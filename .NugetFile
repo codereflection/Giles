@@ -1,0 +1,3 @@
+install_to "lib"
+nuget "ninject"
+nuget "machine.specifications"
