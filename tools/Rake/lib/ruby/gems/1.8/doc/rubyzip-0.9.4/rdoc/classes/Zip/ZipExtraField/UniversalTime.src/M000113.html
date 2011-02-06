@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>pack_for_local (Zip::ZipExtraField::UniversalTime)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1742</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pack_for_local</span>
+        <span class="ruby-identifier">s</span> = [<span class="ruby-ivar">@flag</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;C&quot;</span>)
+        <span class="ruby-ivar">@flag</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">1</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-ivar">@mtime</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;V&quot;</span>)
+        <span class="ruby-ivar">@flag</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">2</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-ivar">@atime</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;V&quot;</span>)
+        <span class="ruby-ivar">@flag</span> <span class="ruby-operator">&amp;</span> <span class="ruby-value">4</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-ivar">@ctime</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">&quot;V&quot;</span>)
+        <span class="ruby-identifier">s</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

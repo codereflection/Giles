@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_path
+  rw: RW
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: NCover::FullCoverageReport
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: report_format
+- !ruby/object:RI::MethodSummary 
+  name: report_type
+name: FullCoverageReport
+superclass: Object

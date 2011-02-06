@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: SQLCmd#build_variable_list
+is_singleton: false
+name: build_variable_list
+params: ()
+visibility: public

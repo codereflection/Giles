@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@tempFile)
+comment: 
+full_name: Zip::ZipStreamableStream#get_input_stream
+is_singleton: false
+name: get_input_stream
+params: () {|@tempFile| ...}
+visibility: public

@@ -1,0 +1,94 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Returns the zip files comment, if it has one
+  name: comment
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: default -&gt; false
+  name: restore_ownership
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: default -&gt; false
+  name: restore_permissions
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: default -&gt; true
+  name: restore_times
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: foreach
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: open
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "ZipFile is modeled after java.util.zip.ZipFile from the Java SDK. The most important methods are those inherited from ZipCentralDirectory for accessing information about the entries in the archive and methods such as get_input_stream and get_output_stream for reading from and writing entries to the archive. The class includes a few convenience methods such as #extract for extracting entries to the filesystem, and #remove, #replace, #rename and #mkdir for making simple modifications to the archive."
+- !ruby/struct:SM::Flow::P 
+  body: "Modifications to a zip archive are not committed until #commit or #close is called. The method #open accepts a block following the pattern from File.open offering a simple way to automatically close the archive when the block returns."
+- !ruby/struct:SM::Flow::P 
+  body: The following example opens zip archive <tt>my.zip</tt> (creating it if it doesn't exist) and adds an entry <tt>first.txt</tt> and a directory entry <tt>a_dir</tt> to it.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  require 'zip/zip'\n\n  Zip::ZipFile.open(&quot;my.zip&quot;, Zip::ZipFile::CREATE) {\n   |zipfile|\n    zipfile.get_output_stream(&quot;first.txt&quot;) { |f| f.puts &quot;Hello from ZipFile&quot; }\n    zipfile.mkdir(&quot;a_dir&quot;)\n  }\n"
+- !ruby/struct:SM::Flow::P 
+  body: The next example reopens <tt>my.zip</tt> writes the contents of <tt>first.txt</tt> to standard out and deletes the entry from the archive.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  require 'zip/zip'\n\n  Zip::ZipFile.open(&quot;my.zip&quot;, Zip::ZipFile::CREATE) {\n    |zipfile|\n    puts zipfile.read(&quot;first.txt&quot;)\n    zipfile.remove(&quot;first.txt&quot;)\n  }\n"
+- !ruby/struct:SM::Flow::P 
+  body: ZipFileSystem offers an alternative API that emulates ruby's interface for accessing the filesystem, ie. the File and Dir classes.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CREATE
+  value: "1"
+full_name: Zip::ZipFile
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: ZipFileSystem
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add
+- !ruby/object:RI::MethodSummary 
+  name: close
+- !ruby/object:RI::MethodSummary 
+  name: commit
+- !ruby/object:RI::MethodSummary 
+  name: commit_required?
+- !ruby/object:RI::MethodSummary 
+  name: extract
+- !ruby/object:RI::MethodSummary 
+  name: find_entry
+- !ruby/object:RI::MethodSummary 
+  name: get_entry
+- !ruby/object:RI::MethodSummary 
+  name: get_input_stream
+- !ruby/object:RI::MethodSummary 
+  name: get_output_stream
+- !ruby/object:RI::MethodSummary 
+  name: mkdir
+- !ruby/object:RI::MethodSummary 
+  name: read
+- !ruby/object:RI::MethodSummary 
+  name: remove
+- !ruby/object:RI::MethodSummary 
+  name: rename
+- !ruby/object:RI::MethodSummary 
+  name: replace
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: ZipFile
+superclass: ZipCentralDirectory

@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: each
+block_params: readline(aSepString)
+comment: 
+full_name: IOExtras::AbstractInputStream#each_line
+is_singleton: false
+name: each_line
+params: (aSepString = $/) {|readline(aSepString)| ...}
+visibility: public

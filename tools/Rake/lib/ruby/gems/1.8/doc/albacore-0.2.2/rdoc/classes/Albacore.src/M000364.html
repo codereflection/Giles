@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_task (Albacore)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/support/createtask.rb, line 2</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_task</span>(<span class="ruby-identifier">taskname</span>, <span class="ruby-identifier">taskclass</span>)
+    <span class="ruby-comment cmt"># this style of creating tasks is not really what i</span>
+    <span class="ruby-comment cmt"># want to do. but it's necessary for ruby 1.8.6</span>
+    <span class="ruby-comment cmt"># because that version doesn't support the foo do |*args, &amp;block|</span>
+    <span class="ruby-comment cmt"># block signature. it supports *args, but not &amp;block.</span>
+    <span class="ruby-comment cmt"># so that limitation is worked around with string eval</span>
+    <span class="ruby-constant">Object</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def \#{taskname}(name=:\#{taskname}, *args, &amp;configblock)\ntask name, *args do |t, task_args|\nobj = \#{taskclass}.new\nobj.load_config_by_task_name(name) if obj.respond_to?(:load_config_by_task_name)\n\nif !configblock.nil?\ncase configblock.arity\nwhen 0\nconfigblock.call\nwhen 1\nconfigblock.call(obj)\nwhen 2\nconfigblock.call(obj, task_args)\nend\nend\n\nobj.execute if obj.respond_to?(:execute)\nend\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>foreach (Zip::ZipFileSystem::ZipFsDir)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zipfilesystem.rb, line 463</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">foreach</span>(<span class="ruby-identifier">aDirectoryName</span>)
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">aDirectoryName</span>).<span class="ruby-identifier">directory?</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOTDIR</span>, <span class="ruby-identifier">aDirectoryName</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">path</span> = <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">aDirectoryName</span>).<span class="ruby-identifier">ensure_end</span>(<span class="ruby-value str">&quot;/&quot;</span>)
+
+        <span class="ruby-identifier">subDirEntriesRegex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;^#{path}([^/]+)$&quot;</span>)
+        <span class="ruby-ivar">@mappedZip</span>.<span class="ruby-identifier">each</span> { 
+          <span class="ruby-operator">|</span><span class="ruby-identifier">fileName</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">match</span> = <span class="ruby-identifier">subDirEntriesRegex</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">fileName</span>)
+          <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>]) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">match</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>
+        }
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

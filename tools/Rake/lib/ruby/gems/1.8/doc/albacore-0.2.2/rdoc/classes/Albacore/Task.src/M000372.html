@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_rake_task (Albacore::Task)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/albacoretask.rb, line 34</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">create_rake_task</span>(<span class="ruby-identifier">mod</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Class</span>
+        <span class="ruby-identifier">tasknames</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-value str">&quot;TaskName&quot;</span>)
+          <span class="ruby-identifier">tasknames</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">eval</span>(<span class="ruby-node">&quot;#{mod}::TaskName&quot;</span>)
+        <span class="ruby-keyword kw">else</span>
+         <span class="ruby-identifier">tasknames</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">tasknames</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">taskname</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">Albacore</span>.<span class="ruby-identifier">create_task</span> <span class="ruby-identifier">taskname</span>, <span class="ruby-identifier">mod</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

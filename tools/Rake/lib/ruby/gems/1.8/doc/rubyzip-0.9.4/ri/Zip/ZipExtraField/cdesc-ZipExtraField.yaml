@@ -1,0 +1,40 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: ID_MAP
+  value: "{}"
+full_name: Zip::ZipExtraField
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: c_dir_length
+- !ruby/object:RI::MethodSummary 
+  name: c_dir_size
+- !ruby/object:RI::MethodSummary 
+  name: create
+- !ruby/object:RI::MethodSummary 
+  name: length
+- !ruby/object:RI::MethodSummary 
+  name: local_length
+- !ruby/object:RI::MethodSummary 
+  name: local_size
+- !ruby/object:RI::MethodSummary 
+  name: merge
+- !ruby/object:RI::MethodSummary 
+  name: size
+- !ruby/object:RI::MethodSummary 
+  name: to_c_dir_bin
+- !ruby/object:RI::MethodSummary 
+  name: to_local_bin
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: ZipExtraField
+superclass: Hash

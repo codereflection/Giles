@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: eof?
+block_params: 
+comment: 
+full_name: Zip::ZipInputStream#eof
+is_singleton: false
+name: eof
+params: ()
+visibility: public

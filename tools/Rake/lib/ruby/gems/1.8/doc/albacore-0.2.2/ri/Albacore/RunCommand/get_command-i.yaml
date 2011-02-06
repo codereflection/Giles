@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Albacore::RunCommand#get_command
+is_singleton: false
+name: get_command
+params: (params)
+visibility: public

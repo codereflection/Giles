@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NCoverReport#build_reports
+is_singleton: false
+name: build_reports
+params: ()
+visibility: public

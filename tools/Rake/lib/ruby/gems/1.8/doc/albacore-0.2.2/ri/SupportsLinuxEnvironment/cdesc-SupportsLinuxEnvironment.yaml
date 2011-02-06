@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: is_linux
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: SupportsLinuxEnvironment
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: format_path
+- !ruby/object:RI::MethodSummary 
+  name: format_reference
+- !ruby/object:RI::MethodSummary 
+  name: to_OS_format
+name: SupportsLinuxEnvironment
+superclass: 

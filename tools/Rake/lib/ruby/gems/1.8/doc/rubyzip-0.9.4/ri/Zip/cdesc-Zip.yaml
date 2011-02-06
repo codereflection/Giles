@@ -1,0 +1,34 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: VERSION
+  value: "'0.9.4'"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: RUBY_MINOR_VERSION
+  value: RUBY_VERSION.split(".")[1].to_i
+- !ruby/object:RI::Constant 
+  comment: 
+  name: RUNNING_ON_WINDOWS
+  value: /mswin32|cygwin|mingw|bccwin/ =~ RUBY_PLATFORM
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Ruby 1.7.x compatibility In ruby 1.6.x and 1.8.0 reading from an empty stream returns an empty string the first time and then nil.
+  - !ruby/struct:SM::Flow::VERB 
+    body: " not so in 1.7.x\n"
+  name: EMPTY_FILE_RETURNS_EMPTY_STRING_FIRST
+  value: RUBY_MINOR_VERSION != 7
+full_name: Zip
+includes: []
+
+instance_methods: []
+
+name: Zip
+superclass: 

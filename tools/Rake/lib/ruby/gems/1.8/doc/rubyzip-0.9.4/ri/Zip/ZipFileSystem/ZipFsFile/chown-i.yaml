@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#chown
+is_singleton: false
+name: chown
+params: (ownerInt, groupInt, *filenames)
+visibility: public

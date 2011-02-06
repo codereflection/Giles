@@ -1,0 +1,35 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: gid
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: uid
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Info-ZIP Extra for UNIX uid/gid
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: HEADER_ID
+  value: "\"Ux\""
+full_name: Zip::ZipExtraField::IUnix
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ==
+- !ruby/object:RI::MethodSummary 
+  name: merge
+- !ruby/object:RI::MethodSummary 
+  name: pack_for_c_dir
+- !ruby/object:RI::MethodSummary 
+  name: pack_for_local
+name: IUnix
+superclass: Generic

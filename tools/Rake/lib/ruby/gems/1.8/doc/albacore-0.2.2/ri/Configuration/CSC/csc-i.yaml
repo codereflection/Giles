@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@config)
+comment: 
+full_name: Configuration::CSC#csc
+is_singleton: false
+name: csc
+params: () {|@config| ...}
+visibility: public

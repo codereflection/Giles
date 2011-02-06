@@ -1,0 +1,18 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Configuration::NetVersion
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: get_net_version
+- !ruby/object:RI::MethodSummary 
+  name: win_dir
+name: NetVersion
+superclass: 

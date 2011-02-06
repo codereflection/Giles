@@ -1,0 +1,43 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: atime
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: ctime
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: flag
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: mtime
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Info-ZIP Additional timestamp field
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: HEADER_ID
+  value: "\"UT\""
+full_name: Zip::ZipExtraField::UniversalTime
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ==
+- !ruby/object:RI::MethodSummary 
+  name: merge
+- !ruby/object:RI::MethodSummary 
+  name: pack_for_c_dir
+- !ruby/object:RI::MethodSummary 
+  name: pack_for_local
+name: UniversalTime
+superclass: Generic

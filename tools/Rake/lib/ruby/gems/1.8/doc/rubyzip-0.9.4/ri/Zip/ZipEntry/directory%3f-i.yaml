@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: is_directory
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns <tt>true</tt> if the entry is a directory.
+full_name: Zip::ZipEntry#directory?
+is_singleton: false
+name: directory?
+params: ()
+visibility: public

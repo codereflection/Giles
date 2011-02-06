@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: readable_real?
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#readable?
+is_singleton: false
+name: readable?
+params: (fileName)
+visibility: public

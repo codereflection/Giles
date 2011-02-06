@@ -1,0 +1,87 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: com_guid
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: com_visible
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: company_name
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: copyright
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: custom_attributes
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: custom_data
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: description
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: file_version
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: lang_engine
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_file
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: product_name
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: title
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: trademark
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: AssemblyInfo
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_assembly_info_data
+- !ruby/object:RI::MethodSummary 
+  name: build_attribute
+- !ruby/object:RI::MethodSummary 
+  name: build_custom_attributes
+- !ruby/object:RI::MethodSummary 
+  name: build_using_statements
+- !ruby/object:RI::MethodSummary 
+  name: check_lang_engine
+- !ruby/object:RI::MethodSummary 
+  name: check_output_file
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: write_assemblyinfo
+name: AssemblyInfo
+superclass: Object

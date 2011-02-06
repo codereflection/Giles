@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: SpecFlowReport
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::SpecFlowReport
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_command_line
+- !ruby/object:RI::MethodSummary 
+  name: get_command_parameters
+- !ruby/object:RI::MethodSummary 
+  name: get_options
+- !ruby/object:RI::MethodSummary 
+  name: get_projects
+name: SpecFlowReport
+superclass: Object

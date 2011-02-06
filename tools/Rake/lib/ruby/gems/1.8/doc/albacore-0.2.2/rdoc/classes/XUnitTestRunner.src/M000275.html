@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute (XUnitTestRunner)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/xunittestrunner.rb, line 34</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>()                 
+    <span class="ruby-ivar">@assemblies</span> = [] <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@assemblies</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@assemblies</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@assembly</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@assembly</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">fail_with_message</span> <span class="ruby-value str">'At least one assembly is required for assemblies attr'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@assemblies</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">==</span><span class="ruby-value">0</span>  
+    <span class="ruby-identifier">failure_message</span> = <span class="ruby-value str">'XUnit Failed. See Build Log For Detail'</span>          
+    
+    <span class="ruby-ivar">@assemblies</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">assm</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">command_params</span> = <span class="ruby-identifier">get_command_parameters</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">%</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">assm</span>) }
+      <span class="ruby-identifier">command_params</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-value">0</span>,<span class="ruby-identifier">assm</span>)     
+      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">run_command</span> <span class="ruby-value str">&quot;XUnit&quot;</span>, <span class="ruby-identifier">command_params</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+      <span class="ruby-identifier">fail_with_message</span> <span class="ruby-identifier">failure_message</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">result</span>
+    <span class="ruby-keyword kw">end</span>       
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

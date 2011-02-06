@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_input_stream (Zip::ZipEntry)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 765</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_input_stream</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">aProc</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@ftype</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:directory</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-constant">NullInputStream</span>.<span class="ruby-identifier">instance</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">NullInputStream</span>.<span class="ruby-identifier">instance</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@filepath</span>
+        <span class="ruby-keyword kw">case</span> <span class="ruby-ivar">@ftype</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:file</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@filepath</span>, <span class="ruby-value str">&quot;rb&quot;</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">aProc</span>)
+
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:symlink</span>
+          <span class="ruby-identifier">linkpath</span> = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-identifier">readlink</span>(<span class="ruby-ivar">@filepath</span>)
+          <span class="ruby-identifier">stringio</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">linkpath</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">stringio</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">stringio</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unknown @ftype #{@ftype}&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">zis</span> = <span class="ruby-constant">ZipInputStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@zipfile</span>, <span class="ruby-identifier">localHeaderOffset</span>)
+        <span class="ruby-identifier">zis</span>.<span class="ruby-identifier">get_next_entry</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword kw">begin</span>
+            <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">zis</span>)
+          <span class="ruby-keyword kw">ensure</span>
+            <span class="ruby-identifier">zis</span>.<span class="ruby-identifier">close</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">zis</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

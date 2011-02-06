@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Alias for #readable?"
+full_name: Zip::ZipFileSystem::ZipFsFile#readable_real?
+is_singleton: false
+name: readable_real?
+params: (fileName)
+visibility: public

@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: project_file
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NDepend
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: check_command
+- !ruby/object:RI::MethodSummary 
+  name: create_parameters
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: NDepend
+superclass: Object

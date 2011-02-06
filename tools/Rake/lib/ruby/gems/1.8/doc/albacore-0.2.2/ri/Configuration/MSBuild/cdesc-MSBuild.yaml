@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+- !ruby/object:RI::MethodSummary 
+  name: msbuildconfig
+comment: 
+constants: []
+
+full_name: Configuration::MSBuild
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::NetVersion
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: msbuild
+- !ruby/object:RI::MethodSummary 
+  name: use
+name: MSBuild
+superclass: 

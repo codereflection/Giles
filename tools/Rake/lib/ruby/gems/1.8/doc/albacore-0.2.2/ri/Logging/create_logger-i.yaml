@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Logging#create_logger
+is_singleton: false
+name: create_logger
+params: (device, level)
+visibility: public

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>mode (Zip::ZipFileSystem::ZipFsFile::ZipFsStat)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zipfilesystem.rb, line 146</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mode</span>
+          <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_entry</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">fstype</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+            <span class="ruby-identifier">e</span>.<span class="ruby-identifier">externalFileAttributes</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">16</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-value">33206</span> <span class="ruby-comment cmt"># 33206 is equivalent to -rw-rw-rw-</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

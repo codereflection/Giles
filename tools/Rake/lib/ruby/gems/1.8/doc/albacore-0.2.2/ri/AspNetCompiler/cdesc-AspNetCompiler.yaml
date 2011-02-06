@@ -1,0 +1,77 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: clean
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: debug
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: delay_sign
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: fixed_names
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: force
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: physical_path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: target_path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: updateable
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: http://msdn.microsoft.com/en-us/library/ms164291.aspx
+  name: virtual_path
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: AspNetCompiler
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::AspNetCompiler
+- !ruby/object:RI::IncludedModule 
+  name: SupportsLinuxEnvironment
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: AspNetCompiler
+superclass: Object

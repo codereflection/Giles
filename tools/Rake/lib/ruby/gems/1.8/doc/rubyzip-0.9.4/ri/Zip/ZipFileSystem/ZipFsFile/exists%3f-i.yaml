@@ -1,0 +1,15 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: exist?
+- !ruby/object:RI::AliasName 
+  name: owned?
+- !ruby/object:RI::AliasName 
+  name: grpowned?
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#exists?
+is_singleton: false
+name: exists?
+params: (fileName)
+visibility: public

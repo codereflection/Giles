@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (config)
+comment: 
+full_name: Configuration::MSBuild#msbuild
+is_singleton: false
+name: msbuild
+params: () {|config| ...}
+visibility: public

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>commit (Zip::ZipFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1508</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">commit</span>
+     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">commit_required?</span>
+      <span class="ruby-identifier">on_success_replace</span>(<span class="ruby-identifier">name</span>) {
+        <span class="ruby-operator">|</span><span class="ruby-identifier">tmpFile</span><span class="ruby-operator">|</span>
+        <span class="ruby-constant">ZipOutputStream</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tmpFile</span>) {
+          <span class="ruby-operator">|</span><span class="ruby-identifier">zos</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-ivar">@entrySet</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">write_to_zip_output_stream</span>(<span class="ruby-identifier">zos</span>) }
+          <span class="ruby-identifier">zos</span>.<span class="ruby-identifier">comment</span> = <span class="ruby-identifier">comment</span>
+        }
+        <span class="ruby-keyword kw">true</span>
+      }
+      <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

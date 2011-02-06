@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@unzipconfig)
+comment: 
+full_name: Configuration::Unzip#unzip
+is_singleton: false
+name: unzip
+params: () {|@unzipconfig| ...}
+visibility: public

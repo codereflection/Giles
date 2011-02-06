@@ -1,0 +1,29 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: clean_dirname
+- !ruby/object:RI::MethodSummary 
+  name: create_rake_task
+- !ruby/object:RI::MethodSummary 
+  name: include_config
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: Albacore::Task
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Failure
+- !ruby/object:RI::IncludedModule 
+  name: Logging
+- !ruby/object:RI::IncludedModule 
+  name: YAMLConfig
+- !ruby/object:RI::IncludedModule 
+  name: UpdateAttributes
+instance_methods: []
+
+name: Task
+superclass: 

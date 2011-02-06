@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Rewinds the stream to the beginning of the current entry
+full_name: Zip::ZipInputStream#rewind
+is_singleton: false
+name: rewind
+params: ()
+visibility: public

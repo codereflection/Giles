@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: included
+- !ruby/object:RI::MethodSummary 
+  name: specflowreportconfig
+comment: 
+constants: []
+
+full_name: Configuration::SpecFlowReport
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: specflowreport
+name: SpecFlowReport
+superclass: 

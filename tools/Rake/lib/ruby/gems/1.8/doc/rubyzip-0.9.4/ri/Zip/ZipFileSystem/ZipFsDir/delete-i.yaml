@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: rmdir
+- !ruby/object:RI::AliasName 
+  name: unlink
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsDir#delete
+is_singleton: false
+name: delete
+params: (entryName)
+visibility: public

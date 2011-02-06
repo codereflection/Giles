@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField::Generic::register_map
+is_singleton: true
+name: register_map
+params: ()
+visibility: public

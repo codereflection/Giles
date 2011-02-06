@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: SQLCmd#build_script_list
+is_singleton: false
+name: build_script_list
+params: ()
+visibility: public

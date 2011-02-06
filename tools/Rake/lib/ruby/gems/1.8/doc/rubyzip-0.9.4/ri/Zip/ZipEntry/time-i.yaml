@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: mtime
+block_params: 
+comment: 
+full_name: Zip::ZipEntry#time
+is_singleton: false
+name: time
+params: ()
+visibility: public

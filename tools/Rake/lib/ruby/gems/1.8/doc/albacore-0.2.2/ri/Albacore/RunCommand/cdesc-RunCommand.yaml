@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: command
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: working_directory
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Albacore::RunCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: get_command
+- !ruby/object:RI::MethodSummary 
+  name: run_command
+name: RunCommand
+superclass: 

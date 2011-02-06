@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TaskName
+  value: ":nunit"
+full_name: NUnitTestRunner
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_command_line
+- !ruby/object:RI::MethodSummary 
+  name: get_command_parameters
+name: NUnitTestRunner
+superclass: Object

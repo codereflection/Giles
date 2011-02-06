@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Renames the specified entry.
+full_name: Zip::ZipFile#rename
+is_singleton: false
+name: rename
+params: (entry, newName, &continueOnExistsProc)
+visibility: public

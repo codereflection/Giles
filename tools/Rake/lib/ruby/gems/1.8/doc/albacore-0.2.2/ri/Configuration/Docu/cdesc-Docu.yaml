@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: docuconfig
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: Configuration::Docu
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: docu
+name: Docu
+superclass: 

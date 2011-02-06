@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Configuration::NetVersion#win_dir
+is_singleton: false
+name: win_dir
+params: ()
+visibility: public

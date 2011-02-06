@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#chmod
+is_singleton: false
+name: chmod
+params: (modeInt, *filenames)
+visibility: public

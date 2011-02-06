@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: AttrMethods#attr_array
+is_singleton: false
+name: attr_array
+params: (*names)
+visibility: public

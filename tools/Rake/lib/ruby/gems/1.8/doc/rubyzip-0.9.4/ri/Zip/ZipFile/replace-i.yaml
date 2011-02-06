@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Replaces the specified entry with the contents of srcPath (from the file system).
+full_name: Zip::ZipFile#replace
+is_singleton: false
+name: replace
+params: (entry, srcPath)
+visibility: public

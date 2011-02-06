@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: VbNetEngine#build_attribute
+is_singleton: false
+name: build_attribute
+params: (attr_name, attr_data)
+visibility: public

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>to_hash (OpenStructToHash)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/support/openstruct.rb, line 2</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>
+    <span class="ruby-comment cmt"># from: http://snippets.dzone.com/posts/show/7312</span>
+    <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@table</span>
+    <span class="ruby-comment cmt"># handles nested structures</span>
+    <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">OpenStruct</span>
+        <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">_to_hash</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">h</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

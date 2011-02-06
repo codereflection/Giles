@@ -1,0 +1,50 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: flatten_zip
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_file
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_path
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TaskName
+  value: ":zip"
+full_name: ZipDirectory
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: clean_directories_names
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: expanded_exclusions
+- !ruby/object:RI::MethodSummary 
+  name: is_excluded
+- !ruby/object:RI::MethodSummary 
+  name: reject_file
+- !ruby/object:RI::MethodSummary 
+  name: remove
+- !ruby/object:RI::MethodSummary 
+  name: set_output_path
+- !ruby/object:RI::MethodSummary 
+  name: zip_additional
+- !ruby/object:RI::MethodSummary 
+  name: zip_directory
+- !ruby/object:RI::MethodSummary 
+  name: zip_name
+name: ZipDirectory
+superclass: Object

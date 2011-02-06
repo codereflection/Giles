@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (match[1])
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsDir#foreach
+is_singleton: false
+name: foreach
+params: (aDirectoryName) {|match[1]| ...}
+visibility: public

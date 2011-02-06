@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NCover::SummaryReport#report_type
+is_singleton: false
+name: report_type
+params: ()
+visibility: public

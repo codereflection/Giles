@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Zip::ZipStreamableStream
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: get_input_stream
+- !ruby/object:RI::MethodSummary 
+  name: get_output_stream
+- !ruby/object:RI::MethodSummary 
+  name: write_to_zip_output_stream
+name: ZipStreamableStream
+superclass: DelegateClass(ZipEntry)

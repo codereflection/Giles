@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ZipDirectory#set_output_path
+is_singleton: false
+name: set_output_path
+params: ()
+visibility: public

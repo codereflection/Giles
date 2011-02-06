@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>initial_parse (Zip::ZipExtraField::Generic)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1682</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initial_parse</span>(<span class="ruby-identifier">binstr</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">binstr</span>
+          <span class="ruby-comment cmt"># If nil, start with empty.</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">binstr</span>[<span class="ruby-value">0</span>,<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">:HEADER_ID</span>)
+          <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;Warning: weired extra feild header ID. skip parsing&quot;</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+        <span class="ruby-keyword kw">end</span>
+        [<span class="ruby-identifier">binstr</span>[<span class="ruby-value">2</span>,<span class="ruby-value">2</span>].<span class="ruby-identifier">unpack</span>(<span class="ruby-value str">&quot;v&quot;</span>)[<span class="ruby-value">0</span>], <span class="ruby-identifier">binstr</span>[<span class="ruby-value">4</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]]
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

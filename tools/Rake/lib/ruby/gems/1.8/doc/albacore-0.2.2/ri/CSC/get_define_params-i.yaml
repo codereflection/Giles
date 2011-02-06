@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: CSC#get_define_params
+is_singleton: false
+name: get_define_params
+params: ()
+visibility: public

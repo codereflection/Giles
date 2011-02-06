@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a ZipEntry object. It is necessary to call this method on a newly created ZipInputStream before reading from the first entry in the archive. Returns nil when there are no more entries.
+full_name: Zip::ZipInputStream#get_next_entry
+is_singleton: false
+name: get_next_entry
+params: ()
+visibility: public

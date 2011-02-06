@@ -1,0 +1,249 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: comment
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: compressed_size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: compression_method
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: crc
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: externalFileAttributes
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: extra
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: follow_symlinks
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: fstype
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: gp_flags
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: header_signature
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: localHeaderOffset
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: restore_ownership
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: restore_permissions
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: restore_times
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: unix_gid
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: unix_perms
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: unix_uid
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: zipfile
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: read_local_entry
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: STORED
+  value: "0"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFLATED
+  value: "8"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_FAT
+  value: "0"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_AMIGA
+  value: "1"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_VMS
+  value: "2"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_UNIX
+  value: "3"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_VM_CMS
+  value: "4"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_ATARI
+  value: "5"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_HPFS
+  value: "6"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_MAC
+  value: "7"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_Z_SYSTEM
+  value: "8"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_CPM
+  value: "9"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_TOPS20
+  value: "10"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_NTFS
+  value: "11"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_QDOS
+  value: "12"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_ACORN
+  value: "13"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_VFAT
+  value: "14"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_MVS
+  value: "15"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_BEOS
+  value: "16"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_TANDEM
+  value: "17"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_THEOS
+  value: "18"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_MAC_OSX
+  value: "19"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPE_ATHEOS
+  value: "30"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: FSTYPES
+  value: "{       FSTYPE_FAT => 'FAT'.freeze,       FSTYPE_AMIGA => 'Amiga'.freeze,       FSTYPE_VMS => 'VMS (Vax or Alpha AXP)'.freeze,       FSTYPE_UNIX => 'Unix'.freeze,       FSTYPE_VM_CMS => 'VM/CMS'.freeze,       FSTYPE_ATARI => 'Atari ST'.freeze,       FSTYPE_HPFS => 'OS/2 or NT HPFS'.freeze,       FSTYPE_MAC => 'Macintosh'.freeze,       FSTYPE_Z_SYSTEM => 'Z-System'.freeze,       FSTYPE_CPM => 'CP/M'.freeze,       FSTYPE_TOPS20 => 'TOPS-20'.freeze,       FSTYPE_NTFS => 'NTFS'.freeze,       FSTYPE_QDOS => 'SMS/QDOS'.freeze,       FSTYPE_ACORN => 'Acorn RISC OS'.freeze,       FSTYPE_VFAT => 'Win32 VFAT'.freeze,       FSTYPE_MVS => 'MVS'.freeze,       FSTYPE_BEOS => 'BeOS'.freeze,       FSTYPE_TANDEM => 'Tandem NSK'.freeze,       FSTYPE_THEOS => 'Theos'.freeze,       FSTYPE_MAC_OSX => 'Mac OS/X (Darwin)'.freeze,       FSTYPE_ATHEOS => 'AtheOS'.freeze,     }.freeze"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LOCAL_ENTRY_SIGNATURE
+  value: "0x04034b50"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LOCAL_ENTRY_STATIC_HEADER_LENGTH
+  value: "30"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LOCAL_ENTRY_TRAILING_DESCRIPTOR_LENGTH
+  value: 4+4+4
+- !ruby/object:RI::Constant 
+  comment: 
+  name: VERSION_NEEDED_TO_EXTRACT
+  value: "10"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CENTRAL_DIRECTORY_ENTRY_SIGNATURE
+  value: "0x02014b50"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CDIR_ENTRY_STATIC_HEADER_LENGTH
+  value: "46"
+full_name: Zip::ZipEntry
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: <=>
+- !ruby/object:RI::MethodSummary 
+  name: ==
+- !ruby/object:RI::MethodSummary 
+  name: comment_in
+- !ruby/object:RI::MethodSummary 
+  name: directory?
+- !ruby/object:RI::MethodSummary 
+  name: extract
+- !ruby/object:RI::MethodSummary 
+  name: file?
+- !ruby/object:RI::MethodSummary 
+  name: get_input_stream
+- !ruby/object:RI::MethodSummary 
+  name: get_raw_input_stream
+- !ruby/object:RI::MethodSummary 
+  name: is_directory
+- !ruby/object:RI::MethodSummary 
+  name: mtime
+- !ruby/object:RI::MethodSummary 
+  name: name_encoding
+- !ruby/object:RI::MethodSummary 
+  name: name_in
+- !ruby/object:RI::MethodSummary 
+  name: parent_as_string
+- !ruby/object:RI::MethodSummary 
+  name: symlink?
+- !ruby/object:RI::MethodSummary 
+  name: time
+- !ruby/object:RI::MethodSummary 
+  name: time=
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: ZipEntry
+superclass: Object

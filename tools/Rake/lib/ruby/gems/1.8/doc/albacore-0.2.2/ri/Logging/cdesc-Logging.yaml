@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: current_log_device
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: logger
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Logging
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: create_logger
+- !ruby/object:RI::MethodSummary 
+  name: log_device=
+- !ruby/object:RI::MethodSummary 
+  name: log_level
+- !ruby/object:RI::MethodSummary 
+  name: log_level=
+name: Logging
+superclass: 

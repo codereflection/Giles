@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: lstat
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#stat
+is_singleton: false
+name: stat
+params: (fileName)
+visibility: public

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Zip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Zip</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/zip/zip_rb.html">
+                lib/zip/zip.rb
+                </a>
+        <br />
+                <a href="../files/lib/zip/zipfilesystem_rb.html">
+                lib/zip/zipfilesystem.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Zip/ZipFileSystem.html" class="link">Zip::ZipFileSystem</a><br />
+Class <a href="Zip/ZipCentralDirectory.html" class="link">Zip::ZipCentralDirectory</a><br />
+Class <a href="Zip/ZipCompressionMethodError.html" class="link">Zip::ZipCompressionMethodError</a><br />
+Class <a href="Zip/ZipDestinationFileExistsError.html" class="link">Zip::ZipDestinationFileExistsError</a><br />
+Class <a href="Zip/ZipEntry.html" class="link">Zip::ZipEntry</a><br />
+Class <a href="Zip/ZipEntryExistsError.html" class="link">Zip::ZipEntryExistsError</a><br />
+Class <a href="Zip/ZipEntryNameError.html" class="link">Zip::ZipEntryNameError</a><br />
+Class <a href="Zip/ZipError.html" class="link">Zip::ZipError</a><br />
+Class <a href="Zip/ZipExtraField.html" class="link">Zip::ZipExtraField</a><br />
+Class <a href="Zip/ZipFile.html" class="link">Zip::ZipFile</a><br />
+Class <a href="Zip/ZipInputStream.html" class="link">Zip::ZipInputStream</a><br />
+Class <a href="Zip/ZipInternalError.html" class="link">Zip::ZipInternalError</a><br />
+Class <a href="Zip/ZipOutputStream.html" class="link">Zip::ZipOutputStream</a><br />
+Class <a href="Zip/ZipStreamableDirectory.html" class="link">Zip::ZipStreamableDirectory</a><br />
+Class <a href="Zip/ZipStreamableStream.html" class="link">Zip::ZipStreamableStream</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">'0.9.4'</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RUBY_MINOR_VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">RUBY_VERSION.split(&quot;.&quot;)[1].to_i</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RUNNING_ON_WINDOWS</td>
+          <td>=</td>
+          <td class="context-item-value">/mswin32|cygwin|mingw|bccwin/ =~ RUBY_PLATFORM</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">EMPTY_FILE_RETURNS_EMPTY_STRING_FIRST</td>
+          <td>=</td>
+          <td class="context-item-value">RUBY_MINOR_VERSION != 7</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Ruby 1.7.x compatibility In ruby 1.6.x and 1.8.0 reading from an empty
+stream returns an empty string the first time and then nil.
+
+<pre>
+ not so in 1.7.x
+</pre>
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

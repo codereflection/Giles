@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: zf
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Same as #new. If a block is passed the ZipFile object is passed to the block and is automatically closed afterwards just as with ruby's builtin File.open method."
+full_name: Zip::ZipFile::open
+is_singleton: true
+name: open
+params: (fileName, create = nil) {|zf| ...}
+visibility: public

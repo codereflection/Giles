@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@execconfig)
+comment: 
+full_name: Configuration::Exec#exec
+is_singleton: false
+name: exec
+params: () {|@execconfig| ...}
+visibility: public

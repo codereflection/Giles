@@ -1,0 +1,46 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: open
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: ZipInputStream is the basic class for reading zip entries in a zip file. It is possible to create a ZipInputStream object directly, passing the zip file name to the constructor, but more often than not the ZipInputStream will be obtained from a ZipFile (perhaps using the ZipFileSystem interface) object for a particular entry in the zip archive.
+- !ruby/struct:SM::Flow::P 
+  body: A ZipInputStream inherits IOExtras::AbstractInputStream in order to provide an IO-like interface for reading from a single zip entry. Beyond methods for mimicking an IO-object it contains the method get_next_entry for iterating through the entries of an archive. get_next_entry returns a ZipEntry object that describes the zip entry the ZipInputStream is currently reading from.
+- !ruby/struct:SM::Flow::P 
+  body: Example that creates a zip archive with ZipOutputStream and reads it back again with a ZipInputStream.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  require 'zip/zip'\n\n  Zip::ZipOutputStream::open(&quot;my.zip&quot;) {\n    |io|\n\n    io.put_next_entry(&quot;first_entry.txt&quot;)\n    io.write &quot;Hello world!&quot;\n\n    io.put_next_entry(&quot;adir/first_entry.txt&quot;)\n    io.write &quot;Hello again!&quot;\n  }\n\n  Zip::ZipInputStream::open(&quot;my.zip&quot;) {\n    |io|\n\n    while (entry = io.get_next_entry)\n      puts &quot;Contents of #{entry.name}: '#{io.read}'&quot;\n    end\n  }\n"
+- !ruby/struct:SM::Flow::P 
+  body: java.util.zip.ZipInputStream is the original inspiration for this class.
+constants: []
+
+full_name: Zip::ZipInputStream
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: IOExtras::AbstractInputStream
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: close
+- !ruby/object:RI::MethodSummary 
+  name: eof
+- !ruby/object:RI::MethodSummary 
+  name: eof?
+- !ruby/object:RI::MethodSummary 
+  name: get_next_entry
+- !ruby/object:RI::MethodSummary 
+  name: input_finished?
+- !ruby/object:RI::MethodSummary 
+  name: open_entry
+- !ruby/object:RI::MethodSummary 
+  name: produce_input
+- !ruby/object:RI::MethodSummary 
+  name: rewind
+- !ruby/object:RI::MethodSummary 
+  name: sysread
+name: ZipInputStream
+superclass: Object

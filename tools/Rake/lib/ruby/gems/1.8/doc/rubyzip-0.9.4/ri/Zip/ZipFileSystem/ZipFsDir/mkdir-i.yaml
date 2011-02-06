@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsDir#mkdir
+is_singleton: false
+name: mkdir
+params: (entryName, permissionInt = 0755)
+visibility: public

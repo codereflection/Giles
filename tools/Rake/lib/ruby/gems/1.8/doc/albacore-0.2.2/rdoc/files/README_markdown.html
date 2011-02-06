@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.markdown</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.markdown</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.markdown
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Jan 10 23:51:38 -0800 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+# Welcome to the albacore project.
+</p>
+<p>
+albacore is a professional quality suite of Rake tasks to help automate the
+process of building a .NET based system.
+</p>
+<p>
+## How To Install albacore From Gemcutter Gems:
+</p>
+<p>
+If you would like to install the current, stable release of albacore, you
+can do so easily through the standard RubyGems.org server. Follow these
+simple instructions and you will be good to go.
+</p>
+<p>
+**Step 1:** Install the albacore gem
+</p>
+<p>
+&gt; gem install albacore
+</p>
+<p>
+That&#8216;s it! You&#8216;re now equiped with everything you need to get
+up and running with albacore!
+</p>
+<p>
+## How To Manually Build And Install The albacore Gem
+</p>
+<p>
+If you would like to install the latest source code for albacore, and get
+all the new features and functionality (possibly in an unstable form), you
+can manually build and install the albacore gem. Follow these simple
+instructions and you will be good to go.
+</p>
+<p>
+**Step 1:** Clone albacore
+</p>
+<p>
+Use your Github account to fork albacore, or clone it directly from my
+public clone URL.
+</p>
+<p>
+&gt; git clone git://github.com/derickbailey/albacore.git albacore
+</p>
+<p>
+**Step 2:** Install Required Dependencies
+</p>
+<p>
+In your local clone of albacore, run the
+&quot;install_dependencies.rb&quot; script:
+</p>
+<p>
+&gt; ruby install_dependencies.rb
+</p>
+<p>
+This will install all of the gem dependencies that you need, to build the
+albacore gem.
+</p>
+<p>
+**Step 3:** Build the gem
+</p>
+<p>
+In your local clone of albacore, use the jeweler rake tasks to build the
+latest version of the albacore code into a gem.
+</p>
+<p>
+&gt; rake jeweler:gemspec &gt; &gt; rake jeweler:build
+</p>
+<p>
+this will produce an &#8216;albacore-#.#.#.gem&#8217; file in the
+&#8216;pkg&#8217; folder, where &#8217;#.#.#&#8217; is the version number.
+For example &#8216;albacore-0.1.2.gem&#8217;.
+</p>
+<p>
+**Step 4:** Install the gem
+</p>
+<p>
+After building the gem, you can install it from your local file system.
+</p>
+<p>
+&gt; gem install -l pkg/albacore-#.#.#.gem
+</p>
+<p>
+where &#8217;#.#.#&#8217; is the version number of the gem. For example
+&#8216;albacore-0.1.2.gem&#8216;
+</p>
+<p>
+## How To Use albacore
+</p>
+<p>
+On systems do not have the &quot;RUBYOPT&quot; environment variable set to
+automatically include rubygems, you will also need to add
+</p>
+<pre>
+    require 'rubygems'
+</pre>
+<p>
+to the top of your rakefile. Then, you can add
+</p>
+<pre>
+    require 'albacore'
+</pre>
+<p>
+to your rakefile. This will allow you to use the tasks that albacore
+includes.
+</p>
+<pre>
+    desc &quot;Run a sample build using the MSBuildTask&quot;
+    msbuild do |msb|
+        msb.properties :configuration =&gt; :Debug
+        msb.targets :Clean, :Build
+        msb.solution = &quot;spec/support/TestSolution/TestSolution.sln&quot;
+    end
+</pre>
+<p>
+Beyond the simple example, check out the [albacore Wiki](<a
+href="http://wiki.github.com/derickbailey/albacore">wiki.github.com/derickbailey/albacore</a>)
+for detailed instructions on how to use the built in tasks and their
+options.
+</p>
+<p>
+## How To Contribute, Collaborate, Communicate
+</p>
+<p>
+If you&#8216;d like to get involved with the albacore framework, we have a
+discussion group over at google: **[AlbacoreDev](<a
+href="http://groups.google.com/group/albacoredev">groups.google.com/group/albacoredev</a>)**
+</p>
+<p>
+Anyone can fork the main repository and submit patches, as well. And
+lastly, the [wiki](<a
+href="http://wiki.github.com/derickbailey/albacore">wiki.github.com/derickbailey/albacore</a>)
+and [issues list](<a
+href="http://github.com/derickbailey/albacore/issues">github.com/derickbailey/albacore/issues</a>)
+are also open for additions, edits, and discussion.
+</p>
+<p>
+## Contributors
+</p>
+<p>
+Many thanks for contributions to albacore are due (in alphabetical order):
+</p>
+<ul>
+<li>[Andreone](<a href="http://github.com/Andreone">github.com/Andreone</a>):
+Significant Wiki contributions, questions and contributions on the google
+group
+
+</li>
+<li>[Ben Hall](<a href="http://github.com/benhall">github.com/benhall</a>):
+Primary contributor. SSH, SFTP, <a
+href="../classes/ZipDirectory.html">ZipDirectory</a>, Rename, YAML auto
+config, Wiki pages, and many other great additions
+
+</li>
+<li>[Brett Veenstra](<a
+href="http://github.com/brettveenstra">github.com/brettveenstra</a>): <a
+href="../classes/SQLCmd.html">SQLCmd</a> options (truted connection, batch
+abort), etc
+
+</li>
+<li>[Brian Donahue](<a
+href="http://github.com/briandonahue">github.com/briandonahue</a>):
+Inspiration and initial code for the ExpandTemplates task
+
+</li>
+<li>[Tobias Grimm](<a href="http://github.com/e-tobi">github.com/e-tobi</a>):
+<a href="../classes/AssemblyInfo.html">AssemblyInfo</a> custom_data,
+working directory code refactoring, relative project paths for executables
+
+</li>
+<li>[Hernan Garcia](<a
+href="http://github.com/hgarcia">github.com/hgarcia</a>/): Specflow Report
+task
+
+</li>
+<li>[Hibri Marzook](<a href="http://github.com/hibri">github.com/hibri</a>): <a
+href="../classes/PLink.html">PLink</a> (deprecated) and <a
+href="../classes/NDepend.html">NDepend</a> tasks
+
+</li>
+<li>[James Gregory](<a
+href="http://github.com/jagregory">github.com/jagregory</a>): <a
+href="../classes/Docu.html">Docu</a> task, zip task contributions
+
+</li>
+<li>[Kevin Colyar](<a
+href="http://github.com/kevincolyar">github.com/kevincolyar</a>): Testing
+and updating of <a href="../classes/MSBuild.html">MSBuild</a> to work with
+Cygwin
+
+</li>
+<li>[Louis Salin](<a
+href="http://github.com/louissalin">github.com/louissalin</a>): Support for
+*nix path separators in <a href="../classes/CSC.html">CSC</a> task
+
+</li>
+<li>[Mark Wilkins](<a
+href="http://github.com/markwilk">github.com/markwilk</a>): VB.NET Language
+Generator For The <a href="../classes/AssemblyInfo.html">AssemblyInfo</a>
+Task
+
+</li>
+<li>[Mike Nichols](<a
+href="http://github.com/mnichols">github.com/mnichols</a>): XUnit
+contributions, bug reports, etc
+
+</li>
+<li>[Nils Jonsson](<a
+href="http://github.com/njonsson">github.com/njonsson</a>): <a
+href="../classes/AssemblyInfo.html">AssemblyInfo</a> corrections, rakefile
+corrections
+
+</li>
+<li>[Prabir Shrestha](<a
+href="http://github.com/prabirshrestha">github.com/prabirshrestha</a>): Bug
+fixes for xunit test runner, etc.
+
+</li>
+<li>[Sean Biefeld](<a
+href="http://github.com/seanbiefeld">github.com/seanbiefeld</a>): <a
+href="../classes/MSpecTestRunner.html">MSpecTestRunner</a> for <a
+href="../classes/NCoverConsole.html">NCoverConsole</a>
+
+</li>
+<li>[Steven Harman](<a
+href="http://github.com/stevenharman">github.com/stevenharman</a>): Primary
+contributor. Nant task, issue tickets, disucssions, and much much more.
+
+</li>
+<li>[Steven Johnson](<a
+href="http://github.com/2020steve">github.com/2020steve</a>): Expand
+Templates (deprecated task) supplimental data, etc
+
+</li>
+<li>[Panda Wood](<a
+href="http://github.com/pandawood">github.com/pandawood</a>): <a
+href="../classes/NCover.html">NCover</a> Console options and wiki edits
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@asmconfig)
+comment: 
+full_name: Configuration::AssemblyInfo#assemblyinfo
+is_singleton: false
+name: assemblyinfo
+params: () {|@asmconfig| ...}
+visibility: public

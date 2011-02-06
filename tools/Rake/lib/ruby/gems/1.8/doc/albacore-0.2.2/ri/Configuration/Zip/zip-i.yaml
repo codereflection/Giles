@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@zipconfig)
+comment: 
+full_name: Configuration::Zip#zip
+is_singleton: false
+name: zip
+params: () {|@zipconfig| ...}
+visibility: public

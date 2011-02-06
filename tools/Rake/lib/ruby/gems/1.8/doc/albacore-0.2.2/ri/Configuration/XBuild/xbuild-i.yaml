@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@xbuildconfig)
+comment: 
+full_name: Configuration::XBuild#xbuild
+is_singleton: false
+name: xbuild
+params: () {|@xbuildconfig| ...}
+visibility: public

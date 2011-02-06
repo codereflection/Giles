@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_batch_abort_param (SQLCmd)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/sqlcmd.rb, line 39</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_batch_abort_param</span>
+    <span class="ruby-value str">&quot;-b&quot;</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@scripts</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@batch_abort</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

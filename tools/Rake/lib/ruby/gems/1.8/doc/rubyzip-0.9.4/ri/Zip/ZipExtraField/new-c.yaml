@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: start main of ZipExtraField &lt; Hash
+full_name: Zip::ZipExtraField::new
+is_singleton: true
+name: new
+params: (binstr = nil)
+visibility: public

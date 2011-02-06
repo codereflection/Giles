@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile::new
+is_singleton: true
+name: new
+params: (mappedZip)
+visibility: public

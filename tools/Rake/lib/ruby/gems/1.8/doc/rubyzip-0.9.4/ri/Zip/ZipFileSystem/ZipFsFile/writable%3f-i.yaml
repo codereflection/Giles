@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: writable_real?
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#writable?
+is_singleton: false
+name: writable?
+params: (fileName)
+visibility: public

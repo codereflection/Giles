@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipStreamableStream#write_to_zip_output_stream
+is_singleton: false
+name: write_to_zip_output_stream
+params: (aZipOutputStream)
+visibility: public

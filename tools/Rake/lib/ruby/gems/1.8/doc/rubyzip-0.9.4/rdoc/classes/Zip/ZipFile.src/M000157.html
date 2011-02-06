@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>mkdir (Zip::ZipFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1558</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">entryName</span>, <span class="ruby-identifier">permissionInt</span> = <span class="ruby-value">0755</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">find_entry</span>(<span class="ruby-identifier">entryName</span>)
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EEXIST</span>, <span class="ruby-node">&quot;File exists - #{entryName}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@entrySet</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ZipStreamableDirectory</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@name</span>, <span class="ruby-identifier">entryName</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">ensure_end</span>(<span class="ruby-value str">&quot;/&quot;</span>), <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">permissionInt</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

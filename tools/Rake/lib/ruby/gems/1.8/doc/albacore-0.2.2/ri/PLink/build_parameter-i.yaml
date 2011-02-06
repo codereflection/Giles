@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: PLink#build_parameter
+is_singleton: false
+name: build_parameter
+params: (param_name, param_value)
+visibility: public

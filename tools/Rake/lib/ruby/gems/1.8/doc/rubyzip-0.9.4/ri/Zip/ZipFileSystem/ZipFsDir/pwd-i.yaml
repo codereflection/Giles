@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: getwd
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsDir#pwd
+is_singleton: false
+name: pwd
+params: ()
+visibility: public

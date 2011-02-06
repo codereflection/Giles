@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_entry (Zip::ZipFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1545</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_entry</span>(<span class="ruby-identifier">entry</span>)
+      <span class="ruby-identifier">selectedEntry</span> = <span class="ruby-identifier">find_entry</span>(<span class="ruby-identifier">entry</span>)
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">selectedEntry</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>, <span class="ruby-identifier">entry</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">selectedEntry</span>.<span class="ruby-identifier">restore_ownership</span> = <span class="ruby-ivar">@restore_ownership</span>
+      <span class="ruby-identifier">selectedEntry</span>.<span class="ruby-identifier">restore_permissions</span> = <span class="ruby-ivar">@restore_permissions</span>
+      <span class="ruby-identifier">selectedEntry</span>.<span class="ruby-identifier">restore_times</span> = <span class="ruby-ivar">@restore_times</span>
+
+      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">selectedEntry</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (configuration)
+comment: 
+full_name: Albacore::configure
+is_singleton: true
+name: configure
+params: () {|configuration| ...}
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipEntry#parent_as_string
+is_singleton: false
+name: parent_as_string
+params: ()
+visibility: public

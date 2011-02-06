@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Searches for an entry just as find_entry, but throws Errno::ENOENT if no entry is found.
+full_name: Zip::ZipFile#get_entry
+is_singleton: false
+name: get_entry
+params: (entry)
+visibility: public

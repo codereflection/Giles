@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>open_entry (Zip::ZipInputStream)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 139</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open_entry</span>
+      <span class="ruby-ivar">@currentEntry</span> = <span class="ruby-constant">ZipEntry</span>.<span class="ruby-identifier">read_local_entry</span>(<span class="ruby-ivar">@archiveIO</span>)
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@currentEntry</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>) 
+        <span class="ruby-ivar">@decompressor</span> = <span class="ruby-constant">NullDecompressor</span>.<span class="ruby-identifier">instance</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@currentEntry</span>.<span class="ruby-identifier">compression_method</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ZipEntry</span><span class="ruby-operator">::</span><span class="ruby-constant">STORED</span>
+        <span class="ruby-ivar">@decompressor</span> = <span class="ruby-constant">PassThruDecompressor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@archiveIO</span>, 
+                                                 <span class="ruby-ivar">@currentEntry</span>.<span class="ruby-identifier">size</span>)
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@currentEntry</span>.<span class="ruby-identifier">compression_method</span> <span class="ruby-operator">==</span> <span class="ruby-constant">ZipEntry</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFLATED</span>
+        <span class="ruby-ivar">@decompressor</span> = <span class="ruby-constant">Inflater</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@archiveIO</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ZipCompressionMethodError</span>,
+          <span class="ruby-node">&quot;Unsupported compression method #{@currentEntry.compression_method}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">flush</span>
+      <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@currentEntry</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

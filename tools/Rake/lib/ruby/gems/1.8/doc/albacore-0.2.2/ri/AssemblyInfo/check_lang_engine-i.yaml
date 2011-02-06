@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: AssemblyInfo#check_lang_engine
+is_singleton: false
+name: check_lang_engine
+params: ()
+visibility: public

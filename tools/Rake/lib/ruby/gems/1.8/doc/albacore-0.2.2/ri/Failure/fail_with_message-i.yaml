@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Failure#fail_with_message
+is_singleton: false
+name: fail_with_message
+params: (msg)
+visibility: public

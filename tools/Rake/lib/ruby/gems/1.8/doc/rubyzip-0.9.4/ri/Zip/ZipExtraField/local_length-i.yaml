@@ -1,0 +1,15 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: local_size
+- !ruby/object:RI::AliasName 
+  name: length
+- !ruby/object:RI::AliasName 
+  name: size
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField#local_length
+is_singleton: false
+name: local_length
+params: ()
+visibility: public

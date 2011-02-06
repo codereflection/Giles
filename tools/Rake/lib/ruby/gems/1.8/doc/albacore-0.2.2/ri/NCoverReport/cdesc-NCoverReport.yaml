@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NCoverReport
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_coverage_files
+- !ruby/object:RI::MethodSummary 
+  name: build_filters
+- !ruby/object:RI::MethodSummary 
+  name: build_reports
+- !ruby/object:RI::MethodSummary 
+  name: build_required_coverage
+- !ruby/object:RI::MethodSummary 
+  name: check_command
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: NCoverReport
+superclass: Object

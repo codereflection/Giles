@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField::IUnix#pack_for_c_dir
+is_singleton: false
+name: pack_for_c_dir
+params: ()
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: SupportsLinuxEnvironment#to_OS_format
+is_singleton: false
+name: to_OS_format
+params: (input)
+visibility: public

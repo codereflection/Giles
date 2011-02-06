@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: c_dir_size
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField#c_dir_length
+is_singleton: false
+name: c_dir_length
+params: ()
+visibility: public

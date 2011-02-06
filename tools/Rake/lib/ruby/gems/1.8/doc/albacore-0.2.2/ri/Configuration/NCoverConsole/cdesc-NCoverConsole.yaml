@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Configuration::NCoverConsole
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ncoverconsole
+name: NCoverConsole
+superclass: 

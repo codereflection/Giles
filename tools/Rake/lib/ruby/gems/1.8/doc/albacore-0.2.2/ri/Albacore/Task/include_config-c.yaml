@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Albacore::Task::include_config
+is_singleton: true
+name: include_config
+params: (mod, calledby)
+visibility: public

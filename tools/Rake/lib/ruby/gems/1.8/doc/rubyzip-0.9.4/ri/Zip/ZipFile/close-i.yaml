@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Closes the zip file committing any changes that has been made.
+full_name: Zip::ZipFile#close
+is_singleton: false
+name: close
+params: ()
+visibility: public

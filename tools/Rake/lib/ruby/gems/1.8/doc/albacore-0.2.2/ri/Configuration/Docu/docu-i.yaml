@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (config)
+comment: 
+full_name: Configuration::Docu#docu
+is_singleton: false
+name: docu
+params: () {|config| ...}
+visibility: public

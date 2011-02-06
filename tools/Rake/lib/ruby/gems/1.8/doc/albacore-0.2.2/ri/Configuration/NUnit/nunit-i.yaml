@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@nunitconfig)
+comment: 
+full_name: Configuration::NUnit#nunit
+is_singleton: false
+name: nunit
+params: () {|@nunitconfig| ...}
+visibility: public

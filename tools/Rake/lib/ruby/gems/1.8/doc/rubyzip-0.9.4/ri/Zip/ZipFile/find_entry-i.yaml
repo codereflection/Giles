@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Searches for entry with the specified name. Returns nil if no entry is found. See also get_entry
+full_name: Zip::ZipFile#find_entry
+is_singleton: false
+name: find_entry
+params: (entry)
+visibility: public

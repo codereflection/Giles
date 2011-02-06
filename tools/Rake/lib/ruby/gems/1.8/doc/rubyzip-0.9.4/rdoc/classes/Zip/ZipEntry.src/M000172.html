@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>== (Zip::ZipEntry)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 746</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span> (<span class="ruby-identifier">other</span>)
+      <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>
+      <span class="ruby-comment cmt"># Compares contents of local entry and exposed fields</span>
+      (<span class="ruby-ivar">@compression_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">compression_method</span> <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@crc</span>               <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">crc</span>               <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@compressed_size</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">compressed_size</span>   <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@size</span>              <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">size</span>              <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@name</span>              <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">name</span>              <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@extra</span>             <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">extra</span>             <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-ivar">@filepath</span>          <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">filepath</span>          <span class="ruby-operator">&amp;&amp;</span>
+       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">time</span>.<span class="ruby-identifier">dos_equals</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">time</span>))
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

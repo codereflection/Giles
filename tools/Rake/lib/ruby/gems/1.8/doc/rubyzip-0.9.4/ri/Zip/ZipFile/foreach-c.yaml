@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Iterates over the contents of the ZipFile. This is more efficient than using a ZipInputStream since this methods simply iterates through the entries in the central directory structure in the archive whereas ZipInputStream jumps through the entire archive accessing the local entry headers (which contain the same information as the central directory).
+full_name: Zip::ZipFile::foreach
+is_singleton: true
+name: foreach
+params: (aZipFileName, &block)
+visibility: public

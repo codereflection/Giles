@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: testrunner
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NCoverConsole
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_coverage_list
+- !ruby/object:RI::MethodSummary 
+  name: build_output_options
+- !ruby/object:RI::MethodSummary 
+  name: build_parameter_list
+- !ruby/object:RI::MethodSummary 
+  name: check_for_testrunner
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: no_registration
+name: NCoverConsole
+superclass: Object

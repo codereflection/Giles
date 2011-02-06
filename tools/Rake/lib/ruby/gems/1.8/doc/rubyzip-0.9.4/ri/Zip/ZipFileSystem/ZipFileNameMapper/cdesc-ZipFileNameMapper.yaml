@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "All access to ZipFile from ZipFsFile and ZipFsDir goes through a ZipFileNameMapper, which has one responsibility: ensure"
+constants: []
+
+full_name: Zip::ZipFileSystem::ZipFileNameMapper
+includes: []
+
+instance_methods: []
+
+name: ZipFileNameMapper
+superclass: Object

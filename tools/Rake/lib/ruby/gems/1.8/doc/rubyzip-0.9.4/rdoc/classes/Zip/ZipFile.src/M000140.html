@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Zip::ZipFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 1387</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">fileName</span>, <span class="ruby-identifier">create</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-keyword kw">super</span>()
+      <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">fileName</span>
+      <span class="ruby-ivar">@comment</span> = <span class="ruby-value str">&quot;&quot;</span>
+      <span class="ruby-keyword kw">if</span> (<span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">fileName</span>))
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">name</span>, <span class="ruby-value str">&quot;rb&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">read_from_stream</span>(<span class="ruby-identifier">f</span>) }
+      <span class="ruby-keyword kw">elsif</span> (<span class="ruby-identifier">create</span>)
+        <span class="ruby-ivar">@entrySet</span> = <span class="ruby-constant">ZipEntrySet</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ZipError</span>, <span class="ruby-node">&quot;File #{fileName} not found&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@create</span> = <span class="ruby-identifier">create</span>
+      <span class="ruby-ivar">@storedEntries</span> = <span class="ruby-ivar">@entrySet</span>.<span class="ruby-identifier">dup</span>
+
+      <span class="ruby-ivar">@restore_ownership</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-ivar">@restore_permissions</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-ivar">@restore_times</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Opens the indicated zip file. If a file with that name already exists it will be overwritten.
+full_name: Zip::ZipOutputStream::new
+is_singleton: true
+name: new
+params: (fileName)
+visibility: public

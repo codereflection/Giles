@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipInputStream#produce_input
+is_singleton: false
+name: produce_input
+params: ()
+visibility: protected

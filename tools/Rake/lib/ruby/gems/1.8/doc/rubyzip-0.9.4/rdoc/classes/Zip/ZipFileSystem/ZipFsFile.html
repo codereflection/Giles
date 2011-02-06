@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Zip::ZipFileSystem::ZipFsFile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Zip::ZipFileSystem::ZipFsFile</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/zip/zipfilesystem_rb.html">
+                lib/zip/zipfilesystem.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Instances of this class are normally accessed via the accessor
+ZipFile::file. An instance of <a href="ZipFsFile.html">ZipFsFile</a>
+behaves like ruby&#8216;s builtin File (class) object, except it works on
+<a href="../ZipFile.html">ZipFile</a> entries.
+</p>
+<p>
+The individual methods are not documented due to their similarity with the
+methods in File
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000061">atime</a>&nbsp;&nbsp;
+      <a href="#M000056">basename</a>&nbsp;&nbsp;
+      <a href="#M000064">blockdev?</a>&nbsp;&nbsp;
+      <a href="#M000065">chardev?</a>&nbsp;&nbsp;
+      <a href="#M000052">chmod</a>&nbsp;&nbsp;
+      <a href="#M000051">chown</a>&nbsp;&nbsp;
+      <a href="#M000062">ctime</a>&nbsp;&nbsp;
+      <a href="#M000079">delete</a>&nbsp;&nbsp;
+      <a href="#M000046">directory?</a>&nbsp;&nbsp;
+      <a href="#M000055">dirname</a>&nbsp;&nbsp;
+      <a href="#M000039">executable?</a>&nbsp;&nbsp;
+      <a href="#M000040">executable_real?</a>&nbsp;&nbsp;
+      <a href="#M000032">exist?</a>&nbsp;&nbsp;
+      <a href="#M000031">exists?</a>&nbsp;&nbsp;
+      <a href="#M000082">expand_path</a>&nbsp;&nbsp;
+      <a href="#M000054">file?</a>&nbsp;&nbsp;
+      <a href="#M000078">foreach</a>&nbsp;&nbsp;
+      <a href="#M000068">ftype</a>&nbsp;&nbsp;
+      <a href="#M000034">grpowned?</a>&nbsp;&nbsp;
+      <a href="#M000058">join</a>&nbsp;&nbsp;
+      <a href="#M000071">link</a>&nbsp;&nbsp;
+      <a href="#M000074">lstat</a>&nbsp;&nbsp;
+      <a href="#M000060">mtime</a>&nbsp;&nbsp;
+      <a href="#M000048">new</a>&nbsp;&nbsp;
+      <a href="#M000030">new</a>&nbsp;&nbsp;
+      <a href="#M000047">open</a>&nbsp;&nbsp;
+      <a href="#M000033">owned?</a>&nbsp;&nbsp;
+      <a href="#M000072">pipe</a>&nbsp;&nbsp;
+      <a href="#M000063">pipe?</a>&nbsp;&nbsp;
+      <a href="#M000077">popen</a>&nbsp;&nbsp;
+      <a href="#M000076">read</a>&nbsp;&nbsp;
+      <a href="#M000035">readable?</a>&nbsp;&nbsp;
+      <a href="#M000036">readable_real?</a>&nbsp;&nbsp;
+      <a href="#M000075">readlines</a>&nbsp;&nbsp;
+      <a href="#M000069">readlink</a>&nbsp;&nbsp;
+      <a href="#M000080">rename</a>&nbsp;&nbsp;
+      <a href="#M000042">setgid?</a>&nbsp;&nbsp;
+      <a href="#M000041">setuid?</a>&nbsp;&nbsp;
+      <a href="#M000049">size</a>&nbsp;&nbsp;
+      <a href="#M000050">size?</a>&nbsp;&nbsp;
+      <a href="#M000067">socket?</a>&nbsp;&nbsp;
+      <a href="#M000057">split</a>&nbsp;&nbsp;
+      <a href="#M000073">stat</a>&nbsp;&nbsp;
+      <a href="#M000043">sticky?</a>&nbsp;&nbsp;
+      <a href="#M000070">symlink</a>&nbsp;&nbsp;
+      <a href="#M000066">symlink?</a>&nbsp;&nbsp;
+      <a href="#M000045">truncate</a>&nbsp;&nbsp;
+      <a href="#M000044">umask</a>&nbsp;&nbsp;
+      <a href="#M000081">unlink</a>&nbsp;&nbsp;
+      <a href="#M000059">utime</a>&nbsp;&nbsp;
+      <a href="#M000037">writable?</a>&nbsp;&nbsp;
+      <a href="#M000038">writable_real?</a>&nbsp;&nbsp;
+      <a href="#M000053">zero?</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="ZipFsFile/ZipFsStat.html" class="link">Zip::ZipFileSystem::ZipFsFile::ZipFsStat</a><br />
+
+    </div>
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">dir</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000030.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000030.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(mappedZip)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000061.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000061.html');return false;">
+          <span class="method-name">atime</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000056" class="method-detail">
+        <a name="M000056"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000056.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000056.html');return false;">
+          <span class="method-name">basename</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000064.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000064.html');return false;">
+          <span class="method-name">blockdev?</span><span class="method-args">(filename)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000065.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000065.html');return false;">
+          <span class="method-name">chardev?</span><span class="method-args">(filename)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000052.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000052.html');return false;">
+          <span class="method-name">chmod</span><span class="method-args">(modeInt, *filenames)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000051.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000051.html');return false;">
+          <span class="method-name">chown</span><span class="method-args">(ownerInt, groupInt, *filenames)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000062.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000062.html');return false;">
+          <span class="method-name">ctime</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000079" class="method-detail">
+        <a name="M000079"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000079.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000079.html');return false;">
+          <span class="method-name">delete</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000046.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000046.html');return false;">
+          <span class="method-name">directory?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000055" class="method-detail">
+        <a name="M000055"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000055.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000055.html');return false;">
+          <span class="method-name">dirname</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000039.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000039.html');return false;">
+          <span class="method-name">executable?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <span class="method-name">executable_real?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for executable?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
+
+        <div class="method-heading">
+          <span class="method-name">exist?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for exists?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000031.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000031.html');return false;">
+          <span class="method-name">exists?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000082.html');return false;">
+          <span class="method-name">expand_path</span><span class="method-args">(aPath)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000054.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000054.html');return false;">
+          <span class="method-name">file?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000078" class="method-detail">
+        <a name="M000078"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000078.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000078.html');return false;">
+          <span class="method-name">foreach</span><span class="method-args">(fileName, aSep = $/, &amp;aProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000068.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000068.html');return false;">
+          <span class="method-name">ftype</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
+
+        <div class="method-heading">
+          <span class="method-name">grpowned?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for exists?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000058" class="method-detail">
+        <a name="M000058"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000058.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000058.html');return false;">
+          <span class="method-name">join</span><span class="method-args">(*fragments)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000071.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000071.html');return false;">
+          <span class="method-name">link</span><span class="method-args">(fileName, symlinkName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
+
+        <div class="method-heading">
+          <span class="method-name">lstat</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="ZipFsFile.html#M000073">stat</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000060" class="method-detail">
+        <a name="M000060"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000060.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000060.html');return false;">
+          <span class="method-name">mtime</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000048.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(fileName, openMode = &quot;r&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000047.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000047.html');return false;">
+          <span class="method-name">open</span><span class="method-args">(fileName, openMode = &quot;r&quot;, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
+
+        <div class="method-heading">
+          <span class="method-name">owned?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for exists?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000072.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000072.html');return false;">
+          <span class="method-name">pipe</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000063.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000063.html');return false;">
+          <span class="method-name">pipe?</span><span class="method-args">(filename)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000077" class="method-detail">
+        <a name="M000077"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000077.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000077.html');return false;">
+          <span class="method-name">popen</span><span class="method-args">(*args, &amp;aProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000076" class="method-detail">
+        <a name="M000076"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000076.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000076.html');return false;">
+          <span class="method-name">read</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000035.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000035.html');return false;">
+          <span class="method-name">readable?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
+
+        <div class="method-heading">
+          <span class="method-name">readable_real?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for readable?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000075.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000075.html');return false;">
+          <span class="method-name">readlines</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000069.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000069.html');return false;">
+          <span class="method-name">readlink</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000080" class="method-detail">
+        <a name="M000080"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000080.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000080.html');return false;">
+          <span class="method-name">rename</span><span class="method-args">(fileToRename, newName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000042.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000042.html');return false;">
+          <span class="method-name">setgid?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000041.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000041.html');return false;">
+          <span class="method-name">setuid?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000049.html');return false;">
+          <span class="method-name">size</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000050.html');return false;">
+          <span class="method-name">size?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns nil for not found and nil for directories
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000067.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000067.html');return false;">
+          <span class="method-name">socket?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000057" class="method-detail">
+        <a name="M000057"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000057.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000057.html');return false;">
+          <span class="method-name">split</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000073.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000073.html');return false;">
+          <span class="method-name">stat</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000043.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000043.html');return false;">
+          <span class="method-name">sticky?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000070.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000070.html');return false;">
+          <span class="method-name">symlink</span><span class="method-args">(fileName, symlinkName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000066.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000066.html');return false;">
+          <span class="method-name">symlink?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000045.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000045.html');return false;">
+          <span class="method-name">truncate</span><span class="method-args">(fileName, len)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000044.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000044.html');return false;">
+          <span class="method-name">umask</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <span class="method-name">unlink</span><span class="method-args">(*args)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="ZipFsFile.html#M000079">delete</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000059" class="method-detail">
+        <a name="M000059"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000059.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000059.html');return false;">
+          <span class="method-name">utime</span><span class="method-args">(modifiedTime, *fileNames)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000037.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000037.html');return false;">
+          <span class="method-name">writable?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
+
+        <div class="method-heading">
+          <span class="method-name">writable_real?</span><span class="method-args">(fileName)</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for writable?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
+
+        <div class="method-heading">
+          <a href="ZipFsFile.src/M000053.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFsFile.src/M000053.html');return false;">
+          <span class="method-name">zero?</span><span class="method-args">(fileName)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

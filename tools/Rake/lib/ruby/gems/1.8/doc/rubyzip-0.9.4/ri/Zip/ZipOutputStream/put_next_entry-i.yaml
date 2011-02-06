@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Closes the current entry and opens a new for writing. <tt>entry</tt> can be a ZipEntry object or a string.
+full_name: Zip::ZipOutputStream#put_next_entry
+is_singleton: false
+name: put_next_entry
+params: (entryname, comment = nil, extra = nil, compression_method = ZipEntry::DEFLATED, level = Zlib::DEFAULT_COMPRESSION)
+visibility: public

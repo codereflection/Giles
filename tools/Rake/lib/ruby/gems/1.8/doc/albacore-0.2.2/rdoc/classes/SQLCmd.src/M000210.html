@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (SQLCmd)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/sqlcmd.rb, line 11</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+    <span class="ruby-ivar">@require_valid_command</span> = <span class="ruby-keyword kw">false</span>
+    <span class="ruby-ivar">@scripts</span>=[]
+    <span class="ruby-ivar">@variables</span>={}
+    <span class="ruby-ivar">@trusted_connection</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-ivar">@batch_abort</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">super</span>()
+    <span class="ruby-identifier">update_attributes</span> <span class="ruby-constant">Albacore</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">sqlcmd</span>.<span class="ruby-identifier">to_hash</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

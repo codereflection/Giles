@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#popen
+is_singleton: false
+name: popen
+params: (*args, &aProc)
+visibility: public

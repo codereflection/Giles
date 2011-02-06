@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: aspnetcompilerconfig
+- !ruby/object:RI::MethodSummary 
+  name: included
+comment: 
+constants: []
+
+full_name: Configuration::AspNetCompiler
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::NetVersion
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: aspnetcompiler
+- !ruby/object:RI::MethodSummary 
+  name: use
+name: AspNetCompiler
+superclass: 

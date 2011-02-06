@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@ndependconfig)
+comment: 
+full_name: Configuration::NDepend#ndepend
+is_singleton: false
+name: ndepend
+params: () {|@ndependconfig| ...}
+visibility: public

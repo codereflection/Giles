@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>attr_hash (AttrMethods)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/support/attrmethods.rb, line 17</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr_hash</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+    <span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def \#{n}(*value)\nif value.nil? || value.empty?\ninstance_variable_get(\&quot;@\#{n}\&quot;)\nelse\ninstance_variable_set(\&quot;@\#{n}\&quot;, value[0])\nend\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>)
+     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:define_method</span>, <span class="ruby-node">&quot;#{n}=&quot;</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{n}&quot;</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

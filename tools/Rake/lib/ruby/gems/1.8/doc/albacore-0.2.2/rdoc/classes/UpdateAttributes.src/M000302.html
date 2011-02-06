@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>update_attributes (UpdateAttributes)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/support/updateattributes.rb, line 2</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">attrs</span>)
+    <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">setter</span> = <span class="ruby-node">&quot;#{key}=&quot;</span>
+      <span class="ruby-identifier">send</span>(<span class="ruby-identifier">setter</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">setter</span>)
+      <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{key} is not a settable attribute on #{self.class}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">setter</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

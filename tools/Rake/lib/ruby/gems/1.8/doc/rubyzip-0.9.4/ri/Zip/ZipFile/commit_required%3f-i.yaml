@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns true if any changes has been made to this archive since the previous commit
+full_name: Zip::ZipFile#commit_required?
+is_singleton: false
+name: commit_required?
+params: ()
+visibility: public

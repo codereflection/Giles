@@ -1,0 +1,45 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: host
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: key
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: port
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: user
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: verbose
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: PLink
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_parameter
+- !ruby/object:RI::MethodSummary 
+  name: check_command
+- !ruby/object:RI::MethodSummary 
+  name: create_parameters
+- !ruby/object:RI::MethodSummary 
+  name: run
+name: PLink
+superclass: Object

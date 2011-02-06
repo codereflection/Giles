@@ -1,0 +1,55 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: batch_abort
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: database
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: password
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: server
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: trusted_connection
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: username
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: SQLCmd
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_parameter
+- !ruby/object:RI::MethodSummary 
+  name: build_script_list
+- !ruby/object:RI::MethodSummary 
+  name: build_variable_list
+- !ruby/object:RI::MethodSummary 
+  name: check_command
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_authentication_params
+- !ruby/object:RI::MethodSummary 
+  name: get_batch_abort_param
+name: SQLCmd
+superclass: Object

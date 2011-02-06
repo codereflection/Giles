@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Alias for #delete"
+full_name: Zip::ZipFileSystem::ZipFsDir#unlink
+is_singleton: false
+name: unlink
+params: (entryName)
+visibility: public

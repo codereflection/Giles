@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@ncoverconsoleconfig)
+comment: 
+full_name: Configuration::NCoverConsole#ncoverconsole
+is_singleton: false
+name: ncoverconsole
+params: () {|@ncoverconsoleconfig| ...}
+visibility: public

@@ -1,0 +1,46 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: file
+  rw: W
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Instances of this class are normally accessed via the accessor ZipFile::dir. An instance of ZipFsDir behaves like ruby's builtin Dir (class) object, except it works on ZipFile entries.
+- !ruby/struct:SM::Flow::P 
+  body: The individual methods are not documented due to their similarity with the methods in Dir
+constants: []
+
+full_name: Zip::ZipFileSystem::ZipFsDir
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: chdir
+- !ruby/object:RI::MethodSummary 
+  name: chroot
+- !ruby/object:RI::MethodSummary 
+  name: delete
+- !ruby/object:RI::MethodSummary 
+  name: entries
+- !ruby/object:RI::MethodSummary 
+  name: foreach
+- !ruby/object:RI::MethodSummary 
+  name: getwd
+- !ruby/object:RI::MethodSummary 
+  name: mkdir
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: open
+- !ruby/object:RI::MethodSummary 
+  name: pwd
+- !ruby/object:RI::MethodSummary 
+  name: rmdir
+- !ruby/object:RI::MethodSummary 
+  name: unlink
+name: ZipFsDir
+superclass: Object

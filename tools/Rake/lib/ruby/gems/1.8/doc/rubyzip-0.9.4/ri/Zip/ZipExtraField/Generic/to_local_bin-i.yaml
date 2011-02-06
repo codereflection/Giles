@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField::Generic#to_local_bin
+is_singleton: false
+name: to_local_bin
+params: ()
+visibility: public

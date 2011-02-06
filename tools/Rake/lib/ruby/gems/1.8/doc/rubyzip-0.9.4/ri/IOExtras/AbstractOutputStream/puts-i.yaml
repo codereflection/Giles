@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: IOExtras::AbstractOutputStream#puts
+is_singleton: false
+name: puts
+params: (*params)
+visibility: public

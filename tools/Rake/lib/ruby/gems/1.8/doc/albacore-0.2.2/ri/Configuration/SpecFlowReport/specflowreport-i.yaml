@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (config)
+comment: 
+full_name: Configuration::SpecFlowReport#specflowreport
+is_singleton: false
+name: specflowreport
+params: () {|config| ...}
+visibility: public

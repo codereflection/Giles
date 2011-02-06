@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Albacore::Task::create_rake_task
+is_singleton: true
+name: create_rake_task
+params: (mod)
+visibility: public

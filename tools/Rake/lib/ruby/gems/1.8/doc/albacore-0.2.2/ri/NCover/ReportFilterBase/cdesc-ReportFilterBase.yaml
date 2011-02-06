@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: filter
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: filter_type
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: is_regex
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: item_type
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NCover::ReportFilterBase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: UpdateAttributes
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: get_filter_options
+name: ReportFilterBase
+superclass: Object

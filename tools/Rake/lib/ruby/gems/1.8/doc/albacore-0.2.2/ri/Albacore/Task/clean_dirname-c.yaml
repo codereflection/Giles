@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Albacore::Task::clean_dirname
+is_singleton: true
+name: clean_dirname
+params: (file)
+visibility: public

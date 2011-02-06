@@ -1,0 +1,34 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: html_output
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TaskName
+  value: ":mspec"
+full_name: MSpecTestRunner
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_assembly_list
+- !ruby/object:RI::MethodSummary 
+  name: build_html_output
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_command_line
+- !ruby/object:RI::MethodSummary 
+  name: get_command_parameters
+name: MSpecTestRunner
+superclass: Object

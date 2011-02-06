@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Implements many of the output convenience methods of IO. relies on &lt;&lt;
+constants: []
+
+full_name: IOExtras::AbstractOutputStream
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: FakeIO
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: print
+- !ruby/object:RI::MethodSummary 
+  name: printf
+- !ruby/object:RI::MethodSummary 
+  name: putc
+- !ruby/object:RI::MethodSummary 
+  name: puts
+- !ruby/object:RI::MethodSummary 
+  name: write
+name: AbstractOutputStream
+superclass: 

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: return field [size, content] or false
+full_name: Zip::ZipExtraField::Generic#initial_parse
+is_singleton: false
+name: initial_parse
+params: (binstr)
+visibility: public

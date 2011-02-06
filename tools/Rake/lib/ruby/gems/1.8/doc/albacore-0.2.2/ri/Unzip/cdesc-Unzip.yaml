@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: destination
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: file
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Unzip
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: Unzip
+superclass: Object

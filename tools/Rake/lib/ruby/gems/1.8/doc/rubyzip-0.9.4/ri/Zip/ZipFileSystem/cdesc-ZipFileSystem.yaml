@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The ZipFileSystem API provides an API for accessing entries in a zip archive that is similar to ruby's builtin File and Dir classes.
+- !ruby/struct:SM::Flow::P 
+  body: Requiring 'zip/zipfilesystem' includes this module in ZipFile making the methods in this module available on ZipFile objects.
+- !ruby/struct:SM::Flow::P 
+  body: Using this API the following example creates a new zip file <tt>my.zip</tt> containing a normal entry with the name <tt>first.txt</tt>, a directory entry named <tt>mydir</tt> and finally another normal entry named <tt>second.txt</tt>
+- !ruby/struct:SM::Flow::VERB 
+  body: "  require 'zip/zipfilesystem'\n\n  Zip::ZipFile.open(&quot;my.zip&quot;, Zip::ZipFile::CREATE) {\n    |zipfile|\n    zipfile.file.open(&quot;first.txt&quot;, &quot;w&quot;) { |f| f.puts &quot;Hello world&quot; }\n    zipfile.dir.mkdir(&quot;mydir&quot;)\n    zipfile.file.open(&quot;mydir/second.txt&quot;, &quot;w&quot;) { |f| f.puts &quot;Hello again&quot; }\n  }\n"
+- !ruby/struct:SM::Flow::P 
+  body: Reading is as easy as writing, as the following example shows. The example writes the contents of <tt>first.txt</tt> from zip archive <tt>my.zip</tt> to standard out.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  require 'zip/zipfilesystem'\n\n  Zip::ZipFile.open(&quot;my.zip&quot;) {\n    |zipfile|\n    puts zipfile.file.read(&quot;first.txt&quot;)\n  }\n"
+constants: []
+
+full_name: Zip::ZipFileSystem
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: dir
+- !ruby/object:RI::MethodSummary 
+  name: file
+name: ZipFileSystem
+superclass: 

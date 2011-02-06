@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_location
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Docu
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::Docu
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: Docu
+superclass: Object

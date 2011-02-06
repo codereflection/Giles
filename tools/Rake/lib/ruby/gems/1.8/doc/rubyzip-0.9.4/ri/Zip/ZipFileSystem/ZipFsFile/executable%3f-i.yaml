@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: executable_real?
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#executable?
+is_singleton: false
+name: executable?
+params: (fileName)
+visibility: public

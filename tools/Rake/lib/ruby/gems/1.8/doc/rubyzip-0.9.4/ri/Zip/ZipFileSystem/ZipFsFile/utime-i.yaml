@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#utime
+is_singleton: false
+name: utime
+params: (modifiedTime, *fileNames)
+visibility: public

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>write_assemblyinfo (AssemblyInfo)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/assemblyinfo.rb, line 27</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_assemblyinfo</span>(<span class="ruby-identifier">assemblyinfo_file</span>)
+    <span class="ruby-identifier">valid</span> = <span class="ruby-identifier">check_output_file</span> <span class="ruby-identifier">assemblyinfo_file</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">valid</span>
+    
+    <span class="ruby-identifier">asm_data</span> = <span class="ruby-identifier">build_assembly_info_data</span>
+
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-value str">&quot;Generating Assembly Info File At: &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">assemblyinfo_file</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">assemblyinfo_file</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>      
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">asm_data</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

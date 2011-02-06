@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Zip::ZipFile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Zip::ZipFile</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/zip/zip_rb.html">
+                lib/zip/zip.rb
+                </a>
+        <br />
+                <a href="../../files/lib/zip/zipfilesystem_rb.html">
+                lib/zip/zipfilesystem.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ZipCentralDirectory.html">
+                ZipCentralDirectory
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="ZipFile.html">ZipFile</a> is modeled after java.util.zip.ZipFile
+from the Java SDK. The most important methods are those inherited from <a
+href="ZipCentralDirectory.html">ZipCentralDirectory</a> for accessing
+information about the entries in the archive and methods such as <a
+href="ZipFile.html#M000143">get_input_stream</a> and <a
+href="ZipFile.html#M000144">get_output_stream</a> for reading from and
+writing entries to the archive. The class includes a few convenience
+methods such as <a href="ZipFile.html#M000151">extract</a> for extracting
+entries to the filesystem, and <a href="ZipFile.html#M000148">remove</a>,
+<a href="ZipFile.html#M000150">replace</a>, <a
+href="ZipFile.html#M000149">rename</a> and <a
+href="ZipFile.html#M000157">mkdir</a> for making simple modifications to
+the archive.
+</p>
+<p>
+Modifications to a zip archive are not committed until <a
+href="ZipFile.html#M000152">commit</a> or <a
+href="ZipFile.html#M000153">close</a> is called. The method <a
+href="ZipFile.html#M000141">open</a> accepts a block following the pattern
+from File.open offering a simple way to automatically <a
+href="ZipFile.html#M000153">close</a> the archive when the block returns.
+</p>
+<p>
+The following example opens zip archive <tt>my.zip</tt> (creating it if it
+doesn&#8216;t exist) and adds an entry <tt>first.txt</tt> and a directory
+entry <tt>a_dir</tt> to it.
+</p>
+<pre>
+  require 'zip/zip'
+
+  Zip::ZipFile.open(&quot;my.zip&quot;, Zip::ZipFile::CREATE) {
+   |zipfile|
+    zipfile.get_output_stream(&quot;first.txt&quot;) { |f| f.puts &quot;Hello from ZipFile&quot; }
+    zipfile.mkdir(&quot;a_dir&quot;)
+  }
+</pre>
+<p>
+The next example reopens <tt>my.zip</tt> writes the contents of
+<tt>first.txt</tt> to standard out and deletes the entry from the archive.
+</p>
+<pre>
+  require 'zip/zip'
+
+  Zip::ZipFile.open(&quot;my.zip&quot;, Zip::ZipFile::CREATE) {
+    |zipfile|
+    puts zipfile.read(&quot;first.txt&quot;)
+    zipfile.remove(&quot;first.txt&quot;)
+  }
+</pre>
+<p>
+<a href="ZipFileSystem.html">ZipFileSystem</a> offers an alternative API
+that emulates ruby&#8216;s interface for accessing the filesystem, ie. the
+File and Dir classes.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000147">add</a>&nbsp;&nbsp;
+      <a href="#M000153">close</a>&nbsp;&nbsp;
+      <a href="#M000152">commit</a>&nbsp;&nbsp;
+      <a href="#M000154">commit_required?</a>&nbsp;&nbsp;
+      <a href="#M000151">extract</a>&nbsp;&nbsp;
+      <a href="#M000155">find_entry</a>&nbsp;&nbsp;
+      <a href="#M000142">foreach</a>&nbsp;&nbsp;
+      <a href="#M000156">get_entry</a>&nbsp;&nbsp;
+      <a href="#M000143">get_input_stream</a>&nbsp;&nbsp;
+      <a href="#M000144">get_output_stream</a>&nbsp;&nbsp;
+      <a href="#M000157">mkdir</a>&nbsp;&nbsp;
+      <a href="#M000140">new</a>&nbsp;&nbsp;
+      <a href="#M000141">open</a>&nbsp;&nbsp;
+      <a href="#M000146">read</a>&nbsp;&nbsp;
+      <a href="#M000148">remove</a>&nbsp;&nbsp;
+      <a href="#M000149">rename</a>&nbsp;&nbsp;
+      <a href="#M000150">replace</a>&nbsp;&nbsp;
+      <a href="#M000145">to_s</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="ZipFileSystem.html">ZipFileSystem</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">CREATE</td>
+          <td>=</td>
+          <td class="context-item-value">1</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">comment</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+Returns the zip files comment, if it has one
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">name</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">restore_ownership</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+default -&gt; false
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">restore_permissions</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+default -&gt; false
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">restore_times</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc">
+default -&gt; true
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000142" class="method-detail">
+        <a name="M000142"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000142.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000142.html');return false;">
+          <span class="method-name">foreach</span><span class="method-args">(aZipFileName, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Iterates over the contents of the <a href="ZipFile.html">ZipFile</a>. This
+is more efficient than using a <a
+href="ZipInputStream.html">ZipInputStream</a> since this methods simply
+iterates through the entries in the central directory structure in the
+archive whereas <a href="ZipInputStream.html">ZipInputStream</a> jumps
+through the entire archive accessing the local entry headers (which contain
+the same information as the central directory).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000140" class="method-detail">
+        <a name="M000140"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000140.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000140.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(fileName, create = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Opens a zip archive. Pass true as the second parameter to create a <a
+href="ZipFile.html#M000140">new</a> archive if it doesn&#8216;t exist
+already.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000141" class="method-detail">
+        <a name="M000141"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000141.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000141.html');return false;">
+          <span class="method-name">open</span><span class="method-args">(fileName, create = nil) {|zf| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Same as <a href="ZipFile.html#M000140">new</a>. If a block is passed the <a
+href="ZipFile.html">ZipFile</a> object is passed to the block and is
+automatically closed afterwards just as with ruby&#8216;s builtin File.open
+method.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000147" class="method-detail">
+        <a name="M000147"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000147.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000147.html');return false;">
+          <span class="method-name">add</span><span class="method-args">(entry, srcPath, &amp;continueOnExistsProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Convenience method for adding the contents of a file to the archive
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000153" class="method-detail">
+        <a name="M000153"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000153.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000153.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Closes the zip file committing any changes that has been made.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000152" class="method-detail">
+        <a name="M000152"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000152.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000152.html');return false;">
+          <span class="method-name">commit</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Commits changes that has been made since the previous <a
+href="ZipFile.html#M000152">commit</a> to the zip archive.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000154" class="method-detail">
+        <a name="M000154"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000154.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000154.html');return false;">
+          <span class="method-name">commit_required?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns true if any changes has been made to this archive since the
+previous <a href="ZipFile.html#M000152">commit</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000151" class="method-detail">
+        <a name="M000151"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000151.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000151.html');return false;">
+          <span class="method-name">extract</span><span class="method-args">(entry, destPath, &amp;onExistsProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Extracts entry to file destPath.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000155" class="method-detail">
+        <a name="M000155"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000155.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000155.html');return false;">
+          <span class="method-name">find_entry</span><span class="method-args">(entry)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Searches for entry with the specified name. Returns nil if no entry is
+found. See also <a href="ZipFile.html#M000156">get_entry</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000156" class="method-detail">
+        <a name="M000156"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000156.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000156.html');return false;">
+          <span class="method-name">get_entry</span><span class="method-args">(entry)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Searches for an entry just as <a
+href="ZipFile.html#M000155">find_entry</a>, but throws Errno::ENOENT if no
+entry is found.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000143" class="method-detail">
+        <a name="M000143"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000143.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000143.html');return false;">
+          <span class="method-name">get_input_stream</span><span class="method-args">(entry, &amp;aProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an input stream to the specified entry. If a block is passed the
+stream object is passed to the block and the stream is automatically closed
+afterwards just as with ruby&#8216;s builtin File.open method.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000144" class="method-detail">
+        <a name="M000144"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000144.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000144.html');return false;">
+          <span class="method-name">get_output_stream</span><span class="method-args">(entry, &amp;aProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns an output stream to the specified entry. If a block is passed the
+stream object is passed to the block and the stream is automatically closed
+afterwards just as with ruby&#8216;s builtin File.open method.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000157" class="method-detail">
+        <a name="M000157"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000157.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000157.html');return false;">
+          <span class="method-name">mkdir</span><span class="method-args">(entryName, permissionInt = 0755)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a directory
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000146" class="method-detail">
+        <a name="M000146"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000146.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000146.html');return false;">
+          <span class="method-name">read</span><span class="method-args">(entry)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a string containing the contents of the specified entry
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000148" class="method-detail">
+        <a name="M000148"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000148.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000148.html');return false;">
+          <span class="method-name">remove</span><span class="method-args">(entry)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes the specified entry.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000149" class="method-detail">
+        <a name="M000149"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000149.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000149.html');return false;">
+          <span class="method-name">rename</span><span class="method-args">(entry, newName, &amp;continueOnExistsProc)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renames the specified entry.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000150" class="method-detail">
+        <a name="M000150"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000150.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000150.html');return false;">
+          <span class="method-name">replace</span><span class="method-args">(entry, srcPath)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replaces the specified entry with the contents of srcPath (from the file
+system).
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000145" class="method-detail">
+        <a name="M000145"></a>
+
+        <div class="method-heading">
+          <a href="ZipFile.src/M000145.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipFile.src/M000145.html');return false;">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the name of the zip archive
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

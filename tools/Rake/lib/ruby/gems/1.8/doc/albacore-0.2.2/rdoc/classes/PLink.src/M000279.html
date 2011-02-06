@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>create_parameters (PLink)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/plink.rb, line 27</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_parameters</span>
+    <span class="ruby-identifier">parameters</span> = []
+    <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{@user}@#{@host} -P #{@port} &quot;</span>
+    <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_parameter</span>(<span class="ruby-value str">&quot;i&quot;</span>, <span class="ruby-ivar">@key</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@key</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;-batch&quot;</span>
+    <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;-v&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@verbose</span>
+    <span class="ruby-identifier">parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@commands</span>
+    <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-value str">&quot;PLink Parameters&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">parameters</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

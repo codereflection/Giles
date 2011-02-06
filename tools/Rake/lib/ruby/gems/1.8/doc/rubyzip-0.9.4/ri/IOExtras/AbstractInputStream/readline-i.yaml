@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: IOExtras::AbstractInputStream#readline
+is_singleton: false
+name: readline
+params: (aSepString = $/)
+visibility: public

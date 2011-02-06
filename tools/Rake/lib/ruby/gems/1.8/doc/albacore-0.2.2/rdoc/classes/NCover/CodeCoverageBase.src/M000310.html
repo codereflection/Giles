@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (NCover::CodeCoverageBase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/ncoverreports/codecoveragebase.rb, line 9</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">coverage_type</span>, <span class="ruby-identifier">params</span>={})
+      <span class="ruby-ivar">@coverage_type</span> = <span class="ruby-identifier">coverage_type</span>
+      <span class="ruby-ivar">@minimum</span> = <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@item_type</span> = <span class="ruby-identifier">:View</span>
+      <span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-keyword kw">super</span>()
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

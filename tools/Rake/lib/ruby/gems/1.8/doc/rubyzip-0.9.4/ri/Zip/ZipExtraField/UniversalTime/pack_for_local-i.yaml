@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipExtraField::UniversalTime#pack_for_local
+is_singleton: false
+name: pack_for_local
+params: ()
+visibility: public

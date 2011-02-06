@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: unlink
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile#delete
+is_singleton: false
+name: delete
+params: (*args)
+visibility: public

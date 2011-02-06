@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an output stream to the specified entry. If a block is passed the stream object is passed to the block and the stream is automatically closed afterwards just as with ruby's builtin File.open method.
+full_name: Zip::ZipFile#get_output_stream
+is_singleton: false
+name: get_output_stream
+params: (entry, &aProc)
+visibility: public

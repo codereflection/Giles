@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_net_version (Configuration::NetVersion)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/config/netversion.rb, line 7</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_net_version</span>(<span class="ruby-identifier">netversion</span>)
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">netversion</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:net2</span>, <span class="ruby-identifier">:net20</span>
+          <span class="ruby-identifier">version</span> = <span class="ruby-value str">&quot;v2.0.50727&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:net35</span>
+          <span class="ruby-identifier">version</span> = <span class="ruby-value str">&quot;v3.5&quot;</span>
+        <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:net4</span>, <span class="ruby-identifier">:net40</span>
+          <span class="ruby-identifier">version</span> = <span class="ruby-value str">&quot;v4.0.30319&quot;</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">fail</span> <span class="ruby-node">&quot;#{netversion} is not a supported .net version&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">win_dir</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-value str">'Microsoft.NET'</span>, <span class="ruby-value str">'Framework'</span>, <span class="ruby-identifier">version</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

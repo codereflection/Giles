@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@xunitconfig)
+comment: 
+full_name: Configuration::XUnit#xunit
+is_singleton: false
+name: xunit
+params: () {|@xunitconfig| ...}
+visibility: public

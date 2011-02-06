@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>copy_raw_entry (Zip::ZipOutputStream)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/zip.rb, line 992</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">copy_raw_entry</span>(<span class="ruby-identifier">entry</span>)
+      <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ZipError</span>, <span class="ruby-value str">&quot;zip stream is closed&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@closed</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ZipError</span>, <span class="ruby-value str">&quot;entry is not a ZipEntry&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">entry</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">ZipEntry</span>)
+      <span class="ruby-identifier">finalize_current_entry</span>
+      <span class="ruby-ivar">@entrySet</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">entry</span>
+      <span class="ruby-identifier">src_pos</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">local_entry_offset</span>
+      <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">write_local_entry</span>(<span class="ruby-ivar">@outputStream</span>)
+      <span class="ruby-ivar">@compressor</span> = <span class="ruby-constant">NullCompressor</span>.<span class="ruby-identifier">instance</span>
+      <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">get_raw_input_stream</span> { 
+        <span class="ruby-operator">|</span><span class="ruby-identifier">is</span><span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">is</span>.<span class="ruby-identifier">seek</span>(<span class="ruby-identifier">src_pos</span>, <span class="ruby-constant">IO</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+        <span class="ruby-constant">IOExtras</span>.<span class="ruby-identifier">copy_stream_n</span>(<span class="ruby-ivar">@outputStream</span>, <span class="ruby-identifier">is</span>, <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">compressed_size</span>)
+      }
+      <span class="ruby-ivar">@compressor</span> = <span class="ruby-constant">NullCompressor</span>.<span class="ruby-identifier">instance</span>
+      <span class="ruby-ivar">@currentEntry</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

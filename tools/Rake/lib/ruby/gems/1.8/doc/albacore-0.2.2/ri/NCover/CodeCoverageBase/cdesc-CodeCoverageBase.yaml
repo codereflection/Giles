@@ -1,0 +1,29 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: coverage_type
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: item_type
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: minimum
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NCover::CodeCoverageBase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: UpdateAttributes
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: get_coverage_options
+name: CodeCoverageBase
+superclass: Object

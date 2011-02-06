@@ -1,0 +1,39 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: comment
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: open
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: ZipOutputStream is the basic class for writing zip files. It is possible to create a ZipOutputStream object directly, passing the zip file name to the constructor, but more often than not the ZipOutputStream will be obtained from a ZipFile (perhaps using the ZipFileSystem interface) object for a particular entry in the zip archive.
+- !ruby/struct:SM::Flow::P 
+  body: A ZipOutputStream inherits IOExtras::AbstractOutputStream in order to provide an IO-like interface for writing to a single zip entry. Beyond methods for mimicking an IO-object it contains the method put_next_entry that closes the current entry and creates a new.
+- !ruby/struct:SM::Flow::P 
+  body: Please refer to ZipInputStream for example code.
+- !ruby/struct:SM::Flow::P 
+  body: java.util.zip.ZipOutputStream is the original inspiration for this class.
+constants: []
+
+full_name: Zip::ZipOutputStream
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: IOExtras::AbstractOutputStream
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: "<<"
+- !ruby/object:RI::MethodSummary 
+  name: close
+- !ruby/object:RI::MethodSummary 
+  name: copy_raw_entry
+- !ruby/object:RI::MethodSummary 
+  name: finish
+- !ruby/object:RI::MethodSummary 
+  name: put_next_entry
+name: ZipOutputStream
+superclass: Object

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>use (Configuration::AspNetCompiler)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/config/aspnetcompilerconfig.rb, line 24</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">use</span>(<span class="ruby-identifier">netversion</span>)
+      <span class="ruby-identifier">netversion</span> = <span class="ruby-identifier">:net20</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">netversion</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:net35</span> <span class="ruby-comment cmt"># since .net 3.5 doesn't have aspnet_compiler use .net 2.0</span>
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">command</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">get_net_version</span>(<span class="ruby-identifier">netversion</span>), <span class="ruby-value str">&quot;aspnet_compiler.exe&quot;</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

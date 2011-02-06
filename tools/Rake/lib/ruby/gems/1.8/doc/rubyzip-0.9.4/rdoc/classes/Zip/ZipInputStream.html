@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Zip::ZipInputStream</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Zip::ZipInputStream</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/zip/zip_rb.html">
+                lib/zip/zip.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="ZipInputStream.html">ZipInputStream</a> is the basic class for
+reading zip entries in a zip file. It is possible to create a <a
+href="ZipInputStream.html">ZipInputStream</a> object directly, passing the
+zip file name to the constructor, but more often than not the <a
+href="ZipInputStream.html">ZipInputStream</a> will be obtained from a <a
+href="ZipFile.html">ZipFile</a> (perhaps using the <a
+href="ZipFileSystem.html">ZipFileSystem</a> interface) object for a
+particular entry in the zip archive.
+</p>
+<p>
+A <a href="ZipInputStream.html">ZipInputStream</a> inherits <a
+href="../IOExtras/AbstractInputStream.html">IOExtras::AbstractInputStream</a>
+in order to provide an IO-like interface for reading from a single zip
+entry. Beyond methods for mimicking an IO-object it contains the method <a
+href="ZipInputStream.html#M000181">get_next_entry</a> for iterating through
+the entries of an archive. <a
+href="ZipInputStream.html#M000181">get_next_entry</a> returns a <a
+href="ZipEntry.html">ZipEntry</a> object that describes the zip entry the
+<a href="ZipInputStream.html">ZipInputStream</a> is currently reading from.
+</p>
+<p>
+Example that creates a zip archive with <a
+href="ZipOutputStream.html">ZipOutputStream</a> and reads it back again
+with a <a href="ZipInputStream.html">ZipInputStream</a>.
+</p>
+<pre>
+  require 'zip/zip'
+
+  Zip::ZipOutputStream::open(&quot;my.zip&quot;) {
+    |io|
+
+    io.put_next_entry(&quot;first_entry.txt&quot;)
+    io.write &quot;Hello world!&quot;
+
+    io.put_next_entry(&quot;adir/first_entry.txt&quot;)
+    io.write &quot;Hello again!&quot;
+  }
+
+  Zip::ZipInputStream::open(&quot;my.zip&quot;) {
+    |io|
+
+    while (entry = io.get_next_entry)
+      puts &quot;Contents of #{entry.name}: '#{io.read}'&quot;
+    end
+  }
+</pre>
+<p>
+java.util.zip.ZipInputStream is the original inspiration for this class.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000179">close</a>&nbsp;&nbsp;
+      <a href="#M000184">eof</a>&nbsp;&nbsp;
+      <a href="#M000185">eof?</a>&nbsp;&nbsp;
+      <a href="#M000181">get_next_entry</a>&nbsp;&nbsp;
+      <a href="#M000188">input_finished?</a>&nbsp;&nbsp;
+      <a href="#M000178">new</a>&nbsp;&nbsp;
+      <a href="#M000180">open</a>&nbsp;&nbsp;
+      <a href="#M000186">open_entry</a>&nbsp;&nbsp;
+      <a href="#M000187">produce_input</a>&nbsp;&nbsp;
+      <a href="#M000182">rewind</a>&nbsp;&nbsp;
+      <a href="#M000183">sysread</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="../IOExtras/AbstractInputStream.html">IOExtras::AbstractInputStream</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000178" class="method-detail">
+        <a name="M000178"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000178.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000178.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(filename, offset = 0)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Opens the indicated zip file. An exception is thrown if the specified
+offset in the specified filename is not a local zip entry header.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000180" class="method-detail">
+        <a name="M000180"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000180.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000180.html');return false;">
+          <span class="method-name">open</span><span class="method-args">(filename) {|zio| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Same as initialize but if a block is passed the opened stream is passed to
+the block and closed when the block returns.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000179" class="method-detail">
+        <a name="M000179"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000179.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000179.html');return false;">
+          <span class="method-name">close</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000184" class="method-detail">
+        <a name="M000184"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000184.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000184.html');return false;">
+          <span class="method-name">eof</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000185" class="method-detail">
+        <a name="M000185"></a>
+
+        <div class="method-heading">
+          <span class="method-name">eof?</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="ZipInputStream.html#M000184">eof</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000181" class="method-detail">
+        <a name="M000181"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000181.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000181.html');return false;">
+          <span class="method-name">get_next_entry</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a <a href="ZipEntry.html">ZipEntry</a> object. It is necessary to
+call this method on a newly created <a
+href="ZipInputStream.html">ZipInputStream</a> before reading from the first
+entry in the archive. Returns nil when there are no more entries.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000182" class="method-detail">
+        <a name="M000182"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000182.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000182.html');return false;">
+          <span class="method-name">rewind</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Rewinds the stream to the beginning of the current entry
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000183" class="method-detail">
+        <a name="M000183"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000183.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000183.html');return false;">
+          <span class="method-name">sysread</span><span class="method-args">(numberOfBytes = nil, buf = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Modeled after IO.sysread
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000188" class="method-detail">
+        <a name="M000188"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000188.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000188.html');return false;">
+          <span class="method-name">input_finished?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000186" class="method-detail">
+        <a name="M000186"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000186.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000186.html');return false;">
+          <span class="method-name">open_entry</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000187" class="method-detail">
+        <a name="M000187"></a>
+
+        <div class="method-heading">
+          <a href="ZipInputStream.src/M000187.html" target="Code" class="method-signature"
+            onclick="popupCode('ZipInputStream.src/M000187.html');return false;">
+          <span class="method-name">produce_input</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

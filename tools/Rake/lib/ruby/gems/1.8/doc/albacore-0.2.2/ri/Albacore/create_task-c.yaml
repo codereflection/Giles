@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Albacore::create_task
+is_singleton: true
+name: create_task
+params: (taskname, taskclass)
+visibility: public

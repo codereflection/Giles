@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NCoverConsole#build_parameter_list
+is_singleton: false
+name: build_parameter_list
+params: (param_name, list)
+visibility: public

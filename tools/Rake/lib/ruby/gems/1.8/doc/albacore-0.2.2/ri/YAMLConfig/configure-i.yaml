@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: YAMLConfig#configure
+is_singleton: false
+name: configure
+params: (yml_file)
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ZipDirectory#zip_additional
+is_singleton: false
+name: zip_additional
+params: (zipfile)
+visibility: public

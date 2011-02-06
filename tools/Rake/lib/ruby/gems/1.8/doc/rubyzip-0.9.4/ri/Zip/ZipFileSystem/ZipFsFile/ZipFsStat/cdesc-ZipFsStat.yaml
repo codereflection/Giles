@@ -1,0 +1,45 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: protected :dir
+constants: []
+
+full_name: Zip::ZipFileSystem::ZipFsFile::ZipFsStat
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: blksize
+- !ruby/object:RI::MethodSummary 
+  name: blocks
+- !ruby/object:RI::MethodSummary 
+  name: dev
+- !ruby/object:RI::MethodSummary 
+  name: forward_invoke
+- !ruby/object:RI::MethodSummary 
+  name: ftype
+- !ruby/object:RI::MethodSummary 
+  name: gid
+- !ruby/object:RI::MethodSummary 
+  name: ino
+- !ruby/object:RI::MethodSummary 
+  name: kind_of?
+- !ruby/object:RI::MethodSummary 
+  name: mode
+- !ruby/object:RI::MethodSummary 
+  name: nlink
+- !ruby/object:RI::MethodSummary 
+  name: rdev
+- !ruby/object:RI::MethodSummary 
+  name: rdev_major
+- !ruby/object:RI::MethodSummary 
+  name: rdev_minor
+- !ruby/object:RI::MethodSummary 
+  name: uid
+name: ZipFsStat
+superclass: Object

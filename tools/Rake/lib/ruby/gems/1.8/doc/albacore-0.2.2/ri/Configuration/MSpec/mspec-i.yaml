@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@mspecconfig)
+comment: 
+full_name: Configuration::MSpec#mspec
+is_singleton: false
+name: mspec
+params: () {|@mspecconfig| ...}
+visibility: public

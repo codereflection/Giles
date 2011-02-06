@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NCoverConsole#no_registration
+is_singleton: false
+name: no_registration
+params: ()
+visibility: public

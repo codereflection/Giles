@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute (NCoverReport)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/ncoverreport.rb, line 19</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">check_command</span>
+    
+    <span class="ruby-identifier">command_parameters</span> = []
+    <span class="ruby-identifier">command_parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_coverage_files</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@coverage_files</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">command_parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_reports</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@reports</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">command_parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_required_coverage</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@required_coverage</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">command_parameters</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_filters</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@filters</span>.<span class="ruby-identifier">empty?</span>
+    
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">run_command</span> <span class="ruby-value str">&quot;NCover.Reporting&quot;</span>, <span class="ruby-identifier">command_parameters</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+    
+    <span class="ruby-identifier">failure_msg</span> = <span class="ruby-value str">'Code Coverage Reporting Failed. See Build Log For Detail.'</span>
+    <span class="ruby-identifier">fail_with_message</span> <span class="ruby-identifier">failure_msg</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">result</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

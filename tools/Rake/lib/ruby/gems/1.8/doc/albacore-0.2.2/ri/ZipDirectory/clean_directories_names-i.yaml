@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: ZipDirectory#clean_directories_names
+is_singleton: false
+name: clean_directories_names
+params: ()
+visibility: public

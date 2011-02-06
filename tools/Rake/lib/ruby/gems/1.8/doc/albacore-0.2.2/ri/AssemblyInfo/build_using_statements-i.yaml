@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: AssemblyInfo#build_using_statements
+is_singleton: false
+name: build_using_statements
+params: ()
+visibility: public

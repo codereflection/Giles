@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NCover::ReportFilterBase#get_filter_options
+is_singleton: false
+name: get_filter_options
+params: ()
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@nantconfig)
+comment: 
+full_name: Configuration::NAnt#nant
+is_singleton: false
+name: nant
+params: () {|@nantconfig| ...}
+visibility: public

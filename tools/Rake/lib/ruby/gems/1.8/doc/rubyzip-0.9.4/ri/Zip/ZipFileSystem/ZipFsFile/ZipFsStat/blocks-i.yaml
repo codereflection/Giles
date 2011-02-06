@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Zip::ZipFileSystem::ZipFsFile::ZipFsStat#blocks
+is_singleton: false
+name: blocks
+params: ()
+visibility: public

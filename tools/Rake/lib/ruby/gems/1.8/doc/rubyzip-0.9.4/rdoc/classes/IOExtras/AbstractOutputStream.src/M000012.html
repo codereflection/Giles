@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>putc (IOExtras::AbstractOutputStream)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/zip/ioextras.rb, line 138</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">putc</span>(<span class="ruby-identifier">anObject</span>)
+      <span class="ruby-keyword kw">self</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">anObject</span>
+              <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Fixnum</span> <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">anObject</span>.<span class="ruby-identifier">chr</span>
+              <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span> <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">anObject</span>
+              <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-value str">&quot;putc: Only Fixnum and String supported&quot;</span>
+              <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">anObject</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

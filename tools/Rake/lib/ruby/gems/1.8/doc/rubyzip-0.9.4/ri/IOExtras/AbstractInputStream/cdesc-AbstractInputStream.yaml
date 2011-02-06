@@ -1,0 +1,37 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: lineno
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Implements many of the convenience methods of IO such as gets, getc, readline and readlines depends on: input_finished?, produce_input and read"
+constants: []
+
+full_name: IOExtras::AbstractInputStream
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Enumerable
+- !ruby/object:RI::IncludedModule 
+  name: FakeIO
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: each
+- !ruby/object:RI::MethodSummary 
+  name: each_line
+- !ruby/object:RI::MethodSummary 
+  name: flush
+- !ruby/object:RI::MethodSummary 
+  name: gets
+- !ruby/object:RI::MethodSummary 
+  name: read
+- !ruby/object:RI::MethodSummary 
+  name: readline
+- !ruby/object:RI::MethodSummary 
+  name: readlines
+name: AbstractInputStream
+superclass: 
