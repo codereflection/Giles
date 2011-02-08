@@ -13,8 +13,8 @@ namespace Giles.Specs.Core.Watchers
 		protected static IFileSystem fileSystem;
 		protected static string path;
 		protected static string filter;
-	    static IBuildRunner buildRunner;
-	    static FileSystemWatcher fileSystemWatcher;
+	    protected static IBuildRunner buildRunner;
+	    protected static FileSystemWatcher fileSystemWatcher;
 	    protected static IFileWatcherFactory fileWatcherFactory;
         protected static string solutionfolder;
 
@@ -40,11 +40,6 @@ namespace Giles.Specs.Core.Watchers
 
 	}
 
-	//public static void CreatedAction(object sender, FileSystemEventArgs e)
-	//{
-
-	//}
-
 	public class when_starting_to_watch_files : with_a_source_watcher
 	{
 		Because of = () =>
@@ -60,6 +55,18 @@ namespace Giles.Specs.Core.Watchers
             fileSystem.Received().GetDirectoryName(path);
 	}
 
+
+    public class when_a_file_has_changed : with_a_source_watcher
+    {
+        Establish context = () =>
+            watcher.Watch(path, filter);
+
+        Because of = () =>
+            watcher.ChangeAction(null, null);
+
+        It should_call_the_solution_builder = () =>
+            buildRunner.Received().Run(path);
+    }
 
 	public class when_disposing : with_a_source_watcher
 	{

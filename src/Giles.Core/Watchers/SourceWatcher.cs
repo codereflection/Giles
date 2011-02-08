@@ -12,6 +12,7 @@ namespace Giles.Core.Watchers
         readonly IBuildRunner buildRunner;
         readonly IFileWatcherFactory fileWatcherFactory;
         string solution;
+        string path;
         public List<FileSystemWatcher> FileWatchers { get; set; }
 
         public SourceWatcher(IFileSystem fileSystem, IBuildRunner buildRunner, IFileWatcherFactory fileWatcherFactory)
@@ -24,18 +25,19 @@ namespace Giles.Core.Watchers
 
         public void Watch(string path, string filter)
         {
+            this.path = path;
             var solutionFolder = fileSystem.GetDirectoryName(path);
             FileWatchers.Add(fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null, ErrorAction));
         }
 
-        void ErrorAction(object sender, ErrorEventArgs e)
+        public void ErrorAction(object sender, ErrorEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        void ChangeAction(object sender, FileSystemEventArgs e)
+        public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-            buildRunner.Run(solution);
+            buildRunner.Run(path);
         }
 
         public void Dispose()
