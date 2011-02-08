@@ -1,4 +1,6 @@
 ﻿using System;
+using Giles.Core.Watchers;
+using Ninject;
 
 namespace Giles
 {
@@ -10,7 +12,10 @@ namespace Giles
 
             Console.ReadKey();
 
+            var kernel = new StandardKernel();
+            var sourceWatcher = kernel.Get<SourceWatcher>();
 
+            sourceWatcher.Watch(@"D:\Dev\Prototypes\TestableTestStuff", @"*.cs");
         }
     }
 }

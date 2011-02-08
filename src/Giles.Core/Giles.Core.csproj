@@ -36,6 +36,8 @@
     </Compile>
     <Compile Include="Encryption\EncryptionHelper.cs" />
     <Compile Include="IO\IFileSystem.cs" />
+    <Compile Include="IO\FileWatcherFactory.cs" />
+    <Compile Include="IO\IFileWatcherFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>

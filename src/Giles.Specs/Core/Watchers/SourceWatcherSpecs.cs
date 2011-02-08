@@ -13,23 +13,29 @@ namespace Giles.Specs.Core.Watchers
 		protected static IFileSystem fileSystem;
 		protected static string path;
 		protected static string filter;
+	    static IBuildRunner buildRunner;
+	    static FileSystemWatcher fileSystemWatcher;
+	    protected static IFileWatcherFactory fileWatcherFactory;
+        protected static string solutionfolder;
 
-		Establish context = () =>
+	    Establish context = () =>
 								{
 									fileSystem = Substitute.For<IFileSystem>();
-									watcher = new SourceWatcher(fileSystem);
-									path = ".";
-									filter = "*.cs";
+									buildRunner = Substitute.For<IBuildRunner>();
+								    fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
+								    
+                                    watcher = new SourceWatcher(fileSystem, buildRunner, fileWatcherFactory);
+								    
+                                    path = @"c:\solutionFolder\mySolution.sln";
+								    filter = "*.cs";
 
-									var fileSystemWatcher = new FileSystemWatcher
-									{
-										Path = path,
-										Filter = filter
-									};
-									
-									fileSystem.FileExists(path).Returns(false);
-									fileSystem.SetupFileWatcher(path, filter, null, null, null, null, null)
-											  .Returns(fileSystemWatcher);
+								    fileSystem.FileExists(path).Returns(false);
+                                    fileSystemWatcher = new FileSystemWatcher(".");
+
+                                    fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
+								    solutionfolder = @"c:\solutionFolder\";
+								    fileSystem.GetDirectoryName(path)
+                                              .Returns(solutionfolder);
 								};
 
 	}
@@ -45,16 +51,13 @@ namespace Giles.Specs.Core.Watchers
 			watcher.Watch(path, filter);
 
 		It should_setup_a_file_watcher = () =>
-			fileSystem.Received().SetupFileWatcher(path, filter, null, null, null, null, null);
+            fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
 
 		It should_store_a_reference_to_the_watcher = () =>
 			watcher.FileWatchers.ShouldNotBeEmpty();
 
-		It should_have_a_file_watcher_watching_the_correct_path = () =>
-			watcher.FileWatchers.First().Path.ShouldEqual(path);
-
-		It should_have_a_file_watcher_watching_the_correct_filter = () =>
-			watcher.FileWatchers.First().Filter.ShouldEqual(filter);
+        It should_get_the_solution_base_path = () =>
+            fileSystem.Received().GetDirectoryName(path);
 	}
 
 
