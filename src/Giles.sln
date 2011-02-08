@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giles.Core", "Giles.Core\Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giles.Specs", "Giles.Specs\Giles.Specs.csproj", "{8FAE1516-9D4A-4575-83BF-515BC6AF8AC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D2D91826-7DA4-4AD2-B102-B1389C0B4A23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,5 +52,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FAE1516-9D4A-4575-83BF-515BC6AF8AC3} = {D2D91826-7DA4-4AD2-B102-B1389C0B4A23}
 	EndGlobalSection
 EndGlobal
