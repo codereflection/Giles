@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Giles.Core.Watchers;
 using Ninject;
+using Ninject.Modules;
 
 namespace Giles
 {
@@ -10,12 +12,16 @@ namespace Giles
         {
             Console.WriteLine("Giles - your own personal watcher");
 
-            Console.ReadKey();
-
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(new SlayerModule());
             var sourceWatcher = kernel.Get<SourceWatcher>();
 
-            sourceWatcher.Watch(@"D:\Dev\Prototypes\TestableTestStuff", @"*.cs");
+            sourceWatcher.Watch(@"D:\Dev\Prototypes\TestableTestStuff\TestableTestStuff.sln", @"*.cs");
+
+            // put in the console watcher here for commands
+            while (true)
+            {
+                
+            }
         }
     }
 }

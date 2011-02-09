@@ -13,29 +13,29 @@ namespace Giles.Specs.Core.Watchers
 		protected static IFileSystem fileSystem;
 		protected static string path;
 		protected static string filter;
-	    protected static IBuildRunner buildRunner;
-	    protected static FileSystemWatcher fileSystemWatcher;
-	    protected static IFileWatcherFactory fileWatcherFactory;
-        protected static string solutionfolder;
+		protected static IBuildRunner buildRunner;
+		protected static FileSystemWatcher fileSystemWatcher;
+		protected static IFileWatcherFactory fileWatcherFactory;
+		protected static string solutionfolder;
 
-	    Establish context = () =>
+		Establish context = () =>
 								{
 									fileSystem = Substitute.For<IFileSystem>();
 									buildRunner = Substitute.For<IBuildRunner>();
-								    fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
-								    
-                                    watcher = new SourceWatcher(fileSystem, buildRunner, fileWatcherFactory);
-								    
-                                    path = @"c:\solutionFolder\mySolution.sln";
-								    filter = "*.cs";
+									fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
+									
+									watcher = new SourceWatcher(fileSystem, buildRunner, fileWatcherFactory);
+									
+									path = @"c:\solutionFolder\mySolution.sln";
+									filter = "*.cs";
 
-								    fileSystem.FileExists(path).Returns(false);
-                                    fileSystemWatcher = new FileSystemWatcher(".");
+									fileSystem.FileExists(path).Returns(false);
+									fileSystemWatcher = new FileSystemWatcher(".");
 
-                                    fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
-								    solutionfolder = @"c:\solutionFolder\";
-								    fileSystem.GetDirectoryName(path)
-                                              .Returns(solutionfolder);
+									fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
+									solutionfolder = @"c:\solutionFolder\";
+									fileSystem.GetDirectoryName(path)
+											  .Returns(solutionfolder);
 								};
 
 	}
@@ -46,27 +46,27 @@ namespace Giles.Specs.Core.Watchers
 			watcher.Watch(path, filter);
 
 		It should_setup_a_file_watcher = () =>
-            fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
+			fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
 
 		It should_store_a_reference_to_the_watcher = () =>
 			watcher.FileWatchers.ShouldNotBeEmpty();
 
-        It should_get_the_solution_base_path = () =>
-            fileSystem.Received().GetDirectoryName(path);
+		It should_get_the_solution_base_path = () =>
+			fileSystem.Received().GetDirectoryName(path);
 	}
 
 
-    public class when_a_file_has_changed : with_a_source_watcher
-    {
-        Establish context = () =>
-            watcher.Watch(path, filter);
+	public class when_a_file_has_changed : with_a_source_watcher
+	{
+		Establish context = () =>
+			watcher.Watch(path, filter);
 
-        Because of = () =>
-            watcher.ChangeAction(null, null);
+		Because of = () =>
+			watcher.ChangeAction(null, null);
 
-        It should_call_the_solution_builder = () =>
-            buildRunner.Received().Run(path);
-    }
+		It should_call_the_solution_builder = () =>
+			buildRunner.Received().Run(path);
+	}
 
 	public class when_disposing : with_a_source_watcher
 	{

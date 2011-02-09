@@ -27,7 +27,13 @@ namespace Giles.Core.Watchers
         {
             this.path = path;
             var solutionFolder = fileSystem.GetDirectoryName(path);
-            FileWatchers.Add(fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null, ErrorAction));
+            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null, ErrorAction);
+            
+            fileSystemWatcher.EnableRaisingEvents = true;
+            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            fileSystemWatcher.IncludeSubdirectories = true;
+
+            FileWatchers.Add(fileSystemWatcher);
         }
 
         public void ErrorAction(object sender, ErrorEventArgs e)
@@ -37,17 +43,13 @@ namespace Giles.Core.Watchers
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-            buildRunner.Run(path);
+            Console.WriteLine("Detected a change in " + e.FullPath);
+            //buildRunner.Run(path);
         }
 
         public void Dispose()
         {
             FileWatchers.ToList().ForEach(x => x.Dispose());
         }
-    }
-
-    public interface IBuildRunner
-    {
-        void Run(string solution);
     }
 }
