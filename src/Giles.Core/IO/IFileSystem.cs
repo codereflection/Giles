@@ -66,6 +66,8 @@ namespace Giles.Core.IO
         string[] GetFiles(string path,
                           string searchPattern);
 
+        string[] GetFiles(string path, string searchPattern, SearchOption searchOption);
+
         long GetFileSize(string path);
 
         string GetFullPath(string path);
@@ -279,6 +281,11 @@ namespace Giles.Core.IO
                                  string searchPattern)
         {
             return Directory.GetFiles(path, searchPattern);
+        }
+
+        public string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
+        {
+            return Directory.GetFiles(path, searchPattern, searchOption);
         }
 
         public long GetFileSize(string path)

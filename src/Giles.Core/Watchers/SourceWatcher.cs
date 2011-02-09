@@ -2,33 +2,52 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Timers;
 using Giles.Core.IO;
+using Giles.Core.Runners;
 
 namespace Giles.Core.Watchers
 {
     public class SourceWatcher : IDisposable
     {
-        readonly IFileSystem fileSystem;
         readonly IBuildRunner buildRunner;
+        readonly Timer buildTimer;
+        readonly IFileSystem fileSystem;
         readonly IFileWatcherFactory fileWatcherFactory;
-        string solution;
-        string path;
+        readonly ITestRunner testRunner;
+        string solutionPath;
         public List<FileSystemWatcher> FileWatchers { get; set; }
 
-        public SourceWatcher(IFileSystem fileSystem, IBuildRunner buildRunner, IFileWatcherFactory fileWatcherFactory)
+
+        public SourceWatcher(IBuildRunner buildRunner, ITestRunner testRunner, IFileSystem fileSystem, IFileWatcherFactory fileWatcherFactory)
         {
-            this.FileWatchers = new List<FileSystemWatcher>();
+            FileWatchers = new List<FileSystemWatcher>();
             this.fileSystem = fileSystem;
             this.buildRunner = buildRunner;
             this.fileWatcherFactory = fileWatcherFactory;
+            this.testRunner = testRunner;
+            buildTimer = new Timer(2000) {AutoReset = false, Enabled = false, Interval = 500};
+            buildTimer.Elapsed += new ElapsedEventHandler(buildTimer_Elapsed);
         }
 
-        public void Watch(string path, string filter)
+        void buildTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            this.path = path;
-            var solutionFolder = fileSystem.GetDirectoryName(path);
-            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null, ErrorAction);
-            
+            buildRunner.Run();
+            testRunner.Run();
+        }
+
+
+        public void Dispose()
+        {
+            FileWatchers.ToList().ForEach(x => x.Dispose());
+        }
+
+        public void Watch(string solutionPath, string filter)
+        {
+            solutionPath = solutionPath;
+            var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
+            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
+                                                                           ErrorAction);
             fileSystemWatcher.EnableRaisingEvents = true;
             fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
             fileSystemWatcher.IncludeSubdirectories = true;
@@ -43,13 +62,15 @@ namespace Giles.Core.Watchers
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-            Console.WriteLine("Detected a change in " + e.FullPath);
-            //buildRunner.Run(path);
-        }
+            //Console.WriteLine("Detected a change in:\n\t" + e.FullPath);
 
-        public void Dispose()
-        {
-            FileWatchers.ToList().ForEach(x => x.Dispose());
+            if (buildTimer.Enabled)
+            {
+                buildTimer.Enabled = false;
+                buildTimer.Enabled = true;
+            }
+            else
+                buildTimer.Enabled = true;
         }
     }
 }
