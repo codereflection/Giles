@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using Giles.Core.Watchers;
 using Ninject;
-using Ninject.Modules;
-using Ninject.Planning.Bindings;
 
 namespace Giles
 {
@@ -14,6 +11,8 @@ namespace Giles
 
         static void Main(string[] args)
         {
+            Console.Clear();
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
             Console.WriteLine("Giles - your own personal watcher");
 
             solutionPath = args[0];
@@ -27,11 +26,52 @@ namespace Giles
 
             sourceWatcher.Watch(solutionPath, @"*.cs");
 
-            // put in the console watcher here for commands
+            DisplayOptions();
             while (true)
             {
                 
+                var key = Console.ReadKey(true);
+
+                var keyValue = key.KeyChar.ToString().ToLower();
+
+                if (keyValue == "?")
+                    DisplayOptions();
+
+                if (keyValue == "i")
+                    DisplayConfig();
+
+                if (keyValue == "c")
+                    Console.Clear();
+
+                if (keyValue == "q")
+                    break;
             }
+            Console.WriteLine("See you next time...");
+
+        }
+
+        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            // eating the ctrl-c for breakfast...
+            e.Cancel = true;
+        }
+
+        static void DisplayConfig()
+        {
+            Console.WriteLine("Current Configuration");
+            Console.WriteLine("  Solution: " + solutionPath);
+            Console.WriteLine("  Test Assembly: " + testAssemblyPath);
+            Console.WriteLine();
+        }
+
+        static void DisplayOptions()
+        {
+            Console.WriteLine("Interactive Console Options:");
+            Console.WriteLine("  ? = Display options");
+            Console.WriteLine("  C = Clear the window");
+            Console.WriteLine("  I = Show current configuration");
+            Console.WriteLine("  Q = Quit");
+            Console.WriteLine();
         }
     }
 }

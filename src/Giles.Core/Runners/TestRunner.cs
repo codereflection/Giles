@@ -59,7 +59,7 @@ namespace Giles.Core.Runners
             testProcess.Close();
             testProcess.Dispose();
 
-            Console.WriteLine("\n\n======= TEST RESULTS =======");
+            Console.WriteLine("\n\n======= TEST RESULTS {0} =======", DateTime.Now.ToLongTimeString());
             Console.WriteLine(output);
         }
     }
