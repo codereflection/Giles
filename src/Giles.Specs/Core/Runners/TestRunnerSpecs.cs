@@ -16,10 +16,11 @@ namespace Giles.Specs.Core.Runners
 
         Establish context = () =>
                                 {
+                                    solutionFolder = @"c:\solutionFolder";
                                     solutionPath = @"c:\solutionFolder\mySolution.sln";
                                     testAssemblyPath = @"c:\solutionFolder\testProject\bin\debug\testAssembly.dll";
+                                    
                                     fileSystem = Substitute.For<IFileSystem>();
-                                    solutionFolder = @"c:\solutionFolder";
                                     fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
                                 };
 

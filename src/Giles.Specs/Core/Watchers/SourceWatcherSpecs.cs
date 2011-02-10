@@ -47,7 +47,7 @@ namespace Giles.Specs.Core.Watchers
     {
         Because of = () =>
             watcher.Watch(path, filter);
-
+            
         It should_setup_a_file_watcher = () =>
             fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
 

@@ -6,7 +6,7 @@ namespace Giles.Core.Runners
     {
     }
 
-    public class BuildRunner : IBuildRunner
+    public class BuildRunner : RunnerBase, IBuildRunner
     {
         readonly string solutionPath;
 
@@ -17,16 +17,8 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
-            var buildProcess = new System.Diagnostics.Process
-                                   {
-                                       StartInfo =
-                                           {
-                                               FileName = @"C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe",
-                                               Arguments = solutionPath,
-                                               UseShellExecute = false,
-                                               RedirectStandardOutput = true
-                                           }
-                                   };
+            var buildProcess = SetupProcess(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe", solutionPath);
+
             buildProcess.Start();
             var output = buildProcess.StandardOutput.ReadToEnd();
 

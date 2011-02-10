@@ -11,7 +11,7 @@ namespace Giles.Core.Runners
     {
     }
 
-    public class TestRunner : ITestRunner
+    public class TestRunner : RunnerBase, ITestRunner
     {
         readonly IFileSystem fileSystem;
         readonly string solutionPath;
@@ -25,7 +25,7 @@ namespace Giles.Core.Runners
             this.fileSystem = fileSystem;
             this.solutionPath = solutionPath;
             this.testAssemblyPath = testAssemblyPath;
-            supportedRunners = new[] { "mspec.exe" };
+            supportedRunners = new[] { "mspec.exe", "nunit-console.exe" };
 
             solutionFolder = fileSystem.GetDirectoryName(solutionPath);
             LocateTestRunner();
@@ -42,16 +42,7 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
-            var testProcess = new System.Diagnostics.Process
-                                  {
-                                      StartInfo =
-                                          {
-                                              FileName = testRunners.FirstOrDefault().Value,
-                                              Arguments = testAssemblyPath,
-                                              UseShellExecute = false,
-                                              RedirectStandardOutput = true
-                                          }
-                                  };
+            var testProcess = SetupProcess(testRunners.FirstOrDefault().Value, testAssemblyPath);
             testProcess.Start();
             var output = testProcess.StandardOutput.ReadToEnd();
 
