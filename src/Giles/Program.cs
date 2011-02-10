@@ -18,10 +18,11 @@ namespace Giles
 
             var solutionPath = args[0];
             var testAssemblyPath = args[1];
+            var projectRoot = args[2];
             //solutionPath = @"D:\Dev\Prototypes\TestableTestStuff\TestableTestStuff.sln";
             //testAssemblyPath = @"D:\Dev\Prototypes\TestableTestStuff\ClassThatDoesShit.Tests\bin\Debug\Teh.Tests.dll";
 
-            var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
+            var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath, projectRoot));
 
             var configFactory = kernel.Get<GilesConfigFactory>();
             config = configFactory.Build();
@@ -89,6 +90,7 @@ namespace Giles
             Console.WriteLine("\nCurrent Configuration");
             Console.WriteLine("  Build Delay: " + config.BuildDelay);
             Console.WriteLine("  Solution: " + config.SolutionPath);
+            Console.WriteLine("  Project Root: " + config.ProjectRoot);
             Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
             Console.WriteLine();
         }

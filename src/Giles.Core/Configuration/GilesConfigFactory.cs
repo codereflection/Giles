@@ -11,16 +11,17 @@ namespace Giles.Core.Configuration
         readonly IFileSystem fileSystem;
         readonly string solutionPath;
         readonly string testAssemblyPath;
-        readonly string solutionFolder;
+        readonly string projectRoot;
         readonly string[] supportedRunners;
 
-        public GilesConfigFactory(GilesConfig config, IFileSystem fileSystem, string solutionPath, string testAssemblyPath)
+        public GilesConfigFactory(GilesConfig config, IFileSystem fileSystem, string solutionPath, string testAssemblyPath, string projectRoot)
         {
             this.config = config;
             this.fileSystem = fileSystem;
             this.solutionPath = solutionPath;
             this.testAssemblyPath = testAssemblyPath;
-            solutionFolder = fileSystem.GetDirectoryName(solutionPath);
+            this.projectRoot = projectRoot;
+         
             supportedRunners = new[] {"mspec.exe", "nunit-console.exe"};
         }
 
@@ -35,17 +36,17 @@ namespace Giles.Core.Configuration
         void LocateTestRunners()
         {
             supportedRunners.Each(x =>
-                                      {
-                                          var files = fileSystem.GetFiles(solutionFolder, x,
-                                                                               SearchOption.AllDirectories);
+                {
+                    var files = fileSystem.GetFiles(projectRoot, x,
+                                                        SearchOption.AllDirectories);
                                           
-                                          config.TestRunners.Add(x,
-                                                                 new RunnerAssembly
-                                                                     {
-                                                                         Path = files.FirstOrDefault(),
-                                                                         Enabled = !string.IsNullOrWhiteSpace(files.FirstOrDefault())
-                                                                     });
-                                      });
+                    config.TestRunners.Add(x,
+                                            new RunnerAssembly
+                                                {
+                                                    Path = files.FirstOrDefault(),
+                                                    Enabled = !string.IsNullOrWhiteSpace(files.FirstOrDefault())
+                                                });
+                });
         }
     }
 }

@@ -10,11 +10,13 @@ namespace Giles
     {
         readonly string solutionPath;
         readonly string testAssemblyPath;
+        readonly string projectRoot;
 
-        public SlayerModule(string solutionPath, string testAssemblyPath)
+        public SlayerModule(string solutionPath, string testAssemblyPath, string projectRoot)
         {
             this.solutionPath = solutionPath;
             this.testAssemblyPath = testAssemblyPath;
+            this.projectRoot = projectRoot;
         }
 
         public override void Load()
@@ -27,7 +29,8 @@ namespace Giles
             Bind<GilesConfig>().ToSelf().InSingletonScope();
             Bind<GilesConfigFactory>().ToSelf()
                 .WithConstructorArgument("solutionPath", solutionPath)
-                .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
+                .WithConstructorArgument("testAssemblyPath", testAssemblyPath)
+                .WithConstructorArgument("projectRoot", projectRoot);
         }
     }
 }

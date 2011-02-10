@@ -6,8 +6,13 @@ namespace Giles.Core.Configuration
     public class GilesConfig : INotifyPropertyChanged
     {
         public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
+        
         public string TestAssemblyPath { get; set; }
+        
         public string SolutionPath { get; set; }
+
+        public string ProjectRoot { get; set; }
+
         long buildDelay = 500;
 
         public event PropertyChangedEventHandler PropertyChanged;

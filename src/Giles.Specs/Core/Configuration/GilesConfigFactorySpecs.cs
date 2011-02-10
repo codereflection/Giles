@@ -17,20 +17,22 @@ namespace Giles.Specs.Core.Configuration
         protected static string solutionFolder;
         protected static string testRunnerExe;
         protected static string testAssemblyPath;
+        protected static string projectRoot;
 
         Establish context = () =>
                                 {
-                                    solutionFolder = @"c:\solutionFolder";
-                                    solutionPath = @"c:\solutionFolder\mySolution.sln";
-                                    testAssemblyPath = @"c:\solutionFolder\tests\bin\debug\tests.dll";
+                                    solutionFolder = @"c:\solutionRoot\solution";
+                                    solutionPath = @"c:\solutionRoot\solution\mySolution.sln";
+                                    testAssemblyPath = @"c:\solutionRoot\solution\tests\bin\debug\tests.dll";
                                     fileSystem = Substitute.For<IFileSystem>();
                                     testRunnerExe = @"c:\testAssembly.exe";
                                     fileSystem.GetFiles(Arg.Any<string>(), Arg.Any<string>(), SearchOption.AllDirectories)
                                         .Returns(new[] { testRunnerExe });
                                     fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
+                                    projectRoot = @"c:\solutionRoot";
 
                                     config = new GilesConfig();
-                                    factory = new GilesConfigFactory(config, fileSystem, solutionPath, testAssemblyPath);
+                                    factory = new GilesConfigFactory(config, fileSystem, solutionPath, testAssemblyPath, projectRoot);
                                 };
 
     }
@@ -40,14 +42,11 @@ namespace Giles.Specs.Core.Configuration
         Because of = () =>
             factory.Build();
 
-        It gets_the_solution_folder = () =>
-            fileSystem.Received().GetDirectoryName(solutionPath);
-
         It locates_the_mspec_test_runner = () =>
-            fileSystem.Received().GetFiles(solutionFolder, "mspec.exe", SearchOption.AllDirectories);
+            fileSystem.Received().GetFiles(projectRoot, "mspec.exe", SearchOption.AllDirectories);
 
         It locates_the_nunit_test_runner = () =>
-            fileSystem.Received().GetFiles(solutionFolder, "nunit-console.exe", SearchOption.AllDirectories);
+            fileSystem.Received().GetFiles(projectRoot, "nunit-console.exe", SearchOption.AllDirectories);
 
         It built_the_correct_config_test_runners = () =>
             config.TestRunners.All(x => x.Value.Path == testRunnerExe).ShouldBeTrue();
