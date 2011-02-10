@@ -14,16 +14,15 @@ namespace Giles.Core.Runners
     public class TestRunner : RunnerBase, ITestRunner
     {
         readonly IFileSystem fileSystem;
-        readonly string solutionPath;
+        readonly string solutionFolder;
         readonly string testAssemblyPath;
-        IList<string> supportedRunners;
+        readonly IList<string> supportedRunners;
+        
         IDictionary<string,string> testRunners = new Dictionary<string, string>();
-        string solutionFolder;
 
         public TestRunner(IFileSystem fileSystem, string solutionPath, string testAssemblyPath)
         {
             this.fileSystem = fileSystem;
-            this.solutionPath = solutionPath;
             this.testAssemblyPath = testAssemblyPath;
             supportedRunners = new[] { "mspec.exe", "nunit-console.exe" };
 
@@ -42,16 +41,19 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
-            var testProcess = SetupProcess(testRunners.FirstOrDefault().Value, testAssemblyPath);
-            testProcess.Start();
-            var output = testProcess.StandardOutput.ReadToEnd();
+            testRunners.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Each(x =>
+                        {
+                            var testProcess = SetupProcess(x.Value, testAssemblyPath);
+                            testProcess.Start();
+                            var output = testProcess.StandardOutput.ReadToEnd();
 
-            testProcess.WaitForExit();
-            testProcess.Close();
-            testProcess.Dispose();
+                            testProcess.WaitForExit();
+                            testProcess.Close();
+                            testProcess.Dispose();
 
-            Console.WriteLine("\n\n======= TEST RESULTS {0} =======", DateTime.Now.ToLongTimeString());
-            Console.WriteLine(output);
+                            Console.WriteLine("\n\n======= TEST RESULTS {0} =======", DateTime.Now.ToLongTimeString());
+                            Console.WriteLine(output);
+                        });
         }
     }
 }
