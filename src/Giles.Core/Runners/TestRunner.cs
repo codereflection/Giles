@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Giles.Core.IO;
+using Giles.Core.Configuration;
 using Machine.Specifications.Utility;
 
 namespace Giles.Core.Runners
@@ -13,35 +12,18 @@ namespace Giles.Core.Runners
 
     public class TestRunner : RunnerBase, ITestRunner
     {
-        readonly IFileSystem fileSystem;
-        readonly string solutionFolder;
+        readonly GilesConfig config;
         readonly string testAssemblyPath;
-        readonly IList<string> supportedRunners;
-        
-        IDictionary<string,string> testRunners = new Dictionary<string, string>();
 
-        public TestRunner(IFileSystem fileSystem, string solutionPath, string testAssemblyPath)
+        public TestRunner(GilesConfig config, string testAssemblyPath)
         {
-            this.fileSystem = fileSystem;
+            this.config = config;
             this.testAssemblyPath = testAssemblyPath;
-            supportedRunners = new[] { "mspec.exe", "nunit-console.exe" };
-
-            solutionFolder = fileSystem.GetDirectoryName(solutionPath);
-            LocateTestRunner();
-        }
-
-        void LocateTestRunner()
-        {
-            supportedRunners.Each(x =>
-                                 {
-                                     var files = fileSystem.GetFiles(solutionFolder, x, SearchOption.AllDirectories);
-                                     testRunners.Add(x, files.FirstOrDefault());
-                                 });
         }
 
         public void Run()
         {
-            testRunners.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Each(x =>
+            config.TestRunners.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Each(x =>
                         {
                             var testProcess = SetupProcess(x.Value, testAssemblyPath);
                             testProcess.Start();

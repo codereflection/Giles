@@ -1,4 +1,5 @@
 ﻿using System;
+using Giles.Core.Configuration;
 using Giles.Core.Watchers;
 using Ninject;
 
@@ -21,6 +22,9 @@ namespace Giles
             //testAssemblyPath = @"D:\Dev\Prototypes\TestableTestStuff\ClassThatDoesShit.Tests\bin\Debug\Teh.Tests.dll";
 
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
+
+            var configFactory = kernel.Get<GilesConfigFactory>();
+            configFactory.Build();
 
             var sourceWatcher = kernel.Get<SourceWatcher>();
 

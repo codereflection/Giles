@@ -34,6 +34,8 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="Configuration\GilesConfig.cs" />
+    <Compile Include="Configuration\GilesConfigFactory.cs" />
     <Compile Include="Encryption\EncryptionHelper.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />
