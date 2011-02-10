@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Watchers;
@@ -19,6 +20,7 @@ namespace Giles.Specs.Core.Watchers
         protected static IFileWatcherFactory fileWatcherFactory;
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
+        static GilesConfig config;
 
         Establish context = () =>
                                 {
@@ -27,7 +29,9 @@ namespace Giles.Specs.Core.Watchers
                                     testRunner = Substitute.For<ITestRunner>();
                                     fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
 
-                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory);
+                                    config = new GilesConfig();
+
+                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
                                     
                                     path = @"c:\solutionFolder\mySolution.sln";
                                     filter = "*.cs";

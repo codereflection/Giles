@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Timers;
+using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 
@@ -14,38 +15,51 @@ namespace Giles.Core.Watchers
         readonly Timer buildTimer;
         readonly IFileSystem fileSystem;
         readonly IFileWatcherFactory fileWatcherFactory;
+        readonly GilesConfig config;
         readonly ITestRunner testRunner;
-        string solutionPath;
-        public List<FileSystemWatcher> FileWatchers { get; set; }
 
 
-        public SourceWatcher(IBuildRunner buildRunner, ITestRunner testRunner, IFileSystem fileSystem, IFileWatcherFactory fileWatcherFactory)
+        public SourceWatcher(IBuildRunner buildRunner, ITestRunner testRunner, IFileSystem fileSystem,
+                             IFileWatcherFactory fileWatcherFactory, GilesConfig config)
         {
             FileWatchers = new List<FileSystemWatcher>();
             this.fileSystem = fileSystem;
             this.buildRunner = buildRunner;
             this.fileWatcherFactory = fileWatcherFactory;
+            this.config = config;
             this.testRunner = testRunner;
-            buildTimer = new Timer(2000) {AutoReset = false, Enabled = false, Interval = 500};
-            buildTimer.Elapsed += new ElapsedEventHandler(buildTimer_Elapsed);
+            buildTimer = new Timer {AutoReset = false, Enabled = false, Interval = config.BuildDelay};
+            config.PropertyChanged += config_PropertyChanged;
+            buildTimer.Elapsed += buildTimer_Elapsed;
         }
 
-        void buildTimer_Elapsed(object sender, ElapsedEventArgs e)
+        void config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            RunNow();
+            if (e.PropertyName == "BuildDelay")
+                buildTimer.Interval = (sender as GilesConfig).BuildDelay;
         }
 
+        public List<FileSystemWatcher> FileWatchers { get; set; }
+
+        #region IDisposable Members
 
         public void Dispose()
         {
             FileWatchers.ToList().ForEach(x => x.Dispose());
         }
 
+        #endregion
+
+        void buildTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            RunNow();
+        }
+
         public void Watch(string solutionPath, string filter)
         {
             solutionPath = solutionPath;
-            var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
-            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
+            string solutionFolder = fileSystem.GetDirectoryName(solutionPath);
+            FileSystemWatcher fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
                                                                            ErrorAction);
             fileSystemWatcher.EnableRaisingEvents = true;
             fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;

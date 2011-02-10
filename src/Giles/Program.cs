@@ -59,9 +59,23 @@ namespace Giles
                 if (keyValue == "r")
                     sourceWatcher.RunNow();
 
+                if (keyValue == "b")
+                    config.BuildDelay = GetUserValue(config.BuildDelay);
+
                 if (keyValue == "q")
                     break;
             }
+        }
+
+        static T GetUserValue<T>(T defaultValue)
+        {
+            Console.Write("Enter new value ({0}): ", defaultValue);
+            var newValue = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(newValue))
+                return defaultValue;
+            
+            return (T)Convert.ChangeType(newValue, typeof(T));
         }
 
         static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -73,6 +87,7 @@ namespace Giles
         static void DisplayConfig()
         {
             Console.WriteLine("\nCurrent Configuration");
+            Console.WriteLine("  Build Delay: " + config.BuildDelay);
             Console.WriteLine("  Solution: " + config.SolutionPath);
             Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
             Console.WriteLine();
@@ -85,6 +100,7 @@ namespace Giles
             Console.WriteLine("  C = Clear the window");
             Console.WriteLine("  I = Show current configuration");
             Console.WriteLine("  R = Run build & tests now");
+            Console.WriteLine("  B = Set Build Delay");
             Console.WriteLine("  Q = Quit");
             Console.WriteLine();
         }
