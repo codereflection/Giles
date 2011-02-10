@@ -7,30 +7,39 @@ namespace Giles
 {
     class Program
     {
-        static string solutionPath;
-        static string testAssemblyPath;
+        static SourceWatcher sourceWatcher;
+        static GilesConfig config;
 
         static void Main(string[] args)
         {
             Console.Clear();
-            Console.CancelKeyPress += new ConsoleCancelEventHandler(Console_CancelKeyPress);
+            Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
 
-            solutionPath = args[0];
-            testAssemblyPath = args[1];
+            var solutionPath = args[0];
+            var testAssemblyPath = args[1];
             //solutionPath = @"D:\Dev\Prototypes\TestableTestStuff\TestableTestStuff.sln";
             //testAssemblyPath = @"D:\Dev\Prototypes\TestableTestStuff\ClassThatDoesShit.Tests\bin\Debug\Teh.Tests.dll";
 
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
 
             var configFactory = kernel.Get<GilesConfigFactory>();
-            configFactory.Build();
-
-            var sourceWatcher = kernel.Get<SourceWatcher>();
+            config = configFactory.Build();
+            
+            sourceWatcher = kernel.Get<SourceWatcher>();
 
             sourceWatcher.Watch(solutionPath, @"*.cs");
 
             DisplayOptions();
+            
+            MainFeedbackLoop();
+
+            Console.WriteLine("See you next time...");
+
+        }
+
+        static void MainFeedbackLoop()
+        {
             while (true)
             {
                 
@@ -47,11 +56,12 @@ namespace Giles
                 if (keyValue == "c")
                     Console.Clear();
 
+                if (keyValue == "r")
+                    sourceWatcher.RunNow();
+
                 if (keyValue == "q")
                     break;
             }
-            Console.WriteLine("See you next time...");
-
         }
 
         static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -62,9 +72,9 @@ namespace Giles
 
         static void DisplayConfig()
         {
-            Console.WriteLine("Current Configuration");
-            Console.WriteLine("  Solution: " + solutionPath);
-            Console.WriteLine("  Test Assembly: " + testAssemblyPath);
+            Console.WriteLine("\nCurrent Configuration");
+            Console.WriteLine("  Solution: " + config.SolutionPath);
+            Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
             Console.WriteLine();
         }
 
@@ -74,6 +84,7 @@ namespace Giles
             Console.WriteLine("  ? = Display options");
             Console.WriteLine("  C = Clear the window");
             Console.WriteLine("  I = Show current configuration");
+            Console.WriteLine("  R = Run build & tests now");
             Console.WriteLine("  Q = Quit");
             Console.WriteLine();
         }

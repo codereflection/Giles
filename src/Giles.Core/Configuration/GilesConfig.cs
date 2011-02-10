@@ -4,6 +4,8 @@ namespace Giles.Core.Configuration
 {
     public class GilesConfig
     {
-        public IDictionary<string, string> TestRunners = new Dictionary<string, string>();
+        public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
+        public string TestAssemblyPath;
+        public string SolutionPath;
     }
 }

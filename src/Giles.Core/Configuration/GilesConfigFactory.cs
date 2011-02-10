@@ -9,30 +9,43 @@ namespace Giles.Core.Configuration
     {
         readonly GilesConfig config;
         readonly IFileSystem fileSystem;
+        readonly string solutionPath;
+        readonly string testAssemblyPath;
         readonly string solutionFolder;
         readonly string[] supportedRunners;
 
-        public GilesConfigFactory(GilesConfig config, IFileSystem fileSystem, string solutionPath)
+        public GilesConfigFactory(GilesConfig config, IFileSystem fileSystem, string solutionPath, string testAssemblyPath)
         {
             this.config = config;
             this.fileSystem = fileSystem;
+            this.solutionPath = solutionPath;
+            this.testAssemblyPath = testAssemblyPath;
             solutionFolder = fileSystem.GetDirectoryName(solutionPath);
-            supportedRunners = new[] { "mspec.exe", "nunit-console.exe" };
+            supportedRunners = new[] {"mspec.exe", "nunit-console.exe"};
         }
 
-        public void Build()
+        public GilesConfig Build()
         {
             LocateTestRunners();
+            config.TestAssemblyPath = testAssemblyPath;
+            config.SolutionPath = solutionPath;
+            return config;
         }
 
         void LocateTestRunners()
         {
             supportedRunners.Each(x =>
-                {
-                    var files = fileSystem.GetFiles(solutionFolder, x, SearchOption.AllDirectories);
-                    config.TestRunners.Add(x, files.FirstOrDefault());
-                });
+                                      {
+                                          var files = fileSystem.GetFiles(solutionFolder, x,
+                                                                               SearchOption.AllDirectories);
+                                          
+                                          config.TestRunners.Add(x,
+                                                                 new RunnerAssembly
+                                                                     {
+                                                                         Path = files.FirstOrDefault(),
+                                                                         Enabled = !string.IsNullOrWhiteSpace(files.FirstOrDefault())
+                                                                     });
+                                      });
         }
-
     }
 }

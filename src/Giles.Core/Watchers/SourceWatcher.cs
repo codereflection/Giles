@@ -32,8 +32,7 @@ namespace Giles.Core.Watchers
 
         void buildTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            buildRunner.Run();
-            testRunner.Run();
+            RunNow();
         }
 
 
@@ -71,6 +70,12 @@ namespace Giles.Core.Watchers
             }
             else
                 buildTimer.Enabled = true;
+        }
+
+        public void RunNow()
+        {
+            buildRunner.Run();
+            testRunner.Run();
         }
     }
 }

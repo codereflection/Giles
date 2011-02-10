@@ -20,15 +20,14 @@ namespace Giles
         public override void Load()
         {
             Bind<IFileSystem>().To<FileSystem>();
-            Bind<IBuildRunner>().To<BuildRunner>()
-                .WithConstructorArgument("solutionPath", solutionPath);
-            Bind<ITestRunner>().To<TestRunner>()
-                .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
+            Bind<IBuildRunner>().To<BuildRunner>();
+            Bind<ITestRunner>().To<TestRunner>();
             Bind<IFileWatcherFactory>().To<FileWatcherFactory>();
             Bind<SourceWatcher>().ToSelf().InSingletonScope();
             Bind<GilesConfig>().ToSelf().InSingletonScope();
             Bind<GilesConfigFactory>().ToSelf()
-                .WithConstructorArgument("solutionPath", solutionPath);
+                .WithConstructorArgument("solutionPath", solutionPath)
+                .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
         }
     }
 }

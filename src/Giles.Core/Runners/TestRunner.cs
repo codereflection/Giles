@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using Giles.Core.Configuration;
 using Machine.Specifications.Utility;
@@ -13,19 +12,17 @@ namespace Giles.Core.Runners
     public class TestRunner : RunnerBase, ITestRunner
     {
         readonly GilesConfig config;
-        readonly string testAssemblyPath;
 
-        public TestRunner(GilesConfig config, string testAssemblyPath)
+        public TestRunner(GilesConfig config)
         {
             this.config = config;
-            this.testAssemblyPath = testAssemblyPath;
         }
 
         public void Run()
         {
-            config.TestRunners.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Each(x =>
+            config.TestRunners.Where(x => x.Value.Enabled).Each(x =>
                         {
-                            var testProcess = SetupProcess(x.Value, testAssemblyPath);
+                            var testProcess = SetupProcess(x.Value.Path, config.TestAssemblyPath);
                             testProcess.Start();
                             var output = testProcess.StandardOutput.ReadToEnd();
 
@@ -36,6 +33,7 @@ namespace Giles.Core.Runners
                             Console.WriteLine("\n\n======= TEST RESULTS {0} =======", DateTime.Now.ToLongTimeString());
                             Console.WriteLine(output);
                         });
+            Console.WriteLine("Test run complete.");
         }
     }
 }

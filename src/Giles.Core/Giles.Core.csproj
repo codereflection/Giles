@@ -36,6 +36,7 @@
     </Compile>
     <Compile Include="Configuration\GilesConfig.cs" />
     <Compile Include="Configuration\GilesConfigFactory.cs" />
+    <Compile Include="Configuration\RunnerAssembly.cs" />
     <Compile Include="Encryption\EncryptionHelper.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />

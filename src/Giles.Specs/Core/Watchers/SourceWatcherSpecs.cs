@@ -48,13 +48,13 @@ namespace Giles.Specs.Core.Watchers
         Because of = () =>
             watcher.Watch(path, filter);
             
-        It should_setup_a_file_watcher = () =>
+        It setups_a_file_watcher = () =>
             fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
 
-        It should_store_a_reference_to_the_watcher = () =>
+        It stores_a_reference_to_the_watcher = () =>
             watcher.FileWatchers.ShouldNotBeEmpty();
 
-        It should_get_the_solution_base_path = () =>
+        It gets_the_solution_base_path = () =>
             fileSystem.Received().GetDirectoryName(path);
     }
 
@@ -68,7 +68,7 @@ namespace Giles.Specs.Core.Watchers
             watcher.ChangeAction(null, null);
 
         [Ignore("build is called on a delay, need a better way to test this")]
-        It should_call_the_solution_builder = () =>
+        It calls_the_solution_builder = () =>
             buildRunner.Received().Run();
     }
 
