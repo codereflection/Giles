@@ -1,1 +1,7 @@
 Giles - Watcher extraordinaire. True to form, Giles will watch you kick ass, and let you know right away when you’ve made a mistake (intentionally or not).
+
+Current (yes ugly) usage takes 3 parameters:
+
+giles.exe path_to_solution path_to_test_assembly project_root_path
+
+Yes, this will be cleaned up shortly.
