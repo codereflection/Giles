@@ -4,4 +4,7 @@ Current (yes ugly) usage takes 3 parameters:
 
 giles.exe path_to_solution path_to_test_assembly project_root_path
 
-Yes, this will be cleaned up shortly.
+(Yes, this will be cleaned up shortly.)
+
+
+While in the interactive console, press ? for a list of options.
