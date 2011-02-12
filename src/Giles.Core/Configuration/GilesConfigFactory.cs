@@ -22,7 +22,7 @@ namespace Giles.Core.Configuration
             this.testAssemblyPath = testAssemblyPath;
             this.projectRoot = projectRoot;
          
-            supportedRunners = new[] {"mspec.exe", "nunit-console.exe"};
+            supportedRunners = new[] {"mspec.exe", "nunit-console.exe:/nologo"};
         }
 
         public GilesConfig Build()
@@ -37,14 +37,18 @@ namespace Giles.Core.Configuration
         {
             supportedRunners.Each(x =>
                 {
-                    var files = fileSystem.GetFiles(projectRoot, x,
+                    var executeable = x.Split(':').First();
+                    var options = x.Split(':').Where(opt => opt != executeable).ToList();
+
+                    var files = fileSystem.GetFiles(projectRoot, executeable,
                                                         SearchOption.AllDirectories);
-                                          
-                    config.TestRunners.Add(x,
+
+                    config.TestRunners.Add(executeable,
                                             new RunnerAssembly
                                                 {
                                                     Path = files.FirstOrDefault(),
-                                                    Enabled = !string.IsNullOrWhiteSpace(files.FirstOrDefault())
+                                                    Enabled = !string.IsNullOrWhiteSpace(files.FirstOrDefault()),
+                                                    Options = options
                                                 });
                 });
         }

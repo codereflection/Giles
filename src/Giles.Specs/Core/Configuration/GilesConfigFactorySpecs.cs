@@ -56,6 +56,12 @@ namespace Giles.Specs.Core.Configuration
 
         It assigned_the_solution_path = () =>
             config.SolutionPath.ShouldEqual(solutionPath);
+
+        It recognized_the_nunit_test_runner_options = () =>
+            config.TestRunners.First(x => x.Key == "nunit-console.exe").Value.Options.First().ShouldEqual("/nologo");
+
+        It recognized_the_mspec_test_runner_options = () =>
+            config.TestRunners.First(x => x.Key == "mspec.exe").Value.Options.ShouldBeEmpty();
 			
     }
 

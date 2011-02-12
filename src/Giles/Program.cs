@@ -1,6 +1,5 @@
 ﻿using System;
 using CommandLine;
-using CommandLine.Text;
 using Giles.Core.Configuration;
 using Giles.Core.Watchers;
 using Giles.Options;
