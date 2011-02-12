@@ -53,11 +53,18 @@
 
 Currently only C#, mspec, and nunit are supported.</p><h2>Install</h2>
 <p>Getting Started
-To get started, add Giles to your project with Nuget:
-nuget install Giles
-or
-Install-Package Giles
+To get started, add Giles to your project with Nuget:<br />
+nuget install Giles<br />
+or<br />
+Install-Package Giles<br />
 or download the latest release from the Github downloads.</p>
+<p>
+Requirements:<br />
+<ul>
+	<li>.NET 4 SDK / Visual Studio 2010 (Giles needs msbuild)</li>
+	<li>The test runner and framework in a lib/tools folder somewhere in your project. Giles will automatically use the first mspec.exe and nunit-console.exe runners it can find in your project.</li>
+</ul>
+</p>
 <h2>Authors</h2>
 <p>Jeff Schumacher (jeff@codingreflection.com)
 <br/>
