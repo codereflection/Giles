@@ -16,6 +16,7 @@ deploy/
 [Rr]eport/*
 *.Publish.xml
 publish/*
+nuget/
 
 #Make sure report dir is created
 ![Rr]eport/Specs/.gitignore
