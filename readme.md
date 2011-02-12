@@ -32,4 +32,4 @@ Interactive Console Options:
   B = Set Build Delay  
   Q = Quit  
 
-For more information and requirement to run Giles, please visit the [wiki|https://github.com/codereflection/Giles/wiki]
+For more information and requirement to run Giles, please visit the [wiki](https://github.com/codereflection/Giles/wiki)
