@@ -9,8 +9,7 @@ task :default => [:full]
 task :full => [:clean,:assemblyInfo,:build,:specifications]
 
 task :clean do
-	FileUtils.rm_rf 'build'
-	FileUtils.rm_rf 'publish'
+	FileUtils.rm_rf 'build'	
 end
 
 
@@ -21,7 +20,7 @@ end
 
 
 mspec :specifications do |mspec|
-	mspec.command = "lib/mspec/mspec.exe"
+	mspec.command = "tools/mspec/mspec.exe"
 	mspec.assemblies = "build/Giles.Specs.dll"
 	mspec.html_output = "report/Specs"
 end
