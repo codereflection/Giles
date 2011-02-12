@@ -28,5 +28,12 @@ namespace Giles.Specs.Core.Runners
 
         It sets_the_arguements = () =>
             result.StartInfo.Arguments.ShouldEqual(arguments);
+
+        It does_not_use_shell_execute = () =>
+            result.StartInfo.UseShellExecute.ShouldBeFalse();
+
+        It redirects_standard_output = () =>
+            result.StartInfo.RedirectStandardOutput.ShouldBeTrue();
+			
     }
 }
