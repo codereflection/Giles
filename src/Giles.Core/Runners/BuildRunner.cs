@@ -11,15 +11,17 @@ namespace Giles.Core.Runners
     public class BuildRunner : RunnerBase, IBuildRunner
     {
         readonly GilesConfig config;
+        readonly Settings settings;
 
-        public BuildRunner(GilesConfig config)
+        public BuildRunner(GilesConfig config, Settings settings)
         {
             this.config = config;
+            this.settings = settings;
         }
 
         public void Run()
         {
-            var buildProcess = SetupProcess(@"C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe", config.SolutionPath);
+            var buildProcess = SetupProcess(settings.MsBuild, config.SolutionPath);
 
             var watch = new Stopwatch();
 

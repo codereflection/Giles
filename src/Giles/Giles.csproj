@@ -75,11 +75,15 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="Options\CLOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlayerModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommandLine">
+      <HintPath>..\..\lib\CommandLineParser\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject.2.1.0.76\lib\40\Ninject.dll</HintPath>
     </Reference>

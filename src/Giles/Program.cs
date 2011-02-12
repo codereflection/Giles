@@ -1,6 +1,9 @@
 ﻿using System;
+using CommandLine;
+using CommandLine.Text;
 using Giles.Core.Configuration;
 using Giles.Core.Watchers;
+using Giles.Options;
 using Ninject;
 
 namespace Giles
@@ -12,15 +15,22 @@ namespace Giles
 
         static void Main(string[] args)
         {
+
+            var options = new CLOptions();
+
+            var parser = new CommandLineParser(
+                new CommandLineParserSettings(false,Console.Error));
+
+            if (!parser.ParseArguments(args, options))
+                Environment.Exit(1);
+
             Console.Clear();
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
 
-            var solutionPath = args[0];
-            var testAssemblyPath = args[1];
-            var projectRoot = args[2];
-            //solutionPath = @"D:\Dev\Prototypes\TestableTestStuff\TestableTestStuff.sln";
-            //testAssemblyPath = @"D:\Dev\Prototypes\TestableTestStuff\ClassThatDoesShit.Tests\bin\Debug\Teh.Tests.dll";
+            var solutionPath = options.SolutionPath;
+            var testAssemblyPath = options.TestAssemblyPath;
+            var projectRoot = options.ProjectRoot;
 
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath, projectRoot));
 
