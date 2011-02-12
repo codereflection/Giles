@@ -8,7 +8,7 @@
     <owners>codereflection</owners>
     <projectUrl>https://github.com/codereflection/Giles</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
+    <description>Giles - continuous test runner for .NET applications. Currently supports Machine.Specifications (mspec) and NUnit.</description>
     <tags>testrunner test unittest giles</tags>
   </metadata>
 </package>
