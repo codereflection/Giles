@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Giles</id>
+    <version>0.0.1.0</version>
+    <title>Giles, Rupert Giles, at your service!</title>
+    <authors>codereflection</authors>
+    <owners>codereflection</owners>
+    <projectUrl>https://github.com/codereflection/Giles</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package description</description>
+    <tags>testrunner test unittest giles</tags>
+  </metadata>
+</package>
