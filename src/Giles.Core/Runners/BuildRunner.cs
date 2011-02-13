@@ -32,11 +32,17 @@ namespace Giles.Core.Runners
             var output = buildProcess.StandardOutput.ReadToEnd();
 
             buildProcess.WaitForExit();
+
+            var exitCode = buildProcess.ExitCode;
+
             buildProcess.Close();
             buildProcess.Dispose();
             watch.Stop();
             
-            Console.WriteLine("Building complete in {0} seconds.", watch.Elapsed.TotalSeconds);
+
+            Console.WriteLine("Build complete in {0} seconds. Result: {1}", 
+                watch.Elapsed.TotalSeconds,
+                exitCode == 0 ? "Success" : "Failure");
 
             //Console.WriteLine("\n\n======= BUILD RESULTS =======");
             //Console.WriteLine(output);
