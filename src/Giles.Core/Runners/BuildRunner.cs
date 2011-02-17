@@ -8,7 +8,7 @@ namespace Giles.Core.Runners
     {
     }
 
-    public class BuildRunner : RunnerBase, IBuildRunner
+    public class BuildRunner : IBuildRunner
     {
         readonly GilesConfig config;
         readonly Settings settings;
@@ -21,8 +21,6 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
-            var buildProcess = SetupProcess(settings.MsBuild, config.SolutionPath);
-
             var watch = new Stopwatch();
 
             Console.WriteLine("Building...");

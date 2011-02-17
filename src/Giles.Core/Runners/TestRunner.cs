@@ -11,7 +11,7 @@ namespace Giles.Core.Runners
     {
     }
 
-    public class TestRunner : RunnerBase, ITestRunner
+    public class TestRunner : ITestRunner
     {
         readonly GilesConfig config;
         readonly ConsoleColor defaultConsoleColor;

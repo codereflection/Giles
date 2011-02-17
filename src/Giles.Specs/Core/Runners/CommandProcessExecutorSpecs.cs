@@ -6,14 +6,14 @@ namespace Giles.Specs.Core.Runners
 {
     public class when_setting_up_a_process
     {
-        static RunnerBase runner;
+        static CommandProcessExecutor runner;
         static Process result;
         static string fileName;
         static string arguments;
 
         Establish context = () =>
                                 {
-                                    runner = new RunnerBase();
+                                    runner = new CommandProcessExecutor();
                                     fileName = "test.exe";
                                     arguments = "/runtest";
                                 };
