@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Giles.Core.IO;
 using Giles.Core.Runners;
@@ -33,7 +34,7 @@ namespace Giles.Core.Configuration
             config.TestAssemblyPath = testAssemblyPath;
             config.SolutionPath = solutionPath;
 
-            config.UserDisplay = new[] {new ConsoleUserDisplay()};
+            config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};
             config.Executor = new CommandProcessExecutor();
             return config;
         }
