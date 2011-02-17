@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using Machine.Specifications;
+using NSubstitute;
 
 namespace Giles.Specs.Core.Runners
 {
@@ -10,17 +12,31 @@ namespace Giles.Specs.Core.Runners
         protected static string solutionPath;
         protected static string solutionFolder;
         protected static string testAssemblyPath;
-        static GilesConfig config;
+        protected static GilesConfig config;
+        static ICommandProcessExecutor executor;
+        static Dictionary<string, RunnerAssembly> runners;
 
         Establish context = () =>
                                 {
                                     solutionFolder = @"c:\solutionFolder";
                                     solutionPath = @"c:\solutionFolder\mySolution.sln";
                                     testAssemblyPath = @"c:\solutionFolder\testProject\bin\debug\testAssembly.dll";
+                                    runners = new Dictionary<string, RunnerAssembly>();
+                                    runners.Add("foo", new RunnerAssembly{Enabled = true, Options = new List<string>{"bar"}, Path = "baz"});
+                                    executor = Substitute.For<ICommandProcessExecutor>();
+                                    executor.Execute(Arg.Any<string>(),Arg.Any<string>()).Returns(new ExecutionResult{ExitCode = 0, Output = "poo"});
 
-                                    config = new GilesConfig();
+                                    config = new GilesConfig()
+                                                 {
+                                                     BuildDelay = 1, 
+                                                     Executor = executor, 
+                                                     ProjectRoot = solutionFolder,
+                                                     SolutionPath = solutionPath,
+                                                     TestAssemblyPath = testAssemblyPath,
+                                                     TestRunners = runners
+                                                 };
+                                    runner = new TestRunner(config);
                                 };
-
     }
 
     public class when_running_a_test_runner : with_a_test_runner
@@ -28,8 +44,7 @@ namespace Giles.Specs.Core.Runners
         Because of = () =>
             runner.Run();
 
-        [Ignore("Process is not abstracted out of the runner yet")]
         It should_execute_the_runner = () =>
-            true.ShouldBeTrue();
+           config.Executor.Received().Execute(Arg.Any<string>(), Arg.Any<string>());
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Giles.Core.Configuration;
+using Machine.Specifications.Utility;
 
 namespace Giles.Core.Runners
 {
@@ -21,21 +22,19 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
+            Debugger.Break();
             var watch = new Stopwatch();
-
-            Console.WriteLine("Building...");
+            config.UserDisplay.Each(display => display.DisplayMessage("Building..."));
 
             watch.Start();
-            config.Executor.Execute(settings.MsBuild, config.SolutionPath);
+            var result = config.Executor.Execute(settings.MsBuild, config.SolutionPath);
             watch.Stop();
             
-
-            Console.WriteLine("Build complete in {0} seconds. Result: {1}", 
+            var message = string.Format("Build complete in {0} seconds. Result: {1}", 
                 watch.Elapsed.TotalSeconds,
-                exitCode == 0 ? "Success" : "Failure");
+                result.ExitCode == 0 ? "Success" : "Failure");
 
-            //Console.WriteLine("\n\n======= BUILD RESULTS =======");
-            //Console.WriteLine(output);
+            config.UserDisplay.Each(display => display.DisplayMessage(message, watch.Elapsed.TotalSeconds));
         }
     }
 }

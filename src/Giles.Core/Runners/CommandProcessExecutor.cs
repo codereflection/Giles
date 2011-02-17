@@ -3,7 +3,12 @@ using System.Diagnostics;
 
 namespace Giles.Core.Runners
 {
-    public class CommandProcessExecutor
+    public interface ICommandProcessExecutor
+    {
+        ExecutionResult Execute(string executable, string arguments);
+    }
+
+    public class CommandProcessExecutor : ICommandProcessExecutor
     {
         public Process SetupProcess(string fileName, string arguments)
         {
@@ -26,9 +31,10 @@ namespace Giles.Core.Runners
             process.Start();
             output = process.StandardOutput.ReadToEnd();
             process.WaitForExit();
+            var exitCode = process.ExitCode;
             process.Close();
             process.Dispose();
-            return new ExecutionResult {ExitCode = process.ExitCode, Output = output};
+            return new ExecutionResult {ExitCode = exitCode, Output = output};
         }
     }
 
