@@ -62,7 +62,13 @@ namespace Giles.Specs.Core.Configuration
 
         It recognized_the_mspec_test_runner_options = () =>
             config.TestRunners.First(x => x.Key == "mspec.exe").Value.Options.ShouldBeEmpty();
-			
+
+        It should_configure_the_console_user_display = () =>
+                                                       config.UserDisplay.Count().ShouldBeGreaterThan(0);
+
+        It should_configure_a_command_process_executor = () =>
+                                                         config.Executor.ShouldNotBeNull();
+
     }
 
 }

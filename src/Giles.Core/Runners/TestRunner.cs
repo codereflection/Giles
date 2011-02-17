@@ -40,22 +40,14 @@ namespace Giles.Core.Runners
             if (x.Value.Options.Count > 0)
                 args += " " + x.Value.Options.Aggregate((working, next) => working + next);
 
-            var testProcess = SetupProcess(x.Value.Path, args);
-            testProcess.Start();
-            var output = testProcess.StandardOutput.ReadToEnd();
-
-            testProcess.WaitForExit();
-                            
-            var exitCode = testProcess.ExitCode;
-
-            testProcess.Close();
-            testProcess.Dispose();
+           
+            var result = config.Executor.Execute(x.Value.Path, args);
 
             Console.WriteLine("\n\n======= {0} TEST RUNNER RESULTS =======", x.Key.ToUpper().Replace(".EXE", string.Empty));
-            Console.ForegroundColor = exitCode != 0 ? 
+            Console.ForegroundColor = result.ExitCode != 0 ? 
                                                         ConsoleColor.Red : defaultConsoleColor;
 
-            Console.WriteLine(output);
+            Console.WriteLine(result.Output);
 
             Console.ForegroundColor = defaultConsoleColor;
         }

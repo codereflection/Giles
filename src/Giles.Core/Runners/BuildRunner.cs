@@ -28,12 +28,7 @@ namespace Giles.Core.Runners
             Console.WriteLine("Building...");
 
             watch.Start();
-            buildProcess.Start();
-            var output = buildProcess.StandardOutput.ReadToEnd();
-
-            buildProcess.WaitForExit();
-            buildProcess.Close();
-            buildProcess.Dispose();
+            config.Executor.Execute(settings.MsBuild, config.SolutionPath);
             watch.Stop();
             
             Console.WriteLine("Building complete in {0} seconds.", watch.Elapsed.TotalSeconds);

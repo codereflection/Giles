@@ -1,11 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using Giles.Core.Runners;
+using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
 {
     public class GilesConfig : INotifyPropertyChanged
     {
         public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
+
+        public IEnumerable<IUserDisplay> UserDisplay = Enumerable.Empty<IUserDisplay>();
         
         public string TestAssemblyPath { get; set; }
         
@@ -38,5 +44,7 @@ namespace Giles.Core.Configuration
                 NotifyPropertyChanged("BuildDelay");
             }
         }
+
+        public CommandProcessExecutor Executor { get; set; }
     }
 }

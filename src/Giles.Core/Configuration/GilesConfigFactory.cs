@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using System.Linq;
 using Giles.Core.IO;
+using Giles.Core.Runners;
+using Giles.Core.UI;
 using Machine.Specifications.Utility;
 
 namespace Giles.Core.Configuration
@@ -30,6 +32,9 @@ namespace Giles.Core.Configuration
             LocateTestRunners();
             config.TestAssemblyPath = testAssemblyPath;
             config.SolutionPath = solutionPath;
+
+            config.UserDisplay = new[] {new ConsoleUserDisplay()};
+            config.Executor = new CommandProcessExecutor();
             return config;
         }
 
