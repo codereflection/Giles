@@ -75,7 +75,6 @@ namespace Giles.Core.Watchers
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-            //Console.WriteLine("Detected a change in:\n\t" + e.FullPath);
 
             if (buildTimer.Enabled)
             {

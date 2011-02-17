@@ -45,6 +45,6 @@ namespace Giles.Core.Configuration
             }
         }
 
-        public CommandProcessExecutor Executor { get; set; }
+        public ICommandProcessExecutor Executor { get; set; }
     }
 }
