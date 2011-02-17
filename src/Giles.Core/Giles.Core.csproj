@@ -65,10 +65,17 @@
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\TestRunner.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
+    <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Growl.Connector">
+      <HintPath>..\..\lib\Growl.Connector\Growl.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="Growl.CoreLibrary">
+      <HintPath>..\..\lib\Growl.Connector\Growl.CoreLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Specifications">
       <HintPath>..\..\tools\mspec\Machine.Specifications.dll</HintPath>
     </Reference>

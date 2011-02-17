@@ -22,7 +22,6 @@ namespace Giles.Core.Runners
 
         public void Run()
         {
-            Debugger.Break();
             var watch = new Stopwatch();
             config.UserDisplay.Each(display => display.DisplayMessage("Building..."));
 
