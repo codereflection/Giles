@@ -63,7 +63,6 @@
     <Compile Include="Runners\BuildRunner.cs" />
     <Compile Include="Runners\CommandProcessExecutor.cs" />
     <Compile Include="Runners\IRunner.cs" />
-    <Compile Include="Runners\RunnerBase.cs" />
     <Compile Include="Runners\TestRunner.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
