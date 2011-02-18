@@ -18,9 +18,9 @@ namespace Giles.Core.UI
 
         public void DisplayResult(ExecutionResult result)
         {
-            Console.WriteLine("\n\n======= {0} TEST RUNNER RESULTS =======", "shit");
+            Console.WriteLine("\n\n======= {0} TEST RUNNER RESULTS =======", result.Runner);
             Console.ForegroundColor = result.ExitCode != 0 ?
-                                                        ConsoleColor.Red : defaultConsoleColor;
+                                      ConsoleColor.Red : defaultConsoleColor;
 
             Console.WriteLine(result.Output);
 

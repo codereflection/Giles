@@ -1,5 +1,5 @@
-using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace Giles.Core.Runners
 {
@@ -34,12 +34,18 @@ namespace Giles.Core.Runners
             var exitCode = process.ExitCode;
             process.Close();
             process.Dispose();
-            return new ExecutionResult {ExitCode = exitCode, Output = output};
+            return new ExecutionResult
+                       {
+                           ExitCode = exitCode, 
+                           Output = output, 
+                           Runner = new FileInfo(executable).Name.ToUpper().Replace(".EXE", string.Empty)
+                       };
         }
     }
 
     public class ExecutionResult
     {
+        public string Runner { get; set; }
         public string Output { get; set; }
         public int ExitCode { get; set; }
     }
