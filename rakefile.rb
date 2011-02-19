@@ -32,7 +32,7 @@ assemblyinfo :assemblyInfo do |asm|
 	asm.title = "Giles, Rupert Giles, at your service!"
 	asm.company_name = "codereflection"
 	asm.product_name = "Giles - auto test runner"
-	asm.version = "0.0.1.0"
-	asm.file_version = "0.0.1.0"
+	asm.version = "0.0.2.0"
+	asm.file_version = "0.0.2.0"
 	asm.copyright = "Copyright (c)2011 Jeff 'codereflection' Schumacher"
 end
