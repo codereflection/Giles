@@ -73,8 +73,8 @@ namespace Giles.Runner.Machine.Specifications
             var formatter = resultFormatterFactory.GetResultFormatterFor(result);
             testListener.WriteLine(formatter.FormatResult(specification), "Output");
 
-            var testResult = new TestResult();
-            testResult.Name = specification.Name;
+            var testResult = new TestResult {Name = specification.Name, TestRunner = "MSPEC"};
+
             if (result.Passed)
             {
                 testResult.State = TestState.Passed;
