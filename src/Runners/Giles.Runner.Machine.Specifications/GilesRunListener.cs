@@ -47,7 +47,7 @@ namespace Giles.Runner.Machine.Specifications
 
             foreach (var testResult in testResults)
             {
-                testListener.TestFinished(testResult);
+                testListener.AddTestSummary(testResult);
                 failure |= testResult.State == TestState.Failed;
             }
 

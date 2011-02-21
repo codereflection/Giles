@@ -44,7 +44,7 @@ namespace Giles.Core.Runners
             GetOutput()[category].AppendLine(text);
         }
 
-        public void TestFinished(TestResult summary)
+        public void AddTestSummary(TestResult summary)
         {
             if (!testRunnerResults.ContainsKey(summary.TestRunner))
                 testRunnerResults.Add(summary.TestRunner, SetupTestResults());
@@ -54,31 +54,30 @@ namespace Giles.Core.Runners
             totalResults[summary.State] += 1;
         }
 
-        public void TestResultsUrl(string resultsUrl)
-        {
-            Console.WriteLine("GilesTestListener: TestResultsUrl fired w/ url: " + resultsUrl);
-        }
-
         public void DisplayResults()
         {
-            var message = "";
-            testRunnerResults.ToList().ForEach(x =>
-                                                   {
-                                                       message +=
-                                                           string.Format(
-                                                               "{0} Results: Passed: {1}, Failed: {2}, Ignored: {3}\n",
-                                                               x.Key,
-                                                               x.Value[TestState.Passed],
-                                                               x.Value[TestState.Failed],
-                                                               x.Value[TestState.Ignored]);
-                                                   });
+            var messages = new StringBuilder();
+            testRunnerResults.ToList().ForEach(x => messages.Append(
+                string.Format(
+                    "{0} Results: Passed: {1}, Failed: {2}, Ignored: {3}\n",
+                    x.Key,
+                    x.Value[TestState.Passed],
+                    x.Value[TestState.Failed],
+                    x.Value[TestState.Ignored])));
 
-            message += string.Format("Total Passed: {0}, Failed: {1}, Ignored: {2}",
-                                                                      totalResults[TestState.Passed],
-                                                                      totalResults[TestState.Failed],
-                                                                      totalResults[TestState.Ignored]);
+            messages.Append(string.Format("Total Passed: {0}, Failed: {1}, Ignored: {2}",
+                                          totalResults[TestState.Passed],
+                                          totalResults[TestState.Failed],
+                                          totalResults[TestState.Ignored]));
 
-            config.UserDisplay.Each(display => display.DisplayMessage(message));
+            var result = new ExecutionResult
+                {
+                    ExitCode = totalResults[TestState.Failed] > 0 ? 1 : 0,
+                    Output = messages.ToString(),
+                    Runner = string.Empty
+                };
+
+            config.UserDisplay.Each(display => display.DisplayResult(result));
         }
     }
 }
