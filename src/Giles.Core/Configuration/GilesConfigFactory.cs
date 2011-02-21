@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.UI;
@@ -32,6 +33,7 @@ namespace Giles.Core.Configuration
         {
             LocateTestRunners();
             config.TestAssemblyPath = testAssemblyPath;
+            config.TestAssembly = Assembly.LoadFrom(config.TestAssemblyPath);
             config.SolutionPath = solutionPath;
 
             config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using Giles.Core.Runners;
 using Giles.Core.UI;
 
@@ -46,5 +47,7 @@ namespace Giles.Core.Configuration
         }
 
         public ICommandProcessExecutor Executor { get; set; }
+
+        public Assembly TestAssembly { get; set; }
     }
 }
