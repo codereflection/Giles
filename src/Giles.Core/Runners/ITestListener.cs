@@ -13,24 +13,48 @@ namespace Giles.Core.Runners
 
     public class GilesTestListener : ITestListener
     {
-        Dictionary<string, StringBuilder> output = new Dictionary<string, StringBuilder>();
+        readonly Dictionary<string, StringBuilder> output = new Dictionary<string, StringBuilder>();
+        Dictionary<TestState, int> results;
+
+        public GilesTestListener()
+        {
+            results = new Dictionary<TestState, int>
+                {
+                    {TestState.Passed, 0},
+                    {TestState.Failed, 0},
+                    {TestState.Ignored, 0}
+                };
+        }
+
+        public Dictionary<string, StringBuilder> GetOutput()
+        {
+            return output;
+        }
 
         public void WriteLine(string text, string category)
         {
-            if (!output.ContainsKey(category))
-                output.Add(category, new StringBuilder());
+            if (!GetOutput().ContainsKey(category))
+                GetOutput().Add(category, new StringBuilder());
 
-            output[category].AppendLine(text);
+            GetOutput()[category].AppendLine(text);
         }
 
         public void TestFinished(TestResult summary)
         {
-            Console.WriteLine("GilesTestListener: TestFinished fired w/ message:" + summary.Message);
+            results[summary.State] += 1;
         }
 
         public void TestResultsUrl(string resultsUrl)
         {
             Console.WriteLine("GilesTestListener: TestResultsUrl fired w/ url: " + resultsUrl);
+        }
+
+        public void WriteResults()
+        {
+            Console.WriteLine("Passed: {0}, Failed: {1}, Ignored: {2}",
+                              results[TestState.Passed],
+                              results[TestState.Failed],
+                              results[TestState.Ignored]);
         }
     }
 }

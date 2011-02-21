@@ -90,8 +90,17 @@ namespace Giles.Core.Watchers
         public void RunNow()
         {
             buildRunner.Run();
-            var testFrameworkRunner = testRunnerResolver.Resolve(config.TestAssembly);
-            testRunner.Run();
+            var testFrameworkRunner = testRunnerResolver.Resolve(config.TestAssembly).ToList();
+
+            var listener = new GilesTestListener();
+            testFrameworkRunner.ForEach(x => x.RunAssembly(listener, config.TestAssembly));
+
+            listener.WriteLine("Tests Complete", "Output");
+
+            //var outputs = listener.GetOutput().ToList();
+
+            //outputs.ForEach(x => Console.WriteLine("Category {0}\n{1}", x.Key, x.Value.ToString()));
+            listener.WriteResults();
         }
     }
 }
