@@ -31,6 +31,7 @@ namespace Giles
                 .WithConstructorArgument("solutionPath", solutionPath)
                 .WithConstructorArgument("testAssemblyPath", testAssemblyPath)
                 .WithConstructorArgument("projectRoot", projectRoot);
+            Bind<ITestRunnerResolver>().To<TestRunnerResolver>().InSingletonScope();
         }
     }
 }

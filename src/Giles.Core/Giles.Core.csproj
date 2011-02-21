@@ -62,8 +62,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\BuildRunner.cs" />
     <Compile Include="Runners\CommandProcessExecutor.cs" />
+    <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
+    <Compile Include="Runners\ITestListener.cs" />
+    <Compile Include="Runners\ITestRunnerResolver.cs" />
+    <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
+    <Compile Include="Runners\TestRunState.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />

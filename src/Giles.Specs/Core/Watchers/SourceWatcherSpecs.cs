@@ -21,6 +21,7 @@ namespace Giles.Specs.Core.Watchers
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
         static GilesConfig config;
+        static ITestRunnerResolver resolver;
 
         Establish context = () =>
                                 {
@@ -28,10 +29,11 @@ namespace Giles.Specs.Core.Watchers
                                     buildRunner = Substitute.For<IBuildRunner>();
                                     testRunner = Substitute.For<ITestRunner>();
                                     fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
+                                    resolver = Substitute.For<ITestRunnerResolver>();
 
                                     config = new GilesConfig();
 
-                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
+                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config, resolver);
                                     
                                     path = @"c:\solutionFolder\mySolution.sln";
                                     filter = "*.cs";
@@ -44,7 +46,6 @@ namespace Giles.Specs.Core.Watchers
                                     fileSystem.GetDirectoryName(path)
                                               .Returns(solutionfolder);
                                 };
-
     }
 
     public class when_starting_to_watch_files : with_a_source_watcher
