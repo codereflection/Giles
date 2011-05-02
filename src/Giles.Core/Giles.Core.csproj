@@ -69,10 +69,10 @@
     <Compile Include="Runners\ITestRunnerResolver.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
-    <Compile Include="Runners\TestRunState.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
+    <Compile Include="Utility\RandomExtensionMethods.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,9 +81,6 @@
     </Reference>
     <Reference Include="Growl.CoreLibrary">
       <HintPath>..\..\lib\Growl.Connector\Growl.CoreLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\..\tools\mspec\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Giles.Core.Configuration;
-using Machine.Specifications.Utility;
+using Giles.Core.UI;
 
 namespace Giles.Core.Runners
 {
@@ -77,7 +76,10 @@ namespace Giles.Core.Runners
                     Runner = string.Empty
                 };
 
-            config.UserDisplay.Each(display => display.DisplayResult(result));
+            if (config.UserDisplay.Count() == 0)
+                config.UserDisplay = new List<IUserDisplay> { new ConsoleUserDisplay() };
+
+            config.UserDisplay.ToList().ForEach(display => display.DisplayResult(result));
         }
     }
 }

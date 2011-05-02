@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Giles.Core.Runners
 {
@@ -17,7 +18,20 @@ namespace Giles.Core.Runners
     {
         Passed,
         Failed,
-        Ignored,
+        Ignored
     }
 
+    public enum SessionRunState
+    {
+        Success,
+        Failure,
+        Error,
+        NoTests
+    }
+
+    public class SessionResults
+    {
+        public SessionRunState SessionRunState { get; set; }
+        public IEnumerable<TestResult> TestResults { get; set; }
+    }
 }
