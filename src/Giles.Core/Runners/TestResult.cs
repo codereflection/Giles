@@ -31,7 +31,13 @@ namespace Giles.Core.Runners
 
     public class SessionResults
     {
+        public SessionResults()
+        {
+            TestResults = new List<TestResult>();
+            Messages = new List<string>();
+        }
         public SessionRunState SessionRunState { get; set; }
-        public IEnumerable<TestResult> TestResults { get; set; }
+        public IList<TestResult> TestResults { get; set; }
+        public IList<string> Messages { get; set; }
     }
 }

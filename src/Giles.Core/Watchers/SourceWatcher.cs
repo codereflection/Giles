@@ -6,6 +6,7 @@ using System.Timers;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
+using Giles.Core.Utility;
 
 namespace Giles.Core.Watchers
 {
@@ -94,7 +95,13 @@ namespace Giles.Core.Watchers
 
             var listener = new GilesTestListener(config);
 
-            testFrameworkRunner.ForEach(x => x.SessionResults(config.TestAssembly));
+            testFrameworkRunner.ForEach(x =>
+                                            {
+                                                var sessionResult = x.SessionResults(config.TestAssembly);
+                                                sessionResult.Messages.Each(m => listener.WriteLine(m, "Output"));
+                                                sessionResult.TestResults.Each(listener.AddTestSummary);
+                                            });
+
 
             //var outputs = listener.GetOutput().ToList();
 
