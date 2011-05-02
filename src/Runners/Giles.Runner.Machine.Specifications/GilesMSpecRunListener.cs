@@ -7,20 +7,24 @@ namespace Giles.Runner.Machine.Specifications
 {
     public class GilesMSpecRunListener : ISpecificationRunListener
     {
-        readonly ITestListener testListener;
         readonly ResultFormatterFactory resultFormatterFactory;
-        
+        private readonly SessionResults sessionResults = new SessionResults();
+
         SessionRunState sessionRunState = SessionRunState.NoTests;
         public SessionRunState SessionRunState
         {
             get { return sessionRunState; }
         }
 
+        public SessionResults SessionResults
+        {
+            get { return sessionResults; }
+        }
+
         readonly List<TestResult> testResults = new List<TestResult>();
 
-        public GilesMSpecRunListener(ITestListener testListener)
+        public GilesMSpecRunListener()
         {
-            this.testListener = testListener;
             resultFormatterFactory = new ResultFormatterFactory();
         }
 
@@ -43,11 +47,11 @@ namespace Giles.Runner.Machine.Specifications
         {
             if (testResults.Count == 0) return;
 
-            bool failure = false;
+            var failure = false;
 
             foreach (var testResult in testResults)
             {
-                testListener.AddTestSummary(testResult);
+                SessionResults.TestResults.Add(testResult);
                 failure |= testResult.State == TestState.Failed;
             }
 
@@ -56,12 +60,12 @@ namespace Giles.Runner.Machine.Specifications
 
         public void OnContextStart(ContextInfo context)
         {
-            testListener.WriteLine(context.FullName, "Output");
+            SessionResults.Messages.Add(context.FullName);
         }
 
         public void OnContextEnd(ContextInfo context)
         {
-            testListener.WriteLine("", "Output");
+            //testListener.WriteLine("", "Output");
         }
 
         public void OnSpecificationStart(SpecificationInfo specification)
@@ -71,7 +75,7 @@ namespace Giles.Runner.Machine.Specifications
         public void OnSpecificationEnd(SpecificationInfo specification, Result result)
         {
             var formatter = resultFormatterFactory.GetResultFormatterFor(result);
-            testListener.WriteLine(formatter.FormatResult(specification), "Output");
+            SessionResults.Messages.Add(formatter.FormatResult(specification));
 
             var testResult = new TestResult {Name = specification.Name, TestRunner = "MSPEC"};
 
@@ -79,23 +83,23 @@ namespace Giles.Runner.Machine.Specifications
             {
                 testResult.State = TestState.Passed;
             }
-            else if (result.Status == Status.Ignored)
+            else switch (result.Status)
             {
-                testResult.State = TestState.Ignored;
-                testResult.Message = "Ignored";
-            }
-            else if (result.Status == Status.NotImplemented)
-            {
-                testResult.State = TestState.Ignored;
-                testResult.Message = "Not Implemented";
-            }
-            else
-            {
-                testResult.State = TestState.Failed;
-                if (result.Exception != null)
-                {
-                    testResult.StackTrace = result.Exception.ToString();
-                }
+                case Status.Ignored:
+                    testResult.State = TestState.Ignored;
+                    testResult.Message = "Ignored";
+                    break;
+                case Status.NotImplemented:
+                    testResult.State = TestState.Ignored;
+                    testResult.Message = "Not Implemented";
+                    break;
+                default:
+                    testResult.State = TestState.Failed;
+                    if (result.Exception != null)
+                    {
+                        testResult.StackTrace = result.Exception.ToString();
+                    }
+                    break;
             }
 
             testResults.Add(testResult);
@@ -103,7 +107,7 @@ namespace Giles.Runner.Machine.Specifications
 
         public void OnFatalError(ExceptionResult exception)
         {
-            testListener.WriteLine("Fatal error: " + exception, "Output");
+            SessionResults.Messages.Add("Fatal error: " + exception);
         }
     }
 }
