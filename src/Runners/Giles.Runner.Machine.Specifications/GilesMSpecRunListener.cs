@@ -5,7 +5,7 @@ using Machine.Specifications.Runner;
 
 namespace Giles.Runner.Machine.Specifications
 {
-    public class GilesRunListener : ISpecificationRunListener
+    public class GilesMSpecRunListener : ISpecificationRunListener
     {
         readonly ITestListener testListener;
         readonly ResultFormatterFactory resultFormatterFactory;
@@ -18,7 +18,7 @@ namespace Giles.Runner.Machine.Specifications
 
         readonly List<TestResult> testResults = new List<TestResult>();
 
-        public GilesRunListener(ITestListener testListener)
+        public GilesMSpecRunListener(ITestListener testListener)
         {
             this.testListener = testListener;
             resultFormatterFactory = new ResultFormatterFactory();
