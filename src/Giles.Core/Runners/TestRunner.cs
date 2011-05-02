@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Giles.Core.Configuration;
@@ -20,7 +19,7 @@ namespace Giles.Core.Runners
             this.config = config;
         }
 
-        public void Run()
+        public bool Run()
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -30,6 +29,8 @@ namespace Giles.Core.Runners
             watch.Stop();
 
             config.UserDisplay.Each(display => display.DisplayMessage("All test runners completed in {0} seconds.", watch.Elapsed.TotalSeconds));
+
+            return true;
         }
 
         void ExecuteRunner(KeyValuePair<string, RunnerAssembly> x)
