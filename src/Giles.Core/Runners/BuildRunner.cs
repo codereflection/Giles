@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Linq;
 using Giles.Core.Configuration;
 using Giles.Core.Utility;
 
@@ -20,7 +19,7 @@ namespace Giles.Core.Runners
             this.settings = settings;
         }
 
-        public void Run()
+        public bool Run()
         {
             var watch = new Stopwatch();
             config.UserDisplay.Each(display => display.DisplayMessage("Building..."));
@@ -29,11 +28,22 @@ namespace Giles.Core.Runners
             var result = config.Executor.Execute(settings.MsBuild, config.SolutionPath);
             watch.Stop();
             
-            var message = string.Format("Build complete in {0} seconds. Result: {1}", 
-                watch.Elapsed.TotalSeconds,
-                result.ExitCode == 0 ? "Success" : "Failure");
+            var message = FormatBuildMessages(watch, result);
 
             config.UserDisplay.Each(display => display.DisplayMessage(message, watch.Elapsed.TotalSeconds));
+
+            return result.ExitCode == 0;
+        }
+
+        private string FormatBuildMessages(Stopwatch watch, ExecutionResult result)
+        {
+            var message = string.Format("Build complete in {0} seconds. Result: {1}", 
+                                        watch.Elapsed.TotalSeconds,
+                                        result.ExitCode == 0 ? "Success" : "Failure");
+
+            if (result.ExitCode != 0)
+                message += string.Format("\n{0}", result.Output);
+            return message;
         }
     }
 }

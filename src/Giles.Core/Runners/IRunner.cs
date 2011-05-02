@@ -2,6 +2,6 @@
 {
     public interface IRunner
     {
-        void Run();
+        bool Run();
     }
 }

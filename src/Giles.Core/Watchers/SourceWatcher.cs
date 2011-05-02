@@ -90,7 +90,8 @@ namespace Giles.Core.Watchers
 
         public void RunNow()
         {
-            buildRunner.Run();
+            if (!buildRunner.Run())
+                return;
             var testFrameworkRunner = testRunnerResolver.Resolve(config.TestAssembly).ToList();
 
             var listener = new GilesTestListener(config);
