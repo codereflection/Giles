@@ -1,19 +1,25 @@
+using System.Collections.Generic;
 using System.Reflection;
+using Giles.Core.Configuration;
 using Giles.Core.Runners;
-using Machine.Specifications.Runner;
+using Giles.Core.UI;
 using Machine.Specifications.Runner.Impl;
+using Machine.Specifications.Runner;
 
 namespace Giles.Runner.Machine.Specifications
 {
     public class SpecificationRunner : IFrameworkRunner
     {
-        public TestRunState RunAssembly(ITestListener testListener, Assembly assembly)
+        public SessionRunState SessionResults(Assembly assembly)
         {
-            var listener = new GilesRunListener(testListener);
-            var runner = new AppDomainRunner(listener, RunOptions.Default);
+            var testListener = new GilesTestListener(new GilesConfig { UserDisplay = new List<IUserDisplay> { new ConsoleUserDisplay() } });
+            var runListener = new GilesRunListener(testListener);
+            var runner = new AppDomainRunner(runListener, RunOptions.Default);
             runner.RunAssembly(assembly);
+            
+            testListener.DisplayResults();
 
-            return listener.TestRunState;
+            return runListener.SessionRunState;
         }
     }
 }

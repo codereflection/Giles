@@ -10,10 +10,10 @@ namespace Giles.Runner.Machine.Specifications
         readonly ITestListener testListener;
         readonly ResultFormatterFactory resultFormatterFactory;
         
-        TestRunState testRunState = TestRunState.NoTests;
-        public TestRunState TestRunState
+        SessionRunState sessionRunState = SessionRunState.NoTests;
+        public SessionRunState SessionRunState
         {
-            get { return testRunState; }
+            get { return sessionRunState; }
         }
 
         readonly List<TestResult> testResults = new List<TestResult>();
@@ -51,7 +51,7 @@ namespace Giles.Runner.Machine.Specifications
                 failure |= testResult.State == TestState.Failed;
             }
 
-            testRunState = failure ? TestRunState.Failure : TestRunState.Success;
+            sessionRunState = failure ? SessionRunState.Failure : SessionRunState.Success;
         }
 
         public void OnContextStart(ContextInfo context)

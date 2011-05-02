@@ -5,7 +5,7 @@ using System.Reflection;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.UI;
-using Machine.Specifications.Utility;
+using Giles.Core.Utility;
 
 namespace Giles.Core.Configuration
 {

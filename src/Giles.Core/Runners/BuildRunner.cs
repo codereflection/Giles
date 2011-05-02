@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Linq;
 using Giles.Core.Configuration;
-using Machine.Specifications.Utility;
+using Giles.Core.Utility;
 
 namespace Giles.Core.Runners
 {
