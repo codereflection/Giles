@@ -60,7 +60,6 @@ namespace Giles.Core.Watchers
 
         public void Watch(string solutionPath, string filter)
         {
-            solutionPath = solutionPath;
             var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
             var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
                                                                            ErrorAction);
@@ -98,7 +97,7 @@ namespace Giles.Core.Watchers
 
             testFrameworkRunner.ForEach(x =>
                                             {
-                                                var sessionResult = x.SessionResults(config.TestAssembly);
+                                                var sessionResult = x.RunAssembly(config.TestAssembly);
                                                 sessionResult.Messages.Each(m => listener.WriteLine(m, "Output"));
                                                 sessionResult.TestResults.Each(listener.AddTestSummary);
                                             });
