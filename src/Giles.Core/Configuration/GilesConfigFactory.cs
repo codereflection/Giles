@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -27,13 +28,17 @@ namespace Giles.Core.Configuration
             this.projectRoot = projectRoot;
          
             supportedRunners = new[] {"mspec.exe", "nunit-console.exe:/nologo"};
+
+            LoadAssembly = new Func<string, Assembly>(filename => Assembly.LoadFrom(config.TestAssemblyPath));
         }
+
+        public Func<string, Assembly> LoadAssembly;
 
         public GilesConfig Build()
         {
             LocateTestRunners();
             config.TestAssemblyPath = testAssemblyPath;
-            config.TestAssembly = Assembly.LoadFrom(config.TestAssemblyPath);
+            config.TestAssembly = LoadAssembly(config.TestAssemblyPath);
             config.SolutionPath = solutionPath;
 
             config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};

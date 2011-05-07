@@ -1,5 +1,7 @@
+using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Machine.Specifications;
@@ -20,21 +22,23 @@ namespace Giles.Specs.Core.Configuration
         protected static string projectRoot;
 
         Establish context = () =>
-                                {
-                                    solutionFolder = @"c:\solutionRoot\solution";
-                                    solutionPath = @"c:\solutionRoot\solution\mySolution.sln";
-                                    testAssemblyPath = @"c:\solutionRoot\solution\tests\bin\debug\tests.dll";
-                                    fileSystem = Substitute.For<IFileSystem>();
-                                    testRunnerExe = @"c:\testAssembly.exe";
-                                    fileSystem.GetFiles(Arg.Any<string>(), Arg.Any<string>(), SearchOption.AllDirectories)
-                                        .Returns(new[] { testRunnerExe });
-                                    fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
-                                    projectRoot = @"c:\solutionRoot";
+            {
+                solutionFolder = @"c:\solutionRoot\solution";
+                solutionPath = @"c:\solutionRoot\solution\mySolution.sln";
+                testAssemblyPath = @"c:\solutionRoot\solution\tests\bin\debug\tests.dll";
+                fileSystem = Substitute.For<IFileSystem>();
+                testRunnerExe = @"c:\testAssembly.exe";
+                fileSystem.GetFiles(Arg.Any<string>(), Arg.Any<string>(), SearchOption.AllDirectories)
+                    .Returns(new[] { testRunnerExe });
+                fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
+                projectRoot = @"c:\solutionRoot";
 
-                                    config = new GilesConfig();
-                                    factory = new GilesConfigFactory(config, fileSystem, solutionPath, testAssemblyPath, projectRoot);
-                                };
-
+                config = new GilesConfig();
+                factory = new GilesConfigFactory(config, fileSystem, solutionPath, testAssemblyPath, projectRoot)
+                              {
+                                  LoadAssembly = filename => null
+                              };
+            };
     }
 
     public class when_building : a_giles_config
