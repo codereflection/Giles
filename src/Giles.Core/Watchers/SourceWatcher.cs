@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Security.Policy;
 using System.Timers;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
@@ -29,7 +31,7 @@ namespace Giles.Core.Watchers
             this.fileWatcherFactory = fileWatcherFactory;
             this.config = config;
             this.testRunner = testRunner;
-            buildTimer = new Timer {AutoReset = false, Enabled = false, Interval = config.BuildDelay};
+            buildTimer = new Timer { AutoReset = false, Enabled = false, Interval = config.BuildDelay };
             config.PropertyChanged += config_PropertyChanged;
             buildTimer.Elapsed += buildTimer_Elapsed;
         }
@@ -89,22 +91,107 @@ namespace Giles.Core.Watchers
         {
             if (!buildRunner.Run())
                 return;
-            var testFrameworkRunner = new TestRunnerResolver().Resolve(config.TestAssembly).ToList();
 
             var listener = new GilesTestListener(config);
 
-            testFrameworkRunner.ForEach(x =>
-                                            {
-                                                var sessionResult = x.RunAssembly(config.TestAssembly);
-                                                sessionResult.Messages.Each(m => listener.WriteLine(m, "Output"));
-                                                sessionResult.TestResults.Each(listener.AddTestSummary);
-                                            });
+            var manager = new GilesAppDomainManager();
+            var runResult = manager.Run(config.TestAssemblyPath);
+            runResult.Each(result =>
+                               {
+                                   result.Messages.Each(m => listener.WriteLine(m, "Output"));
+                                   result.TestResults.Each(listener.AddTestSummary);
+                               });
 
-
-            //var outputs = listener.GetOutput().ToList();
-
-            //outputs.ForEach(x => Console.WriteLine("Category {0}\n{1}", x.Key, x.Value.ToString()));
             listener.DisplayResults();
+        }
+    }
+
+    public class GilesAppDomainManager
+    {
+        public SessionResults SessionResults { get; set; }
+
+        public IEnumerable<SessionResults> Run(string testAssemblyPath)
+        {
+            Console.WriteLine("Setting up new app domain");
+            var domainInfo = new AppDomainSetup
+                                 {
+                                     ApplicationBase = Path.GetDirectoryName(testAssemblyPath)
+                                 };
+
+            Console.WriteLine("Copying Giles.Core to ApplicationBase: {0}", domainInfo.ApplicationBase);
+
+            CopyGilesToTargetApplicationBase(domainInfo);
+
+            var appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
+
+            var runType = typeof (GilesAppDomainRunner);
+            //var runType = typeof(ICanHazNewAppDomain);
+
+            Console.WriteLine("Creating instance of GilesAppDomainRunner in new app domain: {0} with a base of {1}", appDomain.FriendlyName, appDomain.SetupInformation.ApplicationBase);
+            var foo =
+                appDomain.CreateInstanceAndUnwrap(runType.Assembly.FullName, runType.FullName) as GilesAppDomainRunner;
+
+            Console.WriteLine("Running the tests");
+            var results = foo.Run(testAssemblyPath);
+
+            Console.WriteLine("Unloading the app domain");
+            AppDomain.Unload(appDomain);
+            GC.Collect(1, GCCollectionMode.Forced);
+            Console.WriteLine("Run complete!");
+            return results;
+        }
+
+        private static void CopyGilesToTargetApplicationBase(AppDomainSetup domainInfo)
+        {
+            var fileSystem = new FileSystem();
+            var filesToCopy = GetAssembliesToCopy();
+
+            if (domainInfo == null) throw new ArgumentNullException("domainInfo");
+            
+            filesToCopy.Each(file =>
+                                 {
+                                     var targetPath = Path.Combine(domainInfo.ApplicationBase, fileSystem.GetFileName(file));
+                                     Console.WriteLine("Copying to {0}", targetPath);
+                                     if (fileSystem.FileExists(targetPath))
+                                         fileSystem.DeleteFile(targetPath);
+
+                                     fileSystem.CopyFile(file, targetPath);
+                                 });
+        }
+
+        private static IEnumerable<string> GetAssembliesToCopy()
+        {
+            return new[]
+                       {
+                           typeof(GilesAppDomainRunner).Assembly.Location,
+                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.Machine.Specifications.dll")
+                       };
+        }
+    }
+
+
+    public class ICanHazNewAppDomain : MarshalByRefObject
+    {
+        public IEnumerable<SessionResults> Run(string testAssemblyPath)
+        {
+            Console.WriteLine("ICanHazNewAppDomain is current running in the app domain {0} with base of {1}", AppDomain.CurrentDomain.FriendlyName, AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            return Enumerable.Empty<SessionResults>();
+        }
+    }
+
+    public class GilesAppDomainRunner : MarshalByRefObject
+    {
+        public IEnumerable<SessionResults> Run(string testAssemblyPath)
+        {
+            Console.WriteLine("GilesAppDomainRunner is current running in the app domain {0} with base of {1}", AppDomain.CurrentDomain.FriendlyName, AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+            
+            var testAssembly = Assembly.LoadFrom(testAssemblyPath);
+
+            var testFrameworkRunner = new TestRunnerResolver().Resolve(testAssembly).ToList();
+
+            var result = new List<SessionResults>();
+            testFrameworkRunner.ForEach(x => result.Add(x.RunAssembly(testAssembly)));
+            return result;
         }
     }
 }

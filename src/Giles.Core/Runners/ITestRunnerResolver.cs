@@ -26,8 +26,9 @@ namespace Giles.Core.Runners
 
         void BuildRunnerList()
         {
-            runners = new List<TestFrameworkRunner>
-                {new TestFrameworkRunner {CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner}};
+            Console.WriteLine("Building runnner list from app domain: {0}", AppDomain.CurrentDomain.FriendlyName);
+            var runner = new TestFrameworkRunner { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
+            runners = new List<TestFrameworkRunner> { runner };
         }
 
 
@@ -46,7 +47,7 @@ namespace Giles.Core.Runners
         static IFrameworkRunner GetMSpecRunner()
         {
             var assemblyLocation =
-                Path.Combine(Path.GetDirectoryName(typeof (TestRunnerResolver).Assembly.Location),
+                Path.Combine(Path.GetDirectoryName(typeof(TestRunnerResolver).Assembly.Location),
                              "Giles.Runner.Machine.Specifications.dll");
 
             var runner = GetRunner(assemblyLocation);
@@ -60,9 +61,10 @@ namespace Giles.Core.Runners
 
         static Type GetRunner(string assemblyLocation)
         {
-            return Assembly.LoadFrom(assemblyLocation).GetTypes()
-                .Where(x => typeof (IFrameworkRunner).IsAssignableFrom(x) && x.IsClass)
+            var result = Assembly.LoadFrom(assemblyLocation).GetTypes()
+                .Where(x => typeof(IFrameworkRunner).IsAssignableFrom(x) && x.IsClass)
                 .FirstOrDefault();
+            return result;
         }
     }
 

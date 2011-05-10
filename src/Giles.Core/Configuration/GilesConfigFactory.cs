@@ -28,8 +28,6 @@ namespace Giles.Core.Configuration
             this.projectRoot = projectRoot;
          
             supportedRunners = new[] {"mspec.exe", "nunit-console.exe:/nologo"};
-
-            LoadAssembly = new Func<string, Assembly>(filename => Assembly.LoadFrom(config.TestAssemblyPath));
         }
 
         public Func<string, Assembly> LoadAssembly;
@@ -38,7 +36,6 @@ namespace Giles.Core.Configuration
         {
             LocateTestRunners();
             config.TestAssemblyPath = testAssemblyPath;
-            config.TestAssembly = LoadAssembly(config.TestAssemblyPath);
             config.SolutionPath = solutionPath;
 
             config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};

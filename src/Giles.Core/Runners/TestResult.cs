@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Giles.Core.Runners
 {
+    [Serializable]
     public class TestResult
     {
         public string Message;
@@ -14,6 +15,7 @@ namespace Giles.Core.Runners
         public int TotalTests;
     }
 
+    [Serializable]
     public enum TestState
     {
         Passed,
@@ -21,6 +23,7 @@ namespace Giles.Core.Runners
         Ignored
     }
 
+    [Serializable]
     public enum SessionRunState
     {
         Success,
@@ -29,6 +32,7 @@ namespace Giles.Core.Runners
         NoTests
     }
 
+    [Serializable]
     public class SessionResults
     {
         public SessionResults()
