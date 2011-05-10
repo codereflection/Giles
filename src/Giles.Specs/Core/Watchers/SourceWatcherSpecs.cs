@@ -33,7 +33,7 @@ namespace Giles.Specs.Core.Watchers
 
                                     config = new GilesConfig();
 
-                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config, resolver);
+                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
                                     
                                     path = @"c:\solutionFolder\mySolution.sln";
                                     filter = "*.cs";

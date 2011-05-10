@@ -27,9 +27,9 @@ namespace Giles
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
 
-            var solutionPath = options.SolutionPath;
-            var testAssemblyPath = options.TestAssemblyPath;
-            var projectRoot = options.ProjectRoot;
+            var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
+            var testAssemblyPath = options.TestAssemblyPath.Replace("\"", string.Empty);
+            var projectRoot = options.ProjectRoot.Replace("\"", string.Empty);
 
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath, projectRoot));
 

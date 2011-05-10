@@ -17,19 +17,17 @@ namespace Giles.Core.Watchers
         readonly IFileSystem fileSystem;
         readonly IFileWatcherFactory fileWatcherFactory;
         readonly GilesConfig config;
-        readonly ITestRunnerResolver testRunnerResolver;
         readonly ITestRunner testRunner;
 
 
         public SourceWatcher(IBuildRunner buildRunner, ITestRunner testRunner, IFileSystem fileSystem,
-                             IFileWatcherFactory fileWatcherFactory, GilesConfig config, ITestRunnerResolver testRunnerResolver)
+                             IFileWatcherFactory fileWatcherFactory, GilesConfig config)
         {
             FileWatchers = new List<FileSystemWatcher>();
             this.fileSystem = fileSystem;
             this.buildRunner = buildRunner;
             this.fileWatcherFactory = fileWatcherFactory;
             this.config = config;
-            this.testRunnerResolver = testRunnerResolver;
             this.testRunner = testRunner;
             buildTimer = new Timer {AutoReset = false, Enabled = false, Interval = config.BuildDelay};
             config.PropertyChanged += config_PropertyChanged;
@@ -91,7 +89,7 @@ namespace Giles.Core.Watchers
         {
             if (!buildRunner.Run())
                 return;
-            var testFrameworkRunner = testRunnerResolver.Resolve(config.TestAssembly).ToList();
+            var testFrameworkRunner = new TestRunnerResolver().Resolve(config.TestAssembly).ToList();
 
             var listener = new GilesTestListener(config);
 
