@@ -20,7 +20,7 @@ end
 
 
 mspec :specifications do |mspec|
-	mspec.command = "tools/mspec/mspec.exe"
+	mspec.command = "lib/manual/mspec/mspec.exe"
 	mspec.assemblies = "build/Giles.Specs.dll"
 	mspec.html_output = "report/Specs"
 end
