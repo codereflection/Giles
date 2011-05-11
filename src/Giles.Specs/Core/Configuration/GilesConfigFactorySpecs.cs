@@ -34,7 +34,7 @@ namespace Giles.Specs.Core.Configuration
                 projectRoot = @"c:\solutionRoot";
 
                 config = new GilesConfig();
-                factory = new GilesConfigFactory(config, fileSystem, solutionPath, testAssemblyPath, projectRoot)
+                factory = new GilesConfigFactory(config, solutionPath, testAssemblyPath)
                               {
                                   LoadAssembly = filename => null
                               };
@@ -46,12 +46,6 @@ namespace Giles.Specs.Core.Configuration
         Because of = () =>
             factory.Build();
 
-        It locates_the_mspec_test_runner = () =>
-            fileSystem.Received().GetFiles(projectRoot, "mspec.exe", SearchOption.AllDirectories);
-
-        It locates_the_nunit_test_runner = () =>
-            fileSystem.Received().GetFiles(projectRoot, "nunit-console.exe", SearchOption.AllDirectories);
-
         It built_the_correct_config_test_runners = () =>
             config.TestRunners.All(x => x.Value.Path == testRunnerExe).ShouldBeTrue();
 
@@ -61,17 +55,11 @@ namespace Giles.Specs.Core.Configuration
         It assigned_the_solution_path = () =>
             config.SolutionPath.ShouldEqual(solutionPath);
 
-        It recognized_the_nunit_test_runner_options = () =>
-            config.TestRunners.First(x => x.Key == "nunit-console.exe").Value.Options.First().ShouldEqual("/nologo");
-
-        It recognized_the_mspec_test_runner_options = () =>
-            config.TestRunners.First(x => x.Key == "mspec.exe").Value.Options.ShouldBeEmpty();
-
         It should_configure_the_console_user_display = () =>
-                                                       config.UserDisplay.Count().ShouldBeGreaterThan(0);
+            config.UserDisplay.Count().ShouldBeGreaterThan(0);
 
         It should_configure_a_command_process_executor = () =>
-                                                         config.Executor.ShouldNotBeNull();
+            config.Executor.ShouldNotBeNull();
 
     }
 

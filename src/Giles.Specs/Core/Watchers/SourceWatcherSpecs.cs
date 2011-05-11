@@ -24,28 +24,28 @@ namespace Giles.Specs.Core.Watchers
         static ITestRunnerResolver resolver;
 
         Establish context = () =>
-                                {
-                                    fileSystem = Substitute.For<IFileSystem>();
-                                    buildRunner = Substitute.For<IBuildRunner>();
-                                    testRunner = Substitute.For<ITestRunner>();
-                                    fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
-                                    resolver = Substitute.For<ITestRunnerResolver>();
+            {
+                fileSystem = Substitute.For<IFileSystem>();
+                buildRunner = Substitute.For<IBuildRunner>();
+                testRunner = Substitute.For<ITestRunner>();
+                fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
+                resolver = Substitute.For<ITestRunnerResolver>();
 
-                                    config = new GilesConfig();
+                config = new GilesConfig();
 
-                                    watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
+                watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
                                     
-                                    path = @"c:\solutionFolder\mySolution.sln";
-                                    filter = "*.cs";
+                path = @"c:\solutionFolder\mySolution.sln";
+                filter = "*.cs";
 
-                                    fileSystem.FileExists(path).Returns(false);
-                                    fileSystemWatcher = new FileSystemWatcher(".");
+                fileSystem.FileExists(path).Returns(false);
+                fileSystemWatcher = new FileSystemWatcher(".");
 
-                                    fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
-                                    solutionfolder = @"c:\solutionFolder";
-                                    fileSystem.GetDirectoryName(path)
-                                              .Returns(solutionfolder);
-                                };
+                fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
+                solutionfolder = @"c:\solutionFolder";
+                fileSystem.GetDirectoryName(path)
+                            .Returns(solutionfolder);
+            };
     }
 
     public class when_starting_to_watch_files : with_a_source_watcher
