@@ -24,14 +24,6 @@ namespace Giles.Core.Runners
         }
 
 
-        void BuildRunnerList()
-        {
-            Console.WriteLine("Building runnner list from app domain: {0}", AppDomain.CurrentDomain.FriendlyName);
-            var runner = new TestFrameworkRunner { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
-            runners = new List<TestFrameworkRunner> { runner };
-        }
-
-
         public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
         {
             var referencedAssemblies = assembly.GetReferencedAssemblies();
@@ -41,6 +33,13 @@ namespace Giles.Core.Runners
                     runner => runner.GetTheRunner.Invoke());
 
             return result;
+        }
+
+
+        void BuildRunnerList()
+        {
+            var runner = new TestFrameworkRunner { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
+            runners = new List<TestFrameworkRunner> { runner };
         }
 
 
