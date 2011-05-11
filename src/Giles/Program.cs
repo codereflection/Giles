@@ -27,6 +27,7 @@ namespace Giles
             Console.Clear();
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
+            Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
 
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
             var testAssemblyPath = options.TestAssemblyPath.Replace("\"", string.Empty);
