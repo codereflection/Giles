@@ -14,24 +14,24 @@ namespace Giles
 
         static void Main(string[] args)
         {
-
             var options = new CLOptions();
 
             var parser = new CommandLineParser(
                 new CommandLineParserSettings(false,Console.Error));
 
             if (!parser.ParseArguments(args, options))
+            {
+                Console.WriteLine("Unknown command line arguments");
                 Environment.Exit(1);
-
+            }
             Console.Clear();
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
 
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
             var testAssemblyPath = options.TestAssemblyPath.Replace("\"", string.Empty);
-            var projectRoot = options.ProjectRoot.Replace("\"", string.Empty);
 
-            var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath, projectRoot));
+            var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
 
             var configFactory = kernel.Get<GilesConfigFactory>();
             config = configFactory.Build();

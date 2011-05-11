@@ -1,4 +1,3 @@
-using System.Text;
 using CommandLine;
 using CommandLine.Text;
 
@@ -11,9 +10,6 @@ namespace Giles.Options
 
         [Option("t", "TestAssemblyPath", Required = true, HelpText = "Path to the test assembly dll")]
         public string TestAssemblyPath;
-
-        [Option("p", "ProjectRoot", Required = true, HelpText = "Path to the root of the project")]
-        public string ProjectRoot;
 
         [HelpOption(HelpText = "Display this help screen.")]
         public string GetUsage()
