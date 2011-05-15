@@ -85,6 +85,8 @@ namespace Giles
         {
             if (LastRunResults.GilesTestListener != null)
                 LastRunResults.GilesTestListener.DisplayVerboseResults();
+            else
+                Console.WriteLine("Please run some tests first...");
         }
 
         static T GetUserValue<T>(T defaultValue)
@@ -121,6 +123,7 @@ namespace Giles
             Console.WriteLine("  C = Clear the window");
             Console.WriteLine("  I = Show current configuration");
             Console.WriteLine("  R = Run build & tests now");
+            Console.WriteLine("  V = Display last test run messages");
             Console.WriteLine("  B = Set Build Delay");
             Console.WriteLine("  Q = Quit");
             Console.WriteLine();
