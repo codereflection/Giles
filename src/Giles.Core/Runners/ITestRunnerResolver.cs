@@ -14,9 +14,12 @@ namespace Giles.Core.Runners
     public class TestRunnerResolver : ITestRunnerResolver
     {
         readonly Func<AssemblyName, bool> mSpecRunnerPredicate =
-            assemblyName => assemblyName.Name == "Machine.Specifications";
+            assemblyName => assemblyName.Name.Equals("Machine.Specifications", StringComparison.InvariantCultureIgnoreCase);
 
-        List<TestFrameworkRunner> runners;
+        readonly Func<AssemblyName, bool> nUnitRunnerPredicate =
+            assemblyName => assemblyName.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
+
+        List<FrameworkRunnerLocator> runners;
 
         public TestRunnerResolver()
         {
@@ -38,16 +41,26 @@ namespace Giles.Core.Runners
 
         void BuildRunnerList()
         {
-            var runner = new TestFrameworkRunner { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
-            runners = new List<TestFrameworkRunner> { runner };
+            var mspecFrameworkRunner = new FrameworkRunnerLocator { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
+            var nunitFrameworkRunner = new FrameworkRunnerLocator { CheckReference = nUnitRunnerPredicate, GetTheRunner = GetNUnitRunner };
+            runners = new List<FrameworkRunnerLocator> { mspecFrameworkRunner, nunitFrameworkRunner };
         }
-
 
         static IFrameworkRunner GetMSpecRunner()
         {
+            return GetRunnerBy("Giles.Runner.Machine.Specifications.dll");
+        }
+
+        static IFrameworkRunner GetNUnitRunner()
+        {
+            return GetRunnerBy("Giles.Runner.NUnit.dll");
+        }
+
+        static IFrameworkRunner GetRunnerBy(string runnerAssemblyName)
+        {
             var assemblyLocation =
                 Path.Combine(Path.GetDirectoryName(typeof(TestRunnerResolver).Assembly.Location),
-                             "Giles.Runner.Machine.Specifications.dll");
+                             runnerAssemblyName);
 
             var runner = GetRunner(assemblyLocation);
 
@@ -56,7 +69,6 @@ namespace Giles.Core.Runners
 
             return Activator.CreateInstance(runner) as IFrameworkRunner;
         }
-
 
         static Type GetRunner(string assemblyLocation)
         {
@@ -67,7 +79,7 @@ namespace Giles.Core.Runners
         }
     }
 
-    internal class TestFrameworkRunner
+    internal class FrameworkRunnerLocator
     {
         internal Func<AssemblyName, bool> CheckReference { get; set; }
         internal Func<IFrameworkRunner> GetTheRunner { get; set; }

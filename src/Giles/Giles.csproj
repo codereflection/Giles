@@ -102,6 +102,10 @@
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.NUnit\Giles.Runner.NUnit.csproj">
+      <Project>{C2A0F1C6-AA13-468F-844C-0D93A5C299D4}</Project>
+      <Name>Giles.Runner.NUnit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

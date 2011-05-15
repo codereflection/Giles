@@ -91,7 +91,10 @@ namespace Giles.Core.AppDomains
             return new[]
                        {
                            typeof(GilesAppDomainRunner).Assembly.Location,
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.Machine.Specifications.dll")
+                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.Machine.Specifications.dll"),
+                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.NUnit.dll"),
+                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.dll"),
+                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.interfaces.dll"),
                        };
         }
     }

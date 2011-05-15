@@ -207,7 +207,14 @@ namespace Giles.Core.IO
             if (File.Exists(path))
             {
                 SetAttributes(path, FileAttributes.Normal);
-                File.Delete(path);
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Unable to delete file: {0}", path);
+                }
             }
         }
 
