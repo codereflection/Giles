@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Giles.Core.Configuration;
 using Giles.Core.UI;
+using Giles.Core.Utility;
 
 namespace Giles.Core.Runners
 {
@@ -80,6 +82,12 @@ namespace Giles.Core.Runners
                 config.UserDisplay = new List<IUserDisplay> { new ConsoleUserDisplay() };
 
             config.UserDisplay.ToList().ForEach(display => display.DisplayResult(result));
+        }
+
+        public void DisplayVerboseResults()
+        {
+            Console.WriteLine("Verbose results:");
+            output.Each(x => Console.WriteLine(x));
         }
     }
 }

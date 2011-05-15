@@ -75,7 +75,16 @@ namespace Giles
 
                 if (keyValue == "q")
                     break;
+
+                if (keyValue == "v")
+                    DisplayVerboseResults();
             }
+        }
+
+        static void DisplayVerboseResults()
+        {
+            if (LastRunResults.GilesTestListener != null)
+                LastRunResults.GilesTestListener.DisplayVerboseResults();
         }
 
         static T GetUserValue<T>(T defaultValue)

@@ -45,6 +45,7 @@
     <Compile Include="..\..\ProjectVersion.cs">
       <Link>ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="GilesNUnitEventListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestRunner.cs" />
   </ItemGroup>

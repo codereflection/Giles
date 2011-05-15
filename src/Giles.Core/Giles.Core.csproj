@@ -76,6 +76,7 @@
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
     <Compile Include="Utility\RandomExtensionMethods.cs" />
+    <Compile Include="Watchers\LastRunResults.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>
   <ItemGroup>

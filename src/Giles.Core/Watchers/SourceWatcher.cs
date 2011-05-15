@@ -103,6 +103,8 @@ namespace Giles.Core.Watchers
                                });
 
             listener.DisplayResults();
+
+            LastRunResults.GilesTestListener = listener;
         }
     }
 }
