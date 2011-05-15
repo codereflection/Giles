@@ -165,7 +165,14 @@ namespace Giles.Core.IO
                              string targetPath,
                              bool overwrite)
         {
-            File.Copy(sourcePath, targetPath, overwrite);
+            try
+            {
+                File.Copy(sourcePath, targetPath, overwrite);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to copy {0}\n\tto\n\t\t{1} file: {0}\n\tError: {2}", sourcePath, targetPath, e.Message);
+            }
         }
 
         public void MoveFile(string sourcePath,
@@ -213,7 +220,7 @@ namespace Giles.Core.IO
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Unable to delete file: {0}", path);
+                    Console.WriteLine("Unable to delete file: {0}\n\tError: {1}", path, e.Message);
                 }
             }
         }
