@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9ECF9303-7823-4C53-83AB-91282951078E}</ProjectGuid>
+    <ProjectGuid>{C2A0F1C6-AA13-468F-844C-0D93A5C299D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Giles.Machine.Specfications.Runner</RootNamespace>
-    <AssemblyName>Giles.Machine.Specfications.Runner</AssemblyName>
+    <RootNamespace>Giles.Runner.NUnit</RootNamespace>
+    <AssemblyName>Giles.Runner.NUnit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,20 +31,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>..\..\..\lib\NUnit.2.5.10.11092\tools\lib\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>..\..\..\lib\NUnit.2.5.10.11092\tools\lib\nunit.core.interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\ProjectVersion.cs">
-      <Link>Properties\ProjectVersion.cs</Link>
+      <Link>ProjectVersion.cs</Link>
     </Compile>
-    <Compile Include="MSpecRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Giles.Core\Giles.Core.csproj">
