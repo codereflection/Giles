@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9039E7FA-989E-46ED-B031-FB67571E8385}</ProjectGuid>
+    <ProjectGuid>{8FAE1516-9D4A-4575-83BF-515BC6AF8AC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Giles.Core</RootNamespace>
-    <AssemblyName>Giles.Core</AssemblyName>
+    <RootNamespace>Giles.Specs</RootNamespace>
+    <AssemblyName>Giles.Specs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,62 +36,44 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Release\Giles.Core.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisLogFile>bin\Release\Giles.Specs.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
-    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
-    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
-    <Compile Include="AppDomains\FileOperationType.cs" />
-    <Compile Include="AppDomains\GilesAppDomainManager.cs" />
-    <Compile Include="AppDomains\GilesAppDomainRunner.cs" />
-    <Compile Include="Configuration\GilesConfig.cs" />
-    <Compile Include="Configuration\GilesConfigFactory.cs" />
-    <Compile Include="Configuration\MsBuildProject.cs" />
-    <Compile Include="Configuration\RunnerAssembly.cs" />
-    <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="Encryption\EncryptionHelper.cs" />
-    <Compile Include="IO\IFileSystem.cs" />
-    <Compile Include="IO\FileWatcherFactory.cs" />
-    <Compile Include="IO\IFileWatcherFactory.cs" />
+    <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
+    <Compile Include="Core\Configuration\SolutionConfigSpecs.cs" />
+    <Compile Include="Core\Runners\CommandProcessExecutorSpecs.cs" />
+    <Compile Include="Core\Runners\TestRunnerSpecs.cs" />
+    <Compile Include="Core\Watchers\SourceWatcherSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Runners\BuildRunner.cs" />
-    <Compile Include="Runners\CommandProcessExecutor.cs" />
-    <Compile Include="Runners\GilesTestListener.cs" />
-    <Compile Include="Runners\IFrameworkRunner.cs" />
-    <Compile Include="Runners\IRunner.cs" />
-    <Compile Include="Runners\ITestListener.cs" />
-    <Compile Include="Runners\ITestRunnerResolver.cs" />
-    <Compile Include="Runners\TestResult.cs" />
-    <Compile Include="Runners\TestRunner.cs" />
-    <Compile Include="UI\ConsoleUserDisplay.cs" />
-    <Compile Include="UI\GrowlUserDisplay.cs" />
-    <Compile Include="UI\IUserDisplay.cs" />
-    <Compile Include="Utility\RandomExtensionMethods.cs" />
-    <Compile Include="Watchers\LastRunResults.cs" />
-    <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Growl.Connector">
-      <HintPath>..\..\lib\Growl.Connector\Growl.Connector.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5c474de7a495cff1, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\mspec\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="Growl.CoreLibrary">
-      <HintPath>..\..\lib\Growl.Connector\Growl.CoreLibrary.dll</HintPath>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
+      <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
+      <Name>Giles.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
