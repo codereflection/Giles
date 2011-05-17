@@ -52,6 +52,7 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
     <Compile Include="TestResources.cs" />
     <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
     <Compile Include="Core\Configuration\MsBuildProjectSpecs.cs" />
@@ -83,6 +84,9 @@
     <EmbeddedResource Include="Core\Configuration\Resources\Giles.csproj" />
     <EmbeddedResource Include="Core\Configuration\Resources\Giles.sln" />
     <EmbeddedResource Include="Core\Configuration\Resources\Giles.Specs.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.Core.WithMSpec.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
