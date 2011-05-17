@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is this test being run on a Windows platform?
+full_name: Gem::TestCase#win_platform?
+is_singleton: false
+name: win_platform?
+params: ()
+visibility: public

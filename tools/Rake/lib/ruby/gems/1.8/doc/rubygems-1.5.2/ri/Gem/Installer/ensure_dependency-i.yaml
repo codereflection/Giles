@@ -1,0 +1,21 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Ensure that the dependency is satisfied by the current installation of gem. If it is not an exception is raised.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "spec       :"
+    body: Gem::Specification
+  - !ruby/struct:SM::Flow::LI 
+    label: "dependency :"
+    body: Gem::Dependency
+  type: :NOTE
+full_name: Gem::Installer#ensure_dependency
+is_singleton: false
+name: ensure_dependency
+params: (spec, dependency)
+visibility: public

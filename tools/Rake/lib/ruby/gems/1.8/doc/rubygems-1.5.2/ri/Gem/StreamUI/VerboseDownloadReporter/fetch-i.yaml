@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::StreamUI::VerboseDownloadReporter#fetch
+is_singleton: false
+name: fetch
+params: (file_name, total_bytes)
+visibility: public

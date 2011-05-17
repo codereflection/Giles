@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Attempt to YAML-load a gemspec from the given <em>io</em> parameter. Return nil if it fails.
+full_name: Gem::Package::TarInput#load_gemspec
+is_singleton: false
+name: load_gemspec
+params: (io)
+visibility: public

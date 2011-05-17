@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#calc_checksum
+is_singleton: false
+name: calc_checksum
+params: (header)
+visibility: public

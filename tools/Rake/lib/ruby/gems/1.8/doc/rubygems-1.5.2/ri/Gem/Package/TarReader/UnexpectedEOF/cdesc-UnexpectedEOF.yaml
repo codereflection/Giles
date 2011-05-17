@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised if the tar IO is not seekable
+constants: []
+
+full_name: Gem::Package::TarReader::UnexpectedEOF
+includes: []
+
+instance_methods: []
+
+name: UnexpectedEOF
+superclass: StandardError

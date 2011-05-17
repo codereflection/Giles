@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Specification attributes that are arrays (appendable and so-forth)
+full_name: Gem::Specification::array_attributes
+is_singleton: true
+name: array_attributes
+params: ()
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A recommended version for use with a ~&gt; Requirement.
+full_name: Gem::Version#spermy_recommendation
+is_singleton: false
+name: spermy_recommendation
+params: ()
+visibility: public

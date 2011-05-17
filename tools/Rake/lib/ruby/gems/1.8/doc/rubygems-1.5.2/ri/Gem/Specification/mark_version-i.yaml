@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets the rubygems_version to the current RubyGems version
+full_name: Gem::Specification#mark_version
+is_singleton: false
+name: mark_version
+params: ()
+visibility: public

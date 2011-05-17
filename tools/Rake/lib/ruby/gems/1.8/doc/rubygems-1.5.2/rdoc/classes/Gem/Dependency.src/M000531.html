@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>requirement (Gem::Dependency)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/dependency.rb, line 97</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">requirement</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@requirement</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@requirement</span>) <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@requirement</span>
+
+    <span class="ruby-comment cmt"># @version_requirements and @version_requirement are legacy ivar</span>
+    <span class="ruby-comment cmt"># names, and supported here because older gems need to keep</span>
+    <span class="ruby-comment cmt"># working and Dependency doesn't implement marshal_dump and</span>
+    <span class="ruby-comment cmt"># marshal_load. In a happier world, this would be an</span>
+    <span class="ruby-comment cmt"># attr_accessor. The horrifying instance_variable_get you see</span>
+    <span class="ruby-comment cmt"># below is also the legacy of some old restructurings.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Note also that because of backwards compatibility (loading new</span>
+    <span class="ruby-comment cmt"># gems in an old RubyGems installation), we can't add explicit</span>
+    <span class="ruby-comment cmt"># marshaling to this class until we want to make a big</span>
+    <span class="ruby-comment cmt"># break. Maybe 2.0.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-comment cmt"># Children, define explicit marshal and unmarshal behavior for</span>
+    <span class="ruby-comment cmt"># public classes. Marshal formats are part of your public API.</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@version_requirement</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@version_requirement</span>
+      <span class="ruby-identifier">version</span> = <span class="ruby-ivar">@version_requirement</span>.<span class="ruby-identifier">instance_variable_get</span> <span class="ruby-identifier">:@version</span>
+      <span class="ruby-ivar">@version_requirement</span>  = <span class="ruby-keyword kw">nil</span>
+      <span class="ruby-ivar">@version_requirements</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Requirement</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">version</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@requirement</span> = <span class="ruby-ivar">@version_requirements</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@version_requirements</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

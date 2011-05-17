@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Gem::Version</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Gem::Version</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/rubygems/version_rb.html">
+                lib/rubygems/version.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+The <a href="Version.html">Version</a> class processes string versions into
+comparable values. A version string should normally be a series of numbers
+separated by periods. Each part (digits separated by periods) is considered
+its own number, and these are used for sorting. So for instance, 3.10 sorts
+higher than 3.2 because ten is greater than two.
+</p>
+<p>
+If any part contains letters (currently only a-z are supported) then that
+version is considered prerelease. Versions with a prerelease part in the
+Nth part sort less than versions with N-1 parts. Prerelease parts are
+sorted alphabetically using the normal Ruby string sorting rules. If a
+prerelease part contains both letters and numbers, it will be broken into
+multiple parts to provide expected sort behavior (1.0.a10 becomes 1.0.a.10,
+and is greater than 1.0.a9).
+</p>
+<p>
+Prereleases sort between real releases (newest to oldest):
+</p>
+<ol>
+<li>1.0
+
+</li>
+<li>1.0.b1
+
+</li>
+<li>1.0.a.2
+
+</li>
+<li>0.9
+
+</li>
+</ol>
+<h2>How Software Changes</h2>
+<p>
+Users expect to be able to specify a version constraint that gives them
+some reasonable expectation that <a href="Version.html#M000338">new</a>
+versions of a library will work with their software if the version
+constraint is true, and not work with their software if the version
+constraint is false. In other words, the perfect system will accept all
+compatible versions of the library and reject all incompatible versions.
+</p>
+<p>
+Libraries change in 3 ways (well, more than 3, but stay focused here!).
+</p>
+<ol>
+<li>The change may be an implementation detail only and have no effect on the
+client software.
+
+</li>
+<li>The change may add <a href="Version.html#M000338">new</a> features, but do
+so in a way that client software written to an earlier version is still
+compatible.
+
+</li>
+<li>The change may change the public interface of the library in such a way
+that old software is no longer compatible.
+
+</li>
+</ol>
+<p>
+Some examples are appropriate at this point. Suppose I have a Stack class
+that supports a <tt>push</tt> and a <tt>pop</tt> method.
+</p>
+<h3>Examples of Category 1 changes:</h3>
+<ul>
+<li>Switch from an array based implementation to a linked-list based
+implementation.
+
+</li>
+<li>Provide an automatic (and transparent) backing store for large stacks.
+
+</li>
+</ul>
+<h3>Examples of Category 2 changes might be:</h3>
+<ul>
+<li>Add a <tt>depth</tt> method to return the current depth of the stack.
+
+</li>
+<li>Add a <tt>top</tt> method that returns the current top of stack (without
+changing the stack).
+
+</li>
+<li>Change <tt>push</tt> so that it returns the item pushed (previously it had
+no usable return value).
+
+</li>
+</ul>
+<h3>Examples of Category 3 changes might be:</h3>
+<ul>
+<li>Changes <tt>pop</tt> so that it no longer returns a value (you must use
+<tt>top</tt> to get the top of the stack).
+
+</li>
+<li>Rename the methods to <tt>push_item</tt> and <tt>pop_item</tt>.
+
+</li>
+</ul>
+<h2>RubyGems Rational Versioning</h2>
+<ul>
+<li>Versions shall be represented by three non-negative integers, separated by
+periods (e.g. 3.1.4). The first integers is the &quot;major&quot; version
+number, the second integer is the &quot;minor&quot; version number, and the
+third integer is the &quot;build&quot; number.
+
+</li>
+<li>A category 1 change (implementation detail) will increment the build
+number.
+
+</li>
+<li>A category 2 change (backwards compatible) will increment the minor version
+number and reset the build number.
+
+</li>
+<li>A category 3 change (incompatible) will increment the major build number
+and reset the minor and build numbers.
+
+</li>
+<li>Any &quot;public&quot; <a href="Version.html#M000344">release</a> of a gem
+should have a different version. Normally that means incrementing the build
+number. This means a developer can generate builds all day long for
+himself, but as soon as he/she makes a public <a
+href="Version.html#M000344">release</a>, the version must be updated.
+
+</li>
+</ul>
+<h3>Examples</h3>
+<p>
+Let&#8216;s work through a project lifecycle using our Stack example from
+above.
+</p>
+<table>
+<tr><td valign="top"><a href="Version.html">Version</a> 0.0.1:</td><td>The initial Stack class is <a href="Version.html#M000344">release</a>.
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 0.0.2:</td><td>Switched to a linked=list implementation because it is cooler.
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 0.1.0:</td><td>Added a <tt>depth</tt> method.
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 1.0.0:</td><td>Added <tt>top</tt> and made <tt>pop</tt> return nil (<tt>pop</tt> used to
+return the old top item).
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 1.1.0:</td><td><tt>push</tt> now returns the value pushed (it used it return nil).
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 1.1.1:</td><td>Fixed a bug in the linked list implementation.
+
+</td></tr>
+<tr><td valign="top"><a href="Version.html">Version</a> 1.1.2:</td><td>Fixed a bug introduced in the last fix.
+
+</td></tr>
+</table>
+<p>
+Client A needs a stack with basic push/pop capability. He writes to the
+original interface (no <tt>top</tt>), so his version constraint looks like:
+</p>
+<pre>
+  gem 'stack', '~&gt; 0.0'
+</pre>
+<p>
+Essentially, any version is OK with Client A. An incompatible change to the
+library will cause him grief, but he is willing to take the chance (we call
+Client A optimistic).
+</p>
+<p>
+Client B is just like Client A except for two things: (1) He uses the
+<tt>depth</tt> method and (2) he is worried about future incompatibilities,
+so he writes his version constraint like this:
+</p>
+<pre>
+  gem 'stack', '~&gt; 0.1'
+</pre>
+<p>
+The <tt>depth</tt> method was introduced in version 0.1.0, so that version
+or anything later is fine, as long as the version stays below version 1.0
+where incompatibilities are introduced. We call Client B pessimistic
+because he is worried about incompatible future changes (it is OK to be
+pessimistic!).
+</p>
+<h2>Preventing <a href="Version.html">Version</a> Catastrophe:</h2>
+<p>
+From: <a
+href="http://blog.zenspider.com/2008/10/rubygems-howto-preventing-cata.html">blog.zenspider.com/2008/10/rubygems-howto-preventing-cata.html</a>
+</p>
+<p>
+Let&#8216;s say you&#8216;re depending on the fnord gem version 2.y.z. If
+you specify your dependency as &quot;&gt;= 2.0.0&quot; then, you&#8216;re
+good, right? What happens if fnord 3.0 comes out and it isn&#8216;t
+backwards compatible with 2.y.z? Your stuff will break as a result of using
+&quot;&gt;=&quot;. The better route is to specify your dependency with a
+&quot;spermy&quot; version specifier. They&#8216;re a tad confusing, so
+here is how the dependency specifiers work:
+</p>
+<pre>
+  Specification From  ... To (exclusive)
+  &quot;&gt;= 3.0&quot;      3.0   ... &amp;infin;
+  &quot;~&gt; 3.0&quot;      3.0   ... 4.0
+  &quot;~&gt; 3.0.0&quot;    3.0.0 ... 3.1
+  &quot;~&gt; 3.5&quot;      3.5   ... 4.0
+  &quot;~&gt; 3.5.0&quot;    3.5.0 ... 3.6
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000346">&lt;=&gt;</a>&nbsp;&nbsp;
+      <a href="#M000339">bump</a>&nbsp;&nbsp;
+      <a href="#M000336">correct?</a>&nbsp;&nbsp;
+      <a href="#M000337">create</a>&nbsp;&nbsp;
+      <a href="#M000340">eql?</a>&nbsp;&nbsp;
+      <a href="#M000341">marshal_dump</a>&nbsp;&nbsp;
+      <a href="#M000342">marshal_load</a>&nbsp;&nbsp;
+      <a href="#M000338">new</a>&nbsp;&nbsp;
+      <a href="#M000343">prerelease?</a>&nbsp;&nbsp;
+      <a href="#M000344">release</a>&nbsp;&nbsp;
+      <a href="#M000345">spermy_recommendation</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name">Comparable</span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">version</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">to_s</td>
+        </tr>
+                        </table>
+      </div>
+    </div>
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">version</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+A string representation of this <a href="Version.html">Version</a>.
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000336" class="method-detail">
+        <a name="M000336"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000336.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000336.html');return false;">
+          <span class="method-name">correct?</span><span class="method-args">(version)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+True if the <tt>version</tt> string matches RubyGems&#8217; requirements.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000337" class="method-detail">
+        <a name="M000337"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000337.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000337.html');return false;">
+          <span class="method-name">create</span><span class="method-args">(input)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Factory method to <a href="Version.html#M000337">create</a> a <a
+href="Version.html">Version</a> object. Input may be a <a
+href="Version.html">Version</a> or a String. Intended to simplify client
+code.
+</p>
+<pre>
+  ver1 = Version.create('1.3.17')   # -&gt; (Version object)
+  ver2 = Version.create(ver1)       # -&gt; (ver1)
+  ver3 = Version.create(nil)        # -&gt; nil
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000338" class="method-detail">
+        <a name="M000338"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000338.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000338.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(version)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Constructs a <a href="Version.html">Version</a> from the <tt>version</tt>
+string. A version string is a series of digits or ASCII letters separated
+by dots.
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000346" class="method-detail">
+        <a name="M000346"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000346.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000346.html');return false;">
+          <span class="method-name">&lt;=&gt;</span><span class="method-args">(other)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Compares this version with <tt>other</tt> returning -1, 0, or 1 if the
+other version is larger, the same, or smaller than this one. Attempts to
+compare to something that&#8216;s not a <tt><a
+href="Version.html">Gem::Version</a></tt> return <tt>nil</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000339" class="method-detail">
+        <a name="M000339"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000339.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000339.html');return false;">
+          <span class="method-name">bump</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a <a href="Version.html#M000338">new</a> version object where the
+next to the last revision number is one greater (e.g., 5.3.1 =&gt; 5.4).
+</p>
+<p>
+Pre-<a href="Version.html#M000344">release</a> (alpha) parts, e.g,
+5.3.1.b.2 =&gt; 5.4, are ignored.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000340" class="method-detail">
+        <a name="M000340"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000340.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000340.html');return false;">
+          <span class="method-name">eql?</span><span class="method-args">(other)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A <a href="Version.html">Version</a> is only <a
+href="Version.html#M000340">eql?</a> to another version if it&#8216;s
+specified to the same precision. <a href="Version.html">Version</a>
+&quot;1.0&quot; is not the same as version &quot;1&quot;.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000341" class="method-detail">
+        <a name="M000341"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000341.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000341.html');return false;">
+          <span class="method-name">marshal_dump</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Dump only the raw version string, not the complete object. It&#8216;s a
+string for backwards (RubyGems 1.3.5 and earlier) compatibility.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000342" class="method-detail">
+        <a name="M000342"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000342.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000342.html');return false;">
+          <span class="method-name">marshal_load</span><span class="method-args">(array)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Load custom marshal format. It&#8216;s a string for backwards (RubyGems
+1.3.5 and earlier) compatibility.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000343" class="method-detail">
+        <a name="M000343"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000343.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000343.html');return false;">
+          <span class="method-name">prerelease?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A version is considered a prerelease if it contains a letter.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000344" class="method-detail">
+        <a name="M000344"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000344.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000344.html');return false;">
+          <span class="method-name">release</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="Version.html#M000344">release</a> for this version (e.g.
+1.2.0.a -&gt; 1.2.0). Non-prerelease versions return themselves.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000345" class="method-detail">
+        <a name="M000345"></a>
+
+        <div class="method-heading">
+          <a href="Version.src/M000345.html" target="Code" class="method-signature"
+            onclick="popupCode('Version.src/M000345.html');return false;">
+          <span class="method-name">spermy_recommendation</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A recommended version for use with a ~&gt; <a
+href="Requirement.html">Requirement</a>.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

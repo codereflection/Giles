@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A test case for Gem::Installer.
+constants: []
+
+full_name: Gem::InstallerTestCase
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: setup
+- !ruby/object:RI::MethodSummary 
+  name: util_gem_bindir
+- !ruby/object:RI::MethodSummary 
+  name: util_gem_dir
+- !ruby/object:RI::MethodSummary 
+  name: util_inst_bindir
+- !ruby/object:RI::MethodSummary 
+  name: util_installer
+- !ruby/object:RI::MethodSummary 
+  name: util_make_exec
+- !ruby/object:RI::MethodSummary 
+  name: util_setup_gem
+name: InstallerTestCase
+superclass: Gem::TestCase

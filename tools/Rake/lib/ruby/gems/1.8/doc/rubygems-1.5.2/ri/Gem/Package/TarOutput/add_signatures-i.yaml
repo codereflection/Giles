@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Adds data.tar.gz.sig and metadata.gz.sig to the gem-format tar files if a Gem::Security::Signer was sent to initialize.
+full_name: Gem::Package::TarOutput#add_signatures
+is_singleton: false
+name: add_signatures
+params: ()
+visibility: public

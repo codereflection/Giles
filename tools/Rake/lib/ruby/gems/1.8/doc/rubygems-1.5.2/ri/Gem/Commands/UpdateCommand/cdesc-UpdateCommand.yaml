@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::UpdateCommand
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::InstallUpdateOptions
+- !ruby/object:RI::IncludedModule 
+  name: Gem::LocalRemoteOptions
+- !ruby/object:RI::IncludedModule 
+  name: Gem::VersionOption
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: update_gem
+- !ruby/object:RI::MethodSummary 
+  name: update_gems
+- !ruby/object:RI::MethodSummary 
+  name: update_rubygems
+- !ruby/object:RI::MethodSummary 
+  name: which_to_update
+name: UpdateCommand
+superclass: Gem::Command

@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse <tt>obj</tt>, returning an <tt>[op, version]</tt> pair. <tt>obj</tt> can be a String or a Gem::Version.
+- !ruby/struct:SM::Flow::P 
+  body: If <tt>obj</tt> is a String, it can be either a full requirement specification, like <tt>&quot;&gt;= 1.2&quot;</tt>, or a simple version number, like <tt>&quot;1.2&quot;</tt>.
+- !ruby/struct:SM::Flow::VERB 
+  body: "    parse(&quot;&gt; 1.0&quot;)                 # =&gt; [&quot;&gt;&quot;, &quot;1.0&quot;]\n    parse(&quot;1.0&quot;)                   # =&gt; [&quot;=&quot;, &quot;1.0&quot;]\n    parse(Gem::Version.new(&quot;1.0&quot;)) # =&gt; [&quot;=,  &quot;1.0&quot;]\n"
+full_name: Gem::Requirement::parse
+is_singleton: true
+name: parse
+params: (obj)
+visibility: public

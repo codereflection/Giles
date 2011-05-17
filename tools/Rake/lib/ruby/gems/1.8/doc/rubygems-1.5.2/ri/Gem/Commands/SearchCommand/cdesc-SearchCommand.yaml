@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::SearchCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: SearchCommand
+superclass: Gem::Commands::QueryCommand

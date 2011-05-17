@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Gem::StreamUI</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Gem::StreamUI</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/rubygems/user_interaction_rb.html">
+                lib/rubygems/user_interaction.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+<a href="StreamUI.html">Gem::StreamUI</a> implements a simple stream based
+user interface.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000273">alert</a>&nbsp;&nbsp;
+      <a href="#M000275">alert_error</a>&nbsp;&nbsp;
+      <a href="#M000274">alert_warning</a>&nbsp;&nbsp;
+      <a href="#M000267">ask</a>&nbsp;&nbsp;
+      <a href="#M000268">ask_for_password</a>&nbsp;&nbsp;
+      <a href="#M000269">ask_for_password</a>&nbsp;&nbsp;
+      <a href="#M000271">ask_for_password_on_unix</a>&nbsp;&nbsp;
+      <a href="#M000270">ask_for_password_on_windows</a>&nbsp;&nbsp;
+      <a href="#M000266">ask_yes_no</a>&nbsp;&nbsp;
+      <a href="#M000265">choose_from_list</a>&nbsp;&nbsp;
+      <a href="#M000276">debug</a>&nbsp;&nbsp;
+      <a href="#M000279">download_reporter</a>&nbsp;&nbsp;
+      <a href="#M000264">new</a>&nbsp;&nbsp;
+      <a href="#M000278">progress_reporter</a>&nbsp;&nbsp;
+      <a href="#M000272">say</a>&nbsp;&nbsp;
+      <a href="#M000277">terminate_interaction</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="StreamUI/SilentDownloadReporter.html" class="link">Gem::StreamUI::SilentDownloadReporter</a><br />
+Class <a href="StreamUI/SilentProgressReporter.html" class="link">Gem::StreamUI::SilentProgressReporter</a><br />
+Class <a href="StreamUI/SimpleProgressReporter.html" class="link">Gem::StreamUI::SimpleProgressReporter</a><br />
+Class <a href="StreamUI/VerboseDownloadReporter.html" class="link">Gem::StreamUI::VerboseDownloadReporter</a><br />
+Class <a href="StreamUI/VerboseProgressReporter.html" class="link">Gem::StreamUI::VerboseProgressReporter</a><br />
+
+    </div>
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">errs</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ins</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">outs</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000264" class="method-detail">
+        <a name="M000264"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000264.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000264.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(in_stream, out_stream, err_stream=STDERR)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000273" class="method-detail">
+        <a name="M000273"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000273.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000273.html');return false;">
+          <span class="method-name">alert</span><span class="method-args">(statement, question=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display an informational <a href="StreamUI.html#M000273">alert</a>. Will <a
+href="StreamUI.html#M000267">ask</a> <tt>question</tt> if it is not nil.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000275" class="method-detail">
+        <a name="M000275"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000275.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000275.html');return false;">
+          <span class="method-name">alert_error</span><span class="method-args">(statement, question=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display an error message in a location expected to get error messages. Will
+<a href="StreamUI.html#M000267">ask</a> <tt>question</tt> if it is not nil.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000274" class="method-detail">
+        <a name="M000274"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000274.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000274.html');return false;">
+          <span class="method-name">alert_warning</span><span class="method-args">(statement, question=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display a warning in a location expected to get error messages. Will <a
+href="StreamUI.html#M000267">ask</a> <tt>question</tt> if it is not nil.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000267" class="method-detail">
+        <a name="M000267"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000267.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000267.html');return false;">
+          <span class="method-name">ask</span><span class="method-args">(question)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ask a question. Returns an answer if connected to a tty, nil otherwise.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000268" class="method-detail">
+        <a name="M000268"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000268.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000268.html');return false;">
+          <span class="method-name">ask_for_password</span><span class="method-args">(question)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ask for a password. Does not echo response to terminal.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000269" class="method-detail">
+        <a name="M000269"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000269.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000269.html');return false;">
+          <span class="method-name">ask_for_password</span><span class="method-args">(question)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ask for a password. Does not echo response to terminal.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000271" class="method-detail">
+        <a name="M000271"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000271.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000271.html');return false;">
+          <span class="method-name">ask_for_password_on_unix</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Asks for a password that works on unix
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000270" class="method-detail">
+        <a name="M000270"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000270.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000270.html');return false;">
+          <span class="method-name">ask_for_password_on_windows</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Asks for a password that works on windows. Ripped from the Heroku gem.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000266" class="method-detail">
+        <a name="M000266"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000266.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000266.html');return false;">
+          <span class="method-name">ask_yes_no</span><span class="method-args">(question, default=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ask a question. Returns a true for yes, false for no. If not connected to a
+tty, raises an exception if default is nil, otherwise returns default.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000265" class="method-detail">
+        <a name="M000265"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000265.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000265.html');return false;">
+          <span class="method-name">choose_from_list</span><span class="method-args">(question, list)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Choose from a list of options. <tt>question</tt> is a prompt displayed
+above the list. <tt>list</tt> is a list of option strings. Returns the pair
+[option_name, option_index].
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000276" class="method-detail">
+        <a name="M000276"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000276.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000276.html');return false;">
+          <span class="method-name">debug</span><span class="method-args">(statement)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display a <a href="StreamUI.html#M000276">debug</a> message on the same
+location as error messages.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000279" class="method-detail">
+        <a name="M000279"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000279.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000279.html');return false;">
+          <span class="method-name">download_reporter</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a download reporter object chosen from the current verbosity
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000278" class="method-detail">
+        <a name="M000278"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000278.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000278.html');return false;">
+          <span class="method-name">progress_reporter</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Return a progress reporter object chosen from the current verbosity.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000272" class="method-detail">
+        <a name="M000272"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000272.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000272.html');return false;">
+          <span class="method-name">say</span><span class="method-args">(statement=&quot;&quot;)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Display a statement.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000277" class="method-detail">
+        <a name="M000277"></a>
+
+        <div class="method-heading">
+          <a href="StreamUI.src/M000277.html" target="Code" class="method-signature"
+            onclick="popupCode('StreamUI.src/M000277.html');return false;">
+          <span class="method-name">terminate_interaction</span><span class="method-args">(status = 0)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Terminate the application with exit code <tt>status</tt>, running any exit
+handlers that might have been defined.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

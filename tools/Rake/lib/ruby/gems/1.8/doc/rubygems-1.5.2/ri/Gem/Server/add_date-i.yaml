@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Server#add_date
+is_singleton: false
+name: add_date
+params: (res)
+visibility: public

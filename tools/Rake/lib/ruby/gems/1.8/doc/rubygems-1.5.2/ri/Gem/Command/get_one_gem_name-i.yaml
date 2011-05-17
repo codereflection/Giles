@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get a single gem name from the command line. Fail if there is no gem name or if there is more than one gem name given.
+full_name: Gem::Command#get_one_gem_name
+is_singleton: false
+name: get_one_gem_name
+params: ()
+visibility: public

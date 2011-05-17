@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>suggest_gems_from_name (Gem::SpecFetcher)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/spec_fetcher.rb, line 173</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">suggest_gems_from_name</span> <span class="ruby-identifier">gem_name</span>
+    <span class="ruby-identifier">gem_name</span>        = <span class="ruby-identifier">gem_name</span>.<span class="ruby-identifier">downcase</span>
+    <span class="ruby-identifier">max</span>             = <span class="ruby-identifier">gem_name</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">specs</span>           = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">flatten</span> <span class="ruby-value">1</span>
+
+    <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">specs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>, <span class="ruby-identifier">platform</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Platform</span>.<span class="ruby-identifier">match</span> <span class="ruby-identifier">platform</span>
+
+      <span class="ruby-identifier">distance</span> = <span class="ruby-identifier">levenshtein_distance</span> <span class="ruby-identifier">gem_name</span>, <span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>
+
+      <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">distance</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">max</span>
+
+      <span class="ruby-keyword kw">return</span> [<span class="ruby-identifier">name</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">distance</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+
+      [<span class="ruby-identifier">name</span>, <span class="ruby-identifier">distance</span>]
+    }.<span class="ruby-identifier">compact</span>
+
+    <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">dist</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dist</span> }
+
+    <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">5</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">dist</span><span class="ruby-operator">|</span> <span class="ruby-identifier">name</span> }
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

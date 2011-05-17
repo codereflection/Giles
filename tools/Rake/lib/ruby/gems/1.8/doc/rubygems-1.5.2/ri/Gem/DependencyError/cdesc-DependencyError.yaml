@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Gem::DependencyError
+includes: []
+
+instance_methods: []
+
+name: DependencyError
+superclass: Gem::Exception

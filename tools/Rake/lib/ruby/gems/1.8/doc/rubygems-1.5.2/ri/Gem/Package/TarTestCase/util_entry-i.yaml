@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#util_entry
+is_singleton: false
+name: util_entry
+params: (tar)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is <tt>name</tt> a required attribute?
+full_name: Gem::Specification::required_attribute?
+is_singleton: true
+name: required_attribute?
+params: (name)
+visibility: public

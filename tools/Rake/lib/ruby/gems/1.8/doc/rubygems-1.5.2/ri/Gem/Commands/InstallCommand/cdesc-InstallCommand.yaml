@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gem installer command line tool
+- !ruby/struct:SM::Flow::P 
+  body: See `gem help install`
+constants: []
+
+full_name: Gem::Commands::InstallCommand
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::VersionOption
+- !ruby/object:RI::IncludedModule 
+  name: Gem::LocalRemoteOptions
+- !ruby/object:RI::IncludedModule 
+  name: Gem::InstallUpdateOptions
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: InstallCommand
+superclass: Gem::Command

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_gem (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 375</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_gem</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>, <span class="ruby-identifier">deps</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">deps</span> <span class="ruby-keyword kw">then</span>
+      <span class="ruby-identifier">block</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">deps</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span>, <span class="ruby-identifier">req</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">add_dependency</span> <span class="ruby-identifier">n</span>, (<span class="ruby-identifier">req</span> <span class="ruby-operator">||</span> <span class="ruby-value str">'&gt;= 0'</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">spec</span> = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+
+    <span class="ruby-identifier">util_build_gem</span> <span class="ruby-identifier">spec</span>
+
+    <span class="ruby-identifier">cache_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-ivar">@tempdir</span>, <span class="ruby-value str">'gems'</span>, <span class="ruby-node">&quot;#{spec.original_name}.gem&quot;</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mv</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'cache'</span>, <span class="ruby-node">&quot;#{spec.original_name}.gem&quot;</span>),
+                 <span class="ruby-identifier">cache_file</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'specifications'</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">spec_name</span>)
+
+    <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">loaded_from</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">loaded</span> = <span class="ruby-keyword kw">false</span>
+
+    [<span class="ruby-identifier">spec</span>, <span class="ruby-identifier">cache_file</span>]
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,101 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Build indexes for RubyGems older than 1.2.0 when true
+  name: build_legacy
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Build indexes for RubyGems 1.2.0 and newer when true
+  name: build_modern
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Index install location
+  name: dest_directory
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Latest specs index install location
+  name: dest_latest_specs_index
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Prerelease specs index install location
+  name: dest_prerelease_specs_index
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Specs index install location
+  name: dest_specs_index
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Index build directory
+  name: directory
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Top level class for building the gem repository index.
+constants: []
+
+full_name: Gem::Indexer
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::UserInteraction
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: abbreviate
+- !ruby/object:RI::MethodSummary 
+  name: build_indicies
+- !ruby/object:RI::MethodSummary 
+  name: build_legacy_indicies
+- !ruby/object:RI::MethodSummary 
+  name: build_marshal_gemspecs
+- !ruby/object:RI::MethodSummary 
+  name: build_modern_index
+- !ruby/object:RI::MethodSummary 
+  name: build_modern_indicies
+- !ruby/object:RI::MethodSummary 
+  name: build_rss
+- !ruby/object:RI::MethodSummary 
+  name: collect_specs
+- !ruby/object:RI::MethodSummary 
+  name: compact_specs
+- !ruby/object:RI::MethodSummary 
+  name: compress
+- !ruby/object:RI::MethodSummary 
+  name: compress_indicies
+- !ruby/object:RI::MethodSummary 
+  name: gem_file_list
+- !ruby/object:RI::MethodSummary 
+  name: generate_index
+- !ruby/object:RI::MethodSummary 
+  name: gzip
+- !ruby/object:RI::MethodSummary 
+  name: install_indicies
+- !ruby/object:RI::MethodSummary 
+  name: make_temp_directories
+- !ruby/object:RI::MethodSummary 
+  name: paranoid
+- !ruby/object:RI::MethodSummary 
+  name: sanitize
+- !ruby/object:RI::MethodSummary 
+  name: sanitize_string
+- !ruby/object:RI::MethodSummary 
+  name: update_index
+- !ruby/object:RI::MethodSummary 
+  name: update_specs_index
+name: Indexer
+superclass: Object

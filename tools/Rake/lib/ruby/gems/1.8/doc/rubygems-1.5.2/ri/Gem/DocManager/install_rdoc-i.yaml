@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Generate and install RDoc into the documentation directory
+full_name: Gem::DocManager#install_rdoc
+is_singleton: false
+name: install_rdoc
+params: ()
+visibility: public

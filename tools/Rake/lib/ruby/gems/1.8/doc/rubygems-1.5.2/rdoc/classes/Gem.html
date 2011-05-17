@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Gem</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Gem</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/rubygems/defaults_rb.html">
+                lib/rubygems/defaults.rb
+                </a>
+        <br />
+                <a href="../files/lib/rubygems/gem_openssl_rb.html">
+                lib/rubygems/gem_openssl.rb
+                </a>
+        <br />
+                <a href="../files/lib/rubygems/test_case_rb.html">
+                lib/rubygems/test_case.rb
+                </a>
+        <br />
+                <a href="../files/lib/rubygems_rb.html">
+                lib/rubygems.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+RubyGems is the Ruby standard for publishing and managing third party
+libraries.
+</p>
+<p>
+For user documentation, see:
+</p>
+<ul>
+<li><tt>gem help</tt> and <tt>gem help [command]</tt>
+
+</li>
+<li><a href="http://docs.rubygems.org/read/book/1">RubyGems User Guide</a>
+
+</li>
+<li><a href="http://docs.rubygems.org/read/book/3">Frequently Asked
+Questions</a>
+
+</li>
+</ul>
+<p>
+For gem developer documentation see:
+</p>
+<ul>
+<li><a href="http://docs.rubygems.org/read/chapter/5">Creating Gems</a>
+
+</li>
+<li><a href="Gem/Specification.html">Gem::Specification</a>
+
+</li>
+<li><a href="Gem/Version.html">Gem::Version</a> for version dependency notes
+
+</li>
+</ul>
+<p>
+Further RubyGems documentation can be found at:
+</p>
+<ul>
+<li><a href="http://rubygems.rubyforge.org/rdoc">RubyGems API</a> (also
+available from <tt>gem server</tt>)
+
+</li>
+<li><a href="http://rubygem.org">RubyGems Bookshelf</a>
+
+</li>
+</ul>
+<h2>RubyGems Plugins</h2>
+<p>
+As of RubyGems 1.3.2, RubyGems will load plugins installed in gems or
+$LOAD_PATH. Plugins must be named &#8216;rubygems_plugin&#8217; (.rb, .so,
+etc) and placed at the root of your gem&#8216;s require_path. Plugins are
+discovered via Gem::find_files then loaded. Take care when implementing a
+plugin as your plugin file may be loaded multiple times if multiple
+versions of your gem are installed.
+</p>
+<p>
+For an example plugin, see the graph gem which adds a `gem graph` command.
+</p>
+<h2>RubyGems Defaults, Packaging</h2>
+<p>
+RubyGems defaults are stored in rubygems/defaults.rb. If you&#8216;re
+packaging RubyGems or implementing Ruby you can change RubyGems&#8217;
+defaults.
+</p>
+<p>
+For RubyGems packagers, provide lib/rubygems/operating_system.rb and
+override any defaults from lib/rubygems/defaults.rb.
+</p>
+<p>
+For Ruby implementers, provide lib/rubygems/#{RUBY_ENGINE}.rb and override
+any defaults from lib/rubygems/defaults.rb.
+</p>
+<p>
+If you need RubyGems to perform extra work on install or uninstall, your
+defaults override file can set pre and post install and uninstall hooks.
+See Gem::pre_install, Gem::pre_uninstall, Gem::post_install,
+Gem::post_uninstall.
+</p>
+<h2>Bugs</h2>
+<p>
+You can submit bugs to the <a
+href="http://rubyforge.org/tracker/?atid=575&group_id=126">RubyGems bug
+tracker</a> on RubyForge
+</p>
+<h2>Credits</h2>
+<p>
+RubyGems is currently maintained by Eric Hodel.
+</p>
+<p>
+RubyGems was originally developed at RubyConf 2003 by:
+</p>
+<ul>
+<li>Rich Kilmer &#8212; rich(at)infoether.com
+
+</li>
+<li>Chad Fowler &#8212; chad(at)chadfowler.com
+
+</li>
+<li>David Black &#8212; dblack(at)wobblini.net
+
+</li>
+<li>Paul Brannan &#8212; paul(at)atdesk.com
+
+</li>
+<li>Jim Weirch &#8212; jim(at)weirichhouse.org
+
+</li>
+</ul>
+<p>
+Contributors:
+</p>
+<ul>
+<li>Gavin Sinclair &#8212; gsinclair(at)soyabean.com.au
+
+</li>
+<li>George Marrows &#8212; george.marrows(at)ntlworld.com
+
+</li>
+<li>Dick Davies &#8212; rasputnik(at)hellooperator.net
+
+</li>
+<li>Mauricio Fernandez &#8212; batsman.geo(at)yahoo.com
+
+</li>
+<li>Simon Strandgaard &#8212; neoneye(at)adslhome.dk
+
+</li>
+<li>Dave Glasser &#8212; glasser(at)mit.edu
+
+</li>
+<li>Paul Duncan &#8212; pabs(at)pablotron.org
+
+</li>
+<li>Ville Aine &#8212; vaine(at)cs.helsinki.fi
+
+</li>
+<li>Eric Hodel &#8212; drbrain(at)segment7.net
+
+</li>
+<li>Daniel Berger &#8212; djberg96(at)gmail.com
+
+</li>
+<li>Phil Hagelberg &#8212; technomancy(at)gmail.com
+
+</li>
+<li>Ryan Davis &#8212; ryand-ruby(at)zenspider.com
+
+</li>
+</ul>
+<p>
+(If your name is missing, PLEASE let us know!)
+</p>
+<p>
+Thanks!
+</p>
+<p>
+-The RubyGems Team
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000066">default_bindir</a>&nbsp;&nbsp;
+      <a href="#M000062">default_dir</a>&nbsp;&nbsp;
+      <a href="#M000065">default_exec_format</a>&nbsp;&nbsp;
+      <a href="#M000064">default_path</a>&nbsp;&nbsp;
+      <a href="#M000061">default_sources</a>&nbsp;&nbsp;
+      <a href="#M000067">default_system_source_cache_dir</a>&nbsp;&nbsp;
+      <a href="#M000068">default_user_source_cache_dir</a>&nbsp;&nbsp;
+      <a href="#M000071">ensure_ssl_available</a>&nbsp;&nbsp;
+      <a href="#M000075">ruby=</a>&nbsp;&nbsp;
+      <a href="#M000069">ruby_engine</a>&nbsp;&nbsp;
+      <a href="#M000072">searcher=</a>&nbsp;&nbsp;
+      <a href="#M000073">source_index=</a>&nbsp;&nbsp;
+      <a href="#M000070">ssl_available?</a>&nbsp;&nbsp;
+      <a href="#M000063">user_dir</a>&nbsp;&nbsp;
+      <a href="#M000074">win_platform=</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="Gem/Commands.html" class="link">Gem::Commands</a><br />
+Module <a href="Gem/DefaultUserInteraction.html" class="link">Gem::DefaultUserInteraction</a><br />
+Module <a href="Gem/Ext.html" class="link">Gem::Ext</a><br />
+Module <a href="Gem/GemcutterUtilities.html" class="link">Gem::GemcutterUtilities</a><br />
+Module <a href="Gem/InstallUpdateOptions.html" class="link">Gem::InstallUpdateOptions</a><br />
+Module <a href="Gem/LocalRemoteOptions.html" class="link">Gem::LocalRemoteOptions</a><br />
+Module <a href="Gem/Package.html" class="link">Gem::Package</a><br />
+Module <a href="Gem/RequirePathsBuilder.html" class="link">Gem::RequirePathsBuilder</a><br />
+Module <a href="Gem/Text.html" class="link">Gem::Text</a><br />
+Module <a href="Gem/UserInteraction.html" class="link">Gem::UserInteraction</a><br />
+Module <a href="Gem/VersionOption.html" class="link">Gem::VersionOption</a><br />
+Class <a href="Gem/Builder.html" class="link">Gem::Builder</a><br />
+Class <a href="Gem/Command.html" class="link">Gem::Command</a><br />
+Class <a href="Gem/CommandLineError.html" class="link">Gem::CommandLineError</a><br />
+Class <a href="Gem/CommandManager.html" class="link">Gem::CommandManager</a><br />
+Class <a href="Gem/ConfigFile.html" class="link">Gem::ConfigFile</a><br />
+Class <a href="Gem/ConsoleUI.html" class="link">Gem::ConsoleUI</a><br />
+Class <a href="Gem/Dependency.html" class="link">Gem::Dependency</a><br />
+Class <a href="Gem/DependencyError.html" class="link">Gem::DependencyError</a><br />
+Class <a href="Gem/DependencyInstaller.html" class="link">Gem::DependencyInstaller</a><br />
+Class <a href="Gem/DependencyList.html" class="link">Gem::DependencyList</a><br />
+Class <a href="Gem/DependencyRemovalException.html" class="link">Gem::DependencyRemovalException</a><br />
+Class <a href="Gem/DocManager.html" class="link">Gem::DocManager</a><br />
+Class <a href="Gem/DocumentError.html" class="link">Gem::DocumentError</a><br />
+Class <a href="Gem/EndOfYAMLException.html" class="link">Gem::EndOfYAMLException</a><br />
+Class <a href="Gem/ErrorReason.html" class="link">Gem::ErrorReason</a><br />
+Class <a href="Gem/Exception.html" class="link">Gem::Exception</a><br />
+Class <a href="Gem/FakeFetcher.html" class="link">Gem::FakeFetcher</a><br />
+Class <a href="Gem/FileOperations.html" class="link">Gem::FileOperations</a><br />
+Class <a href="Gem/FilePermissionError.html" class="link">Gem::FilePermissionError</a><br />
+Class <a href="Gem/Format.html" class="link">Gem::Format</a><br />
+Class <a href="Gem/FormatException.html" class="link">Gem::FormatException</a><br />
+Class <a href="Gem/GemNotFoundException.html" class="link">Gem::GemNotFoundException</a><br />
+Class <a href="Gem/GemNotInHomeException.html" class="link">Gem::GemNotInHomeException</a><br />
+Class <a href="Gem/GemPathSearcher.html" class="link">Gem::GemPathSearcher</a><br />
+Class <a href="Gem/GemRunner.html" class="link">Gem::GemRunner</a><br />
+Class <a href="Gem/Indexer.html" class="link">Gem::Indexer</a><br />
+Class <a href="Gem/InstallError.html" class="link">Gem::InstallError</a><br />
+Class <a href="Gem/Installer.html" class="link">Gem::Installer</a><br />
+Class <a href="Gem/InstallerTestCase.html" class="link">Gem::InstallerTestCase</a><br />
+Class <a href="Gem/InvalidSpecificationException.html" class="link">Gem::InvalidSpecificationException</a><br />
+Class <a href="Gem/LoadError.html" class="link">Gem::LoadError</a><br />
+Class <a href="Gem/MockGemUi.html" class="link">Gem::MockGemUi</a><br />
+Class <a href="Gem/OldFormat.html" class="link">Gem::OldFormat</a><br />
+Class <a href="Gem/OperationNotSupportedError.html" class="link">Gem::OperationNotSupportedError</a><br />
+Class <a href="Gem/PackageTask.html" class="link">Gem::PackageTask</a><br />
+Class <a href="Gem/Platform.html" class="link">Gem::Platform</a><br />
+Class <a href="Gem/PlatformMismatch.html" class="link">Gem::PlatformMismatch</a><br />
+Class <a href="Gem/RemoteError.html" class="link">Gem::RemoteError</a><br />
+Class <a href="Gem/RemoteFetcher.html" class="link">Gem::RemoteFetcher</a><br />
+Class <a href="Gem/RemoteInstallationCancelled.html" class="link">Gem::RemoteInstallationCancelled</a><br />
+Class <a href="Gem/RemoteInstallationSkipped.html" class="link">Gem::RemoteInstallationSkipped</a><br />
+Class <a href="Gem/RemoteSourceException.html" class="link">Gem::RemoteSourceException</a><br />
+Class <a href="Gem/Requirement.html" class="link">Gem::Requirement</a><br />
+Class <a href="Gem/Server.html" class="link">Gem::Server</a><br />
+Class <a href="Gem/SilentUI.html" class="link">Gem::SilentUI</a><br />
+Class <a href="Gem/SourceIndex.html" class="link">Gem::SourceIndex</a><br />
+Class <a href="Gem/SpecFetcher.html" class="link">Gem::SpecFetcher</a><br />
+Class <a href="Gem/Specification.html" class="link">Gem::Specification</a><br />
+Class <a href="Gem/StreamUI.html" class="link">Gem::StreamUI</a><br />
+Class <a href="Gem/SystemExitException.html" class="link">Gem::SystemExitException</a><br />
+Class <a href="Gem/TestCase.html" class="link">Gem::TestCase</a><br />
+Class <a href="Gem/Uninstaller.html" class="link">Gem::Uninstaller</a><br />
+Class <a href="Gem/Validator.html" class="link">Gem::Validator</a><br />
+Class <a href="Gem/VerificationError.html" class="link">Gem::VerificationError</a><br />
+Class <a href="Gem/Version.html" class="link">Gem::Version</a><br />
+
+    </div>
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">QUICKLOADER_SUCKAGE</td>
+          <td>=</td>
+          <td class="context-item-value">RUBY_VERSION =~ /^1\.9\.1/</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">GEM_PRELUDE_SUCKAGE</td>
+          <td>=</td>
+          <td class="context-item-value">RUBY_VERSION =~ /^1\.9\.2/</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RubyGemsVersion</td>
+          <td>=</td>
+          <td class="context-item-value">VERSION = '1.5.2'</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">RbConfigPriorities</td>
+          <td>=</td>
+          <td class="context-item-value">%w[     EXEEXT RUBY_SO_NAME arch bindir datadir libdir ruby_install_name     ruby_version rubylibprefix sitedir sitelibdir vendordir vendorlibdir   ]</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ConfigMap</td>
+          <td>=</td>
+          <td class="context-item-value">Hash.new do |cm, key|       cm[key] = RbConfig::CONFIG[key.to_s]</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Configuration settings from ::RbConfig
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ssl_available</td>
+          <td class="context-item-value">&nbsp;[W]&nbsp;</td>
+          <td class="context-item-desc">
+Is SSL available?
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000066" class="method-detail">
+        <a name="M000066"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000066.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000066.html');return false;">
+          <span class="method-name">default_bindir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The default directory for binaries
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000062.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000062.html');return false;">
+          <span class="method-name">default_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Default home directory path to be used if an alternate value is not
+specified in the environment
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000065" class="method-detail">
+        <a name="M000065"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000065.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000065.html');return false;">
+          <span class="method-name">default_exec_format</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Deduce Ruby&#8216;s &#8212;program-prefix and &#8212;program-suffix from
+its install name
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000064" class="method-detail">
+        <a name="M000064"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000064.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000064.html');return false;">
+          <span class="method-name">default_path</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Default gem load path
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000061.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000061.html');return false;">
+          <span class="method-name">default_sources</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+An Array of the default sources that come with RubyGems
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000067" class="method-detail">
+        <a name="M000067"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000067.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000067.html');return false;">
+          <span class="method-name">default_system_source_cache_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The default system-wide source info cache directory
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000068" class="method-detail">
+        <a name="M000068"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000068.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000068.html');return false;">
+          <span class="method-name">default_user_source_cache_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The default user-specific source info cache directory
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000071" class="method-detail">
+        <a name="M000071"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000071.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000071.html');return false;">
+          <span class="method-name">ensure_ssl_available</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ensure that SSL is available. Throw an exception if it is not.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000075" class="method-detail">
+        <a name="M000075"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000075.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000075.html');return false;">
+          <span class="method-name">ruby=</span><span class="method-args">(ruby)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows setting path to ruby. This method is available when requiring
+&#8216;rubygems/test_case&#8216;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000069" class="method-detail">
+        <a name="M000069"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000069.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000069.html');return false;">
+          <span class="method-name">ruby_engine</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A wrapper around RUBY_ENGINE const that may not be defined
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000072" class="method-detail">
+        <a name="M000072"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000072.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000072.html');return false;">
+          <span class="method-name">searcher=</span><span class="method-args">(searcher)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows setting the gem path searcher. This method is available when
+requiring &#8216;rubygems/test_case&#8216;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000073" class="method-detail">
+        <a name="M000073"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000073.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000073.html');return false;">
+          <span class="method-name">source_index=</span><span class="method-args">(si)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows setting the default <a href="Gem/SourceIndex.html">SourceIndex</a>.
+This method is available when requiring &#8216;rubygems/test_case&#8216;
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000070" class="method-detail">
+        <a name="M000070"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000070.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000070.html');return false;">
+          <span class="method-name">ssl_available?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is SSL (used by the signing commands) available on this platform?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000063.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000063.html');return false;">
+          <span class="method-name">user_dir</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Path for gems in the user&#8216;s home directory
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000074" class="method-detail">
+        <a name="M000074"></a>
+
+        <div class="method-heading">
+          <a href="Gem.src/M000074.html" target="Code" class="method-signature"
+            onclick="popupCode('Gem.src/M000074.html');return false;">
+          <span class="method-name">win_platform=</span><span class="method-args">(val)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows toggling Windows behavior. This method is available when requiring
+&#8216;rubygems/test_case&#8216;
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

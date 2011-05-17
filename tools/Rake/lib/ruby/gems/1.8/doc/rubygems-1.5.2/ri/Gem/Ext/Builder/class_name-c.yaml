@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Ext::Builder::class_name
+is_singleton: true
+name: class_name
+params: ()
+visibility: public

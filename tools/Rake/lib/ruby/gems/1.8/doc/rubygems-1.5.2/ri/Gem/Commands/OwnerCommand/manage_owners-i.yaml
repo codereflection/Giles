@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Commands::OwnerCommand#manage_owners
+is_singleton: false
+name: manage_owners
+params: (method, name, owners)
+visibility: public

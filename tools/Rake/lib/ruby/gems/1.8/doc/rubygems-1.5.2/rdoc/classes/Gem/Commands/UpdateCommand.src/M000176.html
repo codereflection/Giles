@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute (Gem::Commands::UpdateCommand)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/commands/update_command.rb, line 54</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
+    <span class="ruby-ivar">@installer</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">DependencyInstaller</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-ivar">@updated</span>   = []
+
+    <span class="ruby-identifier">hig</span> = {}
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:system</span>] <span class="ruby-keyword kw">then</span>
+      <span class="ruby-identifier">update_rubygems</span>
+      <span class="ruby-keyword kw">return</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">say</span> <span class="ruby-value str">&quot;Updating installed gems&quot;</span>
+
+      <span class="ruby-identifier">hig</span> = {} <span class="ruby-comment cmt"># highest installed gems</span>
+
+      <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">source_index</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">hig</span>[<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">hig</span>[<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>].<span class="ruby-identifier">version</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">version</span> <span class="ruby-keyword kw">then</span>
+          <span class="ruby-identifier">hig</span>[<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">spec</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">gems_to_update</span> = <span class="ruby-identifier">which_to_update</span> <span class="ruby-identifier">hig</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:args</span>]
+
+    <span class="ruby-identifier">updated</span> = <span class="ruby-identifier">update_gems</span> <span class="ruby-identifier">gems_to_update</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">updated</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">then</span>
+      <span class="ruby-identifier">say</span> <span class="ruby-value str">&quot;Nothing to update&quot;</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;Gems updated: #{updated.map { |spec| spec.name }.join ', '}&quot;</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:generate_ri</span>] <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">updated</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gem</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">DocManager</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gem</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:rdoc_args</span>]).<span class="ruby-identifier">generate_ri</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">DocManager</span>.<span class="ruby-identifier">update_ri_cache</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:generate_rdoc</span>] <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">updated</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gem</span><span class="ruby-operator">|</span>
+          <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">DocManager</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gem</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:rdoc_args</span>]).<span class="ruby-identifier">generate_rdoc</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

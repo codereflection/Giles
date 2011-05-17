@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Deduce Ruby's --program-prefix and --program-suffix from its install name
+full_name: Gem::default_exec_format
+is_singleton: true
+name: default_exec_format
+params: ()
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#to_oct
+is_singleton: false
+name: to_oct
+params: (n, pad_size)
+visibility: public

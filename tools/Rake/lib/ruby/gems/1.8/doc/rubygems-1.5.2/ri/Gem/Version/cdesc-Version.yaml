@@ -1,0 +1,193 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: A string representation of this Version.
+  name: version
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: correct?
+- !ruby/object:RI::MethodSummary 
+  name: create
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The Version class processes string versions into comparable values. A version string should normally be a series of numbers separated by periods. Each part (digits separated by periods) is considered its own number, and these are used for sorting. So for instance, 3.10 sorts higher than 3.2 because ten is greater than two.
+- !ruby/struct:SM::Flow::P 
+  body: If any part contains letters (currently only a-z are supported) then that version is considered prerelease. Versions with a prerelease part in the Nth part sort less than versions with N-1 parts. Prerelease parts are sorted alphabetically using the normal Ruby string sorting rules. If a prerelease part contains both letters and numbers, it will be broken into multiple parts to provide expected sort behavior (1.0.a10 becomes 1.0.a.10, and is greater than 1.0.a9).
+- !ruby/struct:SM::Flow::P 
+  body: "Prereleases sort between real releases (newest to oldest):"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "1."
+    body: "1.0"
+  - !ruby/struct:SM::Flow::LI 
+    label: "2."
+    body: 1.0.b1
+  - !ruby/struct:SM::Flow::LI 
+    label: "3."
+    body: 1.0.a.2
+  - !ruby/struct:SM::Flow::LI 
+    label: "4."
+    body: "0.9"
+  type: :NUMBER
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: How Software Changes
+- !ruby/struct:SM::Flow::P 
+  body: Users expect to be able to specify a version constraint that gives them some reasonable expectation that new versions of a library will work with their software if the version constraint is true, and not work with their software if the version constraint is false. In other words, the perfect system will accept all compatible versions of the library and reject all incompatible versions.
+- !ruby/struct:SM::Flow::P 
+  body: Libraries change in 3 ways (well, more than 3, but stay focused here!).
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "1."
+    body: The change may be an implementation detail only and have no effect on the client software.
+  - !ruby/struct:SM::Flow::LI 
+    label: "2."
+    body: The change may add new features, but do so in a way that client software written to an earlier version is still compatible.
+  - !ruby/struct:SM::Flow::LI 
+    label: "3."
+    body: The change may change the public interface of the library in such a way that old software is no longer compatible.
+  type: :NUMBER
+- !ruby/struct:SM::Flow::P 
+  body: Some examples are appropriate at this point. Suppose I have a Stack class that supports a <tt>push</tt> and a <tt>pop</tt> method.
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: "Examples of Category 1 changes:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Switch from an array based implementation to a linked-list based implementation.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Provide an automatic (and transparent) backing store for large stacks.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: "Examples of Category 2 changes might be:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Add a <tt>depth</tt> method to return the current depth of the stack.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Add a <tt>top</tt> method that returns the current top of stack (without changing the stack).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Change <tt>push</tt> so that it returns the item pushed (previously it had no usable return value).
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: "Examples of Category 3 changes might be:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Changes <tt>pop</tt> so that it no longer returns a value (you must use <tt>top</tt> to get the top of the stack).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Rename the methods to <tt>push_item</tt> and <tt>pop_item</tt>.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: RubyGems Rational Versioning
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Versions shall be represented by three non-negative integers, separated by periods (e.g. 3.1.4). The first integers is the &quot;major&quot; version number, the second integer is the &quot;minor&quot; version number, and the third integer is the &quot;build&quot; number.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: A category 1 change (implementation detail) will increment the build number.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: A category 2 change (backwards compatible) will increment the minor version number and reset the build number.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: A category 3 change (incompatible) will increment the major build number and reset the minor and build numbers.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Any &quot;public&quot; release of a gem should have a different version. Normally that means incrementing the build number. This means a developer can generate builds all day long for himself, but as soon as he/she makes a public release, the version must be updated.
+  type: :BULLET
+- !ruby/struct:SM::Flow::H 
+  level: 3
+  text: Examples
+- !ruby/struct:SM::Flow::P 
+  body: Let's work through a project lifecycle using our Stack example from above.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 0.0.1:"
+    body: The initial Stack class is release.
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 0.0.2:"
+    body: Switched to a linked=list implementation because it is cooler.
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 0.1.0:"
+    body: Added a <tt>depth</tt> method.
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 1.0.0:"
+    body: Added <tt>top</tt> and made <tt>pop</tt> return nil (<tt>pop</tt> used to return the old top item).
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 1.1.0:"
+    body: <tt>push</tt> now returns the value pushed (it used it return nil).
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 1.1.1:"
+    body: Fixed a bug in the linked list implementation.
+  - !ruby/struct:SM::Flow::LI 
+    label: "Version 1.1.2:"
+    body: Fixed a bug introduced in the last fix.
+  type: :NOTE
+- !ruby/struct:SM::Flow::P 
+  body: "Client A needs a stack with basic push/pop capability. He writes to the original interface (no <tt>top</tt>), so his version constraint looks like:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  gem 'stack', '~&gt; 0.0'\n"
+- !ruby/struct:SM::Flow::P 
+  body: Essentially, any version is OK with Client A. An incompatible change to the library will cause him grief, but he is willing to take the chance (we call Client A optimistic).
+- !ruby/struct:SM::Flow::P 
+  body: "Client B is just like Client A except for two things: (1) He uses the <tt>depth</tt> method and (2) he is worried about future incompatibilities, so he writes his version constraint like this:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  gem 'stack', '~&gt; 0.1'\n"
+- !ruby/struct:SM::Flow::P 
+  body: The <tt>depth</tt> method was introduced in version 0.1.0, so that version or anything later is fine, as long as the version stays below version 1.0 where incompatibilities are introduced. We call Client B pessimistic because he is worried about incompatible future changes (it is OK to be pessimistic!).
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: "Preventing Version Catastrophe:"
+- !ruby/struct:SM::Flow::P 
+  body: "From: http://blog.zenspider.com/2008/10/rubygems-howto-preventing-cata.html"
+- !ruby/struct:SM::Flow::P 
+  body: "Let's say you're depending on the fnord gem version 2.y.z. If you specify your dependency as &quot;&gt;= 2.0.0&quot; then, you're good, right? What happens if fnord 3.0 comes out and it isn't backwards compatible with 2.y.z? Your stuff will break as a result of using &quot;&gt;=&quot;. The better route is to specify your dependency with a &quot;spermy&quot; version specifier. They're a tad confusing, so here is how the dependency specifiers work:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Specification From  ... To (exclusive)\n  &quot;&gt;= 3.0&quot;      3.0   ... &amp;infin;\n  &quot;~&gt; 3.0&quot;      3.0   ... 4.0\n  &quot;~&gt; 3.0.0&quot;    3.0.0 ... 3.1\n  &quot;~&gt; 3.5&quot;      3.5   ... 4.0\n  &quot;~&gt; 3.5.0&quot;    3.5.0 ... 3.6\n"
+constants: []
+
+full_name: Gem::Version
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Comparable
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: <=>
+- !ruby/object:RI::MethodSummary 
+  name: bump
+- !ruby/object:RI::MethodSummary 
+  name: eql?
+- !ruby/object:RI::MethodSummary 
+  name: marshal_dump
+- !ruby/object:RI::MethodSummary 
+  name: marshal_load
+- !ruby/object:RI::MethodSummary 
+  name: prerelease?
+- !ruby/object:RI::MethodSummary 
+  name: release
+- !ruby/object:RI::MethodSummary 
+  name: spermy_recommendation
+name: Version
+superclass: Object

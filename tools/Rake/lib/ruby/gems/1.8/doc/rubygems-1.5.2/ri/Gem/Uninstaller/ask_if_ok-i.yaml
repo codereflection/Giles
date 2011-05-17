@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Uninstaller#ask_if_ok
+is_singleton: false
+name: ask_if_ok
+params: (spec)
+visibility: public

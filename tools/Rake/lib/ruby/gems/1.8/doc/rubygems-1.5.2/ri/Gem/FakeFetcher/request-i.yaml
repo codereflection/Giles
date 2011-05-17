@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: "@last_request if block_given?"
+comment: 
+full_name: Gem::FakeFetcher#request
+is_singleton: false
+name: request
+params: (uri, request_class, last_modified = nil) {|@last_request if block_given?| ...}
+visibility: public

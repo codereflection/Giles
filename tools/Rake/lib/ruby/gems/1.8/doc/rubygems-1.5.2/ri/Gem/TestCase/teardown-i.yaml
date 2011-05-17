@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "#teardown restores the process to its original state and removes the tempdir unless the <tt>KEEP_FILES</tt> environment variable was set."
+full_name: Gem::TestCase#teardown
+is_singleton: false
+name: teardown
+params: ()
+visibility: public

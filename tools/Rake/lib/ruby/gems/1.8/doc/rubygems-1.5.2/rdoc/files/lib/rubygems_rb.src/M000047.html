@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>suffixes (lib/rubygems.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems.rb, line 1002</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">suffixes</span>
+    <span class="ruby-ivar">@suffixes</span> <span class="ruby-operator">||=</span> [<span class="ruby-value str">''</span>,
+                   <span class="ruby-value str">'.rb'</span>,
+                   <span class="ruby-operator">*</span><span class="ruby-node">%w(DLEXT DLEXT2)</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+                     <span class="ruby-identifier">val</span> = <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-identifier">key</span>]
+                     <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">val</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">empty?</span>
+                     <span class="ruby-node">&quot;.#{val}&quot;</span>
+                   }
+                  ].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

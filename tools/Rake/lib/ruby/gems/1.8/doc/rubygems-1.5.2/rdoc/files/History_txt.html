@@ -1,0 +1,2152 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: History.txt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>History.txt</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>History.txt
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue May 17 08:27:15 -0700 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+﻿=== 1.5.2 / 2011-02-10
+</p>
+<p>
+NOTE: RubyGems 1.5.0 and 1.5.1 have a broken <tt>gem update
+&#8212;system</tt>.
+</p>
+<p>
+To upgrade you&#8216;ll need to use the manual upgrade recipe. Using
+sudo/su as appropriate:
+</p>
+<pre>
+  $ gem install rubygems-update
+  $ update_rubygems
+</pre>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>Fixed <tt>gem update &#8212;system</tt>. RubyGems can now update itself
+again.
+
+</li>
+</ul>
+<h3>1.5.1 / 2011-02-09</h3>
+<p>
+Minor Enhancement:
+</p>
+<ul>
+<li>Added ability to do gem update &#8212;system X.Y.Z.
+
+</li>
+</ul>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>Scrub !!null YAML from 1.9.2 (install and build).
+
+</li>
+<li>Added missing requires for user_interaction.
+
+</li>
+<li>Wrote option processing tests for gem update.
+
+</li>
+<li>Updated upgrading doco for new gem update &#8212;system option.
+
+</li>
+<li>Fixed SilentUI for cygwin; try /dev/null first then fall back to NUL.
+
+</li>
+<li>RubyGems now enforces ruby 1.8.7 or newer.
+
+</li>
+</ul>
+<h3>1.5.0 / 2011-01-31</h3>
+<p>
+Major Enhancements:
+</p>
+<ul>
+<li>Finally fixed all known 1.9.x issues. Upgrading is now possible!
+
+</li>
+<li>Merged huge 1.3.7/ruby-core changes to master.
+
+</li>
+</ul>
+<p>
+Minor Enhancements:
+</p>
+<ul>
+<li>Added UPGRADING.rdoc to help deal with 1.9 issues.
+
+</li>
+<li><a href="../classes/Gem/Format.html">Gem::Format</a> now gives better
+errors for corrupt gem files and includes paths
+
+</li>
+<li>Pre-install hooks can now abort gem installation by returning false
+
+</li>
+<li>Move shareable TestCase classes to lib/ to help plugin authors with tests.
+
+</li>
+<li>Add post-build hooks that can cancel the gem install
+
+</li>
+<li>Always require custom_require now that require_gem is gone
+
+</li>
+<li>Added GemInstaller accessors for @options so plugins can reference them.
+
+</li>
+<li>Optimized Gem.find_files. ~10% faster than 1.4.2. ~40% faster than ruby
+1.9.
+
+</li>
+<li><a href="../classes/Gem/SilentUI.html">Gem::SilentUI</a> now behaves like
+<a href="../classes/Gem/StreamUI.html">Gem::StreamUI</a> for asking
+questions. Patch by Erik Hollensbe.
+
+</li>
+</ul>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>`gem update` was implicitly doing &#8212;system.
+
+</li>
+<li>1.9.3: Fixed encoding errors causing gem installs to die during rdoc phase.
+
+</li>
+<li>Add RubyForge URL to README. Closes 28825
+
+</li>
+<li>1.9.3: Use chdir {} when building extensions to prevent warnings. Fixes
+4337
+
+</li>
+<li>1.9.2: Fix circular require warning.
+
+</li>
+<li>Make requiring openssl even lazier at request of NaHi
+
+</li>
+<li>`gem unpack` will now download the gem if it is not in the cache. Patch by
+Erik Hollensbe.
+
+</li>
+<li>rubygems-update lists its development dependencies again
+
+</li>
+</ul>
+<h3>1.4.2 / 2011-01-06</h3>
+<p>
+Bug fixes:
+</p>
+<ul>
+<li>Gem::Versions: &quot;1.b1&quot; != &quot;1.b.1&quot;, but &quot;1.b1&quot;
+eql? &quot;1.b.1&quot;. Fixes gem indexing.
+
+</li>
+<li>Fixed Gem.find_files.
+
+</li>
+<li>Removed otherwise unused find_all_dot_rb. Only 6 days old and hella buggy.
+
+</li>
+</ul>
+<h3>1.4.1 / 2010-12-31</h3>
+<p>
+Since apparently nobody reads my emails, blog posts or the README:
+</p>
+<p>
+DO NOT UPDATE RUBYGEMS ON RUBY 1.9! See UPGRADING.rdoc for details.
+</p>
+<p>
+Bug fix:
+</p>
+<ul>
+<li>Specification#load was untainting a frozen string (via `gem build *.spec`)
+
+</li>
+</ul>
+<h3>1.4.0 / 2010-12-30</h3>
+<p>
+NOTE: In order to better maintain rubygems and to get it in sync with the
+world (eg, 1.9&#8216;s 1.3.7 is different from our 1.3.7), rubygems is
+switching to a 4-6 week release schedule. This release is the precursor to
+that process and as such may be a bit on the wild side! You have been
+warned!
+</p>
+<p>
+NOTE: We&#8216;ve switched to git/github. See README.rdoc for details.
+</p>
+<p>
+New features:
+</p>
+<ul>
+<li>Added &#8212;launch option to `gem server`. (gthiesfeld)
+
+</li>
+<li>Added fuzzy name matching on install failures. (gstark/presidentbeef)
+
+</li>
+<li>Allow searching w/ file extensions: gem which fileutils.rb
+
+</li>
+<li>Progress indicator during download (Ryan Melton)
+
+</li>
+<li>Speed up <a href="../classes/Gem/Version.html">Gem::Version</a>#&lt;=&gt;
+by 2-3x in common cases. (raggi)
+
+</li>
+<li>&#8212;source is now additive with your current sources. Use
+&#8212;clear-sources first to maintain previous behavior.
+
+</li>
+</ul>
+<p>
+Bug fixes:
+</p>
+<ul>
+<li>Dependency &quot;~&gt;&quot;s now respect lower-bound prerelease versions.
+
+</li>
+<li>Ensure the gem directories exist on download.
+
+</li>
+<li>Expand Windows user home candidates for Ruby 1.8. Bug 28371 &amp; 28494
+
+</li>
+<li>Fix find_files to order by version.
+
+</li>
+<li>Fix ivar typo. [Josh Peek]
+
+</li>
+<li>Normalized requires and made many of them lazy. Do not depend on rubygems
+to require stdlib stuff for you. (raggi/tmm1)
+
+</li>
+<li>Treat 1.0.a10 like 1.0.a.10 for sorting, etc. Fixes 27903. (dchelimsky)
+
+</li>
+</ul>
+<h3>1.3.7 / 2010-05-13</h3>
+<p>
+NOTE:
+</p>
+<p>
+<a href="http://rubygems.org">rubygems.org</a> is now the default source
+for downloading gems.
+</p>
+<p>
+You may have sources set via ~/.gemrc, so you should replace <a
+href="http://gems.rubyforge.org">gems.rubyforge.org</a> with <a
+href="http://rubygems.org">rubygems.org</a>
+</p>
+<p>
+<a href="http://gems.rubyforge.org">gems.rubyforge.org</a> will continue to
+work for the forseeable future.
+</p>
+<p>
+New features:
+</p>
+<ul>
+<li>`gem` commands
+
+<ul>
+<li>`gem install` and `gem fetch` now report alternate platforms when a
+matching one couldn&#8216;t be found.
+
+</li>
+<li>`gem contents` &#8212;prefix is now the default as specified in
+&#8212;help. Bug 27211 by Mamoru Tasaka.
+
+</li>
+<li>`gem fetch` can fetch of old versions again. Bug 27960 by Eric Hankins.
+
+</li>
+<li>`gem query` and friends output now lists platforms. Bug 27856 by Greg
+Hazel.
+
+</li>
+<li>`gem server` now allows specification of multiple gem dirs for
+documentation. Bug 27573 by Yuki Sonoda.
+
+</li>
+<li>`gem unpack` can unpack gems again. Bug 27872 by Timothy Jones.
+
+</li>
+<li>`gem unpack` now unpacks remote gems.
+
+</li>
+<li>&#8212;user-install is no longer the default. If you really liked it, see
+<a href="../classes/Gem/ConfigFile.html">Gem::ConfigFile</a> to learn how
+to set it by default. (This change was made in 1.3.6)
+
+</li>
+</ul>
+</li>
+<li>RubyGems now has platform support for IronRuby. Patch 27951 by Will Green.
+
+</li>
+</ul>
+<p>
+Bug fixes:
+</p>
+<ul>
+<li>Require rubygems/custom_require if &#8212;disable-gem was set. Bug 27700 by
+Roger Pack.
+
+</li>
+<li>RubyGems now protects against exceptions being raised by plugins.
+
+</li>
+<li>rubygems/builder now requires user_interaction. Ruby Bug 1040 by Phillip
+Toland.
+
+</li>
+<li><a href="../classes/Gem/Dependency.html">Gem::Dependency</a> support
+version_requirements= with a warning. Fix for old Rails versions. Bug 27868
+by Wei Jen Lu.
+
+</li>
+<li><a href="../classes/Gem/PackageTask.html">Gem::PackageTask</a> depends on
+the package dir like the other rake package tasks so dependencies can be
+hooked up correctly.
+
+</li>
+</ul>
+<h3>1.3.6 / 2010-02-17</h3>
+<p>
+New features:
+</p>
+<ul>
+<li>`gem` commands
+
+<ul>
+<li>Added `gem push` and `gem owner` for interacting with modern/Gemcutter
+sources
+
+</li>
+<li>`gem dep` now supports &#8212;prerelease.
+
+</li>
+<li>`gem fetch` now supports &#8212;prerelease.
+
+</li>
+<li>`gem server` now supports &#8212;bind. Patch 27357 by Bruno Michel.
+
+</li>
+<li>`gem rdoc` no longer overwrites built documentation. Use &#8212;overwrite
+force rebuilding. Patch 25982 by Akinori MUSHA.
+
+</li>
+</ul>
+</li>
+<li>Captial letters are now allowed in prerelease versions.
+
+</li>
+</ul>
+<p>
+Bug fixes:
+</p>
+<ul>
+<li>Development deps are no longer added to rubygems-update gem so older
+versions can update sucessfully.
+
+</li>
+<li>Installer bugs:
+
+<ul>
+<li>Prerelease gems can now depend on non-prerelease gems.
+
+</li>
+<li>Development dependencies are ignored unless explicitly needed. Bug 27608 by
+Roger Pack.
+
+</li>
+</ul>
+</li>
+<li>`gem` commands
+
+<ul>
+<li>`gem which` now fails if no paths were found. Adapted patch 27681 by Caio
+Chassot.
+
+</li>
+<li>`gem server` no longer has invalid markup. Bug 27045 by Eric Young.
+
+</li>
+<li>`gem list` and friends show both prerelease and regular gems when
+&#8212;prerelease &#8212;all is given
+
+</li>
+</ul>
+</li>
+<li><a href="../classes/Gem/Format.html">Gem::Format</a> no longer crashes on
+empty files. Bug 27292 by Ian Ragsdale.
+
+</li>
+<li><a href="../classes/Gem/GemPathSearcher.html">Gem::GemPathSearcher</a>
+handles nil require_paths. Patch 27334 by Roger Pack.
+
+</li>
+<li><a href="../classes/Gem/RemoteFetcher.html">Gem::RemoteFetcher</a> no
+longer copies the file if it is where we want it. Patch 27409 by Jakub
+Šťastný.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>lib/rubygems/timer.rb has been removed.
+
+</li>
+<li>Gem::Dependency#version_requirements is deprecated and will be removed on
+or after August 2010.
+
+</li>
+<li>Bulk index update is no longer supported.
+
+</li>
+<li>Gem::manage_gems was removed in 1.3.3.
+
+</li>
+<li>Time::today was removed in 1.3.3.
+
+</li>
+</ul>
+<h3>1.3.5 / 2009-07-21</h3>
+<p>
+Bug fixes:
+</p>
+<ul>
+<li>Fix use of prerelease gems.
+
+</li>
+<li>Gem.bin_path no longer escapes path with spaces. Bug 25935 and 26458.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Bulk index update is no longer supported (the code currently remains, but
+not the tests)
+
+</li>
+<li>Gem::manage_gems was removed in 1.3.3.
+
+</li>
+<li>Time::today was removed in 1.3.3.
+
+</li>
+</ul>
+<h3>1.3.4 / 2009-05-03</h3>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>Fixed various warnings
+
+</li>
+<li>Gem::ruby_version works correctly for 1.8 branch and trunk
+
+</li>
+<li>Prerelease gems now show up in `gem list` and can be used
+
+</li>
+<li>Fixed option name for `gem setup &#8212;format-executable`
+
+</li>
+<li>RubyGems now matches Ruby &gt; 1.9.1 gem paths
+
+</li>
+<li>Gem::RemoteFetcher#download now works for explicit Windows paths across
+drives. Bug 25882 by Lars Christensen
+
+</li>
+<li>Fix typo in Gem::Requirement#parse. Bug 26000 by Mike Gunderloy.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Bulk index update is no longer supported (the code currently remains, but
+not the tests)
+
+</li>
+<li>Gem::manage_gems was removed in 1.3.3.
+
+</li>
+<li>Time::today was removed in 1.3.3.
+
+</li>
+</ul>
+<h3>1.3.3 / 2009-05-04</h3>
+<p>
+New Features:
+</p>
+<ul>
+<li>`gem server` allows port names (from /etc/services) with &#8212;port.
+
+</li>
+<li>`gem server` now has search that jumps to RDoc. Patch 22959 by Vladimir
+Dobriakov.
+
+</li>
+<li>`gem spec` can retrieve single fields from a spec (like `gem spec rake
+authors`).
+
+</li>
+<li>Gem::Specification#has_rdoc= is deprecated and ignored (defaults to true)
+
+</li>
+<li>RDoc is now generated regardless of Gem::Specification#has_rdoc?
+
+</li>
+</ul>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>`gem clean` now cleans up &#8212;user-install gems. Bug 25516 by Brett
+Eisenberg.
+
+</li>
+<li>Gem.bin_path now escapes paths with spaces.
+
+</li>
+<li>Rake extension builder uses explicit correctly loads rubygems when invoking
+rake.
+
+</li>
+<li>Prerelease versions now match &quot;~&gt;&quot; correctly. Patch 25759 by
+Yossef Mendelssohn.
+
+</li>
+<li>Check bindir for executables, not root when validating. Bug reported by
+David Chelimsky.
+
+</li>
+<li>Remove Time.today, no way to override it before RubyGems loads. Bug 25564
+by Emanuele Vicentini
+
+</li>
+<li>Raise <a href="../classes/Gem/Exception.html">Gem::Exception</a> for
+installation_path when not installed. Bug 25741 by Daniel Berger.
+
+</li>
+<li>Don&#8216;t raise in Gem::Specification#validate when homepage is nil. Bug
+25677 by Mike Burrows.
+
+</li>
+<li>Uninstall executables from the correct directory. Bug 25555 by Brett
+Eisenberg.
+
+</li>
+<li>Raise <a href="../classes/Gem/LoadError.html">Gem::LoadError</a> if
+Kernel#gem fails due to previously-loaded gem. Bug reported by Alf Mikula.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Gem::manage_gems has been removed.
+
+</li>
+<li>Time::today has been removed early. There was no way to make it warn and be
+easy to override with user code.
+
+</li>
+</ul>
+<h3>1.3.2 / 2009-04-15</h3>
+<p>
+Select New Features:
+</p>
+<ul>
+<li>RubyGems now loads plugins from rubygems_plugin.rb in installed gems. This
+can be used to add commands (See <a
+href="../classes/Gem/CommandManager.html">Gem::CommandManager</a>) or add
+install/uninstall hooks (See <a
+href="../classes/Gem/Installer.html">Gem::Installer</a> and <a
+href="../classes/Gem/Uninstaller.html">Gem::Uninstaller</a>).
+
+</li>
+<li><a href="../classes/Gem/Version.html">Gem::Version</a> now understands
+prerelease versions using letters. (eg. &#8216;1.2.1.b&#8217;) Thanks to
+Josh Susser, Alex Vollmer and Phil Hagelberg.
+
+</li>
+<li>RubyGems now includes a Rake task for creating gems which replaces
+rake&#8216;s Rake::GemPackageTask. See <a
+href="../classes/Gem/PackageTask.html">Gem::PackageTask</a>.
+
+</li>
+<li>Gem::find_files now returns paths in $LOAD_PATH.
+
+</li>
+<li>Added Gem::promote_load_path for use with Gem::find_files
+
+</li>
+<li>Added Gem::bin_path to make finding executables easier. Patch 24114 by
+James Tucker.
+
+</li>
+<li>Various improvements to build arguments for installing gems.
+
+</li>
+<li>`gem contents` added &#8212;all and &#8212;no-prefix.
+
+</li>
+<li><a href="../classes/Gem/Specification.html">Gem::Specification</a>
+
+<ul>
+<li>validate strips directories and errors on not-files.
+
+</li>
+<li>description no longer removes newlines.
+
+</li>
+<li>name must be a String.
+
+</li>
+<li>FIXME and TODO are no longer allowed in various fields.
+
+</li>
+<li>Added support for a license attribute. Feature 11041 (partial).
+
+</li>
+<li>Removed Gem::Specification::list, too much process growth. Bug 23668 by
+Steve Purcell.
+
+</li>
+</ul>
+</li>
+<li>`gem generate_index`
+
+<ul>
+<li>Can now generate an RSS feed.
+
+</li>
+<li>Modern indicies can now be updated incrementally.
+
+</li>
+<li>Legacy indicies can be updated separately from modern.
+
+</li>
+</ul>
+</li>
+</ul>
+<p>
+Select Bugs Fixed:
+</p>
+<ul>
+<li>Better gem activation error message. Patch 23082.
+
+</li>
+<li><a href="../classes/Kernel.html">Kernel</a> methods are now private. Patch
+20801 by James M. Lawrence.
+
+</li>
+<li>Fixed various usability issues with `gem check`.
+
+</li>
+<li>`gem update` now rescues InstallError and continues. Bug 19268 by Gabriel
+Wilkins.
+
+</li>
+<li>Allow &#8216;https&#8217;, &#8216;file&#8217; as a valid schemes for
+&#8212;source. Patch 22485.
+
+</li>
+<li>`gem install`
+
+<ul>
+<li>Now removes existing path before installing. Bug 22837.
+
+</li>
+<li>Uses Gem::bin_path in executable stubs to work around Kernel#load bug in
+1.9.
+
+</li>
+<li>Correctly handle build args (after &#8212;) via the API. Bug 23210.
+
+</li>
+</ul>
+</li>
+<li>&#8212;user-install
+
+<ul>
+<li>`gem install &#8212;no-user-install` now works. Patch 23573 by Alf Mikula.
+
+</li>
+<li>`gem uninstall` can now uninstall from ~/.gem. Bug 23760 by Roger Pack.
+
+</li>
+</ul>
+</li>
+<li>setup.rb
+
+<ul>
+<li>Clarify RubyGems RDoc installation location. Bug 22656 by Gian Marco
+Gherardi.
+
+</li>
+<li>Allow setup to run from read-only location. Patch 21862 by Luis Herrera.
+
+</li>
+<li>Fixed overwriting ruby executable when BASERUBY was not set. Bug 24958 by
+Michael Soulier.
+
+</li>
+<li>Ensure we&#8216;re in a RubyGems dir when installing.
+
+</li>
+<li>Deal with extraneous quotation mark when autogenerating .bat file on MS
+Windows. Bug 22712.
+
+</li>
+</ul>
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Gem::manage_gems has been removed.
+
+</li>
+<li>Time::today will be removed in RubyGems 1.4.
+
+</li>
+</ul>
+<p>
+Special thanks to Chad Wooley for backwards compatibility testing and Luis
+Lavena and Daniel Berger for continuing windows support.
+</p>
+<h3>1.3.1 / 2008-10-28</h3>
+<p>
+Bugs fixed:
+</p>
+<ul>
+<li>Disregard ownership of ~ under Windows while creating ~/.gem. Fixes issues
+related to no uid support under Windows.
+
+</li>
+<li>Fix requires for Gem::inflate, Gem::deflate, etc.
+
+</li>
+<li>Make Gem.dir respect :gemhome value from config. (Note: this feature may be
+removed since it is hard to implement on 1.9.)
+
+</li>
+<li><a href="../classes/Kernel.html">Kernel</a> methods are now private. Patch
+20801 by James M. Lawrence.
+
+</li>
+<li>Gem::location_of_caller now behaves on Windows. Patch by Daniel Berger.
+
+</li>
+<li>Silence PATH warning.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Gem::manage_gems will be removed on or after March 2009.
+
+</li>
+</ul>
+<h3>1.3.0 / 2008-09-25</h3>
+<p>
+New features:
+</p>
+<ul>
+<li>RubyGems doesn&#8216;t print LOCAL/REMOTE titles for `gem query` and
+friends if stdout is not a TTY, except with &#8212;both.
+
+</li>
+<li>Added Gem.find_files, allows a gem to discover features provided by other
+gems.
+
+</li>
+<li>Added pre/post (un)install hooks for packagers of RubyGems. (Not for gems
+themselves).
+
+</li>
+<li>RubyGems now installs gems into ~/.gem if GEM_HOME is not writable. Use
+&#8212;no-user-install command-line switch to disable this behavior.
+
+</li>
+<li>Fetching specs for update now uses If-Modified-Since requests.
+
+</li>
+<li>RubyGems now updates the ri cache when the rdoc gem is installed and
+documentation is generated.
+
+</li>
+</ul>
+<p>
+Deprecation Notices:
+</p>
+<ul>
+<li>Gem::manage_gems now warns when called. It will be removed on or after
+March 2009.
+
+</li>
+</ul>
+<p>
+Bugs Fixed:
+</p>
+<ul>
+<li>RubyGems 1.3.0+ now updates when no previous rubygems-update is installed.
+Bug 20775 by Hemant Kumar.
+
+</li>
+<li>RubyGems now uses the regexp we already have for `gem list
+&#8212;installed`. Bug 20876 by Nick Hoffman.
+
+</li>
+<li>Platform is now forced to Gem::Platform::RUBY when nil or blank in the
+indexer. Fixes various uninstallable gems.
+
+</li>
+<li>Handle EINVAL on seek. Based on patch in bug 20791 by Neil Wilson.
+
+</li>
+<li>Fix HTTPS support. Patch 21072 by Alex Arnell.
+
+</li>
+<li>RubyGems now loads all cache files even if latest has been loaded. Bug
+20776 by Uwe Kubosch.
+
+</li>
+<li>RubyGems checks for support of development dependencies for to_ruby. Bug
+20778 by Evan Weaver.
+
+</li>
+<li>Now specifications from the future can be loaded.
+
+</li>
+<li>Binary script uninstallation fixed. Bug 21234 by Neil Wilson.
+
+</li>
+<li>Uninstallation with -i fixed. Bug 20812 by John Clayton.
+
+</li>
+<li>Gem::Uninstaller#remove_all now calls Gem::Uninstaller#uninstall_gem so
+hooks get called. Bug 21242 by Neil Wilson.
+
+</li>
+<li>Gem.ruby now properly escaped on windows. Fixes problem with extension
+compilation.
+
+</li>
+<li>`gem lock &#8212;strict` works again. Patch 21814 by Sven Engelhardt.
+
+</li>
+<li>Platform detection for Solaris was improved. Patch 21911 by Bob Remeika.
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>`gem help install` now describes <em>version</em> argument to executable
+stubs
+
+</li>
+<li>`gem help environment` describes environment variables and ~/.gemrc and
+/etc/gemrc
+
+</li>
+<li>On-disk gemspecs are now read in UTF-8 and written with a UTF-8 magic
+comment
+
+</li>
+<li>Rakefile
+
+<ul>
+<li>If the SETUP_OPTIONS environment variable is set, pass its contents as
+arguments to setup.rb
+
+</li>
+</ul>
+</li>
+<li>lib/rubygems/platform.rb
+
+<ul>
+<li>Remove deprecated constant warnings and really deprecate them. (WIN32,
+etc).
+
+</li>
+</ul>
+</li>
+<li>lib/rubygems/remote_fetcher.rb
+
+<ul>
+<li>Now uses ~/.gem/cache if the cache dir in GEM_HOME is not writable.
+
+</li>
+</ul>
+</li>
+<li>lib/rubygems/source_index.rb
+
+<ul>
+<li>Deprecate options to &#8216;search&#8217; other than <a
+href="../classes/Gem/Dependency.html">Gem::Dependency</a> instances and
+issue warning until November 2008.
+
+</li>
+</ul>
+</li>
+<li>setup.rb
+
+<ul>
+<li>&#8212;destdir folder structure now built using Pathname, so it works for
+Windows platforms.
+
+</li>
+</ul>
+</li>
+<li>test/*
+
+<ul>
+<li>Fixes to run tests when under test/rubygems/. Patch by Yusuke ENDOH
+[ruby-core:17353].
+
+</li>
+</ul>
+</li>
+<li>test/test_ext_configure_builder.rb
+
+<ul>
+<li>Locale-free patch by Yusuke Endoh [ruby-core:17444].
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.2.0 / 2008-06-21</h3>
+<p>
+New features:
+</p>
+<ul>
+<li>RubyGems no longer performs bulk updates and instead only fetches the
+gemspec files it needs. Alternate sources will need to upgrade to RubyGems
+1.2 to allow RubyGems to take advantage of the new metadata updater. If a
+pre 1.2 remote source is in the sources list, RubyGems will revert to the
+bulk update code for compatibility.
+
+</li>
+<li>RubyGems now has runtime and development dependency types. Use
+add_development_dependency and add_runtime_dependency. All typeless
+dependencies are considered to be runtime dependencies.
+
+</li>
+<li>RubyGems will now require rubygems/defaults/operating_system.rb and
+rubygems/defaults/#{RBX_ENGINE}.rb if they exist. This allows packagers and
+ruby implementers to add custom behavior to RubyGems via these files. (If
+the RubyGems API is insufficient, please suggest improvements via the
+RubyGems list.)
+
+</li>
+<li>/etc/gemrc (and windows equivalent) for global settings
+
+</li>
+<li>setup.rb now handles &#8212;vendor and &#8212;destdir for packagers
+
+</li>
+<li>`gem stale` command that lists gems by last access time
+
+</li>
+</ul>
+<p>
+Bugs Fixed:
+</p>
+<ul>
+<li>File modes from gems are now honored, patch 19737
+
+</li>
+<li>Marshal <a href="../classes/Gem/Specification.html">Gem::Specification</a>
+objects from the future can now be loaded.
+
+</li>
+<li>A trailing / is now added to remote sources when missing, bug 20134
+
+</li>
+<li>Gems with legacy platforms will now be correctly uninstalled, patch 19877
+
+</li>
+<li>`gem install &#8212;no-wrappers` followed by `gem install &#8212;wrappers`
+no longer overwrites executables
+
+</li>
+<li>`gem pristine` now forces reinstallation of gems, bug 20387
+
+</li>
+<li>RubyGems gracefully handles ^C while loading .gemspec files from disk, bug
+20523
+
+</li>
+<li>Paths are expanded in more places, bug 19317, bug 19896
+
+</li>
+<li><a
+href="../classes/Gem/DependencyInstaller.html">Gem::DependencyInstaller</a>
+resets installed gems every install, bug 19444
+
+</li>
+<li><a href="../classes/Gem.html#M000064">Gem.default_path</a> is now honored
+if GEM_PATH is not set, patch 19502
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>setup.rb
+
+<ul>
+<li>stub files created by RubyGems 0.7.x and older are no longer removed. When
+upgrading from these ancient versions, upgrade to 1.1.x first to clean up
+stubs.
+
+</li>
+<li>RDoc is no longer required until necessary, patch 20414
+
+</li>
+</ul>
+</li>
+<li>`gem server`
+
+<ul>
+<li>Now completely matches the output of `gem generate_index` and has correct
+content types
+
+</li>
+<li>Refreshes from source directories for every hit. The server will no longer
+need to be restarted after installing gems.
+
+</li>
+</ul>
+</li>
+<li>`gem query &#8212;details` and friends now display author, homepage,
+rubyforge url and installed location
+
+</li>
+<li>`gem install` without -i no longer reinstalls dependencies if they are in
+GEM_PATH but not in GEM_HOME
+
+</li>
+<li><a href="../classes/Gem/RemoteFetcher.html">Gem::RemoteFetcher</a> now
+performs persistent connections for HEAD requests, bug 7973
+
+</li>
+</ul>
+<h3>1.1.1 / 2008-04-11</h3>
+<p>
+Bugs Fixed:
+</p>
+<ul>
+<li>Gem.prefix now returns non-nil only when RubyGems was installed outside
+sitelibdir or libdir.
+
+</li>
+<li>The `gem server` gem list now correctly links to gem details.
+
+</li>
+<li>`gem update &#8212;system` now passes &#8212;no-format-executable to
+setup.rb.
+
+</li>
+<li>Gem::SourceIndex#refresh! now works with multiple gem repositories.
+
+</li>
+<li>Downloaded gems now go into &#8212;install-dir&#8216;s cache directory.
+
+</li>
+<li>Various fixes to downloading gem metadata.
+
+</li>
+<li>`gem install &#8212;force` now ignores network errors too.
+
+</li>
+<li>`gem pristine` now rebuilds extensions.
+
+</li>
+<li>`gem update &#8212;system` now works on virgin Apple ruby.
+
+</li>
+<li><a href="../classes/Gem/RemoteFetcher.html">Gem::RemoteFetcher</a> handles
+Errno::ECONNABORTED.
+
+</li>
+<li>Printing of release notes fixed.
+
+</li>
+</ul>
+<h3>1.1.0 / 2008-03-29</h3>
+<p>
+New features:
+</p>
+<ul>
+<li>RubyGems now uses persistent connections on index updates. Index updates
+are much faster now.
+
+</li>
+<li>RubyGems only updates from a latest index by default, cutting candidate
+gems for updates to roughly 1/4 (at present). Index updates are even faster
+still.
+
+<ul>
+<li>`gem list -r` may only show the latest version of a gem, add &#8212;all to
+see all gems.
+
+</li>
+</ul>
+</li>
+<li>`gem spec` now extracts specifications from .gem files.
+
+</li>
+<li>`gem query &#8212;installed` to aid automation of checking for gems.
+
+</li>
+</ul>
+<p>
+Bugs Fixed:
+</p>
+<ul>
+<li>RubyGems works with both Config and RbConfig now.
+
+</li>
+<li>Executables are now cleaned upon uninstall.
+
+</li>
+<li>You can now uninstall from a particular directory.
+
+</li>
+<li>Updating from non-default sources fixed.
+
+</li>
+<li>Executable stubs now use ruby install name in shebang.
+
+</li>
+<li>`gem unpack` checks every directory in Gem.path now.
+
+</li>
+<li>`gem install` now exits with non-zero exit code when appropriate.
+
+</li>
+<li>`gem update` only updates gems that need updates.
+
+</li>
+<li>`gem update` doesn&#8216;t force remote-only updates.
+
+</li>
+<li>`gem update` handles dependencies properly when updating.
+
+</li>
+<li>Gems are now loaded in Gem.path order.
+
+</li>
+<li><a href="../classes/Gem.html">Gem</a> stub scripts on windows now work
+outside Gem.bindir.
+
+</li>
+<li>`gem sources -r` now works without network access.
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>RubyGems now requires Ruby &gt; 1.8.3.
+
+</li>
+<li>Release notes are now printed upon installation.
+
+</li>
+<li>`gem env path` now prints a usable path.
+
+</li>
+<li>`gem install` reverts to local-only installation upon network error.
+
+</li>
+<li>Tar handling code refactoring and cleanup.
+
+</li>
+<li><a
+href="../classes/Gem/DependencyInstaller.html">Gem::DependencyInstaller</a>&#8216;s
+API has changed.
+
+</li>
+</ul>
+<p>
+For a full list of changes to RubyGems, see the ChangeLog file.
+</p>
+<h3>1.0.1 / 2007-12-20</h3>
+<p>
+Bugs Fixed:
+</p>
+<ul>
+<li>Installation on Ruby 1.8.3 through 1.8.5 fixed
+
+</li>
+<li>`gem build` on 1.8.3 fixed
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>Since RubyGems 0.9.5, RubyGems is no longer supported on Ruby 1.8.2 or
+older, this is official in RubyGems 1.0.1.
+
+</li>
+</ul>
+<h3>1.0.0 / 2007-12-20</h3>
+<p>
+Major New Features Include:
+</p>
+<ul>
+<li>RubyGems warns about various problems with gemspecs during gem building
+
+</li>
+<li>More-consistent versioning for the RubyGems software
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>Fixed various bugs and problems with installing gems on Windows
+
+</li>
+<li>Fixed using `gem server` for installing gems
+
+</li>
+<li>Various operations are even more verbose with &#8212;verbose
+
+</li>
+<li>Built gems are now backwards compatible with 0.9.4
+
+</li>
+<li>Improved detection of RUBYOPT loading rubygems
+
+</li>
+<li>`ruby setup.rb` now has a &#8212;help option
+
+</li>
+<li>Gem::Specification#bindir is now respected on installation
+
+</li>
+<li>Executable stubs can now be installed to match ruby&#8216;s name, so if
+ruby is installed as &#8216;ruby18&#8217;, foo_exec will be installed as
+&#8216;foo_exec18&#8216;
+
+</li>
+<li>`gem unpack` can now unpack into a specific directory with &#8212;target
+
+</li>
+<li><a href="../classes/OpenSSL.html">OpenSSL</a> is no longer required by
+default
+
+</li>
+</ul>
+<p>
+Deprecations and Deletions:
+</p>
+<ul>
+<li>Kernel#require_gem has been removed
+
+</li>
+<li>Executables without a shebang will not be wrapped in a future version, this
+may cause such executables to fail to operate on installation
+
+</li>
+<li><a href="../classes/Gem/Platform.html">Gem::Platform</a> constants other
+than RUBY and CURRENT have been removed
+
+</li>
+<li>Gem::RemoteInstaller was removed
+
+</li>
+<li>Gem::Specification#test_suite_file and test_suite_file= are deprecated in
+favor of test_file and test_file=
+
+</li>
+<li>Gem::Specification#autorequire= has been deprecated
+
+</li>
+<li>Time::today will be removed in a future version
+
+</li>
+</ul>
+<h3>0.9.5 / 2007-11-19</h3>
+<p>
+Major New Features Include:
+</p>
+<ul>
+<li>Platform support
+
+</li>
+<li>Automatic installation of platform gems
+
+</li>
+<li>New bandwidth and memory friendlier index file format
+
+</li>
+<li>&quot;Offline&quot; mode (&#8212;no-update-sources)
+
+</li>
+<li>Bulk update threshold can be specified (-B, &#8212;bulk-threshold)
+
+</li>
+<li>New `gem fetch` command
+
+</li>
+<li>`gem` now has &quot;really verbose&quot; output when you specify -v
+
+</li>
+<li>Improved stubs and `gem.bat` on mswin, including better compatiblity with
+the One-Click Installer.
+
+</li>
+</ul>
+<p>
+Other Changes Include:
+</p>
+<ul>
+<li>Time::today is deprecated and will be removed at a future date
+
+</li>
+<li>Gem::manage_gems is deprecated and will be removed at a future date
+
+</li>
+<li>`gem install &#8212;include-dependencies` (-y) is now deprecated since it
+is the default, use &#8212;ignore-dependencies to turn off automatic
+dependency installation
+
+</li>
+<li>Multi-version diamond dependencies only are installed once
+
+</li>
+<li>Processing a YAML bulk index update takes less memory
+
+</li>
+<li>`gem install -i` makes sure all depenencies are installed
+
+</li>
+<li>`gem update &#8212;system` reinstalls into the prefix it was originally
+installed in
+
+</li>
+<li>`gem update &#8212;system` respects &#8212;no-rdoc and &#8212;no-ri flags
+
+</li>
+<li>HTTP basic authentication support for proxies
+
+</li>
+<li>Gem::Specification#platforms should no longer be a String, use
+Gem::Platform::CURRENT when building binary gems instead
+
+</li>
+<li>`gem env` has more diagnostic information
+
+</li>
+<li>require &#8216;rubygems&#8217; loads less code
+
+</li>
+<li>sources.gem is gone, RubyGems now uses built-in defaults
+
+</li>
+<li>`gem install &#8212;source` will no longer add &#8212;source by default,
+use `gem sources &#8212;add` to make it a permanent extra source
+
+</li>
+<li>`gem query` (list) no longer prints details by default
+
+</li>
+<li>Exact gem names are matched in various places
+
+</li>
+<li>mkrf extensions are now supported
+
+</li>
+<li>A gem can depend on a specific RubyGems version
+
+</li>
+<li>`gem_server` is now `gem server`
+
+</li>
+<li>`gemlock` is now `gem lock`
+
+</li>
+<li>`gem_mirror` is now `gem mirror`
+
+</li>
+<li>`gemwhich` is now `gem which`
+
+</li>
+<li>`gemri` is no longer included with RubyGems
+
+</li>
+<li>`index_gem_repository.rb` is now `gem generate_index`
+
+</li>
+<li>`gem` performs more validation of parameters
+
+</li>
+<li>Custom rdoc styles are now supported
+
+</li>
+<li><a href="../classes/Gem.html">Gem</a> indexer no longer removes quick index
+during index creation
+
+</li>
+<li><a href="../classes/Kernel.html#M000671">Kernel#require</a> only rescues a
+LoadError for the file being required now
+
+</li>
+<li>`gem dependencies` can now display some information for remote gems
+
+</li>
+<li>Updating RubyGems now works with RUBYOPT=-rubygems
+
+</li>
+</ul>
+<p>
+Special thanks to:
+</p>
+<ul>
+<li>Daniel Berger
+
+</li>
+<li>Luis Lavena
+
+</li>
+<li>Tom Copeland
+
+</li>
+<li>Wilson Bilkovich
+
+</li>
+</ul>
+<h3>0.9.4 / 2007-05-23</h3>
+<p>
+If you are experiencing problems with the source index (e.g. strange
+&quot;No Method&quot; errors), or problems with zlib (e.g. &quot;Buffer
+Error&quot; messsage), we recommend upgrading to RubyGems 0.9.4.
+</p>
+<p>
+Bug Fixes Include:
+</p>
+<ul>
+<li>Several people have been experiencing problems with no method errors on the
+source index cache. The source index cache is now a bit more self healing.
+Furthermore, if the source index cache is irreparable, then it is
+automatically dropped and reloaded.
+
+</li>
+<li>The source cache files may now be dropped with the &quot;gem sources
+&#8212;clear-all&quot; command. (This command may require root is the
+system source cache is in a root protected area).
+
+</li>
+<li>Several sub-commands were accidently dropped from the &quot;gem&quot;
+command. These commands have been restored.
+
+</li>
+</ul>
+<h3>0.9.3 / 2007-05-10</h3>
+<p>
+Bug Fixes Include:
+</p>
+<p>
+The ZLib library on Windows will occasionally complains about a buffer
+error when unpacking gems. The Gems software has a workaround for that
+problem, but the workaround was only enabled for versions of ZLib 1.2.1 or
+earlier. We have received several reports of the error occuring with ZLib
+1.2.3, so we have permanently enabled the work around on all versions.
+</p>
+<h3>0.9.2 / 2007-02-05</h3>
+<p>
+Bug Fixes Include:
+</p>
+<ul>
+<li>The &quot;unpack&quot; command now works properly.
+
+</li>
+<li>User name and password are now passed properly to the authenticating proxy
+when downloading gems.
+
+</li>
+</ul>
+<h3>0.9.1 / 2007-01-16</h3>
+<p>
+See ChangeLog
+</p>
+<h3>0.9.0 / 2006-06-28</h3>
+<p>
+Finally, the much anticipated RubyGems version 0.9.0 is now available. This
+release includes a number of new features and bug fixes. The number one
+change is that we can now download the gem index incrementally. This will
+greatly speed up the gem command when only a few gems are out of date.
+</p>
+<p>
+Major Enhancments include:
+</p>
+<ul>
+<li>The gem index is now downloaded incrementally, only updating entries that
+are out of date. If more than 50 entries are out of date, we revert back to
+a bulk download.
+
+</li>
+<li>Several patches related to allowing RubyGems to work with authenticating
+proxies (from Danie Roux and Anatol Pomozov). Just put the user and
+password in the proxy URL (e.g. -p <a
+href="http://user:password@proxy.address.com:8080">user:password@proxy.address.com:8080</a>)
+or use the HTTP_PROXY_USER and HTTP_PROXY_PASS environment variables.
+
+</li>
+<li>The gem unpack command can now accept a file path rather than just a
+install gem name.
+
+</li>
+<li>Both RI and RDOC documents are now generated by default.
+
+</li>
+<li>A gemri command is included to read gem RI docs (only needed for Ruby 1.8.4
+or earlier).
+
+</li>
+</ul>
+<p>
+Minor enhancements include:
+</p>
+<ul>
+<li>Verison 0.0.0 is now a valid gem version.
+
+</li>
+<li>Better detection of missing SSL functionality.
+
+</li>
+<li>SSL is not required if the security policy does not require signature
+checking.
+
+</li>
+<li>Rake built extensions are now supported (Tilman Sauerbeck).
+
+</li>
+<li>Several autorequire bug fixes.
+
+</li>
+<li>&#8212;traceback is now an alias for &#8212;backtrace (I can never remember
+which one it is).
+
+</li>
+<li>SAFE=1 compatibility fixes.
+
+</li>
+<li>.rbw is now a supported suffix for RubyGem&#8216;s custom require.
+
+</li>
+<li>Several Ruby 1.9 compatibility fixes (Eric Hodel).
+
+</li>
+</ul>
+<p>
+Bug Fixes:
+</p>
+<ul>
+<li>Added dashes to gemspecs generated in Ruby 1.8.3. This solves some
+cross-Ruby version compatibility issues.
+
+</li>
+<li>Fixed bug where the wrong executables could be uninstalled (Eric Hodel).
+
+</li>
+<li>Fixed bug where gem unpack occasionally unpacked the wrong gem.
+
+</li>
+<li>Fixed bug where a fatal error occured when permissions on .gemrc were too
+restrictive (reported by Luca Pireddu).
+
+</li>
+<li>Fixed prefix handling for native expressions (patch by Aaron Patterson).
+
+</li>
+<li>Fixed several Upgrade =&gt; Update typos.
+
+</li>
+</ul>
+<h3>0.8.11 / 2005-07-13</h3>
+<ul>
+<li>-y is a synonym for &#8212;include-dependencies.
+
+</li>
+<li>Better handling of errors in the top level rescue clause.
+
+</li>
+<li>Package list command (e.g. gem inspect GEM).
+
+</li>
+<li>.gemrc now allows cvsrc-like options to set defaults per subcommand.
+
+</li>
+<li>The autorequire gem spec field will now accept a list.
+
+</li>
+<li>Substituted Time for Date in specs, increasing performance dramatically.
+
+</li>
+<li>Fixed reported bug of gem directories ending in &quot;-&quot; (reported by
+Erik Hatcher).
+
+</li>
+<li>Fixed but in installer that caused dependency installation to not work.
+
+</li>
+<li>Added Paul Duncan&#8216;s gem signing patch.
+
+</li>
+<li>Added Mark Hubbart&#8216;s Framework patch (for better integration with OS
+X).
+
+</li>
+<li>Added David Glasser&#8216;s install-from-mirror patch.
+
+</li>
+<li>Additional internal structural cleanup and test reorganization.
+
+</li>
+</ul>
+<h3>0.8.10 / 2005-03-27</h3>
+<ul>
+<li>In multi-user environments, it is common to supply mulitple versions of
+gems (for example Rails), allowing individual users to select the version
+of the gem they desire. This allows a user to be insulated from updates to
+that gem. RubyGems 0.8.10 fixes a problem where gems could occasionally
+become confused about the current versions of libraries selected by the
+user.
+
+</li>
+<li>The other annoying bug is that if there are any existing rubygems-update
+gems installed, then the &quot;gem update &#8212;system&quot; command will
+download a new update, but install the latest update prior to the download.
+
+</li>
+</ul>
+<h3>0.8.9</h3>
+<p>
+Never released
+</p>
+<h3>0.8.8 / 2005-03-14</h3>
+<ul>
+<li>Moved the master definition of class Requirement back under version. Kept
+the body of Requirement under <a href="../classes/Gem.html">Gem</a>.
+
+</li>
+</ul>
+<h3>0.8.7 / 2005-03-14</h3>
+<p>
+Even though it has only been a few weeks since that last release, there are
+quite a number of new features in 0.8.7. A complete list of new features
+will be given below, but here is a summary of the hot items.
+</p>
+<ul>
+<li>The bug that prevented some users from installing rails has been squashed.
+A big thanks to Bill Guindon (aGorilla) for helping track that one down.
+
+</li>
+</ul>
+<p>
+There are several new commands available on the gem command:
+</p>
+<ul>
+<li>gem cleanup GEMNAME &#8212; Cleanup (uninstall) all the old versions of
+gem. If the gem name is omitted, the entire repository is cleaned.
+
+</li>
+<li>gem dependency GEMNAME &#8212; Show the dependencies for the named gems.
+This is really helpful when trying to figure out what gem needs what other
+gem.
+
+</li>
+</ul>
+<p>
+There changes to the existing commands as well.
+</p>
+<ul>
+<li>gem uninstall is much smarter about removing gems from the repository.
+Lists of gems are now uninstalled in proper dependency order (ie. if A
+depends on B, A is uninstalled first). Also, warnings about broken
+dependencies occur only when removing the <b>last</b> gem that supports a
+dependency is removed.
+
+</li>
+</ul>
+<p>
+Both gem install and gem uninstall support some new command line options
+that can reduce the amount of yes/no queries given the user. For install we
+have:
+</p>
+<ul>
+<li>&#8212;ignore-dependencies &#8212; Only install requests gems, no
+dependendecies are automatically installed.
+
+</li>
+<li>&#8212;include-dependencies &#8212; Automatically install dependencies,
+without confirmation.
+
+</li>
+</ul>
+<p>
+For gem uninstall, the new options are:
+</p>
+<ul>
+<li>&#8212;all &#8212; Uninstall all matching gems without confirmation.
+
+</li>
+<li>&#8212;ignore-dependencies &#8212; Uninstall, even if dependencies are
+broken.
+
+</li>
+<li>&#8212;executables &#8212; Remove executables without confirmation
+
+</li>
+</ul>
+<p>
+Under general cleanup, gems will not, by default, run RDoc on packages that
+do not have the RDoc flag set.
+</p>
+<p>
+And finally there is a new library file &#8216;gemconfigure&#8217; to aid
+in writing version sensitive applications (without undue dependencies on
+RubyGems); and &#8216;gemwhich&#8217;, a short script to locate libraries
+in the file system. You can read more about them here:
+</p>
+<ul>
+<li>gemconfigure: <a
+href="http://docs.rubygems.org/read/chapter/4#page73">docs.rubygems.org/read/chapter/4#page73</a>
+
+</li>
+<li>gemwhich: <a
+href="http://docs.rubygems.org/read/chapter/17">docs.rubygems.org/read/chapter/17</a>
+
+</li>
+</ul>
+<h3>0.8.6 / 2005-02-27</h3>
+<ul>
+<li>Fixed a small bug with shebang construction
+
+</li>
+</ul>
+<h3>0.8.5 / 2005-02-26</h3>
+<p>
+Do you know how you used to dread getting the following message while
+installing gems?
+</p>
+<pre>
+  Updating Gem source index for: http://gems.rubyforge.org
+</pre>
+<p>
+It could take up to 30 seconds (on my machine, even worse on others) for
+that crazy source index to update.
+</p>
+<p>
+This latest release of RubyGems speeds that wait time up considerably. The
+following table gives the following times for installing RedCloth with a
+required source index update on three system we had available to us. No
+RDoc generation was included in the following times.
+</p>
+<pre>
+  RubyGems    Linux         Mac OSX      Windows
+  0.8.4       33 secs       73 secs      58 secs
+  0.8.5        8 secs       14 secs      21 secs
+</pre>
+<p>
+The new caching code is at least 3x faster than previous versions. Woo Hoo!
+</p>
+<h3>0.8.4 / 2005-01-01</h3>
+<ul>
+<li>Rubygems 0.8.3&#8216;s installer was broken unless you already had an older
+version of RubyGems installed. That&#8216;s fixed.
+
+</li>
+<li>Change in the way <a
+href="../classes/Gem/Specification.html">Gem::Specification</a> internally
+deals with lazy attributes and defaults, bringing (with some
+loadpath_manager changes) a fairly significant increase in speed.
+
+</li>
+<li>Support for lower-cased <a href="../classes/Gem.html">Gem</a> file names
+(for you, Paul Duncan :)
+
+</li>
+<li>Erik Veenstra&#8216;s patch for making <a
+href="../classes/Gem.html">Gem</a> versions sortable.
+
+</li>
+</ul>
+<h3>0.8.3 / 2004-12-07</h3>
+<p>
+No real earth shattering news here, but there were a number of really
+annoying issues involving other libraries that RubyGems depends upon. 0.8.3
+contains some workarounds for these issues. In particular:
+</p>
+<ul>
+<li>Added workaround for the null byte in Dir string issue. (see <a
+href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/121702">blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/121702</a>).
+(Thanks to Mauricio Fernández for the quick response on this one).
+
+</li>
+<li>Added workaround for old version of Zlib on windows that caused Ruwiki to
+fail to install. (see <a
+href="http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/121770">blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/121770</a>)
+
+</li>
+<li>Added workaround for large YAML file issues. (We dynamically cut down the
+size of the source index YAML file and seem to have worked around immediate
+issues.
+
+</li>
+</ul>
+<p>
+There has been some minor usability enhancements and changes &#8230;
+</p>
+<ul>
+<li>A user specific source index cache can be used when the site-wide cache is
+unwritable (i.e. because you are running as a non-admin). This
+<b>greatly</b> speeds up gem commands run in non-admin mode when the
+site-wide cache is out of date.
+
+</li>
+<li>The gem command now used an HTTP HEAD command to detect if the
+server&#8216;s source index needs to be downloaed.
+
+</li>
+<li>gem check gemname &#8212;test will run unit tests on installed gems that
+have unit tests.
+
+</li>
+<li>Multiple gem names are allowed on the gem install command line. This means
+you can do:
+
+<pre>
+  gem install rake rails needle postgres-pr pimki
+</pre>
+<p>
+(Ok, you get the idea)
+</p>
+</li>
+<li>Multiple authors my be specified in a <a href="../classes/Gem.html">Gem</a>
+spec.
+
+</li>
+<li>Switched to using setup.rb (rather than a custom install script) for the
+installation of RubyGems itself. If you have installed RubyGems before,
+double check the installation instructions and make sure you use setup.rb
+instead of install.rb.
+
+</li>
+<li>Ryan Davis has provided a patch so you can use an env variable (GEM_SKIP),
+to tell loadpath_manager not to load gems of those names. This was useful
+for him while testing libs that he had in development.
+
+</li>
+</ul>
+<h3>0.8.1 / 2009-09-14</h3>
+<ul>
+<li>Quick release to capture some bug fixes.
+
+</li>
+</ul>
+<h3>0.8.0 / 2009-09-12</h3>
+<ul>
+<li>Remove need for library stubs. Set the RUBYOPT environment variable to
+include &quot;rrubygems&quot;, and a normal require will find gem files.
+Continue to use &#8216;require_gem gem_name, version&#8217; to specify gem
+versions.
+
+</li>
+<li>Deprecated &quot;test_suite_file&quot; gemspec attribute in favor of
+&quot;test_files&quot; array.
+
+</li>
+<li>Generates rdoc by default on installs.
+
+</li>
+<li>Adopted tar/gzip file format, thanks to Mauricio Fernandez.
+
+</li>
+<li>&quot;gem rdoc&quot; allows generation of rdoc after gem installation (will
+add a &quot;gem test&quot;
+
+</li>
+<li>Application stubs can now accept an optional parameter of <em>VERSION</em>
+that will run an arbitrary version of the application requested.
+
+</li>
+<li>Various bug fixes
+
+</li>
+<li>Various platform-independency improvements
+
+</li>
+<li>&quot;gem spec &#8212;all&quot; displays spec info for all installed
+version of a given gem.
+
+</li>
+<li>Dynamic caching of sources
+
+</li>
+<li>Support for user-definable sources on the command line (thanks Assaph Mehr)
+
+</li>
+<li>More intelligent support for platform-dependent gems. Use Platform::CURRENT
+when building a gem to set its platform to the one you&#8216;re building
+on. Installation displays a choice of platform-dependent gems, allowing the
+user to pick.
+
+</li>
+<li>Added &quot;gem unpack&quot; for &quot;unpacking&quot; a gem to the current
+directory
+
+</li>
+</ul>
+<h3>0.7.0 / 2004-07-09</h3>
+<p>
+See ChangeLog
+</p>
+<h3>0.6.0 / 2004-06-08</h3>
+<ul>
+<li>Collapse output of &#8212;search and &#8212;list (and gem_server)
+operations so that each gem is listed only once, with each of its versions
+listed on the same line.
+
+</li>
+<li>bin/gem: new &#8212;upgrade-all option allows one to upgrade every
+installed gem
+
+</li>
+<li>new required_ruby_version attribute added to gem specification for
+specifying a dependency on which version of ruby the gem needs. Format it
+accepts is the same as the <a
+href="../classes/Gem/Requirement.html">Gem::Version::Requirement</a>
+format:
+
+<pre>
+  spec.required_ruby_version = &quot;&gt; 1.8.0&quot;
+</pre>
+</li>
+<li>&#8212;install-stub defaults to true, so library stubs are created
+
+</li>
+</ul>
+<h3>0.5.0 / 2004-06-06</h3>
+<ul>
+<li>Jim added the ability to specify version constraints to avoid API
+incompatibilities. This has been the subject of much debate for the past
+couple of months, with many ideas and code contributed by Eivind Eklund and
+Mauricio Fernandez. The following set of assertions shows how it works:
+
+<pre>
+  assert_inadequate(&quot;1.3&quot;, &quot;~&gt; 1.4&quot;)
+  assert_adequate(  &quot;1.4&quot;, &quot;~&gt; 1.4&quot;)
+  assert_adequate(  &quot;1.5&quot;, &quot;~&gt; 1.4&quot;)
+  assert_inadequate(&quot;2.0&quot;, &quot;~&gt; 1.4&quot;) # This one is key--the new operator
+                                     # disallows major version number
+                                     # differences.
+</pre>
+</li>
+<li>Group gem search output when multiple versions exist for a given gem:
+
+<pre>
+  activerecord (0.7.8, 0.7.7, 0.7.6, 0.7.5)
+    Implements the ActiveRecord pattern for ORM.
+</pre>
+</li>
+<li>Add arbitrary RDoc-able files via gemspec (not just Ruby source files) for
+people who have, for example, README.rdoc in their distributions. Add to
+gemspec via: spec.extra_rdoc_files = [&quot;list&quot;, &quot;of&quot;,
+&quot;files&quot;]. Ruby files are automatically included.
+
+</li>
+<li>Some small bug fixes
+
+</li>
+</ul>
+<h3>0.4.0 / 2004-05-31</h3>
+<ul>
+<li>Minor bug fixes including Windows compatability issues
+
+</li>
+</ul>
+<h3>0.3.0 / 2004-04-30</h3>
+<ul>
+<li>Cleanup of command-line arguments and handling. Most commands accept a
+&#8212;local or &#8212;remote modifier.
+
+</li>
+<li>Creation of Application Gems (packages that include executable programs).
+See <a
+href="http://rubygems.rubyforge.org/wiki/wiki.pl?DeveloperGuide">rubygems.rubyforge.org/wiki/wiki.pl?DeveloperGuide</a>
+for information on how to use it.
+
+</li>
+<li>Basic functionality for installing binary gems from source (:extensions
+property of gem specification holds an array of paths to extconf.rb files
+to be used for compilation)
+
+</li>
+<li>Install library &quot;stub&quot; allowing a normal &#8216;require&#8217; to
+work (which then does the rubygems require and &#8216;require_gem&#8216;
+
+</li>
+<li>&#8212;run-tests runs the test suite specified by the
+&quot;test_suite_file&quot; property of a gem specification
+
+</li>
+<li>HTTP Proxy support works. Rewrite of HTTP code.
+
+</li>
+<li>Unit and functional tests added (see Rakefile).
+
+</li>
+<li>Prompt before remote-installing dependencies during gem installation.
+
+</li>
+<li>Config file for storing preferences for &#8216;gem&#8217; command usage.
+
+</li>
+<li>Generally improved error messages (still more work to do)
+
+</li>
+<li>Rearranged gem directory structure for cleanliness.
+
+</li>
+</ul>
+<h3>0.2.0 / 2004-03-14</h3>
+<ul>
+<li>Initial public release
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

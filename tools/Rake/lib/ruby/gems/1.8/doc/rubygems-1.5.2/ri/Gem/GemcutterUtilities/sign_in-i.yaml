@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::GemcutterUtilities#sign_in
+is_singleton: false
+name: sign_in
+params: ()
+visibility: public

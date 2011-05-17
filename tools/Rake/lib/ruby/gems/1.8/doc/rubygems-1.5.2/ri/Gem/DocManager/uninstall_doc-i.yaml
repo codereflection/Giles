@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Remove RDoc and RI documentation
+full_name: Gem::DocManager#uninstall_doc
+is_singleton: false
+name: uninstall_doc
+params: ()
+visibility: public

@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::LockCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: complain
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: spec_path
+name: LockCommand
+superclass: Gem::Command

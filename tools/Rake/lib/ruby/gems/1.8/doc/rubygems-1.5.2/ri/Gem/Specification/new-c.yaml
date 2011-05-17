@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: self if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Specification constructor. Assigns the default values to the attributes and yields itself for further initialization. Optionally takes <tt>name</tt> and <tt>version</tt>.
+full_name: Gem::Specification::new
+is_singleton: true
+name: new
+params: (name = nil, version = nil) {|self if block_given?| ...}
+visibility: public

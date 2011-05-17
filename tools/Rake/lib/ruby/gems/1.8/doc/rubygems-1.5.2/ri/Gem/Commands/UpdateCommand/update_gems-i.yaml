@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Commands::UpdateCommand#update_gems
+is_singleton: false
+name: update_gems
+params: (gems_to_update)
+visibility: public

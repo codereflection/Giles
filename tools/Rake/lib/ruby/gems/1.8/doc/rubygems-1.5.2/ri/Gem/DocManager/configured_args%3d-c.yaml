@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::DocManager::configured_args=
+is_singleton: true
+name: configured_args=
+params: (args)
+visibility: public

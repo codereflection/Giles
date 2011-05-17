@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>send_gem (Gem::Commands::PushCommand)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/commands/push_command.rb, line 38</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">send_gem</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;Pushing gem to #{options[:host] || Gem.host}...&quot;</span>
+
+    <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">:post</span>, <span class="ruby-value str">&quot;api/v1/gems&quot;</span>]
+
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:host</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:host</span>]
+
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">rubygems_api_request</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span> = <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">read_binary</span> <span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-value str">&quot;Content-Length&quot;</span>, <span class="ruby-identifier">request</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-value str">&quot;Content-Type&quot;</span>,   <span class="ruby-value str">&quot;application/octet-stream&quot;</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-value str">&quot;Authorization&quot;</span>,  <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">rubygems_api_key</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">with_response</span> <span class="ruby-identifier">response</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

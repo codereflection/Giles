@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>show_lookup_failure (Gem::Command)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/command.rb, line 151</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_lookup_failure</span>(<span class="ruby-identifier">gem_name</span>, <span class="ruby-identifier">version</span>, <span class="ruby-identifier">errors</span>, <span class="ruby-identifier">domain</span>)
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">errors</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">alert_error</span> <span class="ruby-node">&quot;Could not find a valid gem '#{gem_name}' (#{version}), here is why:&quot;</span>
+      <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;          #{x.wordy}&quot;</span> }
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">alert_error</span> <span class="ruby-node">&quot;Could not find a valid gem '#{gem_name}' (#{version}) in any repository&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">domain</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:local</span> <span class="ruby-keyword kw">then</span> <span class="ruby-comment cmt"># HACK</span>
+      <span class="ruby-identifier">suggestions</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">SpecFetcher</span>.<span class="ruby-identifier">fetcher</span>.<span class="ruby-identifier">suggest_gems_from_name</span> <span class="ruby-identifier">gem_name</span>
+
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">suggestions</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">alert_error</span> <span class="ruby-node">&quot;Possible alternatives: #{suggestions.join(&quot;, &quot;)}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

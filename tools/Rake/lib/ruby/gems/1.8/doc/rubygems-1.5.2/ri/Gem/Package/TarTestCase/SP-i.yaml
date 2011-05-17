@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#SP
+is_singleton: false
+name: SP
+params: (s)
+visibility: public

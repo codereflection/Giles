@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Checks if this specification meets the requirement of <tt>dependency</tt>.
+full_name: Gem::Specification#satisfies_requirement?
+is_singleton: false
+name: satisfies_requirement?
+params: (dependency)
+visibility: public

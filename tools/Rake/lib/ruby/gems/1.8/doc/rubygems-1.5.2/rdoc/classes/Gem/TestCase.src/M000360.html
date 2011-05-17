@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_make_gems (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 430</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_make_gems</span>(<span class="ruby-identifier">prerelease</span> = <span class="ruby-keyword kw">false</span>)
+    <span class="ruby-ivar">@a1</span> = <span class="ruby-identifier">quick_gem</span> <span class="ruby-value str">'a'</span>, <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">files</span> = <span class="ruby-node">%w[lib/code.rb]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">require_paths</span> = <span class="ruby-node">%w[lib]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">date</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Specification</span><span class="ruby-operator">::</span><span class="ruby-constant">TODAY</span> <span class="ruby-operator">-</span> <span class="ruby-value">86400</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">homepage</span> = <span class="ruby-value str">'http://a.example.com'</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">email</span> = <span class="ruby-node">%w[example@example.com example2@example.com]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">authors</span> = <span class="ruby-node">%w[Example Example2]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;This line is really, really long.  So long, in fact, that it is more than eighty characters long!  The purpose of this line is for testing wrapping behavior because sometimes people don't wrap their text to eighty characters.  Without the wrapping, the text might not look good in the RSS feed.\n\nAlso, a list:\n* An entry that's actually kind of sort\n* an entry that's really long, which will probably get wrapped funny.  That's ok, somebody wasn't thinking straight when they made it more than eighty characters.\n&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">init</span> = <span class="ruby-identifier">proc</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">files</span> = <span class="ruby-node">%w[lib/code.rb]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">require_paths</span> = <span class="ruby-node">%w[lib]</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@a2</span>      = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'a'</span>, <span class="ruby-value str">'2'</span>,      <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+    <span class="ruby-ivar">@a3a</span>     = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'a'</span>, <span class="ruby-value str">'3.a'</span>,    <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+    <span class="ruby-ivar">@a_evil9</span> = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'a_evil'</span>, <span class="ruby-value str">'9'</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+    <span class="ruby-ivar">@b2</span>      = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'b'</span>, <span class="ruby-value str">'2'</span>,      <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+    <span class="ruby-ivar">@c1_2</span>    = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'c'</span>, <span class="ruby-value str">'1.2'</span>,    <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+
+    <span class="ruby-ivar">@pl1</span>     = <span class="ruby-identifier">quick_gem</span> <span class="ruby-value str">'pl'</span>, <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-comment cmt"># l for legacy</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">files</span> = <span class="ruby-node">%w[lib/code.rb]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">require_paths</span> = <span class="ruby-node">%w[lib]</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">platform</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Platform</span>.<span class="ruby-identifier">new</span> <span class="ruby-value str">'i386-linux'</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-identifier">:@original_platform</span>, <span class="ruby-value str">'i386-linux'</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prerelease</span>
+      <span class="ruby-ivar">@a2_pre</span> = <span class="ruby-identifier">quick_gem</span>(<span class="ruby-value str">'a'</span>, <span class="ruby-value str">'2.a'</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">init</span>)
+      <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@a2_pre.original_name} lib code.rb])</span>
+      <span class="ruby-identifier">util_build_gem</span> <span class="ruby-ivar">@a2_pre</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@a1.original_name}   lib code.rb])</span>
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@a2.original_name}   lib code.rb])</span>
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@a3a.original_name}  lib code.rb])</span>
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@b2.original_name}   lib code.rb])</span>
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@c1_2.original_name} lib code.rb])</span>
+    <span class="ruby-identifier">write_file</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-operator">*</span>??[<span class="ruby-identifier">gems</span> <span class="ruby-comment cmt">#{@pl1.original_name}  lib code.rb])</span>
+
+    [<span class="ruby-ivar">@a1</span>, <span class="ruby-ivar">@a2</span>, <span class="ruby-ivar">@a3a</span>, <span class="ruby-ivar">@a_evil9</span>, <span class="ruby-ivar">@b2</span>, <span class="ruby-ivar">@c1_2</span>, <span class="ruby-ivar">@pl1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">util_build_gem</span> <span class="ruby-identifier">spec</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_r</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'gems'</span>, <span class="ruby-ivar">@pl1</span>.<span class="ruby-identifier">original_name</span>)
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">source_index</span> = <span class="ruby-keyword kw">nil</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

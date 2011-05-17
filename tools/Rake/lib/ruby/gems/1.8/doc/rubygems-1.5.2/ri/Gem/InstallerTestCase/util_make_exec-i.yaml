@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::InstallerTestCase#util_make_exec
+is_singleton: false
+name: util_make_exec
+params: (version = '2', shebang = "
+visibility: public

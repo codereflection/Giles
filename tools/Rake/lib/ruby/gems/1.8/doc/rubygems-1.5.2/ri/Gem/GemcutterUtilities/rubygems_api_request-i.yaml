@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::GemcutterUtilities#rubygems_api_request
+is_singleton: false
+name: rubygems_api_request
+params: (method, path, host = Gem.host, &block)
+visibility: public

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>rubygems_api_key= (Gem::ConfigFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/config_file.rb, line 208</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rubygems_api_key=</span>(<span class="ruby-identifier">api_key</span>)
+    <span class="ruby-identifier">config</span> = <span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">credentials_path</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:rubygems_api_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">api_key</span>)
+
+    <span class="ruby-identifier">dirname</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">credentials_path</span>)
+    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-identifier">dirname</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">dirname</span>)
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">load_yaml</span>
+
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">credentials_path</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">config</span>.<span class="ruby-identifier">to_yaml</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@rubygems_api_key</span> = <span class="ruby-identifier">api_key</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is SSL (used by the signing commands) available on this platform?
+full_name: Gem::ssl_available?
+is_singleton: true
+name: ssl_available?
+params: ()
+visibility: public

@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Represents an error communicating via HTTP.
+constants: []
+
+full_name: Gem::RemoteSourceException
+includes: []
+
+instance_methods: []
+
+name: RemoteSourceException
+superclass: Gem::Exception

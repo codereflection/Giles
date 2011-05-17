@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Gem::TestCase</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Gem::TestCase</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/rubygems/test_case_rb.html">
+                lib/rubygems/test_case.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                MiniTest::Unit::TestCase
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+RubyGemTestCase provides a variety of methods for testing rubygems and
+gem-related behavior in a sandbox. Through RubyGemTestCase you can install
+and uninstall gems, fetch remote gems through a stub fetcher and be assured
+your normal set of gems is not affected.
+</p>
+<p>
+Tests are always run at a safe level of 1.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000374">build_rake_in</a>&nbsp;&nbsp;
+      <a href="#M000376">dep</a>&nbsp;&nbsp;
+      <a href="#M000349">install_gem</a>&nbsp;&nbsp;
+      <a href="#M000369">make_command</a>&nbsp;&nbsp;
+      <a href="#M000370">make_command</a>&nbsp;&nbsp;
+      <a href="#M000351">mu_pp</a>&nbsp;&nbsp;
+      <a href="#M000371">nmake_found?</a>&nbsp;&nbsp;
+      <a href="#M000372">process_based_port</a>&nbsp;&nbsp;
+      <a href="#M000373">process_based_port</a>&nbsp;&nbsp;
+      <a href="#M000355">quick_gem</a>&nbsp;&nbsp;
+      <a href="#M000353">read_binary</a>&nbsp;&nbsp;
+      <a href="#M000352">read_cache</a>&nbsp;&nbsp;
+      <a href="#M000377">req</a>&nbsp;&nbsp;
+      <a href="#M000375">rubybin</a>&nbsp;&nbsp;
+      <a href="#M000347">setup</a>&nbsp;&nbsp;
+      <a href="#M000378">spec</a>&nbsp;&nbsp;
+      <a href="#M000348">teardown</a>&nbsp;&nbsp;
+      <a href="#M000350">uninstall_gem</a>&nbsp;&nbsp;
+      <a href="#M000356">util_build_gem</a>&nbsp;&nbsp;
+      <a href="#M000357">util_clear_gems</a>&nbsp;&nbsp;
+      <a href="#M000358">util_gem</a>&nbsp;&nbsp;
+      <a href="#M000359">util_gzip</a>&nbsp;&nbsp;
+      <a href="#M000360">util_make_gems</a>&nbsp;&nbsp;
+      <a href="#M000361">util_set_arch</a>&nbsp;&nbsp;
+      <a href="#M000362">util_setup_fake_fetcher</a>&nbsp;&nbsp;
+      <a href="#M000363">util_setup_spec_fetcher</a>&nbsp;&nbsp;
+      <a href="#M000364">util_zip</a>&nbsp;&nbsp;
+      <a href="#M000379">v</a>&nbsp;&nbsp;
+      <a href="#M000367">vc_windows?</a>&nbsp;&nbsp;
+      <a href="#M000368">vc_windows?</a>&nbsp;&nbsp;
+      <a href="#M000366">win_platform?</a>&nbsp;&nbsp;
+      <a href="#M000365">win_platform?</a>&nbsp;&nbsp;
+      <a href="#M000354">write_file</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="DefaultUserInteraction.html">Gem::DefaultUserInteraction</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000369" class="method-detail">
+        <a name="M000369"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000369.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000369.html');return false;">
+          <span class="method-name">make_command</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the make command for the current platform. For versions of Ruby
+built on MS Windows with VC++ or Borland it will return
+&#8216;nmake&#8217;. On all other platforms, including Cygwin, it will
+return &#8216;make&#8217;.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000372" class="method-detail">
+        <a name="M000372"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000372.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000372.html');return false;">
+          <span class="method-name">process_based_port</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows tests to use a random (but controlled) port number instead of a
+hardcoded one. This helps CI tools when running parallels builds on the
+same builder slave.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000375" class="method-detail">
+        <a name="M000375"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000375.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000375.html');return false;">
+          <span class="method-name">rubybin</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Finds the path to the ruby executable
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000367" class="method-detail">
+        <a name="M000367"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000367.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000367.html');return false;">
+          <span class="method-name">vc_windows?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns whether or not we&#8216;re on a version of Ruby built with VC++ (or
+Borland) versus Cygwin, Mingw, etc.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000365" class="method-detail">
+        <a name="M000365"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000365.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000365.html');return false;">
+          <span class="method-name">win_platform?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this test being run on a Windows platform?
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000374" class="method-detail">
+        <a name="M000374"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000374.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000374.html');return false;">
+          <span class="method-name">build_rake_in</span><span class="method-args">() {|@@rake| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Allows the proper version of <tt>rake</tt> to be used for the test.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000376" class="method-detail">
+        <a name="M000376"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000376.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000376.html');return false;">
+          <span class="method-name">dep</span><span class="method-args">(name, *requirements)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Construct a new <a href="Dependency.html">Gem::Dependency</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000349" class="method-detail">
+        <a name="M000349"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000349.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000349.html');return false;">
+          <span class="method-name">install_gem</span><span class="method-args">(spec)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds and installs the <a href="Specification.html">Gem::Specification</a>
+<tt><a href="TestCase.html#M000378">spec</a></tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000370" class="method-detail">
+        <a name="M000370"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000370.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000370.html');return false;">
+          <span class="method-name">make_command</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns the make command for the current platform. For versions of Ruby
+built on MS Windows with VC++ or Borland it will return
+&#8216;nmake&#8217;. On all other platforms, including Cygwin, it will
+return &#8216;make&#8217;.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000351" class="method-detail">
+        <a name="M000351"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000351.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000351.html');return false;">
+          <span class="method-name">mu_pp</span><span class="method-args">(obj)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Enables pretty-print for all tests
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000371" class="method-detail">
+        <a name="M000371"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000371.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000371.html');return false;">
+          <span class="method-name">nmake_found?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns whether or not the nmake command could be found.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000373" class="method-detail">
+        <a name="M000373"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000373.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000373.html');return false;">
+          <span class="method-name">process_based_port</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+See ::<a href="TestCase.html#M000372">process_based_port</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000355" class="method-detail">
+        <a name="M000355"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000355.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000355.html');return false;">
+          <span class="method-name">quick_gem</span><span class="method-args">(name, version='2') {|s| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a <a href="Specification.html">Gem::Specification</a> with a
+minimum of extra work. <tt>name</tt> and <tt>version</tt> are the
+gem&#8216;s name and version, platform, author, email, homepage, summary
+and description are defaulted. The specification is yielded for
+customization.
+</p>
+<p>
+The gem is added to the installed gems in +@gemhome+ and to the current
+source_index.
+</p>
+<p>
+Use this with <a href="TestCase.html#M000354">write_file</a> to build an
+installed gem.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000353" class="method-detail">
+        <a name="M000353"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000353.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000353.html');return false;">
+          <span class="method-name">read_binary</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reads a binary file at <tt>path</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000352" class="method-detail">
+        <a name="M000352"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000352.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000352.html');return false;">
+          <span class="method-name">read_cache</span><span class="method-args">(path)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Reads a Marshal file at <tt>path</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000377" class="method-detail">
+        <a name="M000377"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000377.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000377.html');return false;">
+          <span class="method-name">req</span><span class="method-args">(*requirements)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Constructs a new <a href="Requirement.html">Gem::Requirement</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000347" class="method-detail">
+        <a name="M000347"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000347.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000347.html');return false;">
+          <span class="method-name">setup</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TestCase.html#M000347">setup</a> prepares a sandboxed location to
+install gems. All installs are directed to a temporary directory. All
+install plugins are removed.
+</p>
+<p>
+If the <tt>RUBY</tt> environment variable is set the given path is used for
+Gem::ruby. The local platform is set to <tt>i386-mswin32</tt> for Windows
+or <tt>i686-darwin8.10.1</tt> otherwise.
+</p>
+<p>
+If the <tt>KEEP_FILES</tt> environment variable is set the files will not
+be removed from <tt>/tmp/test_rubygems_#{$$}.#{Time.now.to_i}</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000378" class="method-detail">
+        <a name="M000378"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000378.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000378.html');return false;">
+          <span class="method-name">spec</span><span class="method-args">(name, version, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Constructs a new <a href="Specification.html">Gem::Specification</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000348" class="method-detail">
+        <a name="M000348"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000348.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000348.html');return false;">
+          <span class="method-name">teardown</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="TestCase.html#M000348">teardown</a> restores the process to its
+original state and removes the tempdir unless the <tt>KEEP_FILES</tt>
+environment variable was set.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000350" class="method-detail">
+        <a name="M000350"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000350.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000350.html');return false;">
+          <span class="method-name">uninstall_gem</span><span class="method-args">(spec)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Uninstalls the <a href="Specification.html">Gem::Specification</a> <tt><a
+href="TestCase.html#M000378">spec</a></tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000356" class="method-detail">
+        <a name="M000356"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000356.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000356.html');return false;">
+          <span class="method-name">util_build_gem</span><span class="method-args">(spec)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Builds a gem from <tt><a href="TestCase.html#M000378">spec</a></tt> and
+places it in <tt>File.join @gemhome, &#8216;cache&#8216;</tt>.
+Automatically creates files based on +spec.files+
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000357" class="method-detail">
+        <a name="M000357"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000357.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000357.html');return false;">
+          <span class="method-name">util_clear_gems</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Removes all installed gems from +@gemhome+.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000358" class="method-detail">
+        <a name="M000358"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000358.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000358.html');return false;">
+          <span class="method-name">util_gem</span><span class="method-args">(name, version, deps = nil, &amp;block)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a gem with <tt>name</tt>, <tt>version</tt> and <tt>deps</tt>. The
+specification will be yielded before gem creation for customization. The
+gem will be placed in <tt>File.join @tempdir, &#8216;gems&#8216;</tt>. The
+specification and .gem file location are returned.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000359" class="method-detail">
+        <a name="M000359"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000359.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000359.html');return false;">
+          <span class="method-name">util_gzip</span><span class="method-args">(data)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Gzips <tt>data</tt>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000360" class="method-detail">
+        <a name="M000360"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000360.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000360.html');return false;">
+          <span class="method-name">util_make_gems</span><span class="method-args">(prerelease = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates several default gems which all have a lib/code.rb file. The gems
+are not installed but are available in the cache dir.
+</p>
+<table>
+<tr><td valign="top">+@a1+:</td><td>gem a version 1, this is the best-described gem.
+
+</td></tr>
+<tr><td valign="top">+@a2+:</td><td>gem a version 2
+
+</td></tr>
+<tr><td valign="top">+@a3a:</td><td>gem a version 3.a
+
+</td></tr>
+<tr><td valign="top">+@a_evil9+:</td><td>gem a_evil version 9, use this to ensure similarly-named gems don&#8216;t
+collide with a.
+
+</td></tr>
+<tr><td valign="top">+@b2+:</td><td>gem b version 2
+
+</td></tr>
+<tr><td valign="top">+@c1_2+:</td><td>gem c version 1.2
+
+</td></tr>
+<tr><td valign="top">+@pl1+:</td><td>gem pl version 1, this gem has a legacy platform of i386-linux.
+
+</td></tr>
+</table>
+<p>
+Additional <tt>prerelease</tt> gems may also be created:
+</p>
+<table>
+<tr><td valign="top">+@a2_pre+:</td><td>gem a version 2.a
+
+</td></tr>
+</table>
+<p>
+TODO: nuke this and fix tests. this should speed up a lot
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000361" class="method-detail">
+        <a name="M000361"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000361.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000361.html');return false;">
+          <span class="method-name">util_set_arch</span><span class="method-args">(arch)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the platform to <tt>arch</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000362" class="method-detail">
+        <a name="M000362"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000362.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000362.html');return false;">
+          <span class="method-name">util_setup_fake_fetcher</span><span class="method-args">(prerelease = false)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets up a fake fetcher using the gems from <a
+href="TestCase.html#M000360">util_make_gems</a>. Optionally additional
+<tt>prerelease</tt> gems may be included.
+</p>
+<p>
+Gems created by this method may be fetched using <a
+href="RemoteFetcher.html">Gem::RemoteFetcher</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000363" class="method-detail">
+        <a name="M000363"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000363.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000363.html');return false;">
+          <span class="method-name">util_setup_spec_fetcher</span><span class="method-args">(*specs)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Sets up <a href="SpecFetcher.html">Gem::SpecFetcher</a> to return
+information from the gems in <tt>specs</tt>. Best used with +@all_gems+
+from <a href="TestCase.html#M000362">util_setup_fake_fetcher</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000364" class="method-detail">
+        <a name="M000364"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000364.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000364.html');return false;">
+          <span class="method-name">util_zip</span><span class="method-args">(data)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Deflates <tt>data</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000379" class="method-detail">
+        <a name="M000379"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000379.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000379.html');return false;">
+          <span class="method-name">v</span><span class="method-args">(string)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Construct a new <a href="Version.html">Gem::Version</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000368" class="method-detail">
+        <a name="M000368"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000368.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000368.html');return false;">
+          <span class="method-name">vc_windows?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns whether or not we&#8216;re on a version of Ruby built with VC++ (or
+Borland) versus Cygwin, Mingw, etc.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000366" class="method-detail">
+        <a name="M000366"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000366.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000366.html');return false;">
+          <span class="method-name">win_platform?</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Is this test being run on a Windows platform?
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000354" class="method-detail">
+        <a name="M000354"></a>
+
+        <div class="method-heading">
+          <a href="TestCase.src/M000354.html" target="Code" class="method-signature"
+            onclick="popupCode('TestCase.src/M000354.html');return false;">
+          <span class="method-name">write_file</span><span class="method-args">(path) {|io if block_given?| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Writes a binary file to <tt>path</tt> which is relative to +@gemhome+
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

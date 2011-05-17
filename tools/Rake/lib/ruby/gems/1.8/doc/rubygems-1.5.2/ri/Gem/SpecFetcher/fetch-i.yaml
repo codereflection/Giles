@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::SpecFetcher#fetch
+is_singleton: false
+name: fetch
+params: (*args)
+visibility: public

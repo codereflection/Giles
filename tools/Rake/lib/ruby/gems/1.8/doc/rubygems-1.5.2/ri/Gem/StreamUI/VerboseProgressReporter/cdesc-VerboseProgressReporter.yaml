@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: count
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A progress reporter that prints out messages about the current progress.
+constants: []
+
+full_name: Gem::StreamUI::VerboseProgressReporter
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::DefaultUserInteraction
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: done
+- !ruby/object:RI::MethodSummary 
+  name: updated
+name: VerboseProgressReporter
+superclass: Object

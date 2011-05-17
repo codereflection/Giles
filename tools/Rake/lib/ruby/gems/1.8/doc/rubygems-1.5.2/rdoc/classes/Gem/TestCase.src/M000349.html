@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>install_gem (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 231</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_gem</span> <span class="ruby-identifier">spec</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/installer'</span>
+
+    <span class="ruby-identifier">use_ui</span> <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">MockGemUi</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-ivar">@tempdir</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">spec</span>).<span class="ruby-identifier">build</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">gem</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@tempdir</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">file_name</span>).<span class="ruby-identifier">untaint</span>
+
+    <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Installer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gem</span>, <span class="ruby-identifier">:wrappers</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>).<span class="ruby-identifier">install</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

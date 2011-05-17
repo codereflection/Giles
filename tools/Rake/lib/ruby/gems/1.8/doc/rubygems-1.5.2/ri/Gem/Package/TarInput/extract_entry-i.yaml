@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarInput#extract_entry
+is_singleton: false
+name: extract_entry
+params: (destdir, entry, expected_md5sum = nil)
+visibility: public

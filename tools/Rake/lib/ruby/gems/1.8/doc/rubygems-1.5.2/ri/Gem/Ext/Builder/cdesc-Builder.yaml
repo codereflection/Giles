@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: class_name
+- !ruby/object:RI::MethodSummary 
+  name: make
+- !ruby/object:RI::MethodSummary 
+  name: redirector
+- !ruby/object:RI::MethodSummary 
+  name: run
+comment: ""
+constants: []
+
+full_name: Gem::Ext::Builder
+includes: []
+
+instance_methods: []
+
+name: Builder
+superclass: Object

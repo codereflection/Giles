@@ -1,0 +1,84 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: make_command
+- !ruby/object:RI::MethodSummary 
+  name: process_based_port
+- !ruby/object:RI::MethodSummary 
+  name: rubybin
+- !ruby/object:RI::MethodSummary 
+  name: vc_windows?
+- !ruby/object:RI::MethodSummary 
+  name: win_platform?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: RubyGemTestCase provides a variety of methods for testing rubygems and gem-related behavior in a sandbox. Through RubyGemTestCase you can install and uninstall gems, fetch remote gems through a stub fetcher and be assured your normal set of gems is not affected.
+- !ruby/struct:SM::Flow::P 
+  body: Tests are always run at a safe level of 1.
+constants: []
+
+full_name: Gem::TestCase
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::DefaultUserInteraction
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build_rake_in
+- !ruby/object:RI::MethodSummary 
+  name: dep
+- !ruby/object:RI::MethodSummary 
+  name: install_gem
+- !ruby/object:RI::MethodSummary 
+  name: make_command
+- !ruby/object:RI::MethodSummary 
+  name: mu_pp
+- !ruby/object:RI::MethodSummary 
+  name: nmake_found?
+- !ruby/object:RI::MethodSummary 
+  name: process_based_port
+- !ruby/object:RI::MethodSummary 
+  name: quick_gem
+- !ruby/object:RI::MethodSummary 
+  name: read_binary
+- !ruby/object:RI::MethodSummary 
+  name: read_cache
+- !ruby/object:RI::MethodSummary 
+  name: req
+- !ruby/object:RI::MethodSummary 
+  name: setup
+- !ruby/object:RI::MethodSummary 
+  name: spec
+- !ruby/object:RI::MethodSummary 
+  name: teardown
+- !ruby/object:RI::MethodSummary 
+  name: uninstall_gem
+- !ruby/object:RI::MethodSummary 
+  name: util_build_gem
+- !ruby/object:RI::MethodSummary 
+  name: util_clear_gems
+- !ruby/object:RI::MethodSummary 
+  name: util_gem
+- !ruby/object:RI::MethodSummary 
+  name: util_gzip
+- !ruby/object:RI::MethodSummary 
+  name: util_make_gems
+- !ruby/object:RI::MethodSummary 
+  name: util_set_arch
+- !ruby/object:RI::MethodSummary 
+  name: util_setup_fake_fetcher
+- !ruby/object:RI::MethodSummary 
+  name: util_setup_spec_fetcher
+- !ruby/object:RI::MethodSummary 
+  name: util_zip
+- !ruby/object:RI::MethodSummary 
+  name: v
+- !ruby/object:RI::MethodSummary 
+  name: vc_windows?
+- !ruby/object:RI::MethodSummary 
+  name: win_platform?
+- !ruby/object:RI::MethodSummary 
+  name: write_file
+name: TestCase
+superclass: MiniTest::Unit::TestCase

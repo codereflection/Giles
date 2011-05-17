@@ -1,0 +1,38 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: gems_to_install
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: installed_gems
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Installs a gem along with all its dependencies from local and remote gems.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFAULT_OPTIONS
+  value: "{     :env_shebang => false,     :domain => :both, # HACK dup     :force => false,     :format_executable => false, # HACK dup     :ignore_dependencies => false,     :prerelease => false,     :security_policy => nil, # HACK NoSecurity requires OpenSSL.  AlmostNo? Low?     :wrappers => true,   }"
+full_name: Gem::DependencyInstaller
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::UserInteraction
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_found_dependencies
+- !ruby/object:RI::MethodSummary 
+  name: find_gems_with_sources
+- !ruby/object:RI::MethodSummary 
+  name: find_spec_by_name_and_version
+- !ruby/object:RI::MethodSummary 
+  name: gather_dependencies
+- !ruby/object:RI::MethodSummary 
+  name: install
+name: DependencyInstaller
+superclass: Object

@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This Gem::StreamUI subclass records input and output to StringIO for retrieval during tests.
+constants: []
+
+full_name: Gem::MockGemUi
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: error
+- !ruby/object:RI::MethodSummary 
+  name: input
+- !ruby/object:RI::MethodSummary 
+  name: output
+- !ruby/object:RI::MethodSummary 
+  name: terminate_interaction
+- !ruby/object:RI::MethodSummary 
+  name: terminated?
+name: MockGemUi
+superclass: Gem::StreamUI

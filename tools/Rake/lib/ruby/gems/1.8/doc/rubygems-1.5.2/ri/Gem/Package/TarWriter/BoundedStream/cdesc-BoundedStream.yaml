@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Maximum number of bytes that can be written
+  name: limit
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Number of bytes written
+  name: written
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: IO wrapper that allows writing a limited amount of data
+constants: []
+
+full_name: Gem::Package::TarWriter::BoundedStream
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: write
+name: BoundedStream
+superclass: Object

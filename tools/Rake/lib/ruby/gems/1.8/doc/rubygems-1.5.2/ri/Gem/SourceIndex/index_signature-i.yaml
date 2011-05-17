@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The signature for the source index. Changes in the signature indicate a change in the index.
+full_name: Gem::SourceIndex#index_signature
+is_singleton: false
+name: index_signature
+params: ()
+visibility: public

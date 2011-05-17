@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Constructs a Format representing the gem's data which came from <tt>gem_path</tt>
+full_name: Gem::Format::new
+is_singleton: true
+name: new
+params: (gem_path)
+visibility: public

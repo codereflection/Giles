@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_setup_gem (Gem::InstallerTestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/installer_test_case.rb, line 96</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_setup_gem</span>(<span class="ruby-identifier">ui</span> = <span class="ruby-ivar">@ui</span>) <span class="ruby-comment cmt"># HACK fix use_ui to make this automatic</span>
+    <span class="ruby-ivar">@spec</span>.<span class="ruby-identifier">files</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'lib'</span>, <span class="ruby-value str">'code.rb'</span>)
+    <span class="ruby-ivar">@spec</span>.<span class="ruby-identifier">executables</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'executable'</span>
+    <span class="ruby-ivar">@spec</span>.<span class="ruby-identifier">extensions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'ext'</span>, <span class="ruby-value str">'a'</span>, <span class="ruby-value str">'mkrf_conf.rb'</span>)
+
+    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-ivar">@tempdir</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-value str">'bin'</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-value str">'lib'</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'ext'</span>, <span class="ruby-value str">'a'</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'bin'</span>, <span class="ruby-value str">'executable'</span>), <span class="ruby-value str">'w'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">end</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'lib'</span>, <span class="ruby-value str">'code.rb'</span>), <span class="ruby-value str">'w'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-value str">'1'</span> <span class="ruby-keyword kw">end</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'ext'</span>, <span class="ruby-value str">'a'</span>, <span class="ruby-value str">'mkrf_conf.rb'</span>), <span class="ruby-value str">'w'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">f</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;File.open 'Rakefile', 'w' do |rf| rf.puts \&quot;task :default\&quot; end\n&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">use_ui</span> <span class="ruby-identifier">ui</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm</span> <span class="ruby-ivar">@gem</span>
+        <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@spec</span>).<span class="ruby-identifier">build</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@installer</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Installer</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@gem</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: errors
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::GemNotFoundException
+includes: []
+
+instance_methods: []
+
+name: GemNotFoundException
+superclass: Gem::Exception

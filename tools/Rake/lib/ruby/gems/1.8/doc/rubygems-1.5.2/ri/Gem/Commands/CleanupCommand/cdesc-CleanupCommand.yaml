@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::CleanupCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: CleanupCommand
+superclass: Gem::Command

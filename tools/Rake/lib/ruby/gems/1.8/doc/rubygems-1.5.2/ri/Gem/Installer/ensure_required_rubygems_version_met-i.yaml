@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Installer#ensure_required_rubygems_version_met
+is_singleton: false
+name: ensure_required_rubygems_version_met
+params: ()
+visibility: public

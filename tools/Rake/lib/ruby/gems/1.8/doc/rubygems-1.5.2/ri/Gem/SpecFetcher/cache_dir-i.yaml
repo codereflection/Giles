@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the local directory to write <tt>uri</tt> to.
+full_name: Gem::SpecFetcher#cache_dir
+is_singleton: false
+name: cache_dir
+params: (uri)
+visibility: public

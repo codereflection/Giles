@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Gem::MockGemUi::TermError
+includes: []
+
+instance_methods: []
+
+name: TermError
+superclass: RuntimeError

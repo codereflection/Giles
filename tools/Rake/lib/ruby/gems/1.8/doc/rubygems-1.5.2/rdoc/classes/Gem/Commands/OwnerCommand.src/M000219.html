@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>show_owners (Gem::Commands::OwnerCommand)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/commands/owner_command.rb, line 40</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show_owners</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">rubygems_api_request</span> <span class="ruby-identifier">:get</span>, <span class="ruby-node">&quot;api/v1/gems/#{name}/owners.yaml&quot;</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">request</span>.<span class="ruby-identifier">add_field</span> <span class="ruby-value str">&quot;Authorization&quot;</span>, <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">rubygems_api_key</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">with_response</span> <span class="ruby-identifier">response</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">resp</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">owners</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">body</span>
+
+      <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;Owners for gem: #{name}&quot;</span>
+      <span class="ruby-identifier">owners</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">owner</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">say</span> <span class="ruby-node">&quot;- #{owner['email']}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

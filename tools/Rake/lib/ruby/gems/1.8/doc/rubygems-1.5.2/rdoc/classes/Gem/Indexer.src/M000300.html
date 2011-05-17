@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>build_legacy_indicies (Gem::Indexer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/indexer.rb, line 138</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build_legacy_indicies</span>(<span class="ruby-identifier">index</span>)
+    <span class="ruby-identifier">say</span> <span class="ruby-value str">&quot;Generating Marshal master index&quot;</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">time</span> <span class="ruby-value str">'Generated Marshal master index'</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">open</span> <span class="ruby-ivar">@marshal_index</span>, <span class="ruby-value str">'wb'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">io</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">dump</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@marshal_index</span>
+    <span class="ruby-ivar">@files</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{@marshal_index}.Z&quot;</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

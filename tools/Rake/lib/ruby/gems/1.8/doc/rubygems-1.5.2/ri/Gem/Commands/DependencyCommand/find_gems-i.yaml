@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Commands::DependencyCommand#find_gems
+is_singleton: false
+name: find_gems
+params: (name, source_index)
+visibility: public

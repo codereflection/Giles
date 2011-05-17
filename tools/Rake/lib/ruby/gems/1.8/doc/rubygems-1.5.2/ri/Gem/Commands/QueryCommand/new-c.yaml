@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Commands::QueryCommand::new
+is_singleton: true
+name: new
+params: (name = 'query', summary = 'Query gem information in local or remote repositories')
+visibility: public

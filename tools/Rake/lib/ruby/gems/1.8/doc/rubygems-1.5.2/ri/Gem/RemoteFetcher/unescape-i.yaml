@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::RemoteFetcher#unescape
+is_singleton: false
+name: unescape
+params: (str)
+visibility: public

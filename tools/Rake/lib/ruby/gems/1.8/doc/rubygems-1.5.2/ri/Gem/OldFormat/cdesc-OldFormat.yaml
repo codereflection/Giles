@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: file_entries
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: gem_path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: spec
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: from_file_by_path
+- !ruby/object:RI::MethodSummary 
+  name: from_io
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The format class knows the guts of the RubyGem .gem file format and provides the capability to read gem files
+constants: []
+
+full_name: Gem::OldFormat
+includes: []
+
+instance_methods: []
+
+name: OldFormat
+superclass: Object

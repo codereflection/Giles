@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Raised when a tar file is corrupt
+constants: []
+
+full_name: Gem::Package::TarInvalidError
+includes: []
+
+instance_methods: []
+
+name: TarInvalidError
+superclass: Error

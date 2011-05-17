@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: An alternate to Gem::Commands::QueryCommand that searches for gems starting with the the supplied argument.
+constants: []
+
+full_name: Gem::Commands::ListCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: ListCommand
+superclass: Gem::Commands::QueryCommand

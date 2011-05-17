@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>sanitize_string (Gem::Indexer)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/indexer.rb, line 556</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sanitize_string</span>(<span class="ruby-identifier">string</span>)
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">string</span>
+
+    <span class="ruby-comment cmt"># HACK the #to_s is in here because RSpec has an Array of Arrays of</span>
+    <span class="ruby-comment cmt"># Strings for authors.  Need a way to disallow bad values on gemspec</span>
+    <span class="ruby-comment cmt"># generation.  (Probably won't happen.)</span>
+    <span class="ruby-identifier">string</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-constant">Builder</span><span class="ruby-operator">::</span><span class="ruby-constant">XChar</span>.<span class="ruby-identifier">encode</span> <span class="ruby-identifier">string</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>, <span class="ruby-constant">NoMethodError</span>
+      <span class="ruby-identifier">string</span>.<span class="ruby-identifier">to_xs</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

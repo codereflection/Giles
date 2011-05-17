@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: self
+comment: 
+full_name: Gem::MockGemUi::TTY#noecho
+is_singleton: false
+name: noecho
+params: () {|self| ...}
+visibility: public

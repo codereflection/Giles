@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Terminate the application with exit code <tt>status</tt>, running any exit handlers that might have been defined.
+full_name: Gem::StreamUI#terminate_interaction
+is_singleton: false
+name: terminate_interaction
+params: (status = 0)
+visibility: public

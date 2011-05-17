@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Sets up Gem::SpecFetcher to return information from the gems in <tt>specs</tt>. Best used with +@all_gems+ from #util_setup_fake_fetcher."
+full_name: Gem::TestCase#util_setup_spec_fetcher
+is_singleton: false
+name: util_setup_spec_fetcher
+params: (*specs)
+visibility: public

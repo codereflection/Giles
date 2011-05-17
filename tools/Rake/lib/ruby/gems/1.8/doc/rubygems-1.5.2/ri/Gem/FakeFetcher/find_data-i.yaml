@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::FakeFetcher#find_data
+is_singleton: false
+name: find_data
+params: (path)
+visibility: public

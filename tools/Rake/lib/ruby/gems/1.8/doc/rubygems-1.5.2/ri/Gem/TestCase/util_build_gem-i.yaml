@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Builds a gem from <tt>spec</tt> and places it in <tt>File.join @gemhome, 'cache'</tt>. Automatically creates files based on +spec.files+
+full_name: Gem::TestCase#util_build_gem
+is_singleton: false
+name: util_build_gem
+params: (spec)
+visibility: public

@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Generates a index files for use as a gem server.
+- !ruby/struct:SM::Flow::P 
+  body: See `gem help generate_index`
+constants: []
+
+full_name: Gem::Commands::GenerateIndexCommand
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: GenerateIndexCommand
+superclass: Gem::Command

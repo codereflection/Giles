@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: UPGRADING.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>UPGRADING.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>UPGRADING.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue May 17 08:27:15 -0700 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>How to upgrade/downgrade Rubygems:</h1>
+<h2>For RubyGems 1.5.0 and 1.5.1:</h2>
+<p>
+RubyGems 1.5.0 and 1.5.1 shipped with a broken <tt>gem update
+&#8212;system</tt>. You will need to use the Manual Upgrade Recipe below.
+</p>
+<h2>On Ruby 1.9.x:</h2>
+<h3>From stock ruby shipping with 1.9:</h3>
+<p>
+Use the Normal Upgrade Method below. (finally!)
+</p>
+<h2>On Ruby 1.8.x:</h2>
+<h3>From rubygems 1.3.x:</h3>
+<p>
+Use the Normal Upgrade Recipe below.
+</p>
+<h3>From rubygems 1-1.x through 1.2.x:</h3>
+<p>
+RubyGems 1.1 and 1.2 have problems upgrading when there is no
+rubygems-update installed. You will need to use the following instructions
+if you see &quot;Nothing to update&quot;.
+</p>
+<p>
+Use the Manual Upgrade Recipe below.
+</p>
+<h3>From rubygems &lt; 1.1.x:</h3>
+<p>
+Use the Normal Upgrade Recipe below.
+</p>
+<h2>Downgrade Recipe</h2>
+<h3>Normal Downgrade</h3>
+<h4>With rubygems 1.5.2 and higher:</h4>
+<pre>
+    $ gem update --system 1.3.7
+</pre>
+<h4>With rubygems 1.5.1 and lower:</h4>
+<p>
+Use sudo/su as appropriate:
+</p>
+<pre>
+    $ gem install rubygems-update -v 1.3.7
+    $ update_rubygems _1.3.7_
+</pre>
+<p>
+Replace 1.3.7 with whatever version you want to downgrade to. This recipe
+can also be used to upgrade to a specific version instead of the latest.
+</p>
+<p>
+Do make sure that you don&#8216;t have any other versions of
+rubygems-update installed when you run the second command.
+</p>
+<h3>1.9.2 Downgrade from Rubygems 1.4.x+ to stock 1.9 rubygems:</h3>
+<p>
+Use sudo/su as appropriate:
+</p>
+<pre>
+    $ ruby --disable-gems -S gem which rubygems
+    ~/.rvm/rubies/ruby-1.9.2-p136/lib/ruby/site_ruby/1.9.1/rubygems.rb
+    $ rm ~/.rvm/rubies/ruby-1.9.2-p136/lib/ruby/site_ruby/1.9.1/rubygems.rb
+    $ rm -rf ~/.rvm/rubies/ruby-1.9.2-p136/lib/ruby/site_ruby/1.9.1/rubygems
+    $ gem -v
+    1.3.7
+</pre>
+<h2>Upgrade Recipes</h2>
+<h3>Normal Upgrade</h3>
+<p>
+Use sudo/su as appropriate:
+</p>
+<pre>
+    $ gem update --system
+</pre>
+<h3>Manual Upgrade</h3>
+<p>
+If you have an older version of RubyGems installed, then you can still do
+it in two steps:
+</p>
+<p>
+Use sudo/su as appropriate:
+</p>
+<pre>
+    $ gem install rubygems-update
+    $ update_rubygems
+</pre>
+<h3>Manual Install</h3>
+<p>
+If you don&#8216;t have any RubyGems install, there is still the pre-gem
+approach to getting software, doing it manually:
+</p>
+<p>
+Use sudo/su as appropriate:
+</p>
+<ul>
+<li>Download from: <a
+href="https://rubygems.org/pages/download">rubygems.org/pages/download</a>
+
+</li>
+<li>Unpack into a directory and cd there
+
+</li>
+<li>Install with: ruby setup.rb
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

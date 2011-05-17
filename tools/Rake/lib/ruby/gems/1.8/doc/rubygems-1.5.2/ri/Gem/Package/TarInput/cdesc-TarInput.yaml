@@ -1,0 +1,33 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: metadata
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: open
+comment: 
+constants: []
+
+full_name: Gem::Package::TarInput
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::Package::FSyncDir
+- !ruby/object:RI::IncludedModule 
+  name: Enumerable
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: close
+- !ruby/object:RI::MethodSummary 
+  name: each
+- !ruby/object:RI::MethodSummary 
+  name: extract_entry
+- !ruby/object:RI::MethodSummary 
+  name: load_gemspec
+- !ruby/object:RI::MethodSummary 
+  name: zipped_stream
+name: TarInput
+superclass: Object

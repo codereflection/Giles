@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Allows tests to use a random (but controlled) port number instead of a hardcoded one. This helps CI tools when running parallels builds on the same builder slave.
+full_name: Gem::TestCase::process_based_port
+is_singleton: true
+name: process_based_port
+params: ()
+visibility: public

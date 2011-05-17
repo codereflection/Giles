@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a new TarOutput that will write a gem-format tar file to <tt>io</tt>. If <tt>signer</tt> is given, the data.tar.gz and metadata.gz will be signed and the signatures will be added to the tar file.
+full_name: Gem::Package::TarOutput::new
+is_singleton: true
+name: new
+params: (io, signer)
+visibility: public

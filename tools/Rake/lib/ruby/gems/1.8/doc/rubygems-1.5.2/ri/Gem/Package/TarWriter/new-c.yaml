@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: writer
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a new TarWriter, yielding it if a block is given
+full_name: Gem::Package::TarWriter::new
+is_singleton: true
+name: new
+params: (io) {|writer| ...}
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Works like #find, but finds all gemspecs matching <tt>glob</tt>."
+full_name: Gem::GemPathSearcher#find_all
+is_singleton: false
+name: find_all
+params: (glob)
+visibility: public

@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: file_path
+  rw: RW
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Used to raise parsing and loading errors
+constants: []
+
+full_name: Gem::FormatException
+includes: []
+
+instance_methods: []
+
+name: FormatException
+superclass: Gem::Exception

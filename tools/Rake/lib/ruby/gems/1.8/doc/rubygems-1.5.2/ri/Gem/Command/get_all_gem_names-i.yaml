@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get all gem names from the command line.
+full_name: Gem::Command#get_all_gem_names
+is_singleton: false
+name: get_all_gem_names
+params: ()
+visibility: public

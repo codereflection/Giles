@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#assert_headers_equal
+is_singleton: false
+name: assert_headers_equal
+params: (expected, actual)
+visibility: public

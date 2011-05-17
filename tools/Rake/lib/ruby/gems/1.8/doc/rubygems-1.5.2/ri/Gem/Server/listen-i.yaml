@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates server sockets based on the addresses option. If no addresses were given a server socket for all interfaces is created.
+full_name: Gem::Server#listen
+is_singleton: false
+name: listen
+params: (addresses = @addresses)
+visibility: public

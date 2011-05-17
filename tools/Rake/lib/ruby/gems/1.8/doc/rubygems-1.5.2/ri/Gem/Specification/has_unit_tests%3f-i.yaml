@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: True if this gem has files in test_files
+full_name: Gem::Specification#has_unit_tests?
+is_singleton: false
+name: has_unit_tests?
+params: ()
+visibility: public

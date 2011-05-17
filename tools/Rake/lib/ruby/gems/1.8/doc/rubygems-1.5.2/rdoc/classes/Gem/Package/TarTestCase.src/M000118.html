@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>assert_headers_equal (Gem::Package::TarTestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/package/tar_test_case.rb, line 25</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_headers_equal</span>(<span class="ruby-identifier">expected</span>, <span class="ruby-identifier">actual</span>)
+    <span class="ruby-identifier">expected</span> = <span class="ruby-identifier">expected</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">expected</span>
+    <span class="ruby-identifier">actual</span> = <span class="ruby-identifier">actual</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">actual</span>
+
+    <span class="ruby-identifier">fields</span> = <span class="ruby-node">%w[
+      name 100
+      mode 8
+      uid 8
+      gid 8
+      size 12
+      mtime 12
+      checksum 8
+      typeflag 1
+      linkname 100
+      magic 6
+      version 2
+      uname 32
+      gname 32
+      devmajor 8
+      devminor 8
+      prefix 155
+    ]</span>
+
+    <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
+
+    <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">shift</span>
+      <span class="ruby-identifier">length</span> = <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_i</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;checksum&quot;</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-identifier">chksum_off</span> = <span class="ruby-identifier">offset</span>
+        <span class="ruby-identifier">offset</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">length</span>
+        <span class="ruby-keyword kw">next</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">expected</span>[<span class="ruby-identifier">offset</span>, <span class="ruby-identifier">length</span>], <span class="ruby-identifier">actual</span>[<span class="ruby-identifier">offset</span>, <span class="ruby-identifier">length</span>],
+                   <span class="ruby-node">&quot;Field #{name} of the tar header differs.&quot;</span>
+
+      <span class="ruby-identifier">offset</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">length</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">expected</span>[<span class="ruby-identifier">chksum_off</span>, <span class="ruby-value">8</span>], <span class="ruby-identifier">actual</span>[<span class="ruby-identifier">chksum_off</span>, <span class="ruby-value">8</span>]
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

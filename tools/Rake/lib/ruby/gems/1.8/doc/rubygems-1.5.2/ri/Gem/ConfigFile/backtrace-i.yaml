@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: True if the backtrace option has been specified, or debug is on.
+full_name: Gem::ConfigFile#backtrace
+is_singleton: false
+name: backtrace
+params: ()
+visibility: public

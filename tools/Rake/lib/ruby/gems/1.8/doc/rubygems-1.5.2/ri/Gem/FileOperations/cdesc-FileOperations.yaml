@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Wrapper for FileUtils meant to provide logging and additional operations if needed.
+constants: []
+
+full_name: Gem::FileOperations
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: method_missing
+name: FileOperations
+superclass: Object

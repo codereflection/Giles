@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Gem::Package::TarWriter::FileOverflow
+includes: []
+
+instance_methods: []
+
+name: FileOverflow
+superclass: StandardError

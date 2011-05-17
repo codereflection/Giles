@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::InstallerTestCase#util_gem_bindir
+is_singleton: false
+name: util_gem_bindir
+params: (version = '2')
+visibility: public

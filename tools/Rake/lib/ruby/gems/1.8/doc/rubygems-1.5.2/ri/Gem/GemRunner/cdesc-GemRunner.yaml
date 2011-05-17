@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Run an instance of the gem program.
+- !ruby/struct:SM::Flow::P 
+  body: Gem::GemRunner is only intended for internal use by RubyGems itself. It does not form any public API and may change at any time for any reason.
+- !ruby/struct:SM::Flow::P 
+  body: If you would like to duplicate functionality of `gem` commands, use the classes they call directly.
+constants: []
+
+full_name: Gem::GemRunner
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: run
+name: GemRunner
+superclass: Object

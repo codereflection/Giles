@@ -1,0 +1,47 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Allows enabling/disabling use of development dependencies
+  name: development
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: from_source_index
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gem::DependencyList is used for installing and uninstalling gems in the correct order to avoid conflicts.
+constants: []
+
+full_name: Gem::DependencyList
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Enumerable
+- !ruby/object:RI::IncludedModule 
+  name: TSort
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add
+- !ruby/object:RI::MethodSummary 
+  name: dependency_order
+- !ruby/object:RI::MethodSummary 
+  name: each
+- !ruby/object:RI::MethodSummary 
+  name: find_name
+- !ruby/object:RI::MethodSummary 
+  name: ok?
+- !ruby/object:RI::MethodSummary 
+  name: ok_to_remove?
+- !ruby/object:RI::MethodSummary 
+  name: remove_by_name
+- !ruby/object:RI::MethodSummary 
+  name: spec_predecessors
+- !ruby/object:RI::MethodSummary 
+  name: tsort_each_child
+- !ruby/object:RI::MethodSummary 
+  name: tsort_each_node
+name: DependencyList
+superclass: Object

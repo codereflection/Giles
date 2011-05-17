@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::PushCommand
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::LocalRemoteOptions
+- !ruby/object:RI::IncludedModule 
+  name: Gem::GemcutterUtilities
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: send_gem
+name: PushCommand
+superclass: Gem::Command

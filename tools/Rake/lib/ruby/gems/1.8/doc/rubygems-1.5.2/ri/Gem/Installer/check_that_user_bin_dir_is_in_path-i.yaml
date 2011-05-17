@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Installer#check_that_user_bin_dir_is_in_path
+is_singleton: false
+name: check_that_user_bin_dir_is_in_path
+params: ()
+visibility: public

@@ -1,0 +1,40 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A test case for Gem::Package::Tar* classes
+constants: []
+
+full_name: Gem::Package::TarTestCase
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ASCIIZ
+- !ruby/object:RI::MethodSummary 
+  name: SP
+- !ruby/object:RI::MethodSummary 
+  name: SP_Z
+- !ruby/object:RI::MethodSummary 
+  name: Z
+- !ruby/object:RI::MethodSummary 
+  name: assert_headers_equal
+- !ruby/object:RI::MethodSummary 
+  name: calc_checksum
+- !ruby/object:RI::MethodSummary 
+  name: header
+- !ruby/object:RI::MethodSummary 
+  name: tar_dir_header
+- !ruby/object:RI::MethodSummary 
+  name: tar_file_header
+- !ruby/object:RI::MethodSummary 
+  name: to_oct
+- !ruby/object:RI::MethodSummary 
+  name: util_dir_entry
+- !ruby/object:RI::MethodSummary 
+  name: util_entry
+name: TarTestCase
+superclass: Gem::TestCase

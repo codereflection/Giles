@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Allows OptionParser to handle HTTP URIs.
+full_name: Gem::LocalRemoteOptions#accept_uri_http
+is_singleton: false
+name: accept_uri_http
+params: ()
+visibility: public

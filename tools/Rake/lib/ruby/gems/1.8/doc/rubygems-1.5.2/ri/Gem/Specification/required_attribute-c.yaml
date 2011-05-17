@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Same as attribute above, but also records this attribute as mandatory.
+full_name: Gem::Specification::required_attribute
+is_singleton: true
+name: required_attribute
+params: (*args)
+visibility: public

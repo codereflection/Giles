@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_clear_gems (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 363</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_clear_gems</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_r</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'gems'</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm_r</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'specifications'</span>)
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">source_index</span>.<span class="ruby-identifier">refresh!</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_build_gem (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 340</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_build_gem</span>(<span class="ruby-identifier">spec</span>)
+    <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'gems'</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">full_name</span>)
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">dir</span>
+
+    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">file</span>
+        <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span> <span class="ruby-identifier">file</span>, <span class="ruby-value str">'w'</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fp</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fp</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# #{file}&quot;</span> <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-identifier">use_ui</span> <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">MockGemUi</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Builder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">spec</span>).<span class="ruby-identifier">build</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mv</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">file_name</span>,
+                   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@gemhome</span>, <span class="ruby-value str">'cache'</span>, <span class="ruby-node">&quot;#{spec.original_name}.gem&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::UnpackCommand
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::VersionOption
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: download
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: find_in_cache
+- !ruby/object:RI::MethodSummary 
+  name: get_path
+name: UnpackCommand
+superclass: Gem::Command

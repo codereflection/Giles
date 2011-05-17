@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setup (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 102</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+    <span class="ruby-keyword kw">super</span>
+
+    <span class="ruby-ivar">@orig_gem_home</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'GEM_HOME'</span>]
+    <span class="ruby-ivar">@orig_gem_path</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'GEM_PATH'</span>]
+
+    <span class="ruby-ivar">@ui</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">MockGemUi</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">tmpdir</span> = <span class="ruby-keyword kw">nil</span>
+    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">tmpdir</span> <span class="ruby-keyword kw">do</span> <span class="ruby-identifier">tmpdir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">pwd</span> <span class="ruby-keyword kw">end</span> <span class="ruby-comment cmt"># HACK OSX /private/tmp</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'KEEP_FILES'</span>] <span class="ruby-keyword kw">then</span>
+      <span class="ruby-ivar">@tempdir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">tmpdir</span>, <span class="ruby-node">&quot;test_rubygems_#{$$}.#{Time.now.to_i}&quot;</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-ivar">@tempdir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-identifier">tmpdir</span>, <span class="ruby-node">&quot;test_rubygems_#{$$}&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-ivar">@tempdir</span>.<span class="ruby-identifier">untaint</span>
+    <span class="ruby-ivar">@gemhome</span>  = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-ivar">@tempdir</span>, <span class="ruby-value str">'gemhome'</span>
+    <span class="ruby-ivar">@userhome</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-ivar">@tempdir</span>, <span class="ruby-value str">'userhome'</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">ensure_gem_subdirectories</span> <span class="ruby-ivar">@gemhome</span>
+
+    <span class="ruby-ivar">@orig_ruby</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ruby</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'RUBY'</span>] <span class="ruby-keyword kw">then</span>
+                   <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">class_eval</span> { <span class="ruby-identifier">ruby</span>, <span class="ruby-ivar">@ruby</span> = <span class="ruby-ivar">@ruby</span>, <span class="ruby-identifier">ruby</span> }
+                   <span class="ruby-identifier">ruby</span>
+                 <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">ensure_gem_subdirectories</span> <span class="ruby-ivar">@gemhome</span>
+
+    <span class="ruby-ivar">@orig_ENV_HOME</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOME'</span>]
+    <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOME'</span>] = <span class="ruby-ivar">@userhome</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-identifier">:@user_home</span>, <span class="ruby-keyword kw">nil</span>
+
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-ivar">@gemhome</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-ivar">@userhome</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">use_paths</span>(<span class="ruby-ivar">@gemhome</span>)
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">loaded_specs</span>.<span class="ruby-identifier">clear</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">verbose</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">update_sources</span> = <span class="ruby-keyword kw">true</span>
+
+    <span class="ruby-ivar">@gem_repo</span> = <span class="ruby-value str">&quot;http://gems.example.com/&quot;</span>
+    <span class="ruby-ivar">@uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span> <span class="ruby-ivar">@gem_repo</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">sources</span>.<span class="ruby-identifier">replace</span> [<span class="ruby-ivar">@gem_repo</span>]
+
+    <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">SpecFetcher</span>.<span class="ruby-identifier">fetcher</span> = <span class="ruby-keyword kw">nil</span>
+
+    <span class="ruby-ivar">@orig_BASERUBY</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">ConfigMap</span>[<span class="ruby-identifier">:BASERUBY</span>]
+    <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">ConfigMap</span>[<span class="ruby-identifier">:BASERUBY</span>] = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">ConfigMap</span>[<span class="ruby-identifier">:ruby_install_name</span>]
+
+    <span class="ruby-ivar">@orig_arch</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">ConfigMap</span>[<span class="ruby-identifier">:arch</span>]
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">win_platform?</span>
+      <span class="ruby-identifier">util_set_arch</span> <span class="ruby-value str">'i386-mswin32'</span>
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">util_set_arch</span> <span class="ruby-value str">'i686-darwin8.10.1'</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@marshal_version</span> = <span class="ruby-node">&quot;#{Marshal::MAJOR_VERSION}.#{Marshal::MINOR_VERSION}&quot;</span>
+
+    <span class="ruby-ivar">@private_key</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'../../../test/rubygems/private_key.pem'</span>,
+                                    <span class="ruby-keyword kw">__FILE__</span>)
+    <span class="ruby-ivar">@public_cert</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">'../../../test/rubygems/public_cert.pem'</span>,
+                                    <span class="ruby-keyword kw">__FILE__</span>)
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_build_hooks</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_install_hooks</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_uninstall_hooks</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">pre_install_hooks</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">pre_uninstall_hooks</span>.<span class="ruby-identifier">clear</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_build</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">installer</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@post_build_hook_arg</span> = <span class="ruby-identifier">installer</span>
+      <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_install</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">installer</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@post_install_hook_arg</span> = <span class="ruby-identifier">installer</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">post_uninstall</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uninstaller</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@post_uninstall_hook_arg</span> = <span class="ruby-identifier">uninstaller</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">pre_install</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">installer</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@pre_install_hook_arg</span> = <span class="ruby-identifier">installer</span>
+      <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">pre_uninstall</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uninstaller</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@pre_uninstall_hook_arg</span> = <span class="ruby-identifier">uninstaller</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@orig_LOAD_PATH</span> = <span class="ruby-identifier">$LOAD_PATH</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

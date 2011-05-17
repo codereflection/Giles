@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Commands::PushCommand#send_gem
+is_singleton: false
+name: send_gem
+params: (name)
+visibility: public

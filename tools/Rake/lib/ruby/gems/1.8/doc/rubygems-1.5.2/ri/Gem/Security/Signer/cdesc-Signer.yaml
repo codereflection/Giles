@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: cert_chain
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: key
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Basic OpenSSL-based package signing class.
+constants: []
+
+full_name: Gem::Security::Signer
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: sign
+name: Signer
+superclass: Object

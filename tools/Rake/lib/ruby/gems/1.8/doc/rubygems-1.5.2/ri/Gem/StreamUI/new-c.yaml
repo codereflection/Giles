@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::StreamUI::new
+is_singleton: true
+name: new
+params: (in_stream, out_stream, err_stream=STDERR)
+visibility: public

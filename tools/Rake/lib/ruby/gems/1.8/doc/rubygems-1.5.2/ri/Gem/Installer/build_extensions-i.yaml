@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Builds extensions. Valid types of extensions are extconf.rb files, configure scripts and rakefiles or mkrf_conf files.
+full_name: Gem::Installer#build_extensions
+is_singleton: false
+name: build_extensions
+params: ()
+visibility: public

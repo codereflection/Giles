@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: path
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Package::FormatError
+includes: []
+
+instance_methods: []
+
+name: FormatError
+superclass: Error

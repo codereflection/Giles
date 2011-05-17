@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Constructs a requirement from <tt>requirements</tt>. Requirements can be Strings, Gem::Versions, or Arrays of those. <tt>nil</tt> and duplicate requirements are ignored. An empty set of <tt>requirements</tt> is the same as <tt>&quot;&gt;= 0&quot;</tt>.
+full_name: Gem::Requirement::new
+is_singleton: true
+name: new
+params: (*requirements)
+visibility: public

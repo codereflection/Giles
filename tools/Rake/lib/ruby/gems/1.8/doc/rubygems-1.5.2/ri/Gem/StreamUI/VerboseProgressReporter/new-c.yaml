@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::StreamUI::VerboseProgressReporter::new
+is_singleton: true
+name: new
+params: (out_stream, size, initial_message, terminal_message = 'complete')
+visibility: public

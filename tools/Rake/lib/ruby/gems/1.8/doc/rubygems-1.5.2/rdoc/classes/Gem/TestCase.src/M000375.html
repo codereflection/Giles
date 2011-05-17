@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>rubybin (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 670</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">rubybin</span>
+    <span class="ruby-identifier">ruby</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">&quot;RUBY&quot;</span>]
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">ruby</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">ruby</span>
+    <span class="ruby-identifier">ruby</span> = <span class="ruby-value str">&quot;ruby&quot;</span>
+    <span class="ruby-identifier">rubyexe</span> = <span class="ruby-node">&quot;#{ruby}.exe&quot;</span>
+
+    <span class="ruby-value">3</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword kw">do</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">ruby</span> <span class="ruby-keyword kw">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">executable?</span> <span class="ruby-identifier">ruby</span> <span class="ruby-keyword kw">and</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span> <span class="ruby-identifier">ruby</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">ruby</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">rubyexe</span> <span class="ruby-keyword kw">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">executable?</span> <span class="ruby-identifier">rubyexe</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">rubyexe</span>)
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">ruby</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;..&quot;</span>, <span class="ruby-identifier">ruby</span>)
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">begin</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-value str">&quot;rbconfig&quot;</span>
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-value str">&quot;bindir&quot;</span>],
+                <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-value str">&quot;ruby_install_name&quot;</span>] <span class="ruby-operator">+</span>
+                <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-value str">&quot;EXEEXT&quot;</span>])
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>
+      <span class="ruby-value str">&quot;ruby&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

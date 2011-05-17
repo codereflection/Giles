@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Compares this version with <tt>other</tt> returning -1, 0, or 1 if the other version is larger, the same, or smaller than this one. Attempts to compare to something that's not a <tt>Gem::Version</tt> return <tt>nil</tt>.
+full_name: Gem::Version#<=>
+is_singleton: false
+name: <=>
+params: (other)
+visibility: public

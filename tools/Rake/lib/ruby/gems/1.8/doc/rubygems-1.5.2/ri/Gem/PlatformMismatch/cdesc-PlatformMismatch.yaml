@@ -1,0 +1,34 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: name
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: platforms
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Generated when trying to lookup a gem to indicate that the gem was found, but that it isn't usable on the current platform.
+- !ruby/struct:SM::Flow::P 
+  body: fetch and install read these and report them to the user to aid in figuring out why a gem couldn't be installed.
+constants: []
+
+full_name: Gem::PlatformMismatch
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_platform
+- !ruby/object:RI::MethodSummary 
+  name: wordy
+name: PlatformMismatch
+superclass: Gem::ErrorReason

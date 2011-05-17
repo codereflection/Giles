@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: "@@rake"
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Allows the proper version of <tt>rake</tt> to be used for the test.
+full_name: Gem::TestCase#build_rake_in
+is_singleton: false
+name: build_rake_in
+params: () {|@@rake| ...}
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "The default (generated) file name of the gem. See also #spec_name."
+- !ruby/struct:SM::Flow::VERB 
+  body: "  spec.file_name # =&gt; &quot;example-1.0.gem&quot;\n"
+full_name: Gem::Specification#file_name
+is_singleton: false
+name: file_name
+params: ()
+visibility: public

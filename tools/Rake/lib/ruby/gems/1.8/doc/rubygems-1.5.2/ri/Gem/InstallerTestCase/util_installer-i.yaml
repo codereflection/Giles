@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::InstallerTestCase#util_installer
+is_singleton: false
+name: util_installer
+params: (spec, gem_path, gem_home)
+visibility: public

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_entry (Gem::Package::TarTestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/package/tar_test_case.rb, line 124</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_entry</span>(<span class="ruby-identifier">tar</span>)
+    <span class="ruby-identifier">io</span> = <span class="ruby-constant">TempIO</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">tar</span>
+
+    <span class="ruby-identifier">header</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Package</span><span class="ruby-operator">::</span><span class="ruby-constant">TarHeader</span>.<span class="ruby-identifier">from</span> <span class="ruby-identifier">io</span>
+
+    <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Package</span><span class="ruby-operator">::</span><span class="ruby-constant">TarReader</span><span class="ruby-operator">::</span><span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">header</span>, <span class="ruby-identifier">io</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

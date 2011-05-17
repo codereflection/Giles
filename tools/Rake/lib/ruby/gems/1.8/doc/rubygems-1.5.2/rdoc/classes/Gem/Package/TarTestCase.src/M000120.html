@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>header (Gem::Package::TarTestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/package/tar_test_case.rb, line 74</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">header</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">fname</span>, <span class="ruby-identifier">dname</span>, <span class="ruby-identifier">length</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">checksum</span> = <span class="ruby-keyword kw">nil</span>)
+    <span class="ruby-identifier">checksum</span> <span class="ruby-operator">||=</span> <span class="ruby-value str">&quot; &quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">8</span>
+
+    <span class="ruby-identifier">arr</span> = [                  <span class="ruby-comment cmt"># struct tarfile_entry_posix</span>
+      <span class="ruby-constant">ASCIIZ</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-value">100</span>),    <span class="ruby-comment cmt"># char name[100];     ASCII + (Z unless filled)</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-identifier">mode</span>, <span class="ruby-value">7</span>)),    <span class="ruby-comment cmt"># char mode[8];       0 padded, octal null</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-value">0</span>, <span class="ruby-value">7</span>)),       <span class="ruby-comment cmt"># char uid[8];        ditto</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-value">0</span>, <span class="ruby-value">7</span>)),       <span class="ruby-comment cmt"># char gid[8];        ditto</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-identifier">length</span>, <span class="ruby-value">11</span>)), <span class="ruby-comment cmt"># char size[12];      0 padded, octal, null</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-value">0</span>, <span class="ruby-value">11</span>)),      <span class="ruby-comment cmt"># char mtime[12];     0 padded, octal, null</span>
+      <span class="ruby-identifier">checksum</span>,              <span class="ruby-comment cmt"># char checksum[8];   0 padded, octal, null, space</span>
+      <span class="ruby-identifier">type</span>,                  <span class="ruby-comment cmt"># char typeflag[1];   file: &quot;0&quot;  dir: &quot;5&quot;</span>
+      <span class="ruby-value str">&quot;\0&quot;</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>,            <span class="ruby-comment cmt"># char linkname[100]; ASCII + (Z unless filled)</span>
+      <span class="ruby-value str">&quot;ustar\0&quot;</span>,             <span class="ruby-comment cmt"># char magic[6];      &quot;ustar\0&quot;</span>
+      <span class="ruby-value str">&quot;00&quot;</span>,                  <span class="ruby-comment cmt"># char version[2];    &quot;00&quot;</span>
+      <span class="ruby-constant">ASCIIZ</span>(<span class="ruby-value str">&quot;wheel&quot;</span>, <span class="ruby-value">32</span>),   <span class="ruby-comment cmt"># char uname[32];     ASCIIZ</span>
+      <span class="ruby-constant">ASCIIZ</span>(<span class="ruby-value str">&quot;wheel&quot;</span>, <span class="ruby-value">32</span>),   <span class="ruby-comment cmt"># char gname[32];     ASCIIZ</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-value">0</span>, <span class="ruby-value">7</span>)),       <span class="ruby-comment cmt"># char devmajor[8];   0 padded, octal, null</span>
+      <span class="ruby-constant">Z</span>(<span class="ruby-identifier">to_oct</span>(<span class="ruby-value">0</span>, <span class="ruby-value">7</span>)),       <span class="ruby-comment cmt"># char devminor[8];   0 padded, octal, null</span>
+      <span class="ruby-constant">ASCIIZ</span>(<span class="ruby-identifier">dname</span>, <span class="ruby-value">155</span>)     <span class="ruby-comment cmt"># char prefix[155];   ASCII + (Z unless filled)</span>
+    ]
+
+    <span class="ruby-identifier">format</span> = <span class="ruby-value str">&quot;C100C8C8C8C12C12C8CC100C6C2C32C32C8C8C155&quot;</span>
+    <span class="ruby-identifier">h</span> = <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">&quot;1.9&quot;</span> <span class="ruby-keyword kw">then</span>
+          <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">arr</span> = <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;&quot;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">//</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]}
+          <span class="ruby-identifier">arr</span>.<span class="ruby-identifier">pack</span> <span class="ruby-identifier">format</span>
+        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">h</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;\0&quot;</span> <span class="ruby-operator">*</span> (<span class="ruby-value">512</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">size</span>)
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">512</span>, <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">size</span>)
+    <span class="ruby-identifier">ret</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

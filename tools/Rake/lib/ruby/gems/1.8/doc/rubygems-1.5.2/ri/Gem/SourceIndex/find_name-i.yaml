@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Find a gem by an exact match on the short name.
+full_name: Gem::SourceIndex#find_name
+is_singleton: false
+name: find_name
+params: (gem_name, requirement = Gem::Requirement.default)
+visibility: public

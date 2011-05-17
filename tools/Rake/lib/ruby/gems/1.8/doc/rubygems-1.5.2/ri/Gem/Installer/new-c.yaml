@@ -1,0 +1,36 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Constructs an Installer instance that will install the gem located at <tt>gem</tt>. <tt>options</tt> is a Hash with the following keys:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: ":env_shebang:"
+    body: Use /usr/bin/env in bin wrappers.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":force:"
+    body: Overrides all version checks and security policy checks, except for a signed-gems-only policy.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":ignore_dependencies:"
+    body: Don't raise if a dependency is missing.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":install_dir:"
+    body: The directory to install the gem into.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":format_executable:"
+    body: Format the executable the same as the ruby executable. If your ruby is ruby18, foo_exec will be installed as foo_exec18.
+  - !ruby/struct:SM::Flow::LI 
+    label: ":security_policy:"
+    body: Use the specified security policy. See Gem::Security
+  - !ruby/struct:SM::Flow::LI 
+    label: ":wrappers:"
+    body: Install wrappers if true, symlinks if false.
+  type: :NOTE
+full_name: Gem::Installer::new
+is_singleton: true
+name: new
+params: (gem, options={})
+visibility: public

@@ -1,0 +1,53 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The directory a gem's executables will be installed into
+  name: bin_dir
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The gem repository the gem will be installed into
+  name: gem_home
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "The Gem::Specification for the gem being uninstalled, only set during #uninstall_gem"
+  name: spec
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: An Uninstaller.
+- !ruby/struct:SM::Flow::P 
+  body: The uninstaller fires pre and post uninstall hooks. Hooks can be added either through a rubygems_plugin.rb file in an installed gem or via a rubygems/defaults/#{RUBY_ENGINE}.rb or rubygems/defaults/operating_system.rb file. See Gem.pre_uninstall and Gem.post_uninstall for details.
+constants: []
+
+full_name: Gem::Uninstaller
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::UserInteraction
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ask_if_ok
+- !ruby/object:RI::MethodSummary 
+  name: dependencies_ok?
+- !ruby/object:RI::MethodSummary 
+  name: path_ok?
+- !ruby/object:RI::MethodSummary 
+  name: remove
+- !ruby/object:RI::MethodSummary 
+  name: remove_all
+- !ruby/object:RI::MethodSummary 
+  name: remove_executables
+- !ruby/object:RI::MethodSummary 
+  name: uninstall
+- !ruby/object:RI::MethodSummary 
+  name: uninstall_gem
+name: Uninstaller
+superclass: Object

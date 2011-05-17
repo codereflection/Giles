@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Constructs a dependency with <tt>name</tt> and <tt>requirements</tt>. The last argument can optionally be the dependency type, which defaults to <tt>:runtime</tt>.
+full_name: Gem::Dependency::new
+is_singleton: true
+name: new
+params: (name, *requirements)
+visibility: public

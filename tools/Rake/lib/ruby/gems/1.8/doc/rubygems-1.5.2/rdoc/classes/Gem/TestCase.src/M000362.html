@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_setup_fake_fetcher (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 507</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_setup_fake_fetcher</span>(<span class="ruby-identifier">prerelease</span> = <span class="ruby-keyword kw">false</span>)
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'zlib'</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'socket'</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/remote_fetcher'</span>
+
+    <span class="ruby-ivar">@fetcher</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">FakeFetcher</span>.<span class="ruby-identifier">new</span>
+
+    <span class="ruby-identifier">util_make_gems</span>(<span class="ruby-identifier">prerelease</span>)
+
+    <span class="ruby-ivar">@all_gems</span> = [<span class="ruby-ivar">@a1</span>, <span class="ruby-ivar">@a2</span>, <span class="ruby-ivar">@a3a</span>, <span class="ruby-ivar">@a_evil9</span>, <span class="ruby-ivar">@b2</span>, <span class="ruby-ivar">@c1_2</span>].<span class="ruby-identifier">sort</span>
+    <span class="ruby-ivar">@all_gem_names</span> = <span class="ruby-ivar">@all_gems</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">gem</span><span class="ruby-operator">|</span> <span class="ruby-identifier">gem</span>.<span class="ruby-identifier">full_name</span> }
+
+    <span class="ruby-identifier">gem_names</span> = [<span class="ruby-ivar">@a1</span>.<span class="ruby-identifier">full_name</span>, <span class="ruby-ivar">@a2</span>.<span class="ruby-identifier">full_name</span>, <span class="ruby-ivar">@a3a</span>.<span class="ruby-identifier">full_name</span>, <span class="ruby-ivar">@b2</span>.<span class="ruby-identifier">full_name</span>]
+    <span class="ruby-ivar">@gem_names</span> = <span class="ruby-identifier">gem_names</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+
+    <span class="ruby-ivar">@source_index</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">SourceIndex</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@a1</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@a2</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@a3a</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@a_evil9</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@c1_2</span>
+    <span class="ruby-ivar">@source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-ivar">@a2_pre</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prerelease</span>
+
+    <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">RemoteFetcher</span>.<span class="ruby-identifier">fetcher</span> = <span class="ruby-ivar">@fetcher</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

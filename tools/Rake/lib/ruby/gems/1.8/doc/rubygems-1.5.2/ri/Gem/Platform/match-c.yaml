@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Platform::match
+is_singleton: true
+name: match
+params: (platform)
+visibility: public

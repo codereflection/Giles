@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::DependencyInstaller#add_found_dependencies
+is_singleton: false
+name: add_found_dependencies
+params: (to_do, dependency_list)
+visibility: public

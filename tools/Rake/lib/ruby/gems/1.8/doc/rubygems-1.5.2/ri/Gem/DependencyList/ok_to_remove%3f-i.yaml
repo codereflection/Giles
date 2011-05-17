@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is is ok to remove a gemspec from the dependency list?
+- !ruby/struct:SM::Flow::P 
+  body: If removing the gemspec creates breaks a currently ok dependency, then it is NOT ok to remove the gemspec.
+full_name: Gem::DependencyList#ok_to_remove?
+is_singleton: false
+name: ok_to_remove?
+params: (full_name)
+visibility: public

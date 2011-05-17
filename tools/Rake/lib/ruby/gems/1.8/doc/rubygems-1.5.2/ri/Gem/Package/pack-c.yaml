@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::pack
+is_singleton: true
+name: pack
+params: (src, destname, signer = nil)
+visibility: public

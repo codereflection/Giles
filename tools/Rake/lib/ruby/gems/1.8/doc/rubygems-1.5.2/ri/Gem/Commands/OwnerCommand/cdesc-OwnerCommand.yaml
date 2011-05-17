@@ -1,0 +1,28 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Gem::Commands::OwnerCommand
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Gem::LocalRemoteOptions
+- !ruby/object:RI::IncludedModule 
+  name: Gem::GemcutterUtilities
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_owners
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: manage_owners
+- !ruby/object:RI::MethodSummary 
+  name: remove_owners
+- !ruby/object:RI::MethodSummary 
+  name: show_owners
+name: OwnerCommand
+superclass: Gem::Command

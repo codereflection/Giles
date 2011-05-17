@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ui
+- !ruby/object:RI::MethodSummary 
+  name: ui=
+- !ruby/object:RI::MethodSummary 
+  name: use_ui
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Module that defines the default UserInteraction. Any class including this module will have access to the <tt>ui</tt> method that returns the default UI.
+constants: []
+
+full_name: Gem::DefaultUserInteraction
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: ui
+- !ruby/object:RI::MethodSummary 
+  name: ui=
+- !ruby/object:RI::MethodSummary 
+  name: use_ui
+name: DefaultUserInteraction
+superclass: 

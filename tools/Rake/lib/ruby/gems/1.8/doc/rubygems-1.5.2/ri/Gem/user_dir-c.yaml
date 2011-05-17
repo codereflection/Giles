@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Path for gems in the user's home directory
+full_name: Gem::user_dir
+is_singleton: true
+name: user_dir
+params: ()
+visibility: public

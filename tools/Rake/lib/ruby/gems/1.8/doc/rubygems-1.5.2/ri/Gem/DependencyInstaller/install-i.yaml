@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Installs the gem <tt>dep_or_name</tt> and all its dependencies. Returns an Array of installed gem specifications.
+- !ruby/struct:SM::Flow::P 
+  body: If the +:prerelease+ option is set and there is a prerelease for <tt>dep_or_name</tt> the prerelease version will be installed.
+- !ruby/struct:SM::Flow::P 
+  body: Unless explicitly specified as a prerelease dependency, prerelease gems that <tt>dep_or_name</tt> depend on will not be installed.
+- !ruby/struct:SM::Flow::P 
+  body: If c-1.a depends on b-1 and a-1.a and there is a gem b-1.a available then c-1.a, b-1 and a-1.a will be installed. b-1.a will need to be installed separately.
+full_name: Gem::DependencyInstaller#install
+is_singleton: false
+name: install
+params: (dep_or_name, version = Gem::Requirement.default)
+visibility: public

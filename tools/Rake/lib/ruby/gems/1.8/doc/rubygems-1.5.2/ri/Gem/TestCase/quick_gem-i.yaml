@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (s)
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a Gem::Specification with a minimum of extra work. <tt>name</tt> and <tt>version</tt> are the gem's name and version, platform, author, email, homepage, summary and description are defaulted. The specification is yielded for customization.
+- !ruby/struct:SM::Flow::P 
+  body: The gem is added to the installed gems in +@gemhome+ and to the current source_index.
+- !ruby/struct:SM::Flow::P 
+  body: "Use this with #write_file to build an installed gem."
+full_name: Gem::TestCase#quick_gem
+is_singleton: false
+name: quick_gem
+params: (name, version='2') {|s| ...}
+visibility: public

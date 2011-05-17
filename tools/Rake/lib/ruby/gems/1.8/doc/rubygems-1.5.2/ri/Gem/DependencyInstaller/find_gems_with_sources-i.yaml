@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns a list of pairs of gemspecs and source_uris that match Gem::Dependency <tt>dep</tt> from both local (Dir.pwd) and remote (Gem.sources) sources. Gems are sorted with newer gems preferred over older gems, and local gems preferred over remote gems.
+full_name: Gem::DependencyInstaller#find_gems_with_sources
+is_singleton: false
+name: find_gems_with_sources
+params: (dep)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add the --prerelease option to the option parser.
+full_name: Gem::VersionOption#add_prerelease_option
+is_singleton: false
+name: add_prerelease_option
+params: (*wrap)
+visibility: public

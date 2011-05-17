@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Reads a gem from <tt>io</tt> at <tt>gem_path</tt> using <tt>security_policy</tt> and returns a Format representing the data from the gem
+full_name: Gem::Format::from_io
+is_singleton: true
+name: from_io
+params: (io, gem_path="(io)", security_policy = nil)
+visibility: public

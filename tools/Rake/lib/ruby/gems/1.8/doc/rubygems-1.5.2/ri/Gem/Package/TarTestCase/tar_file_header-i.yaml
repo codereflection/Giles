@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Package::TarTestCase#tar_file_header
+is_singleton: false
+name: tar_file_header
+params: (fname, dname, mode, length)
+visibility: public

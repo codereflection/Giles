@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::FakeFetcher#fetch_path
+is_singleton: false
+name: fetch_path
+params: (path, mtime = nil)
+visibility: public

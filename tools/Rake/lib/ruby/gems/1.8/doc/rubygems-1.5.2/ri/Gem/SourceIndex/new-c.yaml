@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Constructs a source index instance from the provided specifications, which is a Hash of gem full names and Gem::Specifications.
+full_name: Gem::SourceIndex::new
+is_singleton: true
+name: new
+params: (specifications={})
+visibility: public

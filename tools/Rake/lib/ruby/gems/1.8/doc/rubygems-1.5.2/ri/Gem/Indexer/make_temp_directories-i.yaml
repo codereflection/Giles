@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Make directories for index generation
+full_name: Gem::Indexer#make_temp_directories
+is_singleton: false
+name: make_temp_directories
+params: ()
+visibility: public

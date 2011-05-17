@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: True if <tt>version</tt> satisfies this Requirement.
+full_name: Gem::Requirement#satisfied_by?
+is_singleton: false
+name: satisfied_by?
+params: (version)
+visibility: public

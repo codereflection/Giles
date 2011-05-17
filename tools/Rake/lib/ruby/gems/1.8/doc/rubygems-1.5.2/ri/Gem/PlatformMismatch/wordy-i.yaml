@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::PlatformMismatch#wordy
+is_singleton: false
+name: wordy
+params: ()
+visibility: public

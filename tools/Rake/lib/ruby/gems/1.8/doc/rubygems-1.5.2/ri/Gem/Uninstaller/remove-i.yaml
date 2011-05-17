@@ -1,0 +1,21 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "spec:"
+    body: the spec of the gem to be uninstalled
+  - !ruby/struct:SM::Flow::LI 
+    label: "list:"
+    body: the list of all such gems
+  type: :NOTE
+- !ruby/struct:SM::Flow::P 
+  body: "Warning: this method modifies the <tt>list</tt> parameter. Once it has uninstalled a gem, it is removed from that list."
+full_name: Gem::Uninstaller#remove
+is_singleton: false
+name: remove
+params: (spec, list)
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Sets up a fake fetcher using the gems from #util_make_gems. Optionally additional <tt>prerelease</tt> gems may be included."
+- !ruby/struct:SM::Flow::P 
+  body: Gems created by this method may be fetched using Gem::RemoteFetcher.
+full_name: Gem::TestCase#util_setup_fake_fetcher
+is_singleton: false
+name: util_setup_fake_fetcher
+params: (prerelease = false)
+visibility: public

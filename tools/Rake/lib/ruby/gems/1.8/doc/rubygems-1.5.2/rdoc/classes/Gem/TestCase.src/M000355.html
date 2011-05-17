@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>quick_gem (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 307</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quick_gem</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">version</span>=<span class="ruby-value str">'2'</span>)
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/specification'</span>
+
+    <span class="ruby-identifier">spec</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Specification</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">platform</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Platform</span><span class="ruby-operator">::</span><span class="ruby-constant">RUBY</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">version</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">author</span> = <span class="ruby-value str">'A User'</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">email</span> = <span class="ruby-value str">'example@example.com'</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">homepage</span> = <span class="ruby-value str">'http://example.com'</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">has_rdoc</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">summary</span> = <span class="ruby-value str">&quot;this is a summary&quot;</span>
+      <span class="ruby-identifier">s</span>.<span class="ruby-identifier">description</span> = <span class="ruby-value str">&quot;This is a test description&quot;</span>
+
+      <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">s</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span> <span class="ruby-value str">&quot;specifications&quot;</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">spec_name</span>
+    <span class="ruby-identifier">written_path</span> = <span class="ruby-identifier">write_file</span> <span class="ruby-identifier">path</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">io</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">to_ruby</span>)
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">loaded_from</span> = <span class="ruby-identifier">written_path</span>
+
+    <span class="ruby-constant">Gem</span>.<span class="ruby-identifier">source_index</span>.<span class="ruby-identifier">add_spec</span> <span class="ruby-identifier">spec</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">spec</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

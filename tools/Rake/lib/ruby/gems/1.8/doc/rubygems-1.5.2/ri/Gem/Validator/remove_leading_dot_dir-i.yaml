@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::Validator#remove_leading_dot_dir
+is_singleton: false
+name: remove_leading_dot_dir
+params: (path)
+visibility: public

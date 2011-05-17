@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates a gem with <tt>name</tt>, <tt>version</tt> and <tt>deps</tt>. The specification will be yielded before gem creation for customization. The gem will be placed in <tt>File.join @tempdir, 'gems'</tt>. The specification and .gem file location are returned.
+full_name: Gem::TestCase#util_gem
+is_singleton: false
+name: util_gem
+params: (name, version, deps = nil, &block)
+visibility: public

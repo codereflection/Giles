@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sanitize a single string.
+full_name: Gem::Indexer#sanitize_string
+is_singleton: false
+name: sanitize_string
+params: (string)
+visibility: public

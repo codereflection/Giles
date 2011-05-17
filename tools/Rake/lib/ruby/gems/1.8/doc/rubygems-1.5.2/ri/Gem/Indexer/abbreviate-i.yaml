@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Abbreviate the spec for downloading. Abbreviated specs are only used for searching, downloading and related activities and do not need deployment specific information (e.g. list of files). So we abbreviate the spec, making it much smaller for quicker downloads.
+full_name: Gem::Indexer#abbreviate
+is_singleton: false
+name: abbreviate
+params: (spec)
+visibility: public

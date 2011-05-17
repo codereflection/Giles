@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>util_setup_spec_fetcher (Gem::TestCase)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems/test_case.rb, line 537</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">util_setup_spec_fetcher</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">specs</span>)
+    <span class="ruby-identifier">specs</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">specs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">full_name</span>, <span class="ruby-identifier">spec</span>] }.<span class="ruby-identifier">flatten</span>]
+    <span class="ruby-identifier">si</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">SourceIndex</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">specs</span>
+
+    <span class="ruby-identifier">spec_fetcher</span> = <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">SpecFetcher</span>.<span class="ruby-identifier">fetcher</span>
+
+    <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">specs</span>[<span class="ruby-ivar">@uri</span>] = []
+    <span class="ruby-identifier">si</span>.<span class="ruby-identifier">gems</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span> }.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">spec_tuple</span> = [<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">version</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">original_platform</span>]
+      <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">specs</span>[<span class="ruby-ivar">@uri</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">spec_tuple</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">latest_specs</span>[<span class="ruby-ivar">@uri</span>] = []
+    <span class="ruby-identifier">si</span>.<span class="ruby-identifier">latest_specs</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">spec_tuple</span> = [<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">version</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">original_platform</span>]
+      <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">latest_specs</span>[<span class="ruby-ivar">@uri</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">spec_tuple</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">prerelease_specs</span>[<span class="ruby-ivar">@uri</span>] = []
+    <span class="ruby-identifier">si</span>.<span class="ruby-identifier">prerelease_specs</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">spec_tuple</span> = [<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">version</span>, <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">original_platform</span>]
+      <span class="ruby-identifier">spec_fetcher</span>.<span class="ruby-identifier">prerelease_specs</span>[<span class="ruby-ivar">@uri</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">spec_tuple</span>
+    <span class="ruby-keyword kw">end</span>
+
+    (<span class="ruby-identifier">si</span>.<span class="ruby-identifier">gems</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">si</span>.<span class="ruby-identifier">prerelease_gems</span>).<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>,<span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span> }.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>, <span class="ruby-identifier">spec</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@gem_repo}quick/Marshal.#{Gem.marshal_version}/#{spec.original_name}.gemspec.rz&quot;</span>
+      <span class="ruby-identifier">data</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span> <span class="ruby-identifier">spec</span>
+      <span class="ruby-identifier">data_deflate</span> = <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">Deflate</span>.<span class="ruby-identifier">deflate</span> <span class="ruby-identifier">data</span>
+      <span class="ruby-ivar">@fetcher</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">path</span>] = <span class="ruby-identifier">data_deflate</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-identifier">si</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

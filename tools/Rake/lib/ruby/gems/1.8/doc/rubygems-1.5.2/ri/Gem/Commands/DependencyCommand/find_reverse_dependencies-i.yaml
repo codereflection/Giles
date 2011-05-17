@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns an Array of [specification, dep] that are satisfied by <tt>spec</tt>.
+full_name: Gem::Commands::DependencyCommand#find_reverse_dependencies
+is_singleton: false
+name: find_reverse_dependencies
+params: (spec)
+visibility: public

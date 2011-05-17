@@ -1,0 +1,46 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Creates several default gems which all have a lib/code.rb file. The gems are not installed but are available in the cache dir.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@a1+:"
+    body: gem a version 1, this is the best-described gem.
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@a2+:"
+    body: gem a version 2
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@a3a:"
+    body: gem a version 3.a
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@a_evil9+:"
+    body: gem a_evil version 9, use this to ensure similarly-named gems don't collide with a.
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@b2+:"
+    body: gem b version 2
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@c1_2+:"
+    body: gem c version 1.2
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@pl1+:"
+    body: gem pl version 1, this gem has a legacy platform of i386-linux.
+  type: :NOTE
+- !ruby/struct:SM::Flow::P 
+  body: "Additional <tt>prerelease</tt> gems may also be created:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "+@a2_pre+:"
+    body: gem a version 2.a
+  type: :NOTE
+- !ruby/struct:SM::Flow::P 
+  body: "TODO: nuke this and fix tests. this should speed up a lot"
+full_name: Gem::TestCase#util_make_gems
+is_singleton: false
+name: util_make_gems
+params: (prerelease = false)
+visibility: public

@@ -1,0 +1,17 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Gem::Security default exception type
+constants: []
+
+full_name: Gem::Security::Exception
+includes: []
+
+instance_methods: []
+
+name: Exception
+superclass: Gem::Exception

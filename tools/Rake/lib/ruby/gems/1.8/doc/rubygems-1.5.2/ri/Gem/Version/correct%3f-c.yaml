@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: True if the <tt>version</tt> string matches RubyGems' requirements.
+full_name: Gem::Version::correct?
+is_singleton: true
+name: correct?
+params: (version)
+visibility: public

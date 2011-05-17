@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Gem::GemcutterUtilities
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: rubygems_api_request
+- !ruby/object:RI::MethodSummary 
+  name: sign_in
+- !ruby/object:RI::MethodSummary 
+  name: with_response
+name: GemcutterUtilities
+superclass: 

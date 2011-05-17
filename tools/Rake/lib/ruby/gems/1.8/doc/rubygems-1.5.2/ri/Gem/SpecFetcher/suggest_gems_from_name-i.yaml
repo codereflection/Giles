@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Suggests a gem based on the supplied <tt>gem_name</tt>. Returns a string of the gem name if an approximate match can be found or nil otherwise. NOTE: for performance reasons only gems which exactly match the first character of <tt>gem_name</tt> are considered."
+full_name: Gem::SpecFetcher#suggest_gems_from_name
+is_singleton: false
+name: suggest_gems_from_name
+params: (gem_name)
+visibility: public

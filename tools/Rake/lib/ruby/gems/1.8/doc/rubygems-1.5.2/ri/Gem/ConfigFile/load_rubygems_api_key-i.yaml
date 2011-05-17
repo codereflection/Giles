@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::ConfigFile#load_rubygems_api_key
+is_singleton: false
+name: load_rubygems_api_key
+params: ()
+visibility: public

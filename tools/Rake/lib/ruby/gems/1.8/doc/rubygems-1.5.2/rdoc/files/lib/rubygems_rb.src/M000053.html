@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>load_plugin_files (lib/rubygems.rb)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/rubygems.rb, line 1069</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">load_plugin_files</span>(<span class="ruby-identifier">plugins</span>)
+    <span class="ruby-identifier">plugins</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+
+      <span class="ruby-comment cmt"># Skip older versions of the GemCutter plugin: Its commands are in</span>
+      <span class="ruby-comment cmt"># RubyGems proper now.</span>
+
+      <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">plugin</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/gemcutter-0\.[0-3]/</span>
+
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-identifier">load</span> <span class="ruby-identifier">plugin</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-identifier">details</span> = <span class="ruby-node">&quot;#{plugin.inspect}: #{e.message} (#{e.class})&quot;</span>
+        <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Error loading RubyGems plugin #{details}&quot;</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

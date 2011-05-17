@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "#setup prepares a sandboxed location to install gems. All installs are directed to a temporary directory. All install plugins are removed."
+- !ruby/struct:SM::Flow::P 
+  body: If the <tt>RUBY</tt> environment variable is set the given path is used for Gem::ruby. The local platform is set to <tt>i386-mswin32</tt> for Windows or <tt>i686-darwin8.10.1</tt> otherwise.
+- !ruby/struct:SM::Flow::P 
+  body: If the <tt>KEEP_FILES</tt> environment variable is set the files will not be removed from <tt>/tmp/test_rubygems_#{$$}.#{Time.now.to_i}</tt>.
+full_name: Gem::TestCase#setup
+is_singleton: false
+name: setup
+params: ()
+visibility: public

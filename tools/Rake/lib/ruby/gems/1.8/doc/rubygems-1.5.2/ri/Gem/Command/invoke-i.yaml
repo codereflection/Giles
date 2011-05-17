@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Invoke the command with the given list of arguments.
+full_name: Gem::Command#invoke
+is_singleton: false
+name: invoke
+params: (*args)
+visibility: public

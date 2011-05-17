@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::FileOperations#method_missing
+is_singleton: false
+name: method_missing
+params: (meth, *args, &block)
+visibility: public

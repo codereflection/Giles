@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Load RDoc from a gem if it is available, otherwise from Ruby's stdlib
+full_name: Gem::DocManager::load_rdoc
+is_singleton: true
+name: load_rdoc
+params: ()
+visibility: public

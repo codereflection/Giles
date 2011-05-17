@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gem::LoadError#version_requirement=
+is_singleton: false
+name: version_requirement=
+params: (requirement)
+visibility: public

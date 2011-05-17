@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: length
+block_params: 
+comment: 
+full_name: Gem::SourceIndex#size
+is_singleton: false
+name: size
+params: ()
+visibility: public
