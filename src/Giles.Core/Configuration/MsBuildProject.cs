@@ -34,6 +34,12 @@ namespace Giles.Core.Configuration
                     select hintNode.InnerText).ToArray();
         }
 
+        public string GetAssemblyName()
+        {
+            var platformConfig = GetDefaultPlatformConfig();
+            return GetPropertyValue(platformConfig, "AssemblyName");
+        }
+
         /// <summary>
         /// Gets the output assembly file path relative to the
         /// project files directory.  Uses the project default

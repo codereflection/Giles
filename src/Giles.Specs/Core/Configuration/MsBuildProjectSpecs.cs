@@ -50,5 +50,8 @@ namespace Giles.Specs.Core.Configuration
         It returns_the_output_assembly_path = () =>
             project.GetAssemblyFilePath(@"C:\projects\Giles\src\Giles.Specs\Giles.Specs.csproj")
                 .ShouldEqual(@"C:\projects\Giles\src\Giles.Specs\bin\Debug\Giles.Specs.dll");
+
+        private It returns_the_assembly_name = () =>
+            project.GetAssemblyName().ShouldEqual(@"Giles.Specs");
     }
 }
