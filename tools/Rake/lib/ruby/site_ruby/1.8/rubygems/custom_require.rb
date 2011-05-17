@@ -4,8 +4,6 @@
 # See LICENSE.txt for permissions.
 #++
 
-require 'rubygems'
-
 module Kernel
 
   ##
@@ -28,15 +26,14 @@ module Kernel
   # that file has already been loaded is preserved.
 
   def require(path) # :doc:
+   puts path
     gem_original_require path
   rescue LoadError => load_error
-    if load_error.message =~ /#{Regexp.escape path}\z/ and
-       spec = Gem.searcher.find(path) then
-      Gem.activate(spec.name, "= #{spec.version}")
-      gem_original_require path
-    else
-      raise load_error
+    if load_error.message.end_with?(path) and Gem.try_activate(path) then
+      return gem_original_require(path)
     end
+
+    raise load_error
   end
 
   private :require

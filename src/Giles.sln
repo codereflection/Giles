@@ -10,9 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D2D91826-7DA4-4AD2-B102-B1389C0B4A23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8046A0FB-21E0-4F65-A62C-580916EB31A3}"
-	ProjectSection(SolutionItems) = preProject
-		ProjectVersion.cs = ProjectVersion.cs
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runners", "Runners", "{FE17132F-FE11-4657-AAB8-56F3218E3191}"
 EndProject
