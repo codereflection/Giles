@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommandLine;
 using Giles.Core.Configuration;
+using Giles.Core.Utility;
 using Giles.Core.Watchers;
 using Giles.Options;
 using Ninject;
@@ -11,6 +14,7 @@ namespace Giles
     {
         static SourceWatcher sourceWatcher;
         static GilesConfig config;
+        static bool QuitRequested = false;
 
         static void Main(string[] args)
         {
@@ -24,61 +28,96 @@ namespace Giles
                 Console.WriteLine("Unknown command line arguments");
                 Environment.Exit(1);
             }
-            Console.Clear();
-            Console.CancelKeyPress += Console_CancelKeyPress;
-            Console.WriteLine("Giles - your own personal watcher");
-            Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
 
+            ConsoleSetup();
+
+            SetupSourceWatcher(options);
+
+            SetupInteractiveMenuOptions();
+
+            DisplayInteractiveMenuOptions();
+            
+            MainFeedbackLoop();
+
+            Console.WriteLine("Grr, argh...");
+
+        }
+
+        static void SetupSourceWatcher(CLOptions options)
+        {
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
             var testAssemblyPath = options.TestAssemblyPath.Replace("\"", string.Empty);
 
+            GetSourceWatcher(solutionPath, testAssemblyPath);
+
+            sourceWatcher.Watch(solutionPath, @"*.cs");
+        }
+
+
+        static void GetSourceWatcher(string solutionPath, string testAssemblyPath)
+        {
+            var kernel = SetupGilesKernelAndConfig(solutionPath, testAssemblyPath);
+
+            sourceWatcher = kernel.Get<SourceWatcher>();
+        }
+
+
+        static StandardKernel SetupGilesKernelAndConfig(string solutionPath, string testAssemblyPath)
+        {
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
 
             var configFactory = kernel.Get<GilesConfigFactory>();
             config = configFactory.Build();
-            
-            sourceWatcher = kernel.Get<SourceWatcher>();
-
-            sourceWatcher.Watch(solutionPath, @"*.cs");
-
-            DisplayOptions();
-            
-            MainFeedbackLoop();
-
-            Console.WriteLine("See you next time...");
-
+            return kernel;
         }
+
+
+        static void ConsoleSetup()
+        {
+            Console.Clear();
+            Console.CancelKeyPress += Console_CancelKeyPress;
+            Console.WriteLine("Giles - your own personal watcher");
+            Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
+        }
+
+
+        static IList<InteractiveMenuOption> InteractiveMenuOptions;
+
+        static void SetupInteractiveMenuOptions()
+        {
+            InteractiveMenuOptions = new[]
+                  {
+                      new InteractiveMenuOption { HandlesKey = key => key == "?", Task = DisplayInteractiveMenuOptions },
+                      new InteractiveMenuOption { HandlesKey = key => key == "i", Task = DisplayConfig },
+                      new InteractiveMenuOption { HandlesKey = key => key == "c", Task = Console.Clear },
+                      new InteractiveMenuOption { HandlesKey = key => key == "r", Task = sourceWatcher.RunNow },
+                      new InteractiveMenuOption { HandlesKey = key => key == "b", Task = SetBuildDelay },
+                      new InteractiveMenuOption { HandlesKey = key => key == "q", Task = RequestQuit },
+                      new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults }
+                  };
+        }
+
 
         static void MainFeedbackLoop()
         {
-            while (true)
+            while (!QuitRequested)
             {
-                
-                var key = Console.ReadKey(true);
+                var keyValue = Console.ReadKey(true).KeyChar.ToString().ToLower();
 
-                var keyValue = key.KeyChar.ToString().ToLower();
-
-                if (keyValue == "?")
-                    DisplayOptions();
-
-                if (keyValue == "i")
-                    DisplayConfig();
-
-                if (keyValue == "c")
-                    Console.Clear();
-
-                if (keyValue == "r")
-                    sourceWatcher.RunNow();
-
-                if (keyValue == "b")
-                    config.BuildDelay = GetUserValue(config.BuildDelay);
-
-                if (keyValue == "q")
-                    break;
-
-                if (keyValue == "v")
-                    DisplayVerboseResults();
+                InteractiveMenuOptions
+                    .Where(option => option.HandlesKey(keyValue))
+                    .Each(option => option.Task());                
             }
+        }
+
+        static void RequestQuit()
+        {
+            QuitRequested = true;
+        }
+
+        static void SetBuildDelay()
+        {
+            config.BuildDelay = GetUserValue(config.BuildDelay);
         }
 
         static void DisplayVerboseResults()
@@ -116,7 +155,7 @@ namespace Giles
             Console.WriteLine();
         }
 
-        static void DisplayOptions()
+        static void DisplayInteractiveMenuOptions()
         {
             Console.WriteLine("Interactive Console Options:");
             Console.WriteLine("  ? = Display options");
@@ -128,5 +167,11 @@ namespace Giles
             Console.WriteLine("  Q = Quit");
             Console.WriteLine();
         }
+    }
+
+    public class InteractiveMenuOption
+    {
+        public Func<string, bool> HandlesKey;
+        public Action Task;
     }
 }
