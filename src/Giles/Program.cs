@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommandLine;
 using Giles.Core.Configuration;
+using Giles.Core.IO;
 using Giles.Core.Utility;
 using Giles.Core.Watchers;
 using Giles.Options;
@@ -46,13 +47,40 @@ namespace Giles
         static void SetupSourceWatcher(CLOptions options)
         {
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
-            var testAssemblyPath = options.TestAssemblyPath.Replace("\"", string.Empty);
+            var testAssemblyPath = GetTestAssemblyPath(options);
 
             GetSourceWatcher(solutionPath, testAssemblyPath);
 
             sourceWatcher.Watch(solutionPath, @"*.cs");
         }
 
+        private static string GetTestAssemblyPath(CLOptions options)
+        {
+            var testAssemblyPath = options.TestAssemblyPath != null
+                ? options.TestAssemblyPath.Replace("\"", string.Empty)
+                : FindTestAssembly(options);
+
+            if (testAssemblyPath == null)
+            {
+                Console.Error.Write(options.GetUsage());
+                Console.Error.WriteLine("No test assemblies detected. Please specify"
+                    + " the TestAssemblyPath command line option.");
+                Console.Error.WriteLine();
+                Environment.Exit(1);
+            }
+            return testAssemblyPath;
+        }
+
+        private static string FindTestAssembly(CLOptions options)
+        {
+            var testAssemblyFinder = new TestAssemblyFinder(new FileSystem());
+            var testAssemblies = testAssemblyFinder.FindTestAssembliesIn(options.SolutionPath);
+
+            if (testAssemblies.Count() == 0)
+                return null;
+
+            return testAssemblies.First();
+        }
 
         static void GetSourceWatcher(string solutionPath, string testAssemblyPath)
         {
@@ -60,7 +88,6 @@ namespace Giles
 
             sourceWatcher = kernel.Get<SourceWatcher>();
         }
-
 
         static StandardKernel SetupGilesKernelAndConfig(string solutionPath, string testAssemblyPath)
         {
@@ -70,7 +97,6 @@ namespace Giles
             config = configFactory.Build();
             return kernel;
         }
-
 
         static void ConsoleSetup()
         {
