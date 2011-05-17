@@ -32,7 +32,7 @@ assemblyinfo :assemblyInfo do |asm|
 	asm.title = "Giles, Rupert Giles, at your service!"
 	asm.company_name = "codereflection"
 	asm.product_name = "Giles - auto test runner"
-	asm.version = "0.0.2.0"
-	asm.file_version = "0.0.2.0"
-	asm.copyright = "Copyright (c)2011 Jeff 'codereflection' Schumacher"
+	asm.version = "0.1.0.0"
+	asm.file_version = "0.1.0.0"
+	asm.copyright = "Copyright (c)2011 Jeff Schumacher (@codereflection). Rupert Giles and all other Buffy The Vampire Slayer references are copyrights of their respective owners."
 end
