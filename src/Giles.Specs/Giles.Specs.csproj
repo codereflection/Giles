@@ -53,7 +53,9 @@
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
+    <Compile Include="Core\Runners\BuildRunnerSpecs.cs" />
     <Compile Include="Core\Runners\CommandProcessExecutorSpecs.cs" />
+    <Compile Include="Core\Runners\FakeUserDisplay.cs" />
     <Compile Include="Core\Runners\TestRunnerSpecs.cs" />
     <Compile Include="Core\Watchers\SourceWatcherSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
