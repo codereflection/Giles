@@ -57,10 +57,6 @@ namespace Giles.Specs.Core.Configuration
 
         It should_configure_the_console_user_display = () =>
             config.UserDisplay.Count().ShouldBeGreaterThan(0);
-
-        It should_configure_a_command_process_executor = () =>
-            config.Executor.ShouldNotBeNull();
-
     }
 
 }

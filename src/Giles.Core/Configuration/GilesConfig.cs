@@ -27,14 +27,7 @@ namespace Giles.Core.Configuration
             }
         }
 
-        public ICommandProcessExecutor Executor { get; set; }
-
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
         private void NotifyPropertyChanged(string info)
         {
             if (PropertyChanged == null) return;
