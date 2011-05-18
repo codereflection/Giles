@@ -26,7 +26,6 @@ module Kernel
   # that file has already been loaded is preserved.
 
   def require(path) # :doc:
-   puts path
     gem_original_require path
   rescue LoadError => load_error
     if load_error.message.end_with?(path) and Gem.try_activate(path) then
