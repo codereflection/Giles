@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 [assembly: AssemblyTitle("Giles, Rupert Giles, at your service!")]
 [assembly: AssemblyCompany("codereflection")]
 [assembly: AssemblyProduct("Giles - auto test runner")]
