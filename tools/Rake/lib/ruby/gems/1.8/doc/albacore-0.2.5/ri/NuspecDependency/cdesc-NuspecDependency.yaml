@@ -1,0 +1,24 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: id
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NuspecDependency
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: render
+name: NuspecDependency
+superclass: Object

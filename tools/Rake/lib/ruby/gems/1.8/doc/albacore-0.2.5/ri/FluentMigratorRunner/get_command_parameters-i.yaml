@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: FluentMigratorRunner#get_command_parameters
+is_singleton: false
+name: get_command_parameters
+params: ()
+visibility: public

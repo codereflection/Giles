@@ -1,0 +1,78 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: connection
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: namespace
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: preview
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: profile
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: provider
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: script_directory
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: steps
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: target
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: task
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: timeout
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: verbose
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TaskName
+  value: ":fluentmigrator"
+full_name: FluentMigratorRunner
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_command_line
+- !ruby/object:RI::MethodSummary 
+  name: get_command_parameters
+name: FluentMigratorRunner
+superclass: Object

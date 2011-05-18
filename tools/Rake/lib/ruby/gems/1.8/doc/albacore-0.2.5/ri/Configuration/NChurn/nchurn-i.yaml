@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@nchurnconfig)
+comment: 
+full_name: Configuration::NChurn#nchurn
+is_singleton: false
+name: nchurn
+params: () {|@nchurnconfig| ...}
+visibility: public

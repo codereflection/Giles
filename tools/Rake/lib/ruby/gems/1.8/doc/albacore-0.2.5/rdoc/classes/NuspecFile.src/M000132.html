@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>render (NuspecFile)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/nuspec.rb, line 10</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">xml</span>) 
+    <span class="ruby-identifier">depend</span> = <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">add_element</span> <span class="ruby-value str">'file'</span>, { <span class="ruby-value str">'src'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@src</span> }
+    
+    <span class="ruby-identifier">depend</span>.<span class="ruby-identifier">add_attribute</span>( <span class="ruby-value str">'target'</span>, <span class="ruby-ivar">@target</span> ) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: output_to
+comment: 
+constants: []
+
+full_name: OutputBuilder
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: FileUtils
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: dir
+- !ruby/object:RI::MethodSummary 
+  name: erb
+- !ruby/object:RI::MethodSummary 
+  name: file
+- !ruby/object:RI::MethodSummary 
+  name: file
+name: OutputBuilder
+superclass: Object

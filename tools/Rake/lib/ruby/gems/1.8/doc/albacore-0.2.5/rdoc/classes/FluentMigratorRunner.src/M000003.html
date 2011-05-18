@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_command_parameters (FluentMigratorRunner)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/fluentmigratorrunner.rb, line 23</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_command_parameters</span>
+    <span class="ruby-identifier">params</span> = <span class="ruby-node">&quot; /target \&quot;#{@target}\&quot;&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /provider #{@provider}&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /connection \&quot;#{@connection}\&quot;&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /ns #{@namespace}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@namespace</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /out #{@output}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@output</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /preview #{@preview}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@preview</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /steps #{@steps}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@steps</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@steps</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /task #{@task}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /version #{@version}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@version</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@version</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /verbose #{@verbose}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@verbose</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /wd \&quot;#{@script_directory}\&quot;&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@script_directory</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /profile #{@profile}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@profile</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; /timeout #{@timeout}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@timeout</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">params</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

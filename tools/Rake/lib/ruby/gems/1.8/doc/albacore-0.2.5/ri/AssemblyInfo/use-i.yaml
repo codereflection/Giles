@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: AssemblyInfo#use
+is_singleton: false
+name: use
+params: (file)
+visibility: public

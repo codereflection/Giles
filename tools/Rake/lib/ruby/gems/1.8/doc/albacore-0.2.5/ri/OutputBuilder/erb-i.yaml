@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: OutputBuilder#erb
+is_singleton: false
+name: erb
+params: (f, ft, locals)
+visibility: public

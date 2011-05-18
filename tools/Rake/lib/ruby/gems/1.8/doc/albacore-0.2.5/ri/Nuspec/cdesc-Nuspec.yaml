@@ -1,0 +1,85 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: authors
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: description
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: iconUrl
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: id
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: language
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: licenseUrl
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output_file
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: owners
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: projectUrl
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: requireLicenseAcceptance
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: summary
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: tags
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: title
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: version
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: working_directory
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: Nuspec
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: build
+- !ruby/object:RI::MethodSummary 
+  name: check_required_field
+- !ruby/object:RI::MethodSummary 
+  name: dependency
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: file
+name: Nuspec
+superclass: Object

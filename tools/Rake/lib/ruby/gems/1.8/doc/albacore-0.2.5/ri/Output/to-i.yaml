@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Output#to
+is_singleton: false
+name: to
+params: (to_dir)
+visibility: public

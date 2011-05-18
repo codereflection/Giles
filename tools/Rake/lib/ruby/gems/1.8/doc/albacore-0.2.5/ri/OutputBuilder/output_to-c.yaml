@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: OutputBuilder.new(dir_to, dir_from)
+comment: 
+full_name: OutputBuilder::output_to
+is_singleton: true
+name: output_to
+params: (dir_to, dir_from) {|OutputBuilder.new(dir_to, dir_from)| ...}
+visibility: public

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>execute (SQLCmd)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/sqlcmd.rb, line 22</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">execute</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">check_command</span>
+    
+    <span class="ruby-identifier">cmd_params</span>=[]
+    <span class="ruby-identifier">serverParam</span> = <span class="ruby-ivar">@server</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-identifier">build_parameter</span>(<span class="ruby-value str">&quot;S&quot;</span>, <span class="ruby-value str">&quot;.&quot;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">build_parameter</span>(<span class="ruby-value str">&quot;S&quot;</span>, <span class="ruby-ivar">@server</span>)
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">serverParam</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_parameter</span>(<span class="ruby-value str">&quot;d&quot;</span>, <span class="ruby-ivar">@database</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@database</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_authentication_params</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_variable_list</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@variables</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_batch_abort_param</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_script_list</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@scripts</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">cmd_params</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">build_parameter</span>(<span class="ruby-value str">&quot;V&quot;</span>, <span class="ruby-ivar">@severity</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@severity</span>.<span class="ruby-identifier">nil?</span>
+    
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">run_command</span> <span class="ruby-value str">&quot;SQLCmd&quot;</span>, <span class="ruby-identifier">cmd_params</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+    
+    <span class="ruby-identifier">failure_msg</span> = <span class="ruby-value str">'SQLCmd Failed. See Build Log For Detail.'</span>
+    <span class="ruby-identifier">fail_with_message</span> <span class="ruby-identifier">failure_msg</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">result</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

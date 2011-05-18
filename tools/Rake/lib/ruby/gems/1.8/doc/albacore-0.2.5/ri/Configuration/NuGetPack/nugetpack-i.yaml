@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@config)
+comment: 
+full_name: Configuration::NuGetPack#nugetpack
+is_singleton: false
+name: nugetpack
+params: () {|@config| ...}
+visibility: public

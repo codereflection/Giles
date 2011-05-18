@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nuspec#build
+is_singleton: false
+name: build
+params: (document)
+visibility: public

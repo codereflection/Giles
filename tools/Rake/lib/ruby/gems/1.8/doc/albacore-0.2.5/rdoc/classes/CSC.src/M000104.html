@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_debug_param (CSC)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/csc.rb, line 44</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_debug_param</span>
+    <span class="ruby-keyword kw">case</span> <span class="ruby-ivar">@debug</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-keyword kw">true</span>
+        <span class="ruby-value str">&quot;/debug&quot;</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:full</span>
+        <span class="ruby-value str">&quot;/debug:full&quot;</span>
+      <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:pdbonly</span>
+        <span class="ruby-value str">&quot;/debug:pdbonly&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

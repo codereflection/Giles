@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@mstestconfig)
+comment: 
+full_name: Configuration::MSTest#mstest
+is_singleton: false
+name: mstest
+params: () {|@mstestconfig| ...}
+visibility: public

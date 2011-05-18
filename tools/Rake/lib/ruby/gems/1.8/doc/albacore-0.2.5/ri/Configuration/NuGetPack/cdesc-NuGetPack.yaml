@@ -1,0 +1,18 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: nugetpackconfig
+comment: 
+constants: []
+
+full_name: Configuration::NuGetPack
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Configuration
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: nugetpack
+name: NuGetPack
+superclass: 

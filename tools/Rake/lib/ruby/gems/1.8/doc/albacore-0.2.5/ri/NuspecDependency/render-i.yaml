@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: NuspecDependency#render
+is_singleton: false
+name: render
+params: ( xml )
+visibility: public

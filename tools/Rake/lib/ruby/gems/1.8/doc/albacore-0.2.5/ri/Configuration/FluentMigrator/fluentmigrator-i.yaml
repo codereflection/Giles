@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@fluentmigratorconfig)
+comment: 
+full_name: Configuration::FluentMigrator#fluentmigrator
+is_singleton: false
+name: fluentmigrator
+params: () {|@fluentmigratorconfig| ...}
+visibility: public

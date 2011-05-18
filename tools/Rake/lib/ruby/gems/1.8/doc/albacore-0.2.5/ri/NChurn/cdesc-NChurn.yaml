@@ -1,0 +1,77 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: adapter
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: churn
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: env_path
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: exclude
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: from
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: include
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: output
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: report_as
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: top
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NChurn
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: adapter
+- !ruby/object:RI::MethodSummary 
+  name: churn
+- !ruby/object:RI::MethodSummary 
+  name: churn_precent
+- !ruby/object:RI::MethodSummary 
+  name: env_path
+- !ruby/object:RI::MethodSummary 
+  name: exclude
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: from
+- !ruby/object:RI::MethodSummary 
+  name: include
+- !ruby/object:RI::MethodSummary 
+  name: input
+- !ruby/object:RI::MethodSummary 
+  name: output
+- !ruby/object:RI::MethodSummary 
+  name: report_as
+- !ruby/object:RI::MethodSummary 
+  name: top
+name: NChurn
+superclass: Object

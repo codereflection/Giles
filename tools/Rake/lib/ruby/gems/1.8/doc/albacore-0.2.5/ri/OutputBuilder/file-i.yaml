@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: OutputBuilder#file
+is_singleton: false
+name: file
+params: (f, ft)
+visibility: public

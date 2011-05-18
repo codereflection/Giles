@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nuspec#check_required_field
+is_singleton: false
+name: check_required_field
+params: (field, fieldname)
+visibility: public

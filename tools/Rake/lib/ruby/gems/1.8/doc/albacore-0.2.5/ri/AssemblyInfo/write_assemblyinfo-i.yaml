@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: AssemblyInfo#write_assemblyinfo
+is_singleton: false
+name: write_assemblyinfo
+params: (assemblyinfo_file, input_file)
+visibility: public

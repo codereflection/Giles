@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>build (Nuspec)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/albacore/nuspec.rb, line 72</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build</span>(<span class="ruby-identifier">document</span>)
+    <span class="ruby-identifier">document</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">XMLDecl</span>.<span class="ruby-identifier">new</span>
+
+    <span class="ruby-identifier">package</span> = <span class="ruby-identifier">document</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'package'</span>)
+    <span class="ruby-identifier">package</span>.<span class="ruby-identifier">add_attribute</span>(<span class="ruby-value str">&quot;xmlns&quot;</span>, <span class="ruby-value str">&quot;http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd&quot;</span>)
+
+    <span class="ruby-identifier">metadata</span> = <span class="ruby-identifier">package</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'metadata'</span>)
+    
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'id'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@id</span>)
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'version'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@version</span>)
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'title'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@title</span>)
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'authors'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@authors</span>)
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'description'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@description</span>)
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'language'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@language</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@language</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'licenseUrl'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@licenseUrl</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@licenseUrl</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'projectUrl'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@projectUrl</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@projectUrl</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'owners'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@owners</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@owners</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'summary'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@summary</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@summary</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'iconUrl'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@iconUrl</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@iconUrl</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'requireLicenseAcceptance'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@requireLicenseAcceptance</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@requireLicenseAcceptance</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'tags'</span>).<span class="ruby-identifier">add_text</span>(<span class="ruby-ivar">@tags</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@tags</span>.<span class="ruby-identifier">nil?</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@dependencies</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">depend</span> = <span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'dependencies'</span>)
+      <span class="ruby-ivar">@dependencies</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">depend</span>)}
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">files</span> = <span class="ruby-identifier">package</span>.<span class="ruby-identifier">add_element</span>(<span class="ruby-value str">'files'</span>)
+      <span class="ruby-ivar">@files</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">files</span>)}
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
