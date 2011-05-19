@@ -72,6 +72,7 @@
     <Compile Include="Runners\ITestRunnerResolver.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
+    <Compile Include="Runners\TestRunnerResolver.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />

@@ -28,7 +28,6 @@ namespace Giles
             Bind<GilesConfigFactory>().ToSelf()
                 .WithConstructorArgument("solutionPath", solutionPath)
                 .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
-            Bind<ITestRunnerResolver>().To<TestRunnerResolver>().InSingletonScope();
         }
     }
 }
