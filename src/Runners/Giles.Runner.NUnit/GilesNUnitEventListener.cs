@@ -43,7 +43,7 @@ namespace Giles.Runner.NUnit
 
         public void TestFinished(TestResult result)
         {
-            sessionResults.Messages.Add(string.Format("{0}: {1}", result.Name, result.ResultState.ToString()));
+            sessionResults.Messages.Add(string.Format("\n{0}: {1}", result.Name, result.ResultState.ToString()));
             var testResult = new Core.Runners.TestResult { Name = result.Name, TestRunner = _testRunnerName };
             if (result.IsSuccess)
                 testResult.State = TestState.Passed;

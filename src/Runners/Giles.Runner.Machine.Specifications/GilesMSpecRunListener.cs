@@ -50,7 +50,7 @@ namespace Giles.Runner.Machine.Specifications
 
         public void OnContextStart(ContextInfo context)
         {
-            SessionResults.Messages.Add(context.FullName);
+            SessionResults.Messages.Add(string.Format("\n{0}", context.FullName));
         }
 
         public void OnContextEnd(ContextInfo context)
@@ -65,7 +65,7 @@ namespace Giles.Runner.Machine.Specifications
         public void OnSpecificationEnd(SpecificationInfo specification, Result result)
         {
             var formatter = resultFormatterFactory.GetResultFormatterFor(result);
-            SessionResults.Messages.Add(formatter.FormatResult(specification));
+            SessionResults.Messages.Add(formatter.FormatResult(specification, result));
 
             var testResult = new TestResult { Name = specification.Name, TestRunner = _testRunnerName };
 
