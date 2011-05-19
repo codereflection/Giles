@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\ProjectVersion.cs">
-      <Link>ProjectVersion.cs</Link>
+      <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="GilesNUnitEventListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
