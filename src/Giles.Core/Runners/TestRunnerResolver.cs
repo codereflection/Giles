@@ -24,6 +24,9 @@ namespace Giles.Core.Runners
 
         public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
         {
+            if (assembly == null)
+                return Enumerable.Empty<IFrameworkRunner>();
+
             var referencedAssemblies = assembly.GetReferencedAssemblies();
 
             var result =

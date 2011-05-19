@@ -69,7 +69,7 @@
     <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\ITestListener.cs" />
-    <Compile Include="Runners\ITestRunnerResolver.cs" />
+    <Compile Include="Runners\FrameworkRunnerLocator.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
     <Compile Include="Runners\TestRunnerResolver.cs" />
