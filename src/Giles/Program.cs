@@ -75,11 +75,14 @@ namespace Giles
         static void ConsoleSetup()
         {
             Console.Clear();
+            Console.Title = "Grr, argh.";
+            GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
+            Console.SetBufferSize(1024, 5000);
+            Console.SetWindowSize(150, 69);
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
             Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
         }
-
 
         static IList<InteractiveMenuOption> InteractiveMenuOptions;
 
