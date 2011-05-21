@@ -6,8 +6,8 @@ using System.Collections.Generic;
 namespace Giles.Runner.Xunit {
     public class GilesXunitLogger : XunitFx.IRunnerLogger {
 
-        private List<TestResult>  _sessionResults = null;
-        public IList<TestResult> sessionResults { get { return _sessionResults; } }
+        private SessionResults  _sessionResults = null;
+        public SessionResults SessionResults { get { return _sessionResults; } }
 
         public void AssemblyFinished(string assemblyFilename, int total, int failed, int skipped, double time) {
             throw new NotImplementedException();

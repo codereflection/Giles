@@ -8,14 +8,15 @@ namespace Giles.Runner.Xunit {
     public class XunitTestRunner : IFrameworkRunner {
         public SessionResults RunAssembly(Assembly assembly) {
             var sessionResults = new SessionResults();
+            var logger = new GilesXunitLogger();
             using (var exWrapper = new XunitFx.ExecutorWrapper(new Uri(assembly.CodeBase).LocalPath, null, false)) {
-                var logger = new XunitLogger();
+
                 var runner = new XunitFx.TestRunner(exWrapper, logger);
                 var result = runner.RunAssembly();
                 sessionResults.TestResults = new List<TestResult>();
                 
             }
-            return sessionResults;
+            return logger.SessionResults;
         }
     }
 }
