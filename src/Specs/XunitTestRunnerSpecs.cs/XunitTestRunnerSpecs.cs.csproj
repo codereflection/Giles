@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C941D115-6E15-4D73-81BD-9293CDB10BB8}</ProjectGuid>
+    <ProjectGuid>{4DA890A6-9916-4164-9ECD-717E59AE9BF5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Giles.Runner.XUnit</RootNamespace>
-    <AssemblyName>Giles.Runner.XUnit</AssemblyName>
+    <RootNamespace>XunitTestRunnerSpecs.cs</RootNamespace>
+    <AssemblyName>XunitTestRunnerSpecs.cs</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,22 +33,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="xunit.runner.utility">
-      <HintPath>..\..\..\..\..\DevTools\Fx\testing\xunit-1.8\xunit.runner.utility.dll</HintPath>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\..\packages\xunit.1.8.0.1545\lib\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GilesXunitLogger.cs" />
-    <Compile Include="XunitTestRunner.cs" />
+    <Compile Include="when_using_Giles_to_run_Xunit_tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XunitLogger.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
-      <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
-      <Name>Giles.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
