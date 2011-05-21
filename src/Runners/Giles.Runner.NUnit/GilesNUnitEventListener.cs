@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Giles.Core.Runners;
 using NUnit.Core;
 using TestResult = NUnit.Core.TestResult;
@@ -43,7 +44,8 @@ namespace Giles.Runner.NUnit
 
         public void TestFinished(TestResult result)
         {
-            sessionResults.Messages.Add(string.Format("{0}: {1}", result.Name, result.ResultState.ToString()));
+            sessionResults.Messages.Add(string.Format("\n{0}: {1}", result.Name, result.ResultState));
+
             var testResult = new Core.Runners.TestResult { Name = result.Name, TestRunner = _testRunnerName };
             if (result.IsSuccess)
                 testResult.State = TestState.Passed;
@@ -56,6 +58,7 @@ namespace Giles.Runner.NUnit
                 default:
                     testResult.State = TestState.Failed;
                     testResult.StackTrace = result.StackTrace;
+                    sessionResults.Messages.Add(string.Format("\n{0}\n{1}", result.Message, result.StackTrace));
                     break;
             }
             testResults.Add(testResult);

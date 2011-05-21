@@ -56,6 +56,7 @@
     <Compile Include="Core\Runners\BuildRunnerSpecs.cs" />
     <Compile Include="Core\Runners\CommandProcessExecutorSpecs.cs" />
     <Compile Include="Core\Runners\FakeUserDisplay.cs" />
+    <Compile Include="Core\Runners\TestRunnerResolverSpecs.cs" />
     <Compile Include="Core\Runners\TestRunnerSpecs.cs" />
     <Compile Include="Core\Watchers\SourceWatcherSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +76,10 @@
     <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
       <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
       <Name>Giles.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.Machine.Specifications\Giles.Runner.Machine.Specifications.csproj">
+      <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
+      <Name>Giles.Runner.Machine.Specifications</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

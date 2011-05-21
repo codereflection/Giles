@@ -21,7 +21,7 @@ namespace Giles.Specs.Core.Watchers
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
         static GilesConfig config;
-        static ITestRunnerResolver resolver;
+        static TestRunnerResolver resolver;
 
         Establish context = () =>
             {
@@ -29,7 +29,6 @@ namespace Giles.Specs.Core.Watchers
                 buildRunner = Substitute.For<IBuildRunner>();
                 testRunner = Substitute.For<ITestRunner>();
                 fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
-                resolver = Substitute.For<ITestRunnerResolver>();
 
                 config = new GilesConfig();
 

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +6,7 @@ using System.Reflection;
 
 namespace Giles.Core.Runners
 {
-    public interface ITestRunnerResolver
-    {
-        IEnumerable<IFrameworkRunner> Resolve(Assembly assembly);
-    }
-
-    public class TestRunnerResolver : ITestRunnerResolver
+    public class TestRunnerResolver
     {
         readonly Func<AssemblyName, bool> mSpecRunnerPredicate =
             assemblyName => assemblyName.Name.Equals("Machine.Specifications", StringComparison.InvariantCultureIgnoreCase);
@@ -29,6 +24,9 @@ namespace Giles.Core.Runners
 
         public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
         {
+            if (assembly == null)
+                return Enumerable.Empty<IFrameworkRunner>();
+
             var referencedAssemblies = assembly.GetReferencedAssemblies();
 
             var result =
@@ -77,11 +75,5 @@ namespace Giles.Core.Runners
                 .FirstOrDefault();
             return result;
         }
-    }
-
-    internal class FrameworkRunnerLocator
-    {
-        internal Func<AssemblyName, bool> CheckReference { get; set; }
-        internal Func<IFrameworkRunner> GetTheRunner { get; set; }
     }
 }

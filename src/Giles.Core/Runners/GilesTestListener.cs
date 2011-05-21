@@ -86,8 +86,8 @@ namespace Giles.Core.Runners
 
         public void DisplayVerboseResults()
         {
-            Console.WriteLine("Verbose results:");
-            output.Each(x => Console.WriteLine(x));
+            Console.WriteLine("\n\nVerbose test results:");
+            output.Each(x => Console.WriteLine(x.Value));
         }
     }
 }
