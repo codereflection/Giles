@@ -23,7 +23,7 @@ namespace Giles.Core.Configuration
         public GilesConfig Build()
         {
             config.TestAssemblyPath = testAssemblyPath;
-            config.SolutionPath = solutionPath;
+            config.SolutionPath = "" + solutionPath + "";
 
             config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};
             return config;
