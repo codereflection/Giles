@@ -9,7 +9,7 @@ namespace Giles.Core.Runners
 {
     public class TestFrameworkResolver
     {
-        List<TestFrameworkInspector> supportedFrameworkRunners = new List<TestFrameworkInspector>();
+        readonly List<TestFrameworkInspector> supportedFrameworkRunners = new List<TestFrameworkInspector>();
 
         public TestFrameworkResolver()
         {
@@ -18,27 +18,28 @@ namespace Giles.Core.Runners
 
         void BuildRunnerList()
         {
-            var location = Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location);
+            var files = GetAssembliesFromExecutingPath();
 
-            var files = Directory.GetFiles(location, "*.dll");
-
-            files.Each(file =>
-                           {
-                               var assembly = Assembly.LoadFrom(file);
-                               var types = assembly.GetTypes()
-                                                    .Where(type => type.IsSubclassOf(typeof(TestFrameworkInspector))).ToList();
-
-                               if (types.Count == 0)
-                                   return;
-
-                               types.Each(type =>
-                                              {
-                                                  Console.WriteLine("Found type {0}", type.FullName);
-                                                  supportedFrameworkRunners.Add(Activator.CreateInstance(type) as TestFrameworkInspector);
-                                              });
-                           });
+            files.Each(AddTestFrameworkInspectorsFromAssembly);
         }
 
+        void AddTestFrameworkInspectorsFromAssembly(string file)
+        {
+            var assembly = Assembly.LoadFrom(file);
+            var types = assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(TestFrameworkInspector))).ToList();
+
+            if (types.Count == 0)
+                return;
+
+            types.Each(type => supportedFrameworkRunners.Add(Activator.CreateInstance(type) as TestFrameworkInspector));
+        }
+
+        static IEnumerable<string> GetAssembliesFromExecutingPath()
+        {
+            var location = Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location);
+
+            return Directory.GetFiles(location, "*.dll");
+        }
 
         public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
         {

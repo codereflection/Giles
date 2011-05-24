@@ -46,6 +46,7 @@
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="GilesNUnitEventListener.cs" />
+    <Compile Include="NUnitTestFrameworkInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestRunner.cs" />
   </ItemGroup>

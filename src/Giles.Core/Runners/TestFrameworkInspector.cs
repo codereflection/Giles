@@ -5,6 +5,12 @@ using System.Reflection;
 
 namespace Giles.Core.Runners
 {
+    /// <summary>
+    /// A Giles Inspector has two purposes:
+    /// 1) Provide a method to determine if the target assembly meets the requirements to be a valid test assembly for
+    ///    the runner (i.e. - requiring that the assembly has a reference to nunit.framework)
+    /// 2) Provide a method to get an instance of the Giles runner to run the tests in the target assembly
+    /// </summary>
     public abstract class TestFrameworkInspector
     {
         public abstract Func<AssemblyName, bool> Requirement { get; }
@@ -30,41 +36,6 @@ namespace Giles.Core.Runners
                 .Where(x => typeof(IFrameworkRunner).IsAssignableFrom(x) && x.IsClass)
                 .FirstOrDefault();
             return result;
-        }
-    
-    }
-
-    public class MSpecTestFrameworkInspector : TestFrameworkInspector
-    {
-        public override Func<AssemblyName, bool> Requirement
-        {
-            get
-            {
-                return assemblyName =>
-                    assemblyName.Name.Equals("Machine.Specifications", StringComparison.InvariantCultureIgnoreCase);
-            }
-        }
-
-        public override Func<IFrameworkRunner> Get
-        {
-            get { return () => GetRunnerBy("Giles.Runner.Machine.Specifications.dll"); }
-        }
-    }
-
-    public class NUnitTestFrameworkInspector : TestFrameworkInspector
-    {
-        public override Func<AssemblyName, bool> Requirement
-        {
-            get
-            {
-                return assemblyName =>
-                    assemblyName.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
-            }
-        }
-
-        public override Func<IFrameworkRunner> Get
-        {
-            get { return () => GetRunnerBy("Giles.Runner.NUnit.dll"); }
-        }
+        }    
     }
 }
