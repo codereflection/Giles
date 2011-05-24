@@ -99,6 +99,10 @@
       <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
       <Name>Giles.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Giles.Runner.XUnit\Giles.Runner.XUnit.csproj">
+      <Project>{C941D115-6E15-4D73-81BD-9293CDB10BB8}</Project>
+      <Name>Giles.Runner.XUnit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Runners\Giles.Runner.Machine.Specifications\Giles.Runner.Machine.Specifications.csproj">
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>

@@ -150,6 +150,7 @@ namespace Giles {
             Console.WriteLine("  Solution: " + config.SolutionPath);
             Console.WriteLine("  Project Root: " + config.ProjectRoot);
             Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
+            config.TestRunners.Each(r => Console.WriteLine("  " + r.Key + " Has been enabled"));
             Console.WriteLine();
         }
 
