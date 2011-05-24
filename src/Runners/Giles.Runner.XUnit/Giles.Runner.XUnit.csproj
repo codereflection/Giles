@@ -48,7 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
+    <ProjectReference Include="..\..\Giles.Core\Giles.Core.csproj">
       <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
       <Name>Giles.Core</Name>
     </ProjectReference>

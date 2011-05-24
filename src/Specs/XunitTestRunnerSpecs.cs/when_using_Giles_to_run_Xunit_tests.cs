@@ -23,8 +23,8 @@ namespace Giles.Tests.Runner.Xunit
 
 
         [Fact]
-        public void it_should_load_the_xunit_runner_assembly_into_the_AppDomain() {
-            Assert.True(AppDomain.CurrentDomain.GetAssemblies().Any(a=> a.FullName.Contains("xunit.runner.utility")));
+        public void it_should_load_the_xunit_assembly_into_the_AppDomain() {
+            Assert.True(AppDomain.CurrentDomain.GetAssemblies().Any(a=> a.FullName.Contains("xunit")));
             
         }
     }
