@@ -107,6 +107,10 @@
       <Project>{C2A0F1C6-AA13-468F-844C-0D93A5C299D4}</Project>
       <Name>Giles.Runner.NUnit</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.XUnit\Giles.Runner.XUnit.csproj">
+      <Project>{C941D115-6E15-4D73-81BD-9293CDB10BB8}</Project>
+      <Name>Giles.Runner.XUnit</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
