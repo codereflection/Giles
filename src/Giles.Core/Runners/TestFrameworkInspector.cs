@@ -13,14 +13,24 @@ namespace Giles.Core.Runners
     /// </summary>
     public abstract class TestFrameworkInspector
     {
+        /// <summary>
+        /// Passes a referenced assembly from the target assembly
+        /// Must return true if the referenced assembly meets the requirements of the test framework runner (i.e. = having a reference to nunit.framework)
+        /// </summary>
         public abstract Func<AssemblyName, bool> Requirement { get; }
         public abstract Func<IFrameworkRunner> Get { get; }
 
-        public static IFrameworkRunner GetRunnerBy(string runnerAssemblyName)
+
+        /// <summary>
+        /// Returns an instance of the first test framework runner that implements IFrameworkRunner found in the runnerAssemblyPath
+        /// </summary>
+        /// <param name="runnerAssemblyPath">Filename to load the assembly from</param>
+        /// <returns>An instance of the first class found that implements IFrameworkRunner</returns>
+        public static IFrameworkRunner GetRunnerBy(string runnerAssemblyPath)
         {
             var assemblyLocation =
                 Path.Combine(Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location),
-                             runnerAssemblyName);
+                             runnerAssemblyPath);
 
             var runner = GetRunnerFrom(assemblyLocation);
 

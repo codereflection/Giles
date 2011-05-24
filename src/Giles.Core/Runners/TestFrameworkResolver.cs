@@ -16,6 +16,22 @@ namespace Giles.Core.Runners
             BuildRunnerList();
         }
 
+        public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
+        {
+            if (assembly == null)
+                return Enumerable.Empty<IFrameworkRunner>();
+
+            var referencedAssemblies = assembly.GetReferencedAssemblies();
+
+            var result =
+                supportedFrameworkRunners
+                    .Where(theRunner => referencedAssemblies.AnyMatchesRequirementFor(theRunner.Requirement))
+                    .Select(theRunner => theRunner.Get.Invoke());
+
+            return result;
+        }
+
+
         void BuildRunnerList()
         {
             var files = GetAssembliesFromExecutingPath();
@@ -39,21 +55,6 @@ namespace Giles.Core.Runners
             var location = Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location);
 
             return Directory.GetFiles(location, "*.dll");
-        }
-
-        public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
-        {
-            if (assembly == null)
-                return Enumerable.Empty<IFrameworkRunner>();
-
-            var referencedAssemblies = assembly.GetReferencedAssemblies();
-
-            var result =
-                supportedFrameworkRunners
-                    .Where(theRunner => referencedAssemblies.AnyMatchesRequirementFor(theRunner.Requirement))
-                    .Select(theRunner => theRunner.Get.Invoke());
-
-            return result;
         }
     }
 }

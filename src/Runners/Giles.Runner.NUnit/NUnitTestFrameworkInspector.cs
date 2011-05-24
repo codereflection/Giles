@@ -10,14 +10,14 @@ namespace Giles.Runner.NUnit
         {
             get
             {
-                return assemblyName =>
-                       assemblyName.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
+                return referencedAssembly =>
+                       referencedAssembly.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
             }
         }
 
         public override Func<IFrameworkRunner> Get
         {
-            get { return () => GetRunnerBy("Giles.Runner.NUnit.dll"); }
+            get { return () => GetRunnerBy(typeof(NUnitTestFrameworkInspector).Assembly.ManifestModule.Name); }
         }
     }
 }

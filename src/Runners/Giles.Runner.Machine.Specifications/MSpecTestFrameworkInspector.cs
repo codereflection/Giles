@@ -10,14 +10,14 @@ namespace Giles.Runner.Machine.Specifications
         {
             get
             {
-                return assemblyName =>
-                       assemblyName.Name.Equals("Machine.Specifications", StringComparison.InvariantCultureIgnoreCase);
+                return referencedAssembly =>
+                       referencedAssembly.Name.Equals("Machine.Specifications", StringComparison.InvariantCultureIgnoreCase);
             }
         }
 
         public override Func<IFrameworkRunner> Get
         {
-            get { return () => GetRunnerBy("Giles.Runner.Machine.Specifications.dll"); }
+            get { return () => GetRunnerBy(typeof(MSpecTestFrameworkInspector).Assembly.ManifestModule.Name); }
         }
     }
 }
