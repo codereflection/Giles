@@ -140,7 +140,12 @@ namespace Giles.Core.Configuration
 
         private XmlNode ProjectNode
         {
-            get { return document.FirstChild.NextSibling; }
+            get
+            {
+                return (from XmlNode node in document.ChildNodes
+                        where node.Name.Equals("Project", StringComparison.OrdinalIgnoreCase)
+                        select node).First();
+            }
         }
     }
 }
