@@ -71,12 +71,14 @@
     <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Runners\ITestListener.cs" />
-    <Compile Include="Runners\ITestRunnerResolver.cs" />
+    <Compile Include="Runners\TestFrameworkInspector.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
+    <Compile Include="Runners\TestFrameworkResolver.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
+    <Compile Include="Utility\AssemblyExtensions.cs" />
     <Compile Include="Utility\RandomExtensionMethods.cs" />
     <Compile Include="Watchers\LastRunResults.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />

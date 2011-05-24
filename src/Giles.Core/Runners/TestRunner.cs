@@ -40,8 +40,7 @@ namespace Giles.Core.Runners
             if (x.Value.Options.Count > 0)
                 args += " " + x.Value.Options.Aggregate((working, next) => working + next);
 
-           
-            var result = config.Executor.Execute(x.Value.Path, args);
+            var result = CommandProcessExecutor.Execute(x.Value.Path, args);
 
             config.UserDisplay.Each(display => display.DisplayResult(result));
         }

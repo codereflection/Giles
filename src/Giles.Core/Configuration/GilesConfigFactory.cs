@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Giles.Core.Runners;
 using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
@@ -24,10 +23,9 @@ namespace Giles.Core.Configuration
         public GilesConfig Build()
         {
             config.TestAssemblyPath = testAssemblyPath;
-            config.SolutionPath = solutionPath;
+            config.SolutionPath = "" + solutionPath + "";
 
             config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};
-            config.Executor = new CommandProcessExecutor();
             return config;
         }
     }

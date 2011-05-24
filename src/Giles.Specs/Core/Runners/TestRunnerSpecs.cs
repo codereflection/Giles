@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Giles.Core.Configuration;
 using Giles.Core.Runners;
@@ -13,7 +14,6 @@ namespace Giles.Specs.Core.Runners
         protected static string solutionFolder;
         protected static string testAssemblyPath;
         protected static GilesConfig config;
-        static ICommandProcessExecutor executor;
         static Dictionary<string, RunnerAssembly> runners;
 
         Establish context = () =>
@@ -22,14 +22,11 @@ namespace Giles.Specs.Core.Runners
                                     solutionPath = @"c:\solutionFolder\mySolution.sln";
                                     testAssemblyPath = @"c:\solutionFolder\testProject\bin\debug\testAssembly.dll";
                                     runners = new Dictionary<string, RunnerAssembly>();
-                                    runners.Add("foo", new RunnerAssembly{Enabled = true, Options = new List<string>{"bar"}, Path = "baz"});
-                                    executor = Substitute.For<ICommandProcessExecutor>();
-                                    executor.Execute(Arg.Any<string>(),Arg.Any<string>()).Returns(new ExecutionResult{ExitCode = 0, Output = "poo"});
+                                    runners.Add("foo", new RunnerAssembly { Enabled = true, Options = new List<string> { "bar" }, Path = "baz" });
 
                                     config = new GilesConfig()
                                                  {
-                                                     BuildDelay = 1, 
-                                                     Executor = executor, 
+                                                     BuildDelay = 1,
                                                      ProjectRoot = solutionFolder,
                                                      SolutionPath = solutionPath,
                                                      TestAssemblyPath = testAssemblyPath,
@@ -41,10 +38,21 @@ namespace Giles.Specs.Core.Runners
 
     public class when_running_a_test_runner : with_a_test_runner
     {
+        static bool executeReceived;
+
+        Establish context = () =>
+            CommandProcessExecutor.Execute = (filename, args) => ExecuteReceiver(filename, args);
+
+        static ExecutionResult ExecuteReceiver(string filename, string args)
+        {
+            executeReceived = true;
+            return new ExecutionResult { ExitCode = 0 };
+        }
+
         Because of = () =>
             runner.Run();
 
         It should_execute_the_runner = () =>
-           config.Executor.Received().Execute(Arg.Any<string>(), Arg.Any<string>());
+           executeReceived.ShouldBeTrue();
     }
 }

@@ -25,7 +25,7 @@ namespace Giles.Core.Runners
             config.UserDisplay.Each(display => display.DisplayMessage("Building..."));
 
             watch.Start();
-            var result = config.Executor.Execute(settings.MsBuild, config.SolutionPath);
+            var result = CommandProcessExecutor.Execute(settings.MsBuild, "\"" + config.SolutionPath + "\"");
             watch.Stop();
             
             var message = FormatBuildMessages(watch, result);

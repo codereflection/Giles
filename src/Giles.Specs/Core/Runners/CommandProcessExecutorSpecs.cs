@@ -6,19 +6,17 @@ namespace Giles.Specs.Core.Runners
 {
     public class when_setting_up_a_process
     {
-        static CommandProcessExecutor runner;
         static Process result;
         static string fileName;
         static string arguments;
 
         Establish context = () =>
                                 {
-                                    runner = new CommandProcessExecutor();
                                     fileName = "test.exe";
                                     arguments = "/runtest";
                                 };
         Because of = () =>
-            result = runner.SetupProcess(fileName, arguments);
+            result = CommandProcessExecutor.SetupProcess(fileName, arguments);
 
         It should_have_a_result = () =>
             result.ShouldNotBeNull();
