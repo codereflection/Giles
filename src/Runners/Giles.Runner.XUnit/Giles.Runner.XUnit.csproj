@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GilesXunitLogger.cs" />
+    <Compile Include="XUnitTestFrameworkInspector.cs" />
     <Compile Include="XunitTestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

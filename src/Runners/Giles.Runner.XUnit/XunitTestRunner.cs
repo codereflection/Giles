@@ -1,7 +1,6 @@
 ﻿using Giles.Core.Runners;
 using System;
 using XunitFx = Xunit;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace Giles.Runner.Xunit {
