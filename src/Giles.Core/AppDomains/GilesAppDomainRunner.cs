@@ -16,7 +16,7 @@ namespace Giles.Core.AppDomains
         {            
             var testAssembly = Assembly.LoadFrom(testAssemblyPath);
 
-            var testFrameworkRunner = new TestRunnerResolver().Resolve(testAssembly).ToList();
+            var testFrameworkRunner = new TestFrameworkResolver().Resolve(testAssembly).ToList();
 
             var result = new List<SessionResults>();
             testFrameworkRunner.ForEach(x => result.Add(x.RunAssembly(testAssembly)));

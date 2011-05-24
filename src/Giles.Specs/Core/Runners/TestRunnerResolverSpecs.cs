@@ -8,10 +8,10 @@ namespace Giles.Specs.Core.Runners
 {
     public class with_a_test_runner_resolver
     {
-        protected static TestRunnerResolver subject;
+        protected static TestFrameworkResolver subject;
 
         Establish context = () =>
-            subject = new TestRunnerResolver();
+            subject = new TestFrameworkResolver();
     }
 
     public class when_resolving_for_a_test_runner_in_an_assembly_without_a_test_framework
@@ -21,7 +21,7 @@ namespace Giles.Specs.Core.Runners
         static IEnumerable<IFrameworkRunner> result;
 
         Establish context = () =>
-            assembly = typeof(TestRunnerResolver).Assembly;
+            assembly = typeof(TestFrameworkResolver).Assembly;
 
         Because of = () =>
             result = subject.Resolve(assembly);

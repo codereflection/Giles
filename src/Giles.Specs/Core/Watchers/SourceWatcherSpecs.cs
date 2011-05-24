@@ -21,7 +21,7 @@ namespace Giles.Specs.Core.Watchers
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
         static GilesConfig config;
-        static TestRunnerResolver resolver;
+        static TestFrameworkResolver resolver;
 
         Establish context = () =>
             {
