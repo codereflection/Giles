@@ -34,12 +34,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="xunit">
-      <HintPath>..\..\lib\xunit-1.8\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.runner.utility, Version=1.8.0.1545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\xunit-1.8\xunit.runner.utility.dll</HintPath>
+    <Reference Include="xunit.runner.utility">
+      <HintPath>..\..\..\lib\xunit-1.8\xunit.runner.utility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
