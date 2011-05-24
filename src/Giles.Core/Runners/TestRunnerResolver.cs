@@ -14,6 +14,9 @@ namespace Giles.Core.Runners
         readonly Func<AssemblyName, bool> nUnitRunnerPredicate =
             assemblyName => assemblyName.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
 
+        readonly Func<AssemblyName, bool> xUnitRunnerPredicate =
+            assemblyName => assemblyName.Name.Equals("xunit", StringComparison.InvariantCultureIgnoreCase);
+
         List<FrameworkRunnerLocator> runners;
 
         public TestRunnerResolver()
@@ -41,7 +44,8 @@ namespace Giles.Core.Runners
         {
             var mspecFrameworkRunner = new FrameworkRunnerLocator { CheckReference = mSpecRunnerPredicate, GetTheRunner = GetMSpecRunner };
             var nunitFrameworkRunner = new FrameworkRunnerLocator { CheckReference = nUnitRunnerPredicate, GetTheRunner = GetNUnitRunner };
-            runners = new List<FrameworkRunnerLocator> { mspecFrameworkRunner, nunitFrameworkRunner };
+            var xunitFrameworkRunner = new FrameworkRunnerLocator { CheckReference = xUnitRunnerPredicate, GetTheRunner = GetXunitRunner };
+            runners = new List<FrameworkRunnerLocator> { mspecFrameworkRunner, nunitFrameworkRunner, xunitFrameworkRunner };
         }
 
         static IFrameworkRunner GetMSpecRunner()
@@ -52,6 +56,10 @@ namespace Giles.Core.Runners
         static IFrameworkRunner GetNUnitRunner()
         {
             return GetRunnerBy("Giles.Runner.NUnit.dll");
+        }
+
+        static IFrameworkRunner GetXunitRunner() {
+            return GetRunnerBy("Giles.Runner.XUnit.dll");
         }
 
         static IFrameworkRunner GetRunnerBy(string runnerAssemblyName)
