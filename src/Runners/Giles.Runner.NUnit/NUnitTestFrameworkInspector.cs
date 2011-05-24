@@ -14,10 +14,5 @@ namespace Giles.Runner.NUnit
                        referencedAssembly.Name.Equals("nunit.framework", StringComparison.InvariantCultureIgnoreCase);
             }
         }
-
-        public override Func<IFrameworkRunner> Get
-        {
-            get { return () => GetRunnerBy(typeof(NUnitTestFrameworkInspector).Assembly.ManifestModule.Name); }
-        }
     }
 }

@@ -23,12 +23,17 @@ namespace Giles.Core.Runners
 
             var referencedAssemblies = assembly.GetReferencedAssemblies();
 
-            var result =
+            var runners =
                 supportedFrameworkRunners
                     .Where(theRunner => referencedAssemblies.AnyMatchesRequirementFor(theRunner.Requirement))
-                    .Select(theRunner => theRunner.Get.Invoke());
+                    .Select(AnInstanceOfTheTestRunner);
 
-            return result;
+            return runners;
+        }
+
+        static IFrameworkRunner AnInstanceOfTheTestRunner(TestFrameworkInspector theRunner)
+        {
+            return GetRunnerBy(theRunner.GetType().Assembly.Location);
         }
 
 
@@ -56,5 +61,32 @@ namespace Giles.Core.Runners
 
             return Directory.GetFiles(location, "*.dll");
         }
+
+        /// <summary>
+        /// Returns an instance of the first test framework runner that implements IFrameworkRunner found in the runnerAssemblyPath
+        /// </summary>
+        /// <param name="runnerAssemblyPath">Filename to load the assembly from</param>
+        /// <returns>An instance of the first class found that implements IFrameworkRunner</returns>
+        public static IFrameworkRunner GetRunnerBy(string runnerAssemblyPath)
+        {
+            var assemblyLocation =
+                Path.Combine(Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location),
+                             runnerAssemblyPath);
+
+            var runner = GetRunnerFrom(assemblyLocation);
+
+            if (runner == null)
+                return null;
+
+            return Activator.CreateInstance(runner) as IFrameworkRunner;
+        }
+
+        public static Type GetRunnerFrom(string assemblyLocation)
+        {
+            var result = Assembly.LoadFrom(assemblyLocation).GetTypes()
+                .Where(x => typeof(IFrameworkRunner).IsAssignableFrom(x) && x.IsClass)
+                .FirstOrDefault();
+            return result;
+        }    
     }
 }
