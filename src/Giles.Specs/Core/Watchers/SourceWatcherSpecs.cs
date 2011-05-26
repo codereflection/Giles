@@ -21,7 +21,6 @@ namespace Giles.Specs.Core.Watchers
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
         static GilesConfig config;
-        static TestFrameworkResolver resolver;
 
         Establish context = () =>
             {
@@ -60,6 +59,20 @@ namespace Giles.Specs.Core.Watchers
 
         It gets_the_solution_base_path = () =>
             fileSystem.Received().GetDirectoryName(path);
+    }
+
+    public class when_the_solution_path_is_a_relative_filename : with_a_source_watcher
+    {
+        Establish context = () => {
+            path = "mySolution.sln";
+            fileSystem.GetDirectoryName(path).ReturnsForAnyArgs(info => Path.GetDirectoryName(info.Arg<string>()));
+        };
+
+        Because of = () =>
+            watcher.Watch(path, filter);
+
+        It watch_files_in_the_current_directory = () =>
+            fileWatcherFactory.Received().Build(@".\", filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
     }
 
 
