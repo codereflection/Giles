@@ -88,15 +88,17 @@ namespace Giles.Core.AppDomains
 
         private static IEnumerable<string> GetGilesAssembliesToUse()
         {
-            return new[]
+        	var executingAssemblyDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        	return new[]
                        {
                            typeof(GilesAppDomainRunner).Assembly.Location,
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.Machine.Specifications.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.NUnit.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.XUnit.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.interfaces.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "xunit.runner.utility.dll"),
+                           Path.Combine(executingAssemblyDir, "Giles.Runner.Machine.Specifications.dll"),
+                           Path.Combine(executingAssemblyDir, "Giles.Runner.NUnit.dll"),
+                           Path.Combine(executingAssemblyDir, "Giles.Runner.XUnit.dll"),
+                           Path.Combine(executingAssemblyDir, "nunit.core.dll"),
+                           Path.Combine(executingAssemblyDir, "nunit.core.interfaces.dll"),
+                           Path.Combine(executingAssemblyDir, "xunit.runner.utility.dll"),
+                           Path.Combine(executingAssemblyDir, "Machine.Specifications.dll")
                        };
         }
     }
