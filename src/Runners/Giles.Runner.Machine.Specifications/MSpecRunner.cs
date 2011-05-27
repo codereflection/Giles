@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Giles.Core.Runners;
 using Machine.Specifications.Runner.Impl;
@@ -5,7 +8,7 @@ using Machine.Specifications.Runner;
 
 namespace Giles.Runner.Machine.Specifications
 {
-    public class SpecificationRunner : IFrameworkRunner
+    public class MSpecRunner : IFrameworkRunner
     {
         public SessionResults RunAssembly(Assembly assembly)
         {
@@ -13,6 +16,11 @@ namespace Giles.Runner.Machine.Specifications
             var runner = new AppDomainRunner(runListener, RunOptions.Default);
             runner.RunAssembly(assembly);
             return runListener.SessionResults;
+        }
+
+        public IEnumerable<string> RequiredAssemblies()
+        {
+            return Enumerable.Empty<string>();
         }
     }
 }

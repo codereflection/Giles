@@ -1,10 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Giles.Core.Runners;
 using NUnit.Core;
 
 namespace Giles.Runner.NUnit
 {
-    public class TestRunner : IFrameworkRunner
+    public class NUnitRunner : IFrameworkRunner
     {
         public SessionResults RunAssembly(Assembly assembly)
         {
@@ -14,6 +16,11 @@ namespace Giles.Runner.NUnit
             var listener = new GilesNUnitEventListener();
             remoteTestRunner.Run(listener);
             return listener.SessionResults;
+        }
+
+        public IEnumerable<string> RequiredAssemblies()
+        {
+            return new[] { "nunit.core.dll", "nunit.core.interfaces.dll" };
         }
 
         private static TestPackage SetupTestPackager(Assembly assembly)

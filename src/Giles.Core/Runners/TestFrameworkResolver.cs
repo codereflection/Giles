@@ -9,22 +9,28 @@ namespace Giles.Core.Runners
 {
     public class TestFrameworkResolver
     {
-        readonly List<TestFrameworkInspector> supportedFrameworkRunners = new List<TestFrameworkInspector>();
+        readonly List<TestFrameworkInspector> frameworkRunners = new List<TestFrameworkInspector>();
 
         public TestFrameworkResolver()
         {
             BuildRunnerList();
         }
 
-        public IEnumerable<IFrameworkRunner> Resolve(Assembly assembly)
+        /// <summary>
+        /// Inspects the passed target test assembly to see if it meets all of the requirements for
+        /// and of the Giles test framework runners.
+        /// </summary>
+        /// <param name="targetAssembly">Target test assembly to inspect</param>
+        /// <returns>A list of test framework runners which can run the tests in the target assembly</returns>
+        public IEnumerable<IFrameworkRunner> Resolve(Assembly targetAssembly)
         {
-            if (assembly == null)
+            if (targetAssembly == null)
                 return Enumerable.Empty<IFrameworkRunner>();
 
-            var referencedAssemblies = assembly.GetReferencedAssemblies();
+            var referencedAssemblies = targetAssembly.GetReferencedAssemblies();
 
             var runners =
-                supportedFrameworkRunners
+                frameworkRunners
                     .Where(theRunner => referencedAssemblies.AnyMatchesRequirementFor(theRunner.Requirement))
                     .Select(AnInstanceOfTheTestRunner);
 
@@ -41,18 +47,8 @@ namespace Giles.Core.Runners
         {
             var files = GetAssembliesFromExecutingPath();
 
-            files.Each(AddTestFrameworkInspectorsFromAssembly);
-        }
-
-        void AddTestFrameworkInspectorsFromAssembly(string file)
-        {
-            var assembly = Assembly.LoadFrom(file);
-            var types = assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(TestFrameworkInspector))).ToList();
-
-            if (types.Count == 0)
-                return;
-
-            types.Each(type => supportedFrameworkRunners.Add(Activator.CreateInstance(type) as TestFrameworkInspector));
+            files.Each(f => 
+                frameworkRunners.AddRange(AssemblyExtensions.FromAssemblyGetInstancesOfType<TestFrameworkInspector>(f)));
         }
 
         static IEnumerable<string> GetAssembliesFromExecutingPath()

@@ -1,4 +1,5 @@
-﻿using Giles.Core.Runners;
+﻿using System.Collections.Generic;
+using Giles.Core.Runners;
 using System;
 using XunitFx = Xunit;
 using System.Reflection;
@@ -13,6 +14,11 @@ namespace Giles.Runner.Xunit {
                 var result = runner.RunAssembly();
             }
             return logger.SessionResults;
+        }
+
+        public IEnumerable<string> RequiredAssemblies()
+        {
+            return new[] { "xunit.runner.utility.dll" };
         }
     }
 }

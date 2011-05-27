@@ -48,7 +48,7 @@
     <Compile Include="MSpecTestFrameworkInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultFormatterFactory.cs" />
-    <Compile Include="SpecificationRunner.cs" />
+    <Compile Include="MSpecRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Giles.Core\Giles.Core.csproj">

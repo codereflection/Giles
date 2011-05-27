@@ -6,7 +6,7 @@ using Machine.Specifications;
 
 namespace Giles.Specs.Core.Runners
 {
-    public class with_a_test_runner_resolver
+    public class with_a_test_framework_resolver
     {
         protected static TestFrameworkResolver subject;
 
@@ -15,7 +15,7 @@ namespace Giles.Specs.Core.Runners
     }
 
     public class when_resolving_for_a_test_runner_in_an_assembly_without_a_test_framework
-        : with_a_test_runner_resolver
+        : with_a_test_framework_resolver
     {
         static Assembly assembly;
         static IEnumerable<IFrameworkRunner> result;
@@ -31,13 +31,13 @@ namespace Giles.Specs.Core.Runners
     }
 
     public class when_resolving_for_the_mspec_runner_in_an_assembly_that_references_mspec
-        : with_a_test_runner_resolver
+        : with_a_test_framework_resolver
     {
         static Assembly assemby;
         static IEnumerable<IFrameworkRunner> result;
 
         Establish context = () =>
-            assemby = typeof(with_a_test_runner_resolver).Assembly;
+            assemby = typeof(with_a_test_framework_resolver).Assembly;
 
         Because of = () =>
             result = subject.Resolve(assemby);
@@ -46,11 +46,11 @@ namespace Giles.Specs.Core.Runners
             result.ShouldNotBeEmpty();
 
         It should_return_the_mspec_framework_runner = () =>
-            result.First().ShouldBeOfType<Giles.Runner.Machine.Specifications.SpecificationRunner>();
+            result.First().ShouldBeOfType<Giles.Runner.Machine.Specifications.MSpecRunner>();
     }
 
     public class when_resolving_for_a_test_runner_and_an_assembly_is_not_passed
-        : with_a_test_runner_resolver
+        : with_a_test_framework_resolver
     {
         static Assembly assembly;
         static IEnumerable<IFrameworkRunner> result;
