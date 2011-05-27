@@ -51,15 +51,12 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
-    <Compile Include="AppDomains\FileOperationType.cs" />
-    <Compile Include="AppDomains\GilesAppDomainManager.cs" />
-    <Compile Include="AppDomains\GilesAppDomainRunner.cs" />
     <Compile Include="Configuration\GilesConfig.cs" />
     <Compile Include="Configuration\GilesConfigFactory.cs" />
-    <Compile Include="Configuration\MsBuildProject.cs" />
     <Compile Include="Configuration\RunnerAssembly.cs" />
     <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="Configuration\TestAssemblyFinder.cs" />
+    <Compile Include="Configuration\SolutionConfig.cs" />
+    <Compile Include="Configuration\SolutionConfigLoader.cs" />
     <Compile Include="Encryption\EncryptionHelper.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />
@@ -67,20 +64,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\BuildRunner.cs" />
     <Compile Include="Runners\CommandProcessExecutor.cs" />
-    <Compile Include="Runners\GilesTestListener.cs" />
-    <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
-    <Compile Include="Runners\ITestListener.cs" />
-    <Compile Include="Runners\TestFrameworkInspector.cs" />
-    <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
-    <Compile Include="Runners\TestFrameworkResolver.cs" />
     <Compile Include="UI\ConsoleUserDisplay.cs" />
     <Compile Include="UI\GrowlUserDisplay.cs" />
     <Compile Include="UI\IUserDisplay.cs" />
-    <Compile Include="Utility\AssemblyExtensions.cs" />
-    <Compile Include="Utility\RandomExtensionMethods.cs" />
-    <Compile Include="Watchers\LastRunResults.cs" />
     <Compile Include="Watchers\SourceWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
