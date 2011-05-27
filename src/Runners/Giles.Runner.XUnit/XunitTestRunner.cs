@@ -18,7 +18,11 @@ namespace Giles.Runner.Xunit {
 
         public IEnumerable<string> RequiredAssemblies()
         {
-            return new[] { "xunit.runner.utility.dll" };
+            return new[]
+                       {
+                           Assembly.GetAssembly(typeof(XunitTestRunner)).Location, 
+                           "xunit.runner.utility.dll"
+                       };
         }
     }
 }

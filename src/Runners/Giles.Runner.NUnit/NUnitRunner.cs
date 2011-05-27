@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Giles.Core.Runners;
@@ -20,7 +19,11 @@ namespace Giles.Runner.NUnit
 
         public IEnumerable<string> RequiredAssemblies()
         {
-            return new[] { "nunit.core.dll", "nunit.core.interfaces.dll" };
+            return new[]
+                       {
+                           Assembly.GetAssembly(typeof(NUnitRunner)).Location, 
+                           "nunit.core.dll", "nunit.core.interfaces.dll"
+                       };
         }
 
         private static TestPackage SetupTestPackager(Assembly assembly)

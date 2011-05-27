@@ -13,7 +13,7 @@ namespace Giles.Core.Runners
 
         public TestFrameworkResolver()
         {
-            BuildRunnerList();
+            frameworkRunners.AddRange(GetNewInstancesByType<TestFrameworkInspector>());
         }
 
         /// <summary>
@@ -43,19 +43,21 @@ namespace Giles.Core.Runners
         }
 
 
-        void BuildRunnerList()
+        /// <summary>
+        /// Gets a list of new instances of classes which implement, extend or are of type T
+        /// from all of the assemblies in the executing path
+        /// </summary>
+        /// <returns>List of new instances of classes which implement, extend or are of type T</returns>
+        public static IEnumerable<T> GetNewInstancesByType<T>() where T : class
         {
-            var files = GetAssembliesFromExecutingPath();
+            var files = AssemblyExtensions.GetAssembliesFromExecutingPath();
 
-            files.Each(f => 
-                frameworkRunners.AddRange(AssemblyExtensions.FromAssemblyGetInstancesOfType<TestFrameworkInspector>(f)));
-        }
+            var result = new List<T>();
 
-        static IEnumerable<string> GetAssembliesFromExecutingPath()
-        {
-            var location = Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location);
+            files.Each(f =>
+                result.AddRange(AssemblyExtensions.FromAssemblyGetInstancesOfType<T>(f)));
 
-            return Directory.GetFiles(location, "*.dll");
+            return result;
         }
 
         /// <summary>
@@ -83,6 +85,6 @@ namespace Giles.Core.Runners
                 .Where(x => typeof(IFrameworkRunner).IsAssignableFrom(x) && x.IsClass)
                 .FirstOrDefault();
             return result;
-        }    
+        }
     }
 }

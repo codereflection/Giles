@@ -20,7 +20,7 @@ namespace Giles.Runner.Machine.Specifications
 
         public IEnumerable<string> RequiredAssemblies()
         {
-            return Enumerable.Empty<string>();
+            return new[] { Assembly.GetAssembly(typeof(MSpecRunner)).Location };
         }
     }
 }
