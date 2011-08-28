@@ -35,7 +35,7 @@ namespace Giles.Core.Runners
             return result.ExitCode == 0;
         }
 
-        private string FormatBuildMessages(Stopwatch watch, ExecutionResult result)
+        private static string FormatBuildMessages(Stopwatch watch, ExecutionResult result)
         {
             var message = string.Format("Build complete in {0} seconds. Result: {1}", 
                                         watch.Elapsed.TotalSeconds,
