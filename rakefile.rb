@@ -6,7 +6,7 @@ require 'lib/FileSystem/filesystem'
 
 task :default => [:full]
 
-@GilesVersion = "0.1.0.1"
+@GilesVersion = "0.1.0.2"
 
 task :full => [:clean,:assemblyInfo,:build,:specifications,:createSpec,:createPackage]
 
@@ -53,7 +53,7 @@ nuspec :createSpec => :prepPackage do |nuspec|
 	nuspec.authors = "Jeff Schumacher (@codereflection)"
 	nuspec.owners = "Jeff Schumacher (@codereflection)"
 	nuspec.description = "Giles - continuous test runner for .NET applications."
-	nuspec.summary = "Currently supports Machine.Specifications (mspec) and NUnit."
+	nuspec.summary = "Currently supports Machine.Specifications (mspec) and NUnit, and xUnit.net"
 	nuspec.language = "en-US"
 	nuspec.projectUrl = "http://codereflection.github.com/Giles/"
 	nuspec.title = "Giles, Rupert Giles, at your service!"
