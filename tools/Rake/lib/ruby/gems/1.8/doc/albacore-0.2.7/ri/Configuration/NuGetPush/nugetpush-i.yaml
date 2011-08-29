@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@config)
+comment: 
+full_name: Configuration::NuGetPush#nugetpush
+is_singleton: false
+name: nugetpush
+params: () {|@config| ...}
+visibility: public
