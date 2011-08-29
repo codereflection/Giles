@@ -12,7 +12,7 @@ Giles Options
 
   s, SolutionPath        Required. Path to the sln file
 
-  t, TestAssemblyPath    Required. Path to the test assembly dll
+  t, TestAssemblyPath    Required. Path to the test assembly dll (optional, Giles will try to find the test assembly)
 
   help                   Display this help screen.
 
