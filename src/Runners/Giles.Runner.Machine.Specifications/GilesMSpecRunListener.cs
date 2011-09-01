@@ -44,25 +44,7 @@ namespace Giles.Runner.Machine.Specifications
                                             var testResult =
                                                 new TestResult { Name = specification.Name, TestRunner = "MSPEC" };
 
-                                            if (result.Passed)
-                                                testResult.State = TestState.Passed;
-                                            else if (result.Status.ToString() == "Ignored")
-                                            {
-                                                testResult.State = TestState.Ignored;
-                                                testResult.Message = "Ignored";
-                                            }
-                                            else if (result.Status.ToString() == "NotImplemented")
-                                            {
-                                                testResult.State = TestState.Ignored;
-                                                testResult.Message = "Not Implemented";
-                                            }
-                                            else
-                                            {
-                                                testResult.State = TestState.Failed;
-                                                if (result.Exception != null)
-                                                    testResult.StackTrace = result.Exception.ToString();
-                                            }
-                                            testResults.Add(testResult);
+                                            ProcessTestResult((object) result, testResult, testResults);
                                         }),
 
                     OnFatalError = ReturnVoid.Arguments<dynamic>(exception => sessionResults.Messages.Add("Fatal error: " + exception)),
@@ -75,38 +57,27 @@ namespace Giles.Runner.Machine.Specifications
                 };
         }
 
-
-        //public void OnSpecificationEnd(SpecificationInfo specification, Result result)
-        //{
-        //    var formatter = resultFormatterFactory.GetResultFormatterFor(result);
-        //    SessionResults.Messages.Add(formatter.FormatResult(specification, result));
-
-        //    var testResult = new TestResult { Name = specification.Name, TestRunner = _testRunnerName };
-
-        //    if (result.Passed)
-        //    {
-        //        testResult.State = TestState.Passed;
-        //    }
-        //    else switch (result.Status)
-        //        {
-        //            case Status.Ignored:
-        //                testResult.State = TestState.Ignored;
-        //                testResult.Message = "Ignored";
-        //                break;
-        //            case Status.NotImplemented:
-        //                testResult.State = TestState.Ignored;
-        //                testResult.Message = "Not Implemented";
-        //                break;
-        //            default:
-        //                testResult.State = TestState.Failed;
-        //                if (result.Exception != null)
-        //                {
-        //                    testResult.StackTrace = result.Exception.ToString();
-        //                }
-        //                break;
-        //        }
-
-        //    testResults.Add(testResult);
-        //}
+        private static void ProcessTestResult(dynamic result, TestResult testResult, ICollection<TestResult> testResults)
+        {
+            if (result.Passed)
+                testResult.State = TestState.Passed;
+            else if (result.Status.ToString() == "Ignored")
+            {
+                testResult.State = TestState.Ignored;
+                testResult.Message = "Ignored";
+            }
+            else if (result.Status.ToString() == "NotImplemented")
+            {
+                testResult.State = TestState.Ignored;
+                testResult.Message = "Not Implemented";
+            }
+            else
+            {
+                testResult.State = TestState.Failed;
+                if (result.Exception != null)
+                    testResult.StackTrace = result.Exception.ToString();
+            }
+            testResults.Add(testResult);
+        }
     }
 }
