@@ -53,7 +53,10 @@ namespace Giles.Core.AppDomains
         private void SetupAppDomain()
         {
             var domainInfo = new AppDomainSetup
-                                 { ApplicationBase = testAssemblyFolder };
+                                 {
+                                     ApplicationBase = testAssemblyFolder,
+                                     PrivateBinPath = "Giles"
+                                 };
 
             appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
         }
@@ -73,10 +76,14 @@ namespace Giles.Core.AppDomains
             var fileSystem = new FileSystem();
             var filesToCopy = GetGilesAssembliesToUse();
             
+            var gilesTargetAssemblyFolder = Path.Combine(testAssemblyFolder, @"Giles");
+            if (!Directory.Exists(gilesTargetAssemblyFolder))
+                Directory.CreateDirectory(gilesTargetAssemblyFolder);
+
             filesToCopy.Each(f =>
                                  {
                                      var sourcePath = f.Contains("\\") ? f : GetFileSourceLocation(f);
-                                     var targetPath = Path.Combine(testAssemblyFolder, fileSystem.GetFileName(f));
+                                     var targetPath = Path.Combine(gilesTargetAssemblyFolder, fileSystem.GetFileName(f));
                                      
                                      if (fileOperationType == FileOperationType.Copy || fileOperationType == FileOperationType.Delete)
                                          if (fileSystem.FileExists(targetPath))

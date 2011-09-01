@@ -31,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\manual\mspec\Machine.Specifications.dll</HintPath>
+    <Reference Include="ImpromptuInterface">
+      <HintPath>..\..\..\lib\ImpromptuInterface.5.6.2\lib\net40\ImpromptuInterface.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
