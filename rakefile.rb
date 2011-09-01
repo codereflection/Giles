@@ -43,7 +43,10 @@ desc "Prep the package folder"
 task :prepPackage do
 	FileSystem.DeleteDirectory("deploy")
 	FileSystem.EnsurePath("deploy/package")
+	FileSystem.EnsurePath("deploy/package/tools")
 	FileSystem.CopyFiles("build/*", "deploy/package")
+	FileSystem.CopyFiles("giles.ps1", "deploy/package/tools")
+	FileSystem.CopyFiles("init.ps1", "deploy/package/tools")
 end
 
 desc "Create the nuspec"
