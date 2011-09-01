@@ -17,6 +17,8 @@ deploy/
 *.Publish.xml
 publish/*
 nuget/
+*.swp
+*~
 
 #Make sure report dir is created
 ![Rr]eport/Specs/.gitignore
