@@ -10,109 +10,71 @@ namespace Giles.Runner.Machine.Specifications
         public static IEnumerable<Type> Types { get; set; }
     }
 
-    public class GilesMSpecRunListener //: ISpecificationRunListener
+    public class GilesMSpecRunListener
     {
         public static object GetAnonymousListener(SessionResults sessionResults, List<TestResult> testResults, ResultFormatterFactory resultFormatterFactory)
         {
             return new
-                       {
-                           OnAssemblyStart = ReturnVoid.Arguments<dynamic>(a => { }),
-                           //void OnAssemblyStart(AssemblyInfo assembly);
-                           OnAssemblyEnd = ReturnVoid.Arguments<dynamic>(a => { }),
-                           //void OnAssemblyEnd(AssemblyInfo assembly);
-                           OnRunStart = ReturnVoid.Arguments(() => { }),
-                           //void OnRunStart();
-                           OnRunEnd = ReturnVoid.Arguments(() => testResults.ForEach(x => sessionResults.TestResults.Add(x))),
-                           //void OnRunEnd();
-                           OnContextStart = ReturnVoid.Arguments<dynamic>(c => { }),
-                           //void OnContextStart(ContextInfo context);
-                           OnContextEnd = ReturnVoid.Arguments<dynamic>(c => { }),
-                           //void OnContextEnd(ContextInfo context);
-                           OnSpecificationStart = ReturnVoid.Arguments<Object>(s => { }),
-                           //void OnSpecificationStart(SpecificationInfo specification);
-                           OnSpecificationEnd = ReturnVoid.Arguments<dynamic, dynamic>((s, r) =>
-                                                {
-                                                    var formatter = ResultFormatterFactory.GetResultFormatterFor(result: r.Status.ToString());
+                {
+                    OnAssemblyStart = ReturnVoid.Arguments<dynamic>(assembly => { }),
 
-                                                    string formatResult = formatter.FormatResult(s, r);
-                                                    sessionResults.Messages.Add(formatResult);
-                                                    Console.WriteLine("Passed: {0}", r.Passed);
+                    OnAssemblyEnd = ReturnVoid.Arguments<dynamic>(assembly => { }),
+                           
+                    OnRunStart = ReturnVoid.Arguments(() => { }),
+                           
+                    OnRunEnd = ReturnVoid.Arguments(() => testResults.ForEach(x => sessionResults.TestResults.Add(x))),
+                           
+                    OnContextStart = ReturnVoid.Arguments<dynamic>(context =>
+                                                                       {
+                                                                           string r = string.Format("\n{0}", context.FullName);
+                                                                           sessionResults.Messages.Add(r);
+                                                                       }),
+                           
+                    OnContextEnd = ReturnVoid.Arguments<dynamic>(context => { }),
+                           
+                    OnSpecificationStart = ReturnVoid.Arguments<Object>(specification => { }),
+                           
+                    OnSpecificationEnd = ReturnVoid.Arguments<dynamic, dynamic>((specification, result) =>
+                                        {
+                                            var formatter = ResultFormatterFactory.GetResultFormatterFor(result: result.Status.ToString());
 
-                                                    var testResult =
-                                                        new TestResult { Name = s.Name, TestRunner = "MSPEC" };
+                                            string formatResult = formatter.FormatResult(specification, result);
+                                            sessionResults.Messages.Add(formatResult);
 
-                                                    if (r.Passed)
-                                                    {
-                                                        testResult.State =
-                                                            TestState.Passed;
-                                                    }
+                                            var testResult =
+                                                new TestResult { Name = specification.Name, TestRunner = "MSPEC" };
 
-                                                    testResults.Add(testResult);
-                                                }),
-                           //void OnSpecificationEnd(SpecificationInfo specification, Result result);
-                           OnFatalError = ReturnVoid.Arguments<Object>(e => { }),
-                           //void OnFatalError(ExceptionResult exception);
-                           sessionResults,
-                           testResults,
-                           resultFormatterFactory
-                       };
+                                            if (result.Passed)
+                                                testResult.State = TestState.Passed;
+                                            else if (result.Status.ToString() == "Ignored")
+                                            {
+                                                testResult.State = TestState.Ignored;
+                                                testResult.Message = "Ignored";
+                                            }
+                                            else if (result.Status.ToString() == "NotImplemented")
+                                            {
+                                                testResult.State = TestState.Ignored;
+                                                testResult.Message = "Not Implemented";
+                                            }
+                                            else
+                                            {
+                                                testResult.State = TestState.Failed;
+                                                if (result.Exception != null)
+                                                    testResult.StackTrace = result.Exception.ToString();
+                                            }
+                                            testResults.Add(testResult);
+                                        }),
+
+                    OnFatalError = ReturnVoid.Arguments<dynamic>(exception => sessionResults.Messages.Add("Fatal error: " + exception)),
+
+                    sessionResults,
+                           
+                    testResults,
+                           
+                    resultFormatterFactory
+                };
         }
 
-
-        //const string _testRunnerName = "MSPEC";
-        //readonly ResultFormatterFactory resultFormatterFactory;
-        //private readonly SessionResults sessionResults = new SessionResults();
-
-        //public SessionResults SessionResults
-        //{
-        //    get { return sessionResults; }
-        //}
-
-        //readonly List<TestResult> testResults = new List<TestResult>();
-
-        //public GilesMSpecRunListener()
-        //{
-        //    resultFormatterFactory = new ResultFormatterFactory();
-        //}
-
-        //public void OnAssemblyStart(AssemblyInfo assembly)
-        //{
-
-        //}
-
-        //public void OnAssemblyEnd(AssemblyInfo assembly)
-        //{
-
-        //}
-
-        //public void OnRunStart()
-        //{
-
-        //}
-
-        //public void OnRunEnd()
-        //{
-        //    if (testResults.Count == 0) return;
-
-        //    foreach (var testResult in testResults)
-        //    {
-        //        SessionResults.TestResults.Add(testResult);
-        //    }
-        //}
-
-        //public void OnContextStart(ContextInfo context)
-        //{
-        //    SessionResults.Messages.Add(string.Format("\n{0}", context.FullName));
-        //}
-
-        //public void OnContextEnd(ContextInfo context)
-        //{
-        //    //testListener.WriteLine("", "Output");
-        //}
-
-        //public void OnSpecificationStart(SpecificationInfo specification)
-        //{
-        //}
 
         //public void OnSpecificationEnd(SpecificationInfo specification, Result result)
         //{
@@ -145,11 +107,6 @@ namespace Giles.Runner.Machine.Specifications
         //        }
 
         //    testResults.Add(testResult);
-        //}
-
-        //public void OnFatalError(ExceptionResult exception)
-        //{
-        //    SessionResults.Messages.Add("Fatal error: " + exception);
         //}
     }
 }
