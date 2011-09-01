@@ -16,11 +16,22 @@ namespace Giles.Core.AppDomains
 
         public IEnumerable<SessionResults> Run(string testAssemblyPath)
         {
-            var runner = SetupRunner(testAssemblyPath);
+            IEnumerable<SessionResults> results = new List<SessionResults>();
+            GilesAppDomainRunner runner;
 
-            var results = runner.Run(testAssemblyPath);
-
-            CleanupRunner();
+            try
+            {
+                runner = SetupRunner(testAssemblyPath);
+                results = runner.Run(testAssemblyPath);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Giles encountered an error while running the tests:\n\n{0}", e);
+            }
+            finally
+            {
+                CleanupRunner();
+            }
 
             return results;
         }
