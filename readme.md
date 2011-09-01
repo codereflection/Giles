@@ -3,7 +3,7 @@ a continuous test runner for .NET applications. True to form, Giles will watch y
 
 # Useage:
 
-giles.exe -s [path_to_solution] -t [path_to_test_assembly]
+giles.exe -s [path_to_solution]
 
 
 # Command Line Help:
@@ -12,7 +12,7 @@ Giles Options
 
   s, SolutionPath        Required. Path to the sln file
 
-  t, TestAssemblyPath    Required. Path to the test assembly dll (optional, Giles will try to find the test assembly)
+  t, TestAssemblyPath    Required. Path to the test assembly dll ( Optional, Giles will try to find the test assembly )
 
   help                   Display this help screen.
 
