@@ -1,0 +1,6 @@
+v0.1.1.0 - Sept 1, 2011
+ - Fixed Machine.Specification versioning issue where the test project needed to have the same version of mspec that Giles was using. Giles no longer has a dependancy on Machine.Specifications.dll, so we're version independent now!
+
+v0.1.0.2 - Aug 29, 2011
+ - Introduced Giles own runners instead of relying on console runners for each test framework
+ - The only command line option required now is the solution file to watch, the test assembly is determined automatically.  If Giles gets the test assembly incorrect, then you can specify the test assembly location with the -t parameter
