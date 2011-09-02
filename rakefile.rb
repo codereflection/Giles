@@ -47,6 +47,8 @@ task :prepPackage do
 	FileSystem.CopyFiles("build/*", "deploy/package")
 	FileSystem.CopyFiles("giles.ps1", "deploy/package/tools")
 	FileSystem.CopyFiles("init.ps1", "deploy/package/tools")
+	FileSystem.CopyFiles("ReleaseNotes.txt", "deploy/package")
+	FileSystem.CopyFiles("License.txt", "deploy/package")
 end
 
 desc "Create the nuspec"
