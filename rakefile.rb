@@ -65,6 +65,7 @@ nuspec :createSpec => :prepPackage do |nuspec|
 	nuspec.tags = "testrunner test unittest giles"
 	nuspec.output_file = "Giles.nuspec"
 	nuspec.working_directory = "deploy/package"
+	nuspec.licenseUrl = "https://github.com/codereflection/Giles/blob/master/License.txt"
 end
 
 desc "Create the nuspec package"
