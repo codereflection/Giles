@@ -1,3 +1,7 @@
+v0.1.1.1 - Sept 2, 2011
+ - Added giles.ps1 & init script. Now instead of having to run Giles manually from the nuget package, you just need to run giles.ps1 from the root of the solution. Giles will find the correct .sln files and start watching straight away.
+ - Added MIT license
+
 v0.1.1.0 - Sept 1, 2011
  - Fixed Machine.Specification versioning issue where the test project needed to have the same version of mspec that Giles was using. Giles no longer has a dependancy on Machine.Specifications.dll, so we're version independent now!
 
