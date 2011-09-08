@@ -6,7 +6,7 @@ require 'lib/FileSystem/filesystem'
 
 task :default => [:full]
 
-@GilesVersion = "0.1.0.0"
+@GilesVersion = "0.1.1.1"
 
 task :full => [:clean,:assemblyInfo,:build,:specifications,:createSpec,:createPackage]
 
@@ -43,7 +43,12 @@ desc "Prep the package folder"
 task :prepPackage do
 	FileSystem.DeleteDirectory("deploy")
 	FileSystem.EnsurePath("deploy/package")
+	FileSystem.EnsurePath("deploy/package/tools")
 	FileSystem.CopyFiles("build/*", "deploy/package")
+	FileSystem.CopyFiles("giles.ps1", "deploy/package/tools")
+	FileSystem.CopyFiles("init.ps1", "deploy/package/tools")
+	FileSystem.CopyFiles("ReleaseNotes.txt", "deploy/package")
+	FileSystem.CopyFiles("License.txt", "deploy/package")
 end
 
 desc "Create the nuspec"
@@ -53,13 +58,14 @@ nuspec :createSpec => :prepPackage do |nuspec|
 	nuspec.authors = "Jeff Schumacher (@codereflection)"
 	nuspec.owners = "Jeff Schumacher (@codereflection)"
 	nuspec.description = "Giles - continuous test runner for .NET applications."
-	nuspec.summary = "Currently supports Machine.Specifications (mspec) and NUnit."
+	nuspec.summary = "Currently supports Machine.Specifications (mspec) and NUnit, and xUnit.net"
 	nuspec.language = "en-US"
 	nuspec.projectUrl = "http://codereflection.github.com/Giles/"
 	nuspec.title = "Giles, Rupert Giles, at your service!"
 	nuspec.tags = "testrunner test unittest giles"
 	nuspec.output_file = "Giles.nuspec"
 	nuspec.working_directory = "deploy/package"
+	nuspec.licenseUrl = "https://github.com/codereflection/Giles/blob/master/License.txt"
 end
 
 desc "Create the nuspec package"

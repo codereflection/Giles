@@ -1,9 +1,11 @@
+using System;
 using System.IO;
 using System.Linq;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Watchers;
+using Giles.Runner.Machine.Specifications;
 using Machine.Specifications;
 using NSubstitute;
 
@@ -32,7 +34,7 @@ namespace Giles.Specs.Core.Watchers
                 config = new GilesConfig();
 
                 watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
-                                    
+
                 path = @"c:\solutionFolder\mySolution.sln";
                 filter = "*.cs";
 
@@ -50,7 +52,7 @@ namespace Giles.Specs.Core.Watchers
     {
         Because of = () =>
             watcher.Watch(path, filter);
-            
+
         It setups_a_file_watcher = () =>
             fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
 

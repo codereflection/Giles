@@ -1,11 +1,16 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace Giles.Core.Runners
 {
     public interface IFrameworkRunner
     {
         SessionResults RunAssembly(Assembly assembly);
-        //TestRunState RunNamespace(ITestListener testListener, Assembly assembly, string ns);
-        //TestRunState RunMember(ITestListener testListener, Assembly assembly, MemberInfo member);
+
+        /// <summary>
+        /// Returns a list of assemblies which the test runner implementation requires to run
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<string> RequiredAssemblies();
     }
 }

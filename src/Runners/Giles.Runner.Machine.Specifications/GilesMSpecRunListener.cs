@@ -1,103 +1,83 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Giles.Core.Runners;
-using Machine.Specifications;
-using Machine.Specifications.Runner;
+using ImpromptuInterface.Dynamic;
 
 namespace Giles.Runner.Machine.Specifications
 {
-    public class GilesMSpecRunListener : ISpecificationRunListener
+    public static class MSpecTypes
     {
-        const string _testRunnerName = "MSPEC";
-        readonly ResultFormatterFactory resultFormatterFactory;
-        private readonly SessionResults sessionResults = new SessionResults();
+        public static IEnumerable<Type> Types { get; set; }
+    }
 
-        public SessionResults SessionResults
+    public class GilesMSpecRunListener
+    {
+        public static object GetAnonymousListener(SessionResults sessionResults, List<TestResult> testResults, ResultFormatterFactory resultFormatterFactory)
         {
-            get { return sessionResults; }
-        }
-
-        readonly List<TestResult> testResults = new List<TestResult>();
-
-        public GilesMSpecRunListener()
-        {
-            resultFormatterFactory = new ResultFormatterFactory();
-        }
-
-        public void OnAssemblyStart(AssemblyInfo assembly)
-        {
-
-        }
-
-        public void OnAssemblyEnd(AssemblyInfo assembly)
-        {
-
-        }
-
-        public void OnRunStart()
-        {
-
-        }
-
-        public void OnRunEnd()
-        {
-            if (testResults.Count == 0) return;
-
-            foreach (var testResult in testResults)
-            {
-                SessionResults.TestResults.Add(testResult);
-            }
-        }
-
-        public void OnContextStart(ContextInfo context)
-        {
-            SessionResults.Messages.Add(string.Format("\n{0}", context.FullName));
-        }
-
-        public void OnContextEnd(ContextInfo context)
-        {
-            //testListener.WriteLine("", "Output");
-        }
-
-        public void OnSpecificationStart(SpecificationInfo specification)
-        {
-        }
-
-        public void OnSpecificationEnd(SpecificationInfo specification, Result result)
-        {
-            var formatter = resultFormatterFactory.GetResultFormatterFor(result);
-            SessionResults.Messages.Add(formatter.FormatResult(specification, result));
-
-            var testResult = new TestResult { Name = specification.Name, TestRunner = _testRunnerName };
-
-            if (result.Passed)
-            {
-                testResult.State = TestState.Passed;
-            }
-            else switch (result.Status)
+            return new
                 {
-                    case Status.Ignored:
-                        testResult.State = TestState.Ignored;
-                        testResult.Message = "Ignored";
-                        break;
-                    case Status.NotImplemented:
-                        testResult.State = TestState.Ignored;
-                        testResult.Message = "Not Implemented";
-                        break;
-                    default:
-                        testResult.State = TestState.Failed;
-                        if (result.Exception != null)
-                        {
-                            testResult.StackTrace = result.Exception.ToString();
-                        }
-                        break;
-                }
+                    OnAssemblyStart = ReturnVoid.Arguments<dynamic>(assembly => { }),
 
-            testResults.Add(testResult);
+                    OnAssemblyEnd = ReturnVoid.Arguments<dynamic>(assembly => { }),
+                           
+                    OnRunStart = ReturnVoid.Arguments(() => { }),
+                           
+                    OnRunEnd = ReturnVoid.Arguments(() => testResults.ForEach(x => sessionResults.TestResults.Add(x))),
+                           
+                    OnContextStart = ReturnVoid.Arguments<dynamic>(context =>
+                                                                       {
+                                                                           string r = string.Format("\n{0}", context.FullName);
+                                                                           sessionResults.Messages.Add(r);
+                                                                       }),
+                           
+                    OnContextEnd = ReturnVoid.Arguments<dynamic>(context => { }),
+                           
+                    OnSpecificationStart = ReturnVoid.Arguments<Object>(specification => { }),
+                           
+                    OnSpecificationEnd = ReturnVoid.Arguments<dynamic, dynamic>((specification, result) =>
+                                        {
+                                            var formatter = ResultFormatterFactory.GetResultFormatterFor(result: result.Status.ToString());
+
+                                            string formatResult = formatter.FormatResult(specification, result);
+                                            sessionResults.Messages.Add(formatResult);
+
+                                            var testResult =
+                                                new TestResult { Name = specification.Name, TestRunner = "MSPEC" };
+
+                                            ProcessTestResult((object) result, testResult, testResults);
+                                        }),
+
+                    OnFatalError = ReturnVoid.Arguments<dynamic>(exception => sessionResults.Messages.Add("Fatal error: " + exception)),
+
+                    sessionResults,
+                           
+                    testResults,
+                           
+                    resultFormatterFactory
+                };
         }
 
-        public void OnFatalError(ExceptionResult exception)
+        private static void ProcessTestResult(dynamic result, TestResult testResult, ICollection<TestResult> testResults)
         {
-            SessionResults.Messages.Add("Fatal error: " + exception);
+            if (result.Passed)
+                testResult.State = TestState.Passed;
+            else if (result.Status.ToString() == "Ignored")
+            {
+                testResult.State = TestState.Ignored;
+                testResult.Message = "Ignored";
+            }
+            else if (result.Status.ToString() == "NotImplemented")
+            {
+                testResult.State = TestState.Ignored;
+                testResult.Message = "Not Implemented";
+            }
+            else
+            {
+                testResult.State = TestState.Failed;
+                if (result.Exception != null)
+                    testResult.StackTrace = result.Exception.ToString();
+            }
+            testResults.Add(testResult);
         }
     }
 }

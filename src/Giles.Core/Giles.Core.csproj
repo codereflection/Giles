@@ -56,8 +56,10 @@
     <Compile Include="AppDomains\GilesAppDomainRunner.cs" />
     <Compile Include="Configuration\GilesConfig.cs" />
     <Compile Include="Configuration\GilesConfigFactory.cs" />
+    <Compile Include="Configuration\MsBuildProject.cs" />
     <Compile Include="Configuration\RunnerAssembly.cs" />
     <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\TestAssemblyFinder.cs" />
     <Compile Include="Encryption\EncryptionHelper.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />
@@ -92,6 +94,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

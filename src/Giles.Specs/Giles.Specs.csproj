@@ -52,12 +52,16 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
+    <Compile Include="TestResources.cs" />
     <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
+    <Compile Include="Core\Configuration\MsBuildProjectSpecs.cs" />
     <Compile Include="Core\Runners\BuildRunnerSpecs.cs" />
     <Compile Include="Core\Runners\CommandProcessExecutorSpecs.cs" />
     <Compile Include="Core\Runners\FakeUserDisplay.cs" />
-    <Compile Include="Core\Runners\TestRunnerResolverSpecs.cs" />
+    <Compile Include="Core\Runners\TestFrameworkResolverSpecs.cs" />
     <Compile Include="Core\Runners\TestRunnerSpecs.cs" />
+    <Compile Include="Core\Utility\AssemblyExtensionsSpecs.cs" />
     <Compile Include="Core\Watchers\SourceWatcherSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,6 +75,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
@@ -81,6 +86,15 @@
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.Core.csproj" />
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.csproj" />
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.sln" />
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.Specs.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Core\Configuration\Resources\Giles.Core.WithMSpec.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

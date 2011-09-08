@@ -1,0 +1,43 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: apikey
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: command
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: create_only
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: package
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: source
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: NuGetPush
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+- !ruby/object:RI::IncludedModule 
+  name: Configuration::NuGetPush
+- !ruby/object:RI::IncludedModule 
+  name: SupportsLinuxEnvironment
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+name: NuGetPush
+superclass: Object

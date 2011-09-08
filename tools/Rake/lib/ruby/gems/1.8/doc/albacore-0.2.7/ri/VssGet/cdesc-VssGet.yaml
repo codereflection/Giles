@@ -1,0 +1,56 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: password
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: path
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: project
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: quite
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: readonly
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: recursive
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: repository
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: username
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TaskName
+  value: ":vssget"
+full_name: VssGet
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::Task
+- !ruby/object:RI::IncludedModule 
+  name: Albacore::RunCommand
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: execute
+- !ruby/object:RI::MethodSummary 
+  name: get_command_parameters
+name: VssGet
+superclass: Object

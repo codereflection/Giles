@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nuspec#framework_assembly
+is_singleton: false
+name: framework_assembly
+params: (name, target_framework)
+visibility: public

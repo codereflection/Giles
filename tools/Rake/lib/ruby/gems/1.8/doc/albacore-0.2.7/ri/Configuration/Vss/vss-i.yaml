@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@vssconfig)
+comment: 
+full_name: Configuration::Vss#vss
+is_singleton: false
+name: vss
+params: () {|@vssconfig| ...}
+visibility: public

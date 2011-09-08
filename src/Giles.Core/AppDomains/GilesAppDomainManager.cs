@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Utility;
@@ -16,11 +16,22 @@ namespace Giles.Core.AppDomains
 
         public IEnumerable<SessionResults> Run(string testAssemblyPath)
         {
-            var runner = SetupRunner(testAssemblyPath);
+            IEnumerable<SessionResults> results = new List<SessionResults>();
+            GilesAppDomainRunner runner;
 
-            var results = runner.Run(testAssemblyPath);
-
-            CleanupRunner();
+            try
+            {
+                runner = SetupRunner(testAssemblyPath);
+                results = runner.Run(testAssemblyPath);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Giles encountered an error while running the tests:\n\n{0}", e);
+            }
+            finally
+            {
+                CleanupRunner();
+            }
 
             return results;
         }
@@ -53,7 +64,10 @@ namespace Giles.Core.AppDomains
         private void SetupAppDomain()
         {
             var domainInfo = new AppDomainSetup
-                                 { ApplicationBase = testAssemblyFolder };
+                                 {
+                                     ApplicationBase = testAssemblyFolder,
+                                     PrivateBinPath = "Giles"
+                                 };
 
             appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
         }
@@ -73,31 +87,41 @@ namespace Giles.Core.AppDomains
             var fileSystem = new FileSystem();
             var filesToCopy = GetGilesAssembliesToUse();
             
-            filesToCopy.Each(file =>
+            var gilesTargetAssemblyFolder = Path.Combine(testAssemblyFolder, @"Giles");
+            if (!Directory.Exists(gilesTargetAssemblyFolder))
+                Directory.CreateDirectory(gilesTargetAssemblyFolder);
+
+            filesToCopy.Each(f =>
                                  {
-                                     var targetPath = Path.Combine(testAssemblyFolder, fileSystem.GetFileName(file));
+                                     var sourcePath = f.Contains("\\") ? f : GetFileSourceLocation(f);
+                                     var targetPath = Path.Combine(gilesTargetAssemblyFolder, fileSystem.GetFileName(f));
                                      
                                      if (fileOperationType == FileOperationType.Copy || fileOperationType == FileOperationType.Delete)
                                          if (fileSystem.FileExists(targetPath))
                                              fileSystem.DeleteFile(targetPath);
 
                                      if (fileOperationType == FileOperationType.Copy)
-                                         fileSystem.CopyFile(file, targetPath);
+                                     {
+                                         fileSystem.CopyFile(sourcePath, targetPath);
+                                     }
                                  });
+        }
+
+        static string GetFileSourceLocation(string f)
+        {
+            var location = Path.GetDirectoryName(typeof(GilesAppDomainManager).Assembly.Location);
+            return Path.Combine(location, f);
         }
 
         private static IEnumerable<string> GetGilesAssembliesToUse()
         {
-            return new[]
-                       {
-                           typeof(GilesAppDomainRunner).Assembly.Location,
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.Machine.Specifications.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.NUnit.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Giles.Runner.XUnit.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "nunit.core.interfaces.dll"),
-                           Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "xunit.runner.utility.dll"),
-                       };
+            var runners = TestFrameworkResolver.GetNewInstancesByType<IFrameworkRunner>();
+
+            var result = new List<string> { typeof(GilesAppDomainRunner).Assembly.Location };
+
+            result.AddRange(runners.SelectMany(x => x.RequiredAssemblies()).Where(x => !string.IsNullOrWhiteSpace(x)));
+
+            return result;
         }
     }
 }

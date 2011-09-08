@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: (@config)
+comment: 
+full_name: Configuration::NuGetPublish#nugetpublish
+is_singleton: false
+name: nugetpublish
+params: () {|@config| ...}
+visibility: public
