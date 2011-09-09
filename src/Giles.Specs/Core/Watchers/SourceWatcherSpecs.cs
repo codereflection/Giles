@@ -1,11 +1,10 @@
-using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Watchers;
-using Giles.Runner.Machine.Specifications;
 using Machine.Specifications;
 using NSubstitute;
 
@@ -22,7 +21,7 @@ namespace Giles.Specs.Core.Watchers
         protected static IFileWatcherFactory fileWatcherFactory;
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
-        static GilesConfig config;
+        protected static GilesConfig config;
         static TestFrameworkResolver resolver;
 
         Establish context = () =>
@@ -67,15 +66,17 @@ namespace Giles.Specs.Core.Watchers
 
     public class when_a_file_has_changed : with_a_source_watcher
     {
-        Establish context = () =>
+        Establish context = () => 
             watcher.Watch(path, filter);
 
         Because of = () =>
             watcher.ChangeAction(null, null);
 
-        [Ignore("build is called on a delay, need a better way to test this")]
         It calls_the_solution_builder = () =>
-            buildRunner.Received().Run();
+            {
+                Thread.Sleep((int) config.BuildDelay + 100);
+                buildRunner.Received().Run();
+            };
     }
 
     public class when_disposing : with_a_source_watcher
