@@ -70,7 +70,6 @@
     <Compile Include="Runners\GilesTestListener.cs" />
     <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
-    <Compile Include="Runners\ITestListener.cs" />
     <Compile Include="Runners\TestFrameworkInspector.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />

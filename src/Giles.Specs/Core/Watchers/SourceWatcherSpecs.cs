@@ -23,6 +23,7 @@ namespace Giles.Specs.Core.Watchers
         protected static ITestRunner testRunner;
         protected static GilesConfig config;
         static TestFrameworkResolver resolver;
+        protected static GilesTestListener listener;
 
         Establish context = () =>
             {
@@ -45,6 +46,9 @@ namespace Giles.Specs.Core.Watchers
                 solutionfolder = @"c:\solutionFolder";
                 fileSystem.GetDirectoryName(path)
                             .Returns(solutionfolder);
+
+                listener = Substitute.For<GilesTestListener>(config);
+                watcher.GetListener = c => listener;
             };
     }
 
@@ -77,7 +81,11 @@ namespace Giles.Specs.Core.Watchers
                 Thread.Sleep((int) config.BuildDelay + 100);
                 buildRunner.Received().Run();
             };
-    }
+
+        It should_display_the_results = () => 
+            listener.Received().DisplayResults();
+
+    }   
 
     public class when_disposing : with_a_source_watcher
     {

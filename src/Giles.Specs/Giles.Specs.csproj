@@ -53,6 +53,7 @@
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
+    <Compile Include="Core\Runners\GilesTestListenerSpecs.cs" />
     <Compile Include="TestResources.cs" />
     <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
     <Compile Include="Core\Configuration\MsBuildProjectSpecs.cs" />

@@ -8,18 +8,22 @@ using Giles.Core.Utility;
 
 namespace Giles.Core.Runners
 {
-    public class GilesTestListener : ITestListener
+    public class GilesTestListener
     {
         readonly GilesConfig config;
         readonly Dictionary<string, StringBuilder> output = new Dictionary<string, StringBuilder>();
         readonly Dictionary<TestState, int> totalResults;
         readonly Dictionary<string, Dictionary<TestState, int>> testRunnerResults;
 
-        public GilesTestListener(GilesConfig config)
+        public GilesTestListener()
         {
-            this.config = config;
             totalResults = SetupTestResults();
             testRunnerResults = new Dictionary<string, Dictionary<TestState, int>>();
+        }
+
+        public GilesTestListener(GilesConfig config) : this()
+        {
+            this.config = config;
         }
 
         static Dictionary<TestState, int> SetupTestResults()

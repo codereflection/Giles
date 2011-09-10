@@ -91,12 +91,14 @@ namespace Giles.Core.Watchers
             buildTimer.Enabled = true;
         }
 
+        public Func<GilesConfig, GilesTestListener> GetListener = config => new GilesTestListener(config);
+
         public void RunNow()
         {
             if (!buildRunner.Run())
                 return;
 
-            var listener = new GilesTestListener(config);
+            var listener = GetListener.Invoke(config);
 
             var manager = new GilesAppDomainManager();
             var runResult = manager.Run(config.TestAssemblyPath);
