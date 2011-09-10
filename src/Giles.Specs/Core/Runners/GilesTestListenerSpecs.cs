@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Giles.Core.Configuration;
 using Giles.Core.Runners;
-using Giles.Core.Utility;
 using Machine.Specifications;
 
 namespace Giles.Specs.Core.Runners
@@ -23,8 +22,15 @@ namespace Giles.Specs.Core.Runners
             config = new GilesConfig();
             config.UserDisplay.Add(fakeUserDisplay);
 
+            consoleOutputBuffer = new StringBuilder();
+            consoleOutputWriter = new StringWriter(consoleOutputBuffer);
+            Console.SetOut(consoleOutputWriter);
+
             listener = new GilesTestListener(config);
         };
+
+        protected static TextWriter consoleOutputWriter;
+        protected static StringBuilder consoleOutputBuffer;
     }
 
     public class when_writing_a_line_to_the_test_listener : with_a_giles_test_listener
@@ -38,16 +44,8 @@ namespace Giles.Specs.Core.Runners
 
     public class when_displaying_the_verbose_test_results : with_a_giles_test_listener
     {
-        static TextWriter consoleOutputWriter;
-        static StringBuilder consoleOutputBuffer;
-
-        Establish context = () =>
-        {
-            consoleOutputBuffer = new StringBuilder();
-            consoleOutputWriter = new StringWriter(consoleOutputBuffer);
-            Console.SetOut(consoleOutputWriter);
+        Establish context = () => 
             listener.WriteLine(testMessage, testCategory);
-        };
 
         Because of = () =>
             listener.DisplayVerboseResults();
@@ -75,6 +73,31 @@ namespace Giles.Specs.Core.Runners
 
         It should_display_the_number_of_ignored_tests = () =>
             fakeUserDisplay.DisplayResultsReceived.Count(x => x.Output.Contains("Ignored: 0")).ShouldEqual(1);
-			
+
+    }
+
+    public class when_displaying_all_the_errors_from_the_last_test_run : with_a_giles_test_listener
+    {
+        const string testName = "FailingTestThatFails";
+        const string testRunner = "FakeRunner";
+
+        Establish context = () =>
+            listener.AddTestSummary(new TestResult
+                                        {
+                                            Message = testMessage, 
+                                            TestRunner = testRunner, 
+                                            State = TestState.Failed, 
+                                            Name = testName
+                                        });
+
+        Because of = () =>
+            listener.DisplayErrors();
+
+        It should_display_the_failing_test_name = () =>
+            consoleOutputBuffer.ToString().ShouldContain(testName);
+
+        It should_display_the_failing_test_message = () =>
+            consoleOutputBuffer.ToString().ShouldContain(testMessage);
+
     }
 }

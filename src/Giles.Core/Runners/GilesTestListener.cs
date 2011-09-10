@@ -14,6 +14,7 @@ namespace Giles.Core.Runners
         readonly Dictionary<string, StringBuilder> output = new Dictionary<string, StringBuilder>();
         readonly Dictionary<TestState, int> totalResults;
         readonly Dictionary<string, Dictionary<TestState, int>> testRunnerResults;
+        readonly IList<TestResult> testRunnerFailures = new List<TestResult>();
 
         public GilesTestListener()
         {
@@ -54,6 +55,9 @@ namespace Giles.Core.Runners
             if (!testRunnerResults.ContainsKey(summary.TestRunner))
                 testRunnerResults.Add(summary.TestRunner, SetupTestResults());
 
+            if (summary.State == TestState.Failed)
+                testRunnerFailures.Add(summary);
+
             testRunnerResults[summary.TestRunner][summary.State] += 1;
 
             totalResults[summary.State] += 1;
@@ -61,19 +65,7 @@ namespace Giles.Core.Runners
 
         public void DisplayResults()
         {
-            var messages = new StringBuilder();
-            testRunnerResults.ToList().ForEach(x => messages.Append(
-                string.Format(
-                    "{0} Results: Passed: {1}, Failed: {2}, Ignored: {3}\n",
-                    x.Key,
-                    x.Value[TestState.Passed],
-                    x.Value[TestState.Failed],
-                    x.Value[TestState.Ignored])));
-
-            messages.Append(string.Format("Total Passed: {0}, Failed: {1}, Ignored: {2}",
-                                          totalResults[TestState.Passed],
-                                          totalResults[TestState.Failed],
-                                          totalResults[TestState.Ignored]));
+            var messages = AggregateTestRunnerResults();
 
             var result = new ExecutionResult
                 {
@@ -88,10 +80,39 @@ namespace Giles.Core.Runners
             config.UserDisplay.ToList().ForEach(display => display.DisplayResult(result));
         }
 
+        StringBuilder AggregateTestRunnerResults()
+        {
+            var messages = new StringBuilder();
+            testRunnerResults.ToList().ForEach(x => messages.Append(
+                string.Format(
+                    "{0} Results: Passed: {1}, Failed: {2}, Ignored: {3}\n",
+                    x.Key,
+                    x.Value[TestState.Passed],
+                    x.Value[TestState.Failed],
+                    x.Value[TestState.Ignored])));
+
+            messages.Append(string.Format("Total Passed: {0}, Failed: {1}, Ignored: {2}",
+                                          totalResults[TestState.Passed],
+                                          totalResults[TestState.Failed],
+                                          totalResults[TestState.Ignored]));
+            return messages;
+        }
+
         public void DisplayVerboseResults()
         {
             Console.WriteLine("\n\nVerbose test results:");
             output.Each(x => Console.WriteLine(x.Value));
+        }
+
+        public void DisplayErrors()
+        {
+            var messages = new StringBuilder();
+            testRunnerFailures.Each(x =>
+                                        {
+                                            messages.AppendLine(x.Name);
+                                            messages.AppendLine(x.Message);
+                                        });
+            Console.WriteLine(messages);
         }
     }
 }
