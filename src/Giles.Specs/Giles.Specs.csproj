@@ -48,6 +48,9 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|AnyCPU'">
+    <OutputPath>bin\AutomatedRelease_x86\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>

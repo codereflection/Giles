@@ -1,3 +1,7 @@
+v0.1.1.2 - Sept 12, 2011
+ - Added x86 version of Giles to support testing of x86 target applications. A giles-x86.ps1 script has also been included to launch the x86 Giles instead of the AnyCPU version
+ - Added Giles version output to help window and to the console window title
+
 v0.1.1.1 - Sept 2, 2011
  - Added giles.ps1 & init script. Now instead of having to run Giles manually from the nuget package, you just need to run giles.ps1 from the root of the solution. Giles will find the correct .sln files and start watching straight away.
  - Added MIT license

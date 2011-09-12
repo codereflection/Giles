@@ -10,13 +10,13 @@ module FileSystem
 
     def FileSystem.DeleteDirectory(path)
         #if Dir.exists?(path) then 
-             FileUtils.rm_rf path
+             FileUtils.rm_rf path, :verbose => true
         #end
     end
 
     def FileSystem.CopyFiles(source, target) 
         Dir.glob(source) do |name|
-            FileUtils.cp(name, target)
+            FileUtils.cp(name, target, :verbose => true)
         end    
     end
 end

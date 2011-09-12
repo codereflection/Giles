@@ -71,6 +71,14 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|x86'">
+    <OutputPath>..\..\build\x86\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|AnyCPU'">
+    <OutputPath>bin\AutomatedRelease_x86\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>

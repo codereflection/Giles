@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CommandLine;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
@@ -18,11 +19,13 @@ namespace Giles {
         static void Main(string[] args) {
             var options = new CLOptions();
 
+            Console.WriteLine(GetGilesFunnyLine());
+
             var parser = new CommandLineParser(
                 new CommandLineParserSettings(false, Console.Error));
 
             if (!parser.ParseArguments(args, options)) {
-                Console.WriteLine("Unknown command line arguments");
+                Console.WriteLine("Unable to determine what command lines arguments were used, check the help above!\nThe minimum needed is the -s [solution file path].");
                 Environment.Exit(1);
             }
 
@@ -35,9 +38,16 @@ namespace Giles {
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
+        }
 
-            Console.WriteLine("Grr, argh...");
-
+        static string GetGilesFunnyLine()
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName();
+            return string.Format(@"Grr, argh... v{0}.{1}.{2}.{3}",
+                assemblyName.Version.Major,
+                assemblyName.Version.Minor,
+                assemblyName.Version.Revision,
+                assemblyName.Version.Build);
         }
 
         static void SetupSourceWatcher(CLOptions options) {
@@ -105,7 +115,7 @@ namespace Giles {
 
         static void ConsoleSetup() {
             Console.Clear();
-            Console.Title = "Grr, argh.";
+            Console.Title = GetGilesFunnyLine();
             GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
             Console.SetBufferSize(1024, 5000);
             Console.SetWindowSize(Program.Width, Program.Height);

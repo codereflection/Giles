@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|AnyCPU'">
+    <OutputPath>..\..\build\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ImpromptuInterface">
       <HintPath>..\..\..\lib\ImpromptuInterface.5.6.2\lib\net40\ImpromptuInterface.dll</HintPath>
