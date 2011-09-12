@@ -8,7 +8,7 @@ task :default => [:full]
 
 @GilesVersion = "0.1.1.1"
 
-task :full => [:clean,:assemblyInfo,:build,:specifications,:createSpec,:createPackage]
+task :full => [:clean,:assemblyInfo,:build,:buildx86,:copyx86,:specifications,:createSpec,:createPackage]
 
 task :clean do
 	FileUtils.rm_rf 'build'	
@@ -20,6 +20,16 @@ msbuild :build do |msb|
 	msb.solution = "src/Giles.sln"
 end
 
+msbuild :buildx86 do |msb|
+	msb.properties :configuration => :AutomatedRelease_x86
+	msb.solution = "src/Giles.sln"
+end
+
+desc "Copy x86 Giles to build directory"
+task :copyx86 do
+	FileSystem.CopyFiles("build/x86/Giles.exe", "build/Giles-x86.exe")
+	FileSystem.CopyFiles("build/x86/Giles.exe.config", "build/Giles-x86.exe.config")
+end
 
 mspec :specifications do |mspec|
 	mspec.command = "lib/manual/mspec/mspec.exe"
@@ -44,8 +54,10 @@ task :prepPackage do
 	FileSystem.DeleteDirectory("deploy")
 	FileSystem.EnsurePath("deploy/package")
 	FileSystem.EnsurePath("deploy/package/tools")
+	FileSystem.DeleteDirectory("build/x86")
 	FileSystem.CopyFiles("build/*", "deploy/package")
 	FileSystem.CopyFiles("giles.ps1", "deploy/package/tools")
+	FileSystem.CopyFiles("giles-x86.ps1", "deploy/package/tools")
 	FileSystem.CopyFiles("init.ps1", "deploy/package/tools")
 	FileSystem.CopyFiles("ReleaseNotes.txt", "deploy/package")
 	FileSystem.CopyFiles("License.txt", "deploy/package")

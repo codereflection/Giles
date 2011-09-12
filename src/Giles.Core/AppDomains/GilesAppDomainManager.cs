@@ -24,14 +24,23 @@ namespace Giles.Core.AppDomains
                 runner = SetupRunner(testAssemblyPath);
                 results = runner.Run(testAssemblyPath);
             }
-            catch(Exception e)
+            catch (InvalidOperationException e)
             {
-                Console.WriteLine("Giles encountered an error while running the tests:\n\n{0}", e);
+                if (e.Message.Contains("homogenous AppDomain"))
+                    Console.WriteLine(
+                        GilesResource.homogenousAppDomainErrorMessage);
+                else
+                    Console.WriteLine(GilesResource.GilesTestRunnerExceptionMessage, e);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(GilesResource.GilesTestRunnerExceptionMessage, e);
             }
             finally
             {
                 CleanupRunner();
             }
+
 
             return results;
         }

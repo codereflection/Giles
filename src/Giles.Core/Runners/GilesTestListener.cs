@@ -57,6 +57,12 @@ namespace Giles.Core.Runners
 
         public void DisplayResults()
         {
+            if (testRunnerResults.Count == 0)
+            {
+                config.UserDisplay.ToList().ForEach(display => display.DisplayResult(new ExecutionResult{ExitCode = 1, Output = "Something went wrong, check the Giles console window for more details", Runner = ""}));
+                return;
+            }
+
             var messages = new StringBuilder();
             testRunnerResults.ToList().ForEach(x => messages.Append(
                 string.Format(
