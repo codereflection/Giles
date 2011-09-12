@@ -106,11 +106,13 @@ namespace Giles.Core.Runners
 
         public void DisplayErrors()
         {
-            var messages = new StringBuilder();
+            var messages = new StringBuilder(string.Format("\n\nTest Run Errors ({0})\n", testRunnerFailures.ToList().Count));
             testRunnerFailures.Each(x =>
                                         {
+                                            messages.AppendLine("-------------------");
                                             messages.AppendLine(x.Name);
                                             messages.AppendLine(x.Message);
+                                            messages.AppendLine(x.StackTrace);
                                         });
             Console.WriteLine(messages);
         }
