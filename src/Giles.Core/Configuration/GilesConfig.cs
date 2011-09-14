@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using Giles.Core.Runners;
 using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
@@ -9,7 +7,7 @@ namespace Giles.Core.Configuration
     public class GilesConfig : INotifyPropertyChanged
     {
         public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
-        public IEnumerable<IUserDisplay> UserDisplay = Enumerable.Empty<IUserDisplay>();
+        public List<IUserDisplay> UserDisplay = new List<IUserDisplay>();
         private long buildDelay = 500;
         public string TestAssemblyPath { get; set; }
         public string SolutionPath { get; set; }

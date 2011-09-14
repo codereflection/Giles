@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Giles.Core.Configuration;
 using Giles.Core.Runners;
@@ -17,7 +16,8 @@ namespace Giles.Specs.Core.Runners
         Establish context = () =>
             {
                 fakeUserDisplay = new FakeUserDisplay();
-                config = new GilesConfig { UserDisplay = new[] { fakeUserDisplay } };
+                config = new GilesConfig();
+                config.UserDisplay.Add(fakeUserDisplay);
                 settings = new Settings();
                 subject = new BuildRunner(config, settings);
             };
@@ -48,10 +48,10 @@ namespace Giles.Specs.Core.Runners
             result.ShouldBeTrue();
 
         It should_display_the_build_complete_message_to_the_user_display = () =>
-            fakeUserDisplay.messagesReceived.Any(x => x.Contains("Build complete")).ShouldBeTrue();
+            fakeUserDisplay.DisplayMessagesReceived.Any(x => x.Contains("Build complete")).ShouldBeTrue();
 
         It should_display_a_message_of_success_to_the_user_display = () =>
-            fakeUserDisplay.messagesReceived.Any(x => x.Contains("Success")).ShouldBeTrue();
+            fakeUserDisplay.DisplayMessagesReceived.Any(x => x.Contains("Success")).ShouldBeTrue();
     }
 
     public class when_asked_to_run_a_build_and_the_build_was_failed : with_a_build_runner
@@ -79,9 +79,9 @@ namespace Giles.Specs.Core.Runners
             result.ShouldBeFalse();
 
         It should_display_the_build_complete_message_to_the_user_display = () =>
-            fakeUserDisplay.messagesReceived.Any(x => x.Contains("Build complete")).ShouldBeTrue();
+            fakeUserDisplay.DisplayMessagesReceived.Any(x => x.Contains("Build complete")).ShouldBeTrue();
 
         It should_display_a_message_of_failure_to_the_user_display = () =>
-            fakeUserDisplay.messagesReceived.Any(x => x.Contains("Failure")).ShouldBeTrue();
+            fakeUserDisplay.DisplayMessagesReceived.Any(x => x.Contains("Failure")).ShouldBeTrue();
     }
 }

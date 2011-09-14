@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
 using System.Timers;
 using Giles.Core.AppDomains;
 using Giles.Core.Configuration;
@@ -38,8 +37,11 @@ namespace Giles.Core.Watchers
 
         void config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "BuildDelay")
-                buildTimer.Interval = (sender as GilesConfig).BuildDelay;
+            if (e.PropertyName != "BuildDelay") return;
+            
+            var buildDelay = (sender as GilesConfig).BuildDelay;
+
+            buildTimer.Interval = buildDelay;
         }
 
         public List<FileSystemWatcher> FileWatchers { get; set; }
@@ -86,22 +88,26 @@ namespace Giles.Core.Watchers
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-
             if (buildTimer.Enabled)
-            {
-                buildTimer.Enabled = false;
-                buildTimer.Enabled = true;
-            }
+                ResetBuildTimer();
             else
                 buildTimer.Enabled = true;
         }
+
+        void ResetBuildTimer()
+        {
+            buildTimer.Enabled = false;
+            buildTimer.Enabled = true;
+        }
+
+        public Func<GilesConfig, GilesTestListener> GetListener = config => new GilesTestListener(config);
 
         public void RunNow()
         {
             if (!buildRunner.Run())
                 return;
 
-            var listener = new GilesTestListener(config);
+            var listener = GetListener.Invoke(config);
 
             var manager = new GilesAppDomainManager();
             var runResult = manager.Run(config.TestAssemblyPath);

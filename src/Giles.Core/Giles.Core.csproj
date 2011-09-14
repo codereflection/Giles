@@ -47,6 +47,9 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|AnyCPU'">
+    <OutputPath>..\..\build\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
@@ -61,6 +64,11 @@
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\TestAssemblyFinder.cs" />
     <Compile Include="Encryption\EncryptionHelper.cs" />
+    <Compile Include="GilesResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GilesResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />
     <Compile Include="IO\IFileWatcherFactory.cs" />
@@ -70,7 +78,6 @@
     <Compile Include="Runners\GilesTestListener.cs" />
     <Compile Include="Runners\IFrameworkRunner.cs" />
     <Compile Include="Runners\IRunner.cs" />
-    <Compile Include="Runners\ITestListener.cs" />
     <Compile Include="Runners\TestFrameworkInspector.cs" />
     <Compile Include="Runners\TestResult.cs" />
     <Compile Include="Runners\TestRunner.cs" />
@@ -95,6 +102,13 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GilesResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GilesResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

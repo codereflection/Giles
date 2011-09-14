@@ -48,11 +48,15 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutomatedRelease_x86|AnyCPU'">
+    <OutputPath>bin\AutomatedRelease_x86\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
+    <Compile Include="Core\Runners\GilesTestListenerSpecs.cs" />
     <Compile Include="TestResources.cs" />
     <Compile Include="Core\Configuration\GilesConfigFactorySpecs.cs" />
     <Compile Include="Core\Configuration\MsBuildProjectSpecs.cs" />

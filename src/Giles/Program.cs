@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using CommandLine;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
@@ -18,11 +19,13 @@ namespace Giles {
         static void Main(string[] args) {
             var options = new CLOptions();
 
+            Console.WriteLine(GetGilesFunnyLine());
+
             var parser = new CommandLineParser(
                 new CommandLineParserSettings(false, Console.Error));
 
             if (!parser.ParseArguments(args, options)) {
-                Console.WriteLine("Unknown command line arguments");
+                Console.WriteLine("Unable to determine what command lines arguments were used, check the help above!\nThe minimum needed is the -s [solution file path].");
                 Environment.Exit(1);
             }
 
@@ -35,9 +38,16 @@ namespace Giles {
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
+        }
 
-            Console.WriteLine("Grr, argh...");
-
+        static string GetGilesFunnyLine()
+        {
+            var assemblyName = Assembly.GetExecutingAssembly().GetName();
+            return string.Format(@"Grr, argh... v{0}.{1}.{2}.{3}",
+                assemblyName.Version.Major,
+                assemblyName.Version.Minor,
+                assemblyName.Version.Revision,
+                assemblyName.Version.Build);
         }
 
         static void SetupSourceWatcher(CLOptions options) {
@@ -105,7 +115,7 @@ namespace Giles {
 
         static void ConsoleSetup() {
             Console.Clear();
-            Console.Title = "Grr, argh.";
+            Console.Title = GetGilesFunnyLine();
             GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
             Console.SetBufferSize(1024, 5000);
             Console.SetWindowSize(Program.Width, Program.Height);
@@ -125,7 +135,8 @@ namespace Giles {
                       new InteractiveMenuOption { HandlesKey = key => key == "r", Task = sourceWatcher.RunNow },
                       new InteractiveMenuOption { HandlesKey = key => key == "b", Task = SetBuildDelay },
                       new InteractiveMenuOption { HandlesKey = key => key == "q", Task = RequestQuit },
-                      new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults }
+                      new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults },
+                      new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors }
                   };
         }
 
@@ -146,6 +157,14 @@ namespace Giles {
 
         static void SetBuildDelay() {
             config.BuildDelay = GetUserValue(config.BuildDelay);
+        }
+
+        static void DisplayErrors()
+        {
+            if (LastRunResults.GilesTestListener != null)
+                LastRunResults.GilesTestListener.DisplayErrors();
+            else
+                Console.WriteLine("Please run some tests first...");
         }
 
         static void DisplayVerboseResults() {
@@ -182,13 +201,14 @@ namespace Giles {
 
         static void DisplayInteractiveMenuOptions() {
             Console.WriteLine("Interactive Console Options:");
-            Console.WriteLine("  ? = Display options");
-            Console.WriteLine("  C = Clear the window");
-            Console.WriteLine("  I = Show current configuration");
-            Console.WriteLine("  R = Run build & tests now");
-            Console.WriteLine("  V = Display last test run messages");
-            Console.WriteLine("  B = Set Build Delay");
-            Console.WriteLine("  Q = Quit");
+            Console.WriteLine("   ? = Display options");
+            Console.WriteLine("   C = Clear the window");
+            Console.WriteLine("   I = Show current configuration");
+            Console.WriteLine("   R = Run build & tests now");
+            Console.WriteLine("   V = Display all messages from last test run");
+            Console.WriteLine("   E = Display errors from last test run");
+            Console.WriteLine("   B = Set Build Delay");
+            Console.WriteLine("   Q = Quit");
             Console.WriteLine();
         }
     }
