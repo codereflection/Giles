@@ -1,5 +1,6 @@
 vNext - Sept xx, 2011
  - Added E option to the interactive console to only print out the errors from the last test run, verbosely, including the stack traces
+ - Added Success and Failure icons to Growl notification - Thanks to Ian Davis for the idea.
 
 v0.1.1.2 - Sept 12, 2011
  - Added x86 version of Giles to support testing of x86 target applications. A giles-x86.ps1 script has also been included to launch the x86 Giles instead of the AnyCPU version
