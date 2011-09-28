@@ -1,6 +1,9 @@
 using System;
+using System.Drawing;
+using System.Reflection;
 using Giles.Core.Runners;
 using Growl.Connector;
+using Growl.CoreLibrary;
 
 namespace Giles.Core.UI
 {
@@ -9,6 +12,8 @@ namespace Giles.Core.UI
         private GrowlConnector growl;
         private NotificationType notificationType;
         private Application application;
+        private const string successImage = "Giles.Core.Resources.checkmark.png";
+        private const string failureImage = "Giles.Core.Resources.stop.png";
 
         public GrowlUserDisplay()
         {
@@ -23,7 +28,7 @@ namespace Giles.Core.UI
                         {
                             EncryptionAlgorithm = Cryptography.SymmetricAlgorithmType.PlainText
                         };
-            
+
 
             growl.Register(application, new[] { notificationType });
         }
@@ -39,8 +44,15 @@ namespace Giles.Core.UI
         public void DisplayResult(ExecutionResult result)
         {
             var title = result.ExitCode == 0 ? "Success!" : "Failures!";
-            var notification = new Notification(application.Name, notificationType.Name, DateTime.Now.Ticks.ToString(), title, result.Output);
+            Resource icon = result.ExitCode == 0 ? LoadImage(successImage) : LoadImage(failureImage);
+            var notification = new Notification(application.Name, notificationType.Name, DateTime.Now.Ticks.ToString(), title, result.Output) { Icon = icon };
             growl.Notify(notification);
+        }
+
+        private static Image LoadImage(string resourceName)
+        {
+            var file = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            return Image.FromStream(file);
         }
     }
 }
