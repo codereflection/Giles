@@ -135,7 +135,8 @@ namespace Giles {
                       new InteractiveMenuOption { HandlesKey = key => key == "r", Task = sourceWatcher.RunNow },
                       new InteractiveMenuOption { HandlesKey = key => key == "b", Task = SetBuildDelay },
                       new InteractiveMenuOption { HandlesKey = key => key == "q", Task = RequestQuit },
-                      new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults }
+                      new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults },
+                      new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors }
                   };
         }
 
@@ -156,6 +157,14 @@ namespace Giles {
 
         static void SetBuildDelay() {
             config.BuildDelay = GetUserValue(config.BuildDelay);
+        }
+
+        static void DisplayErrors()
+        {
+            if (LastRunResults.GilesTestListener != null)
+                LastRunResults.GilesTestListener.DisplayErrors();
+            else
+                Console.WriteLine("Please run some tests first...");
         }
 
         static void DisplayVerboseResults() {
@@ -192,13 +201,14 @@ namespace Giles {
 
         static void DisplayInteractiveMenuOptions() {
             Console.WriteLine("Interactive Console Options:");
-            Console.WriteLine("  ? = Display options");
-            Console.WriteLine("  C = Clear the window");
-            Console.WriteLine("  I = Show current configuration");
-            Console.WriteLine("  R = Run build & tests now");
-            Console.WriteLine("  V = Display last test run messages");
-            Console.WriteLine("  B = Set Build Delay");
-            Console.WriteLine("  Q = Quit");
+            Console.WriteLine("   ? = Display options");
+            Console.WriteLine("   C = Clear the window");
+            Console.WriteLine("   I = Show current configuration");
+            Console.WriteLine("   R = Run build & tests now");
+            Console.WriteLine("   V = Display all messages from last test run");
+            Console.WriteLine("   E = Display errors from last test run");
+            Console.WriteLine("   B = Set Build Delay");
+            Console.WriteLine("   Q = Quit");
             Console.WriteLine();
         }
     }

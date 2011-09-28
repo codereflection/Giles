@@ -25,7 +25,8 @@ namespace Giles.Core.Configuration
             config.TestAssemblyPath = testAssemblyPath;
             config.SolutionPath = "" + solutionPath + "";
 
-            config.UserDisplay = new List<IUserDisplay> {new ConsoleUserDisplay(), new GrowlUserDisplay()};
+            config.UserDisplay.Add(new ConsoleUserDisplay());
+            config.UserDisplay.Add(new GrowlUserDisplay());
             return config;
         }
     }
