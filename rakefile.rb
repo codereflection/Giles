@@ -6,7 +6,7 @@ require 'lib/FileSystem/filesystem'
 
 task :default => [:full]
 
-@GilesVersion = "0.1.1.2"
+@GilesVersion = "0.1.1.3"
 
 task :full => [:clean,:assemblyInfo,:build,:buildx86,:copyx86,:specifications,:createSpec,:createPackage]
 
