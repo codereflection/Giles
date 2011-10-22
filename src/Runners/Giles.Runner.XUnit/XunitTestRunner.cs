@@ -20,8 +20,7 @@ namespace Giles.Runner.Xunit {
         {
             return new[]
                        {
-                           Assembly.GetAssembly(typeof(XunitTestRunner)).Location, 
-                           "xunit.runner.utility.dll"
+                           Assembly.GetAssembly(typeof(XunitTestRunner)).Location, "xunit.runner.utility.dll"
                        };
         }
     }

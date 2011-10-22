@@ -124,7 +124,7 @@ namespace Giles.Core.AppDomains
 
         private static IEnumerable<string> GetGilesAssembliesToUse()
         {
-            var runners = TestFrameworkResolver.GetNewInstancesByType<IFrameworkRunner>();
+            var runners = TypeLoader.GetNewInstancesByType<IFrameworkRunner>();
 
             var result = new List<string> { typeof(GilesAppDomainRunner).Assembly.Location };
 

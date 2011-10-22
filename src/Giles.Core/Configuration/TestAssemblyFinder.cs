@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using Giles.Core.IO;
+using Giles.Core.Runners;
 
 namespace Giles.Core.Configuration
 {
@@ -16,6 +18,14 @@ namespace Giles.Core.Configuration
             @"Project\(""{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC\}""\)" +
             @"[^""]*""[^""]*""" + 
             @"[^""]*""([^""]*)""", RegexOptions.Compiled);
+
+        private static readonly string[] SupportedAssemblies
+                = new[]
+                  {
+                          "Machine.Specifications.dll",
+                          "nunit.framework.dll",
+                          "xunit.dll"
+                  };
 
         public TestAssemblyFinder(IFileSystem fileSystem)
         {
@@ -66,11 +76,10 @@ namespace Giles.Core.Configuration
         private int GetIsTestProjectScore(MsBuildProject project)
         {
             // TODO: may want to group this information with other info about supported test frameworks
-            int score = 0;
-            if (IsTestFrameworkReferenced(project, "Machine.Specifications.dll"))
-                score += 10;
-            if (IsTestFrameworkReferenced(project, "nunit.framework.dll"))
-                score += 10;
+            int numberOfReferencedTestAssemblies =
+                    SupportedAssemblies.Where( item => IsTestFrameworkReferenced( project, item ) )
+                            .Count();
+            int score = numberOfReferencedTestAssemblies * 10;
 
             // no supported test framework, abort
             if (score == 0)
