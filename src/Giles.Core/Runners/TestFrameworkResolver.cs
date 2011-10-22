@@ -9,11 +9,12 @@ namespace Giles.Core.Runners
 {
     public class TestFrameworkResolver
     {
-        readonly List<TestFrameworkInspector> frameworkRunners = new List<TestFrameworkInspector>();
+        readonly List<TestFrameworkInspector> frameworkInspectors = new List<TestFrameworkInspector>();
 
         public TestFrameworkResolver()
         {
-            frameworkRunners.AddRange(GetNewInstancesByType<TestFrameworkInspector>());
+            var inspectors = TypeLoader.GetNewInstancesByType<TestFrameworkInspector>();
+            frameworkInspectors.AddRange(inspectors);
         }
 
         /// <summary>
@@ -30,8 +31,8 @@ namespace Giles.Core.Runners
             var referencedAssemblies = targetAssembly.GetReferencedAssemblies();
 
             var runners =
-                frameworkRunners
-                    .Where(theRunner => referencedAssemblies.AnyMatchesRequirementFor(theRunner.Requirement))
+                frameworkInspectors
+                    .Where(inspector => referencedAssemblies.AnyMatchesRequirementFor(inspector.Requirement))
                     .Select(AnInstanceOfTheTestRunner);
 
             return runners;
@@ -42,24 +43,6 @@ namespace Giles.Core.Runners
             return GetRunnerBy(theRunner.GetType().Assembly.Location);
         }
 
-
-        /// <summary>
-        /// Gets a list of new instances of classes which implement, extend or are of type T
-        /// from all of the assemblies in the executing path
-        /// </summary>
-        /// <returns>List of new instances of classes which implement, extend or are of type T</returns>
-        public static IEnumerable<T> GetNewInstancesByType<T>() where T : class
-        {
-            var files = AssemblyExtensions.GetAssembliesFromExecutingPath();
-
-            var result = new List<T>();
-
-            files.Each(f =>
-                result.AddRange(AssemblyExtensions.FromAssemblyGetInstancesOfType<T>(f)));
-
-            return result;
-        }
-
         /// <summary>
         /// Returns an instance of the first test framework runner that implements IFrameworkRunner found in the runnerAssemblyPath
         /// </summary>
@@ -67,9 +50,9 @@ namespace Giles.Core.Runners
         /// <returns>An instance of the first class found that implements IFrameworkRunner</returns>
         public static IFrameworkRunner GetRunnerBy(string runnerAssemblyPath)
         {
-            var assemblyLocation =
-                Path.Combine(Path.GetDirectoryName(typeof(TestFrameworkResolver).Assembly.Location),
-                             runnerAssemblyPath);
+            var codeBase = new Uri(typeof(TestFrameworkResolver).Assembly.CodeBase);
+            var basePath = Path.GetDirectoryName(codeBase.LocalPath);
+            var assemblyLocation = Path.Combine(basePath, runnerAssemblyPath);
 
             var runner = GetRunnerFrom(assemblyLocation);
 
