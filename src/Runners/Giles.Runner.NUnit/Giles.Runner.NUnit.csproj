@@ -40,6 +40,9 @@
     <Reference Include="nunit.core.interfaces">
       <HintPath>..\..\..\lib\NUnit.2.5.10.11092\tools\lib\nunit.core.interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.util">
+      <HintPath>..\..\..\lib\NUnit.2.5.10.11092\tools\lib\nunit.util.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +51,7 @@
     <Compile Include="..\..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="DomainRunner.cs" />
     <Compile Include="GilesNUnitEventListener.cs" />
     <Compile Include="NUnitTestFrameworkInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
