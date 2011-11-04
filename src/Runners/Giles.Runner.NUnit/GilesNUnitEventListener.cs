@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Giles.Core.Runners;
 using NUnit.Core;
 using TestResult = NUnit.Core.TestResult;
 
 namespace Giles.Runner.NUnit
 {
-    public class GilesNUnitEventListener : EventListener
+    [Serializable]
+    public class GilesNUnitEventListener : MarshalByRefObject, EventListener
     {
         const string _testRunnerName = "NUNIT";
         private readonly SessionResults sessionResults = new SessionResults();
