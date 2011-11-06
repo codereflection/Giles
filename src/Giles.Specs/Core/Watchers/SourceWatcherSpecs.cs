@@ -1,10 +1,10 @@
 using System.IO;
-using System.Linq;
 using System.Threading;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Watchers;
+using Giles.Specs.Core.Utility;
 using Machine.Specifications;
 using NSubstitute;
 
@@ -17,7 +17,7 @@ namespace Giles.Specs.Core.Watchers
         protected static string path;
         protected static string filter;
         protected static IBuildRunner buildRunner;
-        protected static FileSystemWatcher fileSystemWatcher;
+        protected static FakeFileSystemWatcher fileSystemWatcher;
         protected static IFileWatcherFactory fileWatcherFactory;
         protected static string solutionfolder;
         protected static ITestRunner testRunner;
@@ -40,7 +40,7 @@ namespace Giles.Specs.Core.Watchers
                 filter = "*.cs";
 
                 fileSystem.FileExists(path).Returns(false);
-                fileSystemWatcher = new FileSystemWatcher(".");
+                fileSystemWatcher = new FakeFileSystemWatcher(".");
 
                 fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
                 solutionfolder = @"c:\solutionFolder";
@@ -96,6 +96,6 @@ namespace Giles.Specs.Core.Watchers
             watcher.Dispose();
 
         It should_call_dispose_on_each_file_watcher = () =>
-            watcher.FileWatchers.All(x => x == null);
+            fileSystemWatcher.WasDisposed.ShouldBeTrue();
     }
 }

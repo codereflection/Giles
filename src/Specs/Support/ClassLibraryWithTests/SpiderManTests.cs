@@ -5,7 +5,7 @@ namespace ClassLibraryWithTests
     public class SpiderManTests
     {
         [Test]
-        public void SpiderMan_should_know_his_own_catch_phrase()
+        public void SpiderMan_should_know_his_own_catch_phrase_from_the_app_config()
         {
             var spidey = new SpiderMan();
 
