@@ -37,7 +37,10 @@ namespace Giles.Specs.Core.Configuration
                 .Returns(TestResources.Read(
                     "Giles.Specs.Core.Configuration.Resources.Giles.Specs.csproj"));
 
-            testFinder = new TestAssemblyFinder(fileSystem);
+            testFinder = new TestAssemblyFinder
+                             {
+                                 GetFileSystem = () => fileSystem
+                             };
         };
     }
 

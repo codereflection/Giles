@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using CommandLine;
 using Giles.Core.Configuration;
-using Giles.Core.IO;
 using Giles.Core.Utility;
 using Giles.Core.Watchers;
 using Giles.Options;
@@ -63,7 +62,7 @@ namespace Giles {
         {
             var testAssemblyPath = options.TestAssemblyPath != null
                 ? options.TestAssemblyPath.Replace("\"", string.Empty)
-                : FindTestAssembly(options);
+                : FindTestAssembly(options.SolutionPath);
 
             if (testAssemblyPath == null)
             {
@@ -76,10 +75,10 @@ namespace Giles {
             return testAssemblyPath;
         }
 
-        private static string FindTestAssembly(CLOptions options)
+        private static string FindTestAssembly(string solutionPath)
         {
-            var testAssemblyFinder = new TestAssemblyFinder(new FileSystem());
-            var testAssemblies = testAssemblyFinder.FindTestAssembliesIn(options.SolutionPath);
+            var testAssemblyFinder = new TestAssemblyFinder();
+            var testAssemblies = testAssemblyFinder.FindTestAssembliesIn(solutionPath);
 
             if (testAssemblies.Count() == 0)
                 return null;
