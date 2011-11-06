@@ -8,25 +8,20 @@ namespace Giles
 {
     public class SlayerModule : NinjectModule
     {
-        readonly string solutionPath;
-        readonly string testAssemblyPath;
+        readonly GilesConfig config;
 
-        public SlayerModule(string solutionPath, string testAssemblyPath)
+        public SlayerModule(GilesConfig config)
         {
-            this.solutionPath = solutionPath;
-            this.testAssemblyPath = testAssemblyPath;
+            this.config = config;
         }
 
         public override void Load()
         {
             Bind<IFileSystem>().To<FileSystem>();
-            Bind<IBuildRunner>().To<BuildRunner>();
+            Bind<IBuildRunner>().To<BuildRunner>().WithConstructorArgument("config", config);
             Bind<ITestRunner>().To<TestRunner>();
             Bind<IFileWatcherFactory>().To<FileWatcherFactory>();
-            Bind<SourceWatcher>().ToSelf().InSingletonScope();
-            Bind<GilesConfigBuilder>().ToSelf()
-                .WithConstructorArgument("solutionPath", solutionPath)
-                .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
+            Bind<SourceWatcher>().ToSelf().InSingletonScope().WithConstructorArgument("config", config);
         }
     }
 }

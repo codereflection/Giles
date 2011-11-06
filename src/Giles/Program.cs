@@ -13,7 +13,9 @@ namespace Giles {
     class Program {
         static SourceWatcher sourceWatcher;
         static GilesConfig config;
-        static bool QuitRequested = false;
+        static bool quitRequested;
+        static IList<InteractiveMenuOption> menuOptions;
+        static StandardKernel kernel;
 
         static void Main(string[] args) {
             var options = new CLOptions();
@@ -28,15 +30,26 @@ namespace Giles {
                 Environment.Exit(1);
             }
 
+            config = GilesSetupFor(options);
+
+            kernel = new StandardKernel(new SlayerModule(config));
+
             ConsoleSetup();
 
-            SetupSourceWatcher(options);
+            sourceWatcher = StartSourceWatcher();
 
             SetupInteractiveMenuOptions();
 
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
+        }
+
+        static GilesConfig GilesSetupFor(CLOptions options)
+        {
+            var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
+            var testAssemblyPath = GetTestAssemblyPath(options);
+            return SetupGilesConfig(solutionPath, testAssemblyPath);
         }
 
         static string GetGilesFunnyLine()
@@ -49,14 +62,12 @@ namespace Giles {
                 name.Version.Build);
         }
 
-        static void SetupSourceWatcher(CLOptions options) {
-            var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
-            var testAssemblyPath = GetTestAssemblyPath(options);
-
-            GetSourceWatcher(solutionPath, testAssemblyPath);
+        static SourceWatcher StartSourceWatcher() {
+            var sourceWatcher = kernel.Get<SourceWatcher>();
 
             // HACK: Only *.cs files? Really? 
-            sourceWatcher.Watch(solutionPath, @"*.cs");
+            sourceWatcher.Watch(config.SolutionPath, @"*.cs");
+            return sourceWatcher;
         }
 
         private static string GetTestAssemblyPath(CLOptions options)
@@ -84,18 +95,10 @@ namespace Giles {
             return assemblies.Count() == 0 ? null : assemblies.First();
         }
 
-        static void GetSourceWatcher(string solutionPath, string testAssemblyPath) {
-            var kernel = SetupGilesKernelAndConfig(solutionPath, testAssemblyPath);
+        static GilesConfig SetupGilesConfig(string solutionPath, string testAssemblyPath) {
 
-            sourceWatcher = kernel.Get<SourceWatcher>();
-        }
-
-        static StandardKernel SetupGilesKernelAndConfig(string solutionPath, string testAssemblyPath) {
-            var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
-
-            var factory = kernel.Get<GilesConfigBuilder>();
-            config = factory.Build();
-            return kernel;
+            var builder = new GilesConfigBuilder(solutionPath, testAssemblyPath);
+            return builder.Build();
         }
 
         private static int Height {
@@ -115,16 +118,14 @@ namespace Giles {
             Console.Title = GetGilesFunnyLine();
             GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
             Console.SetBufferSize(1024, 5000);
-            Console.SetWindowSize(Program.Width, Program.Height);
+            //Console.SetWindowSize(Width, Height);
             Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
             Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
         }
 
-        static IList<InteractiveMenuOption> InteractiveMenuOptions;
-
         static void SetupInteractiveMenuOptions() {
-            InteractiveMenuOptions = new[]
+            menuOptions = new[]
                   {
                       new InteractiveMenuOption { HandlesKey = key => key == "?", Task = DisplayInteractiveMenuOptions },
                       new InteractiveMenuOption { HandlesKey = key => key == "i", Task = DisplayConfig },
@@ -139,17 +140,17 @@ namespace Giles {
 
 
         static void MainFeedbackLoop() {
-            while (!QuitRequested) {
+            while (!quitRequested) {
                 var keyValue = Console.ReadKey(true).KeyChar.ToString().ToLower();
 
-                InteractiveMenuOptions
+                menuOptions
                     .Where(option => option.HandlesKey(keyValue))
                     .Each(option => option.Task());
             }
         }
 
         static void RequestQuit() {
-            QuitRequested = true;
+            quitRequested = true;
         }
 
         static void SetBuildDelay() {
