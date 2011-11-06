@@ -1,7 +1,8 @@
-v.Next - Nov 5, 2011
+v.Next - Nov 6, 2011
  - Fixed XUnit test project detection (Thanks Ian Davis!)
  - No longer blocking Ctrl-C (GH-4)
  - No longer setting the window size, buffer size, or position. Giles shouldn't be doing this
+ - Fixed issue with Giles not using the test assembly's app.config (GH-12)
 
 v0.1.1.3 - Oct 12, 2011
  - Added E option to the interactive console to only print out the errors from the last test run, verbosely, including the stack traces
