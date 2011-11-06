@@ -101,24 +101,9 @@ namespace Giles {
             return builder.Build();
         }
 
-        private static int Height {
-            get {
-                return (69 > Console.LargestWindowHeight) ? Console.LargestWindowHeight : 69;
-            }
-        }
-
-        private static int Width {
-            get {
-                return (150 > Console.LargestWindowWidth) ? Console.LargestWindowWidth : 150; ;
-            }
-        }
-
         static void ConsoleSetup() {
             Console.Clear();
             Console.Title = GetGilesFunnyLine();
-            //GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
-            //Console.SetBufferSize(1024, 5000);
-            //Console.SetWindowSize(Width, Height);
             Console.WriteLine("Giles - your own personal watcher");
             Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
         }
