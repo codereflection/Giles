@@ -18,10 +18,9 @@ namespace Giles.Core.Watchers
         readonly IFileSystem fileSystem;
         readonly IFileWatcherFactory fileWatcherFactory;
         readonly GilesConfig config;
-        readonly ITestRunner testRunner;
 
 
-        public SourceWatcher(IBuildRunner buildRunner, ITestRunner testRunner, IFileSystem fileSystem,
+        public SourceWatcher(IBuildRunner buildRunner, IFileSystem fileSystem,
                              IFileWatcherFactory fileWatcherFactory, GilesConfig config)
         {
             FileWatchers = new List<FileSystemWatcher>();
@@ -29,7 +28,6 @@ namespace Giles.Core.Watchers
             this.buildRunner = buildRunner;
             this.fileWatcherFactory = fileWatcherFactory;
             this.config = config;
-            this.testRunner = testRunner;
             buildTimer = new Timer { AutoReset = false, Enabled = false, Interval = config.BuildDelay };
             config.PropertyChanged += config_PropertyChanged;
             buildTimer.Elapsed += buildTimer_Elapsed;

@@ -64,7 +64,6 @@
     <Compile Include="Core\Runners\CommandProcessExecutorSpecs.cs" />
     <Compile Include="Core\Runners\FakeUserDisplay.cs" />
     <Compile Include="Core\Runners\TestFrameworkResolverSpecs.cs" />
-    <Compile Include="Core\Runners\TestRunnerSpecs.cs" />
     <Compile Include="Core\Utility\AssemblyExtensionsSpecs.cs" />
     <Compile Include="Core\Watchers\SourceWatcherSpecs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

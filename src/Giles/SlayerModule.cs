@@ -19,7 +19,6 @@ namespace Giles
         {
             Bind<IFileSystem>().To<FileSystem>();
             Bind<IBuildRunner>().To<BuildRunner>().WithConstructorArgument("config", config);
-            Bind<ITestRunner>().To<TestRunner>();
             Bind<IFileWatcherFactory>().To<FileWatcherFactory>();
             Bind<SourceWatcher>().ToSelf().InSingletonScope().WithConstructorArgument("config", config);
         }

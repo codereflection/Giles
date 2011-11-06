@@ -20,21 +20,18 @@ namespace Giles.Specs.Core.Watchers
         protected static FileSystemWatcher fileSystemWatcher;
         protected static IFileWatcherFactory fileWatcherFactory;
         protected static string solutionfolder;
-        protected static ITestRunner testRunner;
         protected static GilesConfig config;
-        static TestFrameworkResolver resolver;
         protected static GilesTestListener listener;
 
         Establish context = () =>
             {
                 fileSystem = Substitute.For<IFileSystem>();
                 buildRunner = Substitute.For<IBuildRunner>();
-                testRunner = Substitute.For<ITestRunner>();
                 fileWatcherFactory = Substitute.For<IFileWatcherFactory>();
 
                 config = new GilesConfig();
 
-                watcher = new SourceWatcher(buildRunner, testRunner, fileSystem, fileWatcherFactory, config);
+                watcher = new SourceWatcher(buildRunner, fileSystem, fileWatcherFactory, config);
 
                 path = @"c:\solutionFolder\mySolution.sln";
                 filter = "*.cs";
