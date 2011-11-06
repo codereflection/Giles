@@ -19,6 +19,7 @@ namespace Giles.Core.Watchers
         readonly IFileWatcherFactory fileWatcherFactory;
         readonly GilesConfig config;
 
+        public List<FileSystemWatcher> FileWatchers { get; set; }
 
         public SourceWatcher(IBuildRunner buildRunner, IFileSystem fileSystem,
                              IFileWatcherFactory fileWatcherFactory, GilesConfig config)
@@ -30,32 +31,21 @@ namespace Giles.Core.Watchers
             this.config = config;
             buildTimer = new Timer { AutoReset = false, Enabled = false, Interval = config.BuildDelay };
             config.PropertyChanged += config_PropertyChanged;
-            buildTimer.Elapsed += buildTimer_Elapsed;
+            buildTimer.Elapsed += (sender, e) => RunNow();
         }
 
         void config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName != "BuildDelay") return;
             
-            var buildDelay = (sender as GilesConfig).BuildDelay;
+            var buildDelay = ((GilesConfig) sender).BuildDelay;
 
             buildTimer.Interval = buildDelay;
         }
 
-        public List<FileSystemWatcher> FileWatchers { get; set; }
-
-        #region IDisposable Members
-
         public void Dispose()
         {
             FileWatchers.ToList().ForEach(x => x.Dispose());
-        }
-
-        #endregion
-
-        void buildTimer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            RunNow();
         }
 
         public void Watch(string solutionPath, string filter)
