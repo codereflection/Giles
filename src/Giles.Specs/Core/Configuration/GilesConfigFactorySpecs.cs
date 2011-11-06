@@ -1,18 +1,16 @@
-using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Machine.Specifications;
-using Machine.Specifications.Utility;
 using NSubstitute;
 
 namespace Giles.Specs.Core.Configuration
 {
+    [Subject(typeof(GilesConfigBuilder))]
     public class a_giles_config
     {
-        protected static GilesConfigFactory factory;
+        protected static GilesConfigBuilder builder;
         protected static GilesConfig config;
         protected static IFileSystem fileSystem;
         protected static string solutionPath;
@@ -33,18 +31,15 @@ namespace Giles.Specs.Core.Configuration
                 fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
                 projectRoot = @"c:\solutionRoot";
 
-                config = new GilesConfig();
-                factory = new GilesConfigFactory(config, solutionPath, testAssemblyPath)
-                              {
-                                  LoadAssembly = filename => null
-                              };
+                builder = new GilesConfigBuilder(solutionPath, testAssemblyPath);
             };
     }
 
+    [Subject(typeof(GilesConfigBuilder))]
     public class when_building : a_giles_config
     {
         Because of = () =>
-            factory.Build();
+            config = builder.Build();
 
         It built_the_correct_config_test_runners = () =>
             config.TestRunners.All(x => x.Value.Path == testRunnerExe).ShouldBeTrue();

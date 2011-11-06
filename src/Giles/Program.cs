@@ -41,12 +41,12 @@ namespace Giles {
 
         static string GetGilesFunnyLine()
         {
-            var assemblyName = Assembly.GetExecutingAssembly().GetName();
+            var name = Assembly.GetExecutingAssembly().GetName();
             return string.Format(@"Grr, argh... v{0}.{1}.{2}.{3}",
-                assemblyName.Version.Major,
-                assemblyName.Version.Minor,
-                assemblyName.Version.Revision,
-                assemblyName.Version.Build);
+                name.Version.Major,
+                name.Version.Minor,
+                name.Version.Revision,
+                name.Version.Build);
         }
 
         static void SetupSourceWatcher(CLOptions options) {
@@ -55,16 +55,17 @@ namespace Giles {
 
             GetSourceWatcher(solutionPath, testAssemblyPath);
 
+            // HACK: Only *.cs files? Really? 
             sourceWatcher.Watch(solutionPath, @"*.cs");
         }
 
         private static string GetTestAssemblyPath(CLOptions options)
         {
-            var testAssemblyPath = options.TestAssemblyPath != null
+            var path = options.TestAssemblyPath != null
                 ? options.TestAssemblyPath.Replace("\"", string.Empty)
                 : FindTestAssembly(options.SolutionPath);
 
-            if (testAssemblyPath == null)
+            if (path == null)
             {
                 Console.Error.Write(options.GetUsage());
                 Console.Error.WriteLine("No test assemblies detected. Please specify"
@@ -72,18 +73,15 @@ namespace Giles {
                 Console.Error.WriteLine();
                 Environment.Exit(1);
             }
-            return testAssemblyPath;
+            return path;
         }
 
         private static string FindTestAssembly(string solutionPath)
         {
-            var testAssemblyFinder = new TestAssemblyFinder();
-            var testAssemblies = testAssemblyFinder.FindTestAssembliesIn(solutionPath);
+            var finder = new TestAssemblyFinder();
+            var assemblies = finder.FindTestAssembliesIn(solutionPath);
 
-            if (testAssemblies.Count() == 0)
-                return null;
-
-            return testAssemblies.First();
+            return assemblies.Count() == 0 ? null : assemblies.First();
         }
 
         static void GetSourceWatcher(string solutionPath, string testAssemblyPath) {
@@ -95,8 +93,8 @@ namespace Giles {
         static StandardKernel SetupGilesKernelAndConfig(string solutionPath, string testAssemblyPath) {
             var kernel = new StandardKernel(new SlayerModule(solutionPath, testAssemblyPath));
 
-            var configFactory = kernel.Get<GilesConfigFactory>();
-            config = configFactory.Build();
+            var factory = kernel.Get<GilesConfigBuilder>();
+            config = factory.Build();
             return kernel;
         }
 
@@ -192,7 +190,6 @@ namespace Giles {
             Console.WriteLine("\nCurrent Configuration");
             Console.WriteLine("  Build Delay: " + config.BuildDelay);
             Console.WriteLine("  Solution: " + config.SolutionPath);
-            Console.WriteLine("  Project Root: " + config.ProjectRoot);
             Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
             config.TestRunners.Each(r => Console.WriteLine("  " + r.Key + " Has been enabled"));
             Console.WriteLine();

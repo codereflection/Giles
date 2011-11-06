@@ -11,7 +11,6 @@ namespace Giles.Core.Configuration
         private long buildDelay = 500;
         public string TestAssemblyPath { get; set; }
         public string SolutionPath { get; set; }
-        public string ProjectRoot { get; set; }
 
         public long BuildDelay
         {

@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Giles.Core.UI;
+﻿using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
 {
-    public class GilesConfigFactory
+    public class GilesConfigBuilder
     {
-        readonly GilesConfig config;
+        readonly GilesConfig config = new GilesConfig();
         readonly string solutionPath;
         readonly string testAssemblyPath;
 
-        public GilesConfigFactory(GilesConfig config, string solutionPath, string testAssemblyPath)
+        public GilesConfigBuilder(string solutionPath, string testAssemblyPath)
         {
-            this.config = config;
             this.solutionPath = solutionPath;
             this.testAssemblyPath = testAssemblyPath;
         }
-
-        public Func<string, Assembly> LoadAssembly;
 
         public GilesConfig Build()
         {

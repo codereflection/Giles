@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using Machine.Specifications;
-using NSubstitute;
 
 namespace Giles.Specs.Core.Runners
 {
@@ -17,23 +15,28 @@ namespace Giles.Specs.Core.Runners
         static Dictionary<string, RunnerAssembly> runners;
 
         Establish context = () =>
-                                {
-                                    solutionFolder = @"c:\solutionFolder";
-                                    solutionPath = @"c:\solutionFolder\mySolution.sln";
-                                    testAssemblyPath = @"c:\solutionFolder\testProject\bin\debug\testAssembly.dll";
-                                    runners = new Dictionary<string, RunnerAssembly>();
-                                    runners.Add("foo", new RunnerAssembly { Enabled = true, Options = new List<string> { "bar" }, Path = "baz" });
+            {
+                solutionFolder = @"c:\solutionFolder";
+                solutionPath = @"c:\solutionFolder\mySolution.sln";
+                testAssemblyPath = @"c:\solutionFolder\testProject\bin\debug\testAssembly.dll";
+                runners = new Dictionary<string, RunnerAssembly>
+                              {
+                                  {
+                                      "foo",
+                                      new RunnerAssembly
+                                          {Enabled = true, Options = new List<string> {"bar"}, Path = "baz"}
+                                      }
+                              };
 
-                                    config = new GilesConfig()
-                                                 {
-                                                     BuildDelay = 1,
-                                                     ProjectRoot = solutionFolder,
-                                                     SolutionPath = solutionPath,
-                                                     TestAssemblyPath = testAssemblyPath,
-                                                     TestRunners = runners
-                                                 };
-                                    runner = new TestRunner(config);
+                config = new GilesConfig()
+                                {
+                                    BuildDelay = 1,
+                                    SolutionPath = solutionPath,
+                                    TestAssemblyPath = testAssemblyPath,
+                                    TestRunners = runners
                                 };
+                runner = new TestRunner(config);
+            };
     }
 
     public class when_running_a_test_runner : with_a_test_runner

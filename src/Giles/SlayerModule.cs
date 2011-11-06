@@ -24,8 +24,7 @@ namespace Giles
             Bind<ITestRunner>().To<TestRunner>();
             Bind<IFileWatcherFactory>().To<FileWatcherFactory>();
             Bind<SourceWatcher>().ToSelf().InSingletonScope();
-            Bind<GilesConfig>().ToSelf().InSingletonScope();
-            Bind<GilesConfigFactory>().ToSelf()
+            Bind<GilesConfigBuilder>().ToSelf()
                 .WithConstructorArgument("solutionPath", solutionPath)
                 .WithConstructorArgument("testAssemblyPath", testAssemblyPath);
         }
