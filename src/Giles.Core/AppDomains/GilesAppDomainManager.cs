@@ -75,15 +75,12 @@ namespace Giles.Core.AppDomains
 
         private void SetupAppDomain(string testAssemblyPath)
         {
-            Console.WriteLine("Setting up App Domain for test assembly: {0}", testAssemblyPath);
             var domainInfo = new AppDomainSetup
                                  {
                                      ApplicationBase = testAssemblyFolder,
                                      PrivateBinPath = "Giles",
                                      ConfigurationFile = GetConfigFile(testAssemblyPath)
                                  };
-
-            Console.WriteLine("Using configuration file: {0}", domainInfo.ConfigurationFile);
 
             appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
         }
