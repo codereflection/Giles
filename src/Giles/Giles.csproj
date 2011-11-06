@@ -83,7 +83,6 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
-    <Compile Include="GilesConsoleWindowControls.cs" />
     <Compile Include="Options\CLOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
