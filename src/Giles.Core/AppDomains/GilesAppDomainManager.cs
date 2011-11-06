@@ -13,6 +13,9 @@ namespace Giles.Core.AppDomains
         private AppDomain appDomain;
         private string testAssemblyFolder;
         public SessionResults SessionResults { get; set; }
+        private static readonly IFileSystem FileSystem = new FileSystem();
+        public Func<IFileSystem> GetFileSystem = () => FileSystem;
+
 
         public IEnumerable<SessionResults> Run(string testAssemblyPath)
         {
@@ -58,7 +61,7 @@ namespace Giles.Core.AppDomains
 
             CopyGilesToTheTestAssemblyFolder(testAssemblyFolder);
 
-            SetupAppDomain();
+            SetupAppDomain(testAssemblyPath);
 
             return GetRunner();
         }
@@ -70,15 +73,26 @@ namespace Giles.Core.AppDomains
             return appDomain.CreateInstanceAndUnwrap(runType.Assembly.FullName, runType.FullName) as GilesAppDomainRunner;
         }
 
-        private void SetupAppDomain()
+        private void SetupAppDomain(string testAssemblyPath)
         {
+            Console.WriteLine("Setting up App Domain for test assembly: {0}", testAssemblyPath);
             var domainInfo = new AppDomainSetup
                                  {
                                      ApplicationBase = testAssemblyFolder,
-                                     PrivateBinPath = "Giles"
+                                     PrivateBinPath = "Giles",
+                                     ConfigurationFile = GetConfigFile(testAssemblyPath)
                                  };
 
+            Console.WriteLine("Using configuration file: {0}", domainInfo.ConfigurationFile);
+
             appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
+        }
+
+        string GetConfigFile(string testAssemblyPath)
+        {
+            var configFile = testAssemblyPath + ".config";
+            
+            return GetFileSystem().FileExists(configFile) ? configFile : string.Empty;
         }
 
         private static void CopyGilesToTheTestAssemblyFolder(string testAssemblyFolder)

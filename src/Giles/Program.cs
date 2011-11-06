@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using CommandLine;
@@ -49,6 +50,10 @@ namespace Giles {
         {
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
             var testAssemblyPath = GetTestAssemblyPath(options);
+
+            solutionPath = Path.GetFullPath(solutionPath);
+            testAssemblyPath = Path.GetFullPath(testAssemblyPath);
+
             return SetupGilesConfig(solutionPath, testAssemblyPath);
         }
 
