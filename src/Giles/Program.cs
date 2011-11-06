@@ -30,7 +30,7 @@ namespace Giles {
                 Environment.Exit(1);
             }
 
-            config = GilesSetupFor(options);
+            config = GetGilesConfigFor(options);
 
             kernel = new StandardKernel(new SlayerModule(config));
 
@@ -38,14 +38,14 @@ namespace Giles {
 
             sourceWatcher = StartSourceWatcher();
 
-            SetupInteractiveMenuOptions();
+            menuOptions = GetInteractiveMenuOptions();
 
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
         }
 
-        static GilesConfig GilesSetupFor(CLOptions options)
+        static GilesConfig GetGilesConfigFor(CLOptions options)
         {
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
             var testAssemblyPath = GetTestAssemblyPath(options);
@@ -63,11 +63,11 @@ namespace Giles {
         }
 
         static SourceWatcher StartSourceWatcher() {
-            var sourceWatcher = kernel.Get<SourceWatcher>();
+            var watcher = kernel.Get<SourceWatcher>();
 
             // HACK: Only *.cs files? Really? 
-            sourceWatcher.Watch(config.SolutionPath, @"*.cs");
-            return sourceWatcher;
+            watcher.Watch(config.SolutionPath, @"*.cs");
+            return watcher;
         }
 
         private static string GetTestAssemblyPath(CLOptions options)
@@ -116,16 +116,15 @@ namespace Giles {
         static void ConsoleSetup() {
             Console.Clear();
             Console.Title = GetGilesFunnyLine();
-            GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
-            Console.SetBufferSize(1024, 5000);
+            //GilesConsoleWindowControls.SetConsoleWindowPosition(0, 75);
+            //Console.SetBufferSize(1024, 5000);
             //Console.SetWindowSize(Width, Height);
-            Console.CancelKeyPress += Console_CancelKeyPress;
             Console.WriteLine("Giles - your own personal watcher");
             Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
         }
 
-        static void SetupInteractiveMenuOptions() {
-            menuOptions = new[]
+        static InteractiveMenuOption[] GetInteractiveMenuOptions() {
+            return new[]
                   {
                       new InteractiveMenuOption { HandlesKey = key => key == "?", Task = DisplayInteractiveMenuOptions },
                       new InteractiveMenuOption { HandlesKey = key => key == "i", Task = DisplayConfig },
@@ -147,6 +146,7 @@ namespace Giles {
                     .Where(option => option.HandlesKey(keyValue))
                     .Each(option => option.Task());
             }
+            Console.WriteLine("Until next time...");
         }
 
         static void RequestQuit() {
@@ -180,11 +180,6 @@ namespace Giles {
                 return defaultValue;
 
             return (T)Convert.ChangeType(newValue, typeof(T));
-        }
-
-        static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e) {
-            // eating the ctrl-c for breakfast...
-            e.Cancel = true;
         }
 
         static void DisplayConfig() {
