@@ -8,6 +8,7 @@ using NSubstitute;
 
 namespace Giles.Specs.Core.Configuration
 {
+    [Subject(typeof(TestAssemblyFinder))]
     public class a_solution_with_a_test_project
     {
         protected static TestAssemblyFinder testFinder;
@@ -44,6 +45,7 @@ namespace Giles.Specs.Core.Configuration
         };
     }
 
+    [Subject(typeof(TestAssemblyFinder))]
     public class when_loading_configuration_settings_from_a_solution_with_a_test_project : a_solution_with_a_test_project
     {
         Because of = () =>
@@ -67,17 +69,18 @@ namespace Giles.Specs.Core.Configuration
                 @"c:\app\src\Giles.Specs\bin\Debug\Giles.Specs.dll");
     }
 
+    [Subject(typeof(TestAssemblyFinder))]
     public class a_solution_with_two_projects_referencing_test_frameworks : a_solution_with_a_test_project
     {
-        Establish context = () => {
-            // switch call for Core project to return core project with MSpec reference
+        // switch call for Core project to return core project with MSpec reference
+        Establish context = () => 
             fileSystem.OpenFile(@"c:\app\src\Giles.Core\Giles.Core.csproj",
                 FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
                 .Returns(TestResources.Read(
                     "Giles.Specs.Core.Configuration.Resources.Giles.Core.WithMSpec.csproj"));
-        };
     }
 
+    [Subject(typeof(TestAssemblyFinder))]
     public class when_a_solution_contains_two_projects_referencing_test_frameworks : a_solution_with_two_projects_referencing_test_frameworks
     {
         private static IEnumerable<string> assemblies;

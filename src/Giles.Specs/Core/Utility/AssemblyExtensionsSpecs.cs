@@ -13,6 +13,7 @@ namespace Giles.Specs.Core.Utility
     {
     }
 
+    [Subject(typeof(AssemblyExtensions))]
     public class when_getting_instances_of_T_from_assembly_by_interface
     {
         static string path;

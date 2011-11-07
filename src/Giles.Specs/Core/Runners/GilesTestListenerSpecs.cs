@@ -8,6 +8,7 @@ using Machine.Specifications;
 
 namespace Giles.Specs.Core.Runners
 {
+    [Subject(typeof(GilesTestListener))]
     public class with_a_giles_test_listener
     {
         protected const string testMessage = "The monkies have tested the cheese, and the cheese is good.";
@@ -33,6 +34,7 @@ namespace Giles.Specs.Core.Runners
         protected static StringBuilder consoleOutputBuffer;
     }
 
+    [Subject(typeof(GilesTestListener))]
     public class when_writing_a_line_to_the_test_listener : with_a_giles_test_listener
     {
         Because of = () =>
@@ -42,6 +44,7 @@ namespace Giles.Specs.Core.Runners
             listener.GetOutput()[testCategory].ToString().Contains(testMessage);
     }
 
+    [Subject(typeof(GilesTestListener))]
     public class when_displaying_the_verbose_test_results : with_a_giles_test_listener
     {
         Establish context = () => 
@@ -54,6 +57,7 @@ namespace Giles.Specs.Core.Runners
             consoleOutputBuffer.ToString().ShouldNotBeEmpty();
     }
 
+    [Subject(typeof(GilesTestListener))]
     public class when_displaying_the_results : with_a_giles_test_listener
     {
         Establish context = () =>
@@ -76,6 +80,7 @@ namespace Giles.Specs.Core.Runners
 
     }
 
+    [Subject(typeof(GilesTestListener))]
     public class when_displaying_all_the_errors_from_the_last_test_run : with_a_giles_test_listener
     {
         const string testName = "FailingTestThatFails";

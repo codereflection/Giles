@@ -4,6 +4,7 @@ using Machine.Specifications;
 
 namespace Giles.Specs.Core.Runners
 {
+    [Subject(typeof(CommandProcessExecutor))]
     public class when_setting_up_a_process
     {
         static Process result;

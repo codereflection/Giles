@@ -5,7 +5,7 @@ using Machine.Specifications;
 
 namespace Giles.Specs.Core.Runners
 {
-    [Subject("Build Runner")]
+    [Subject(typeof(BuildRunner))]
     public class with_a_build_runner
     {
         protected static GilesConfig config;
@@ -23,6 +23,7 @@ namespace Giles.Specs.Core.Runners
             };
     }
 
+    [Subject(typeof(BuildRunner))]
     public class when_asked_to_run_a_build_and_the_build_was_successful : with_a_build_runner
     {
         static ExecutionResult ExecuteHandler(string filename, string args)
@@ -54,6 +55,7 @@ namespace Giles.Specs.Core.Runners
             fakeUserDisplay.DisplayMessagesReceived.Any(x => x.Contains("Success")).ShouldBeTrue();
     }
 
+    [Subject(typeof(BuildRunner))]
     public class when_asked_to_run_a_build_and_the_build_was_failed : with_a_build_runner
     {
         static ExecutionResult ExecuteHandler(string filename, string args)

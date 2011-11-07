@@ -5,6 +5,7 @@ using Machine.Specifications;
 
 namespace Giles.Specs.Core.Configuration
 {
+    [Subject(typeof(MsBuildProject))]
     public class an_msbuild_project
     {
         protected static string projectPath;
@@ -15,6 +16,7 @@ namespace Giles.Specs.Core.Configuration
         };
     }
 
+    [Subject(typeof(MsBuildProject))]
     public class when_an_msbuild_project_is_loaded : an_msbuild_project
     {
         Because of = () => {

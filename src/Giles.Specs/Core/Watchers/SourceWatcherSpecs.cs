@@ -10,6 +10,7 @@ using NSubstitute;
 
 namespace Giles.Specs.Core.Watchers
 {
+    [Subject(typeof(SourceWatcher))]
     public class with_a_source_watcher
     {
         protected static SourceWatcher watcher;
@@ -49,6 +50,7 @@ namespace Giles.Specs.Core.Watchers
             };
     }
 
+    [Subject(typeof(SourceWatcher))]
     public class when_starting_to_watch_files : with_a_source_watcher
     {
         Because of = () =>
@@ -65,6 +67,7 @@ namespace Giles.Specs.Core.Watchers
     }
 
 
+    [Subject(typeof(SourceWatcher))]
     public class when_a_file_has_changed : with_a_source_watcher
     {
         Establish context = () => 
@@ -82,8 +85,9 @@ namespace Giles.Specs.Core.Watchers
         It should_display_the_results = () => 
             listener.Received().DisplayResults();
 
-    }   
+    }
 
+    [Subject(typeof(SourceWatcher))]
     public class when_disposing : with_a_source_watcher
     {
         Establish context = () =>
