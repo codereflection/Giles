@@ -1,4 +1,4 @@
-v.Next - Nov 6, 2011
+v0.1.1.4 - Nov 6, 2011
  - Fixed XUnit test project detection (Thanks Ian Davis!)
  - No longer blocking Ctrl-C (GH-4)
  - No longer setting the window size, buffer size, or position. Giles shouldn't be doing this
