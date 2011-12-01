@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Giles.Core.Configuration;
@@ -31,7 +32,7 @@ namespace Giles.Specs.Core.Configuration
                 fileSystem.GetDirectoryName(solutionPath).Returns(solutionFolder);
                 projectRoot = @"c:\solutionRoot";
 
-                builder = new GilesConfigBuilder(solutionPath, testAssemblyPath);
+                builder = new GilesConfigBuilder(solutionPath, new List<string> { testAssemblyPath });
             };
     }
 
@@ -45,7 +46,7 @@ namespace Giles.Specs.Core.Configuration
             config.TestRunners.All(x => x.Value.Path == testRunnerExe).ShouldBeTrue();
 
         It assigned_the_test_assembly_path = () =>
-            config.TestAssemblyPath.ShouldEqual(testAssemblyPath);
+            config.TestAssemblies.ShouldContain(testAssemblyPath);
 
         It assigned_the_solution_path = () =>
             config.SolutionPath.ShouldEqual(solutionPath);

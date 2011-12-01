@@ -1,4 +1,5 @@
-﻿using Giles.Core.UI;
+﻿using System.Collections.Generic;
+using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
 {
@@ -6,17 +7,17 @@ namespace Giles.Core.Configuration
     {
         readonly GilesConfig config = new GilesConfig();
         readonly string solutionPath;
-        readonly string testAssemblyPath;
+        readonly List<string> testAssemblies;
 
-        public GilesConfigBuilder(string solutionPath, string testAssemblyPath)
+        public GilesConfigBuilder(string solutionPath, List<string> testAssemblies)
         {
             this.solutionPath = solutionPath;
-            this.testAssemblyPath = testAssemblyPath;
+            this.testAssemblies = testAssemblies;
         }
 
         public GilesConfig Build()
         {
-            config.TestAssemblyPath = testAssemblyPath;
+            config.TestAssemblies = testAssemblies;
             config.SolutionPath = "" + solutionPath + "";
 
             config.UserDisplay.Add(new ConsoleUserDisplay());

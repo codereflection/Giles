@@ -89,7 +89,7 @@ namespace Giles.Core.Watchers
             var listener = GetListener.Invoke(config);
 
             var manager = new GilesAppDomainManager();
-            var runResult = manager.Run(config.TestAssemblyPath);
+            var runResult = manager.Run(config.TestAssemblies.FirstOrDefault());
             runResult.Each(result =>
                                {
                                    result.Messages.Each(m => listener.WriteLine(m, "Output"));

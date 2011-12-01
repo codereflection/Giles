@@ -10,15 +10,18 @@ using Giles.Core.Watchers;
 using Giles.Options;
 using Ninject;
 
-namespace Giles {
-    class Program {
+namespace Giles
+{
+    class Program
+    {
         static SourceWatcher sourceWatcher;
         static GilesConfig config;
         static bool quitRequested;
         static IList<InteractiveMenuOption> menuOptions;
         static StandardKernel kernel;
 
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
             var options = new CLOptions();
 
             Console.WriteLine(GetGilesFunnyLine());
@@ -26,7 +29,8 @@ namespace Giles {
             var parser = new CommandLineParser(
                 new CommandLineParserSettings(false, Console.Error));
 
-            if (!parser.ParseArguments(args, options)) {
+            if (!parser.ParseArguments(args, options))
+            {
                 Console.WriteLine("Unable to determine what command lines arguments were used, check the help above!\nThe minimum needed is the -s [solution file path].");
                 Environment.Exit(1);
             }
@@ -54,7 +58,7 @@ namespace Giles {
             solutionPath = Path.GetFullPath(solutionPath);
             testAssemblyPath = Path.GetFullPath(testAssemblyPath);
 
-            return SetupGilesConfig(solutionPath, testAssemblyPath);
+            return SetupGilesConfig(solutionPath, new List<string> { testAssemblyPath });
         }
 
         static string GetGilesFunnyLine()
@@ -67,7 +71,8 @@ namespace Giles {
                 name.Version.Build);
         }
 
-        static SourceWatcher StartSourceWatcher() {
+        static SourceWatcher StartSourceWatcher()
+        {
             var watcher = kernel.Get<SourceWatcher>();
 
             // HACK: Only *.cs files? Really? 
@@ -100,20 +105,23 @@ namespace Giles {
             return assemblies.Count() == 0 ? null : assemblies.First();
         }
 
-        static GilesConfig SetupGilesConfig(string solutionPath, string testAssemblyPath) {
+        static GilesConfig SetupGilesConfig(string solutionPath, List<string> testAssemblies)
+        {
 
-            var builder = new GilesConfigBuilder(solutionPath, testAssemblyPath);
+            var builder = new GilesConfigBuilder(solutionPath, testAssemblies);
             return builder.Build();
         }
 
-        static void ConsoleSetup() {
+        static void ConsoleSetup()
+        {
             Console.Clear();
             Console.Title = GetGilesFunnyLine();
             Console.WriteLine("Giles - your own personal watcher");
             Console.WriteLine("\t\"I'd like to test that theory...\"\n\n");
         }
 
-        static InteractiveMenuOption[] GetInteractiveMenuOptions() {
+        static InteractiveMenuOption[] GetInteractiveMenuOptions()
+        {
             return new[]
                   {
                       new InteractiveMenuOption { HandlesKey = key => key == "?", Task = DisplayInteractiveMenuOptions },
@@ -128,8 +136,10 @@ namespace Giles {
         }
 
 
-        static void MainFeedbackLoop() {
-            while (!quitRequested) {
+        static void MainFeedbackLoop()
+        {
+            while (!quitRequested)
+            {
                 var keyValue = Console.ReadKey(true).KeyChar.ToString().ToLower();
 
                 menuOptions
@@ -139,11 +149,13 @@ namespace Giles {
             Console.WriteLine("Until next time...");
         }
 
-        static void RequestQuit() {
+        static void RequestQuit()
+        {
             quitRequested = true;
         }
 
-        static void SetBuildDelay() {
+        static void SetBuildDelay()
+        {
             config.BuildDelay = GetUserValue(config.BuildDelay);
         }
 
@@ -155,14 +167,16 @@ namespace Giles {
                 Console.WriteLine("Please run some tests first...");
         }
 
-        static void DisplayVerboseResults() {
+        static void DisplayVerboseResults()
+        {
             if (LastRunResults.GilesTestListener != null)
                 LastRunResults.GilesTestListener.DisplayVerboseResults();
             else
                 Console.WriteLine("Please run some tests first...");
         }
 
-        static T GetUserValue<T>(T defaultValue) {
+        static T GetUserValue<T>(T defaultValue)
+        {
             Console.Write("Enter new value ({0}): ", defaultValue);
             var newValue = Console.ReadLine();
 
@@ -172,16 +186,18 @@ namespace Giles {
             return (T)Convert.ChangeType(newValue, typeof(T));
         }
 
-        static void DisplayConfig() {
+        static void DisplayConfig()
+        {
             Console.WriteLine("\nCurrent Configuration");
             Console.WriteLine("  Build Delay: " + config.BuildDelay);
             Console.WriteLine("  Solution: " + config.SolutionPath);
-            Console.WriteLine("  Test Assembly: " + config.TestAssemblyPath);
+            Console.WriteLine("  Test Assembly: " + config.TestAssemblies);
             config.TestRunners.Each(r => Console.WriteLine("  " + r.Key + " Has been enabled"));
             Console.WriteLine();
         }
 
-        static void DisplayInteractiveMenuOptions() {
+        static void DisplayInteractiveMenuOptions()
+        {
             Console.WriteLine("Interactive Console Options:");
             Console.WriteLine("   ? = Display options");
             Console.WriteLine("   C = Clear the window");
@@ -195,7 +211,8 @@ namespace Giles {
         }
     }
 
-    public class InteractiveMenuOption {
+    public class InteractiveMenuOption
+    {
         public Func<string, bool> HandlesKey;
         public Action Task;
     }
