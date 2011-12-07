@@ -55,6 +55,7 @@
     <Compile Include="..\ProjectVersion.cs">
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
+    <Compile Include="Console\Options\CLOptionsSpecs.cs" />
     <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
     <Compile Include="Core\Runners\GilesTestListenerSpecs.cs" />
     <Compile Include="Core\Utility\FakeFileSystemWatcher.cs">
@@ -72,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommandLine">
+      <HintPath>..\..\lib\CommandLineParser\CommandLine.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Specifications, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\manual\mspec\Machine.Specifications.dll</HintPath>
@@ -87,6 +91,10 @@
     <ProjectReference Include="..\Giles.Core\Giles.Core.csproj">
       <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
       <Name>Giles.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Giles\Giles.csproj">
+      <Project>{ACCEC948-8032-4D2B-AD53-1DD1390EDA78}</Project>
+      <Name>Giles</Name>
     </ProjectReference>
     <ProjectReference Include="..\Runners\Giles.Runner.Machine.Specifications\Giles.Runner.Machine.Specifications.csproj">
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>

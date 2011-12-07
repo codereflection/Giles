@@ -25,7 +25,7 @@ namespace Giles.Specs.Core.Runners
 
             consoleOutputBuffer = new StringBuilder();
             consoleOutputWriter = new StringWriter(consoleOutputBuffer);
-            Console.SetOut(consoleOutputWriter);
+            System.Console.SetOut(consoleOutputWriter);
 
             listener = new GilesTestListener(config);
         };

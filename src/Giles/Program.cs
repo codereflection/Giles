@@ -53,12 +53,15 @@ namespace Giles
         static GilesConfig GetGilesConfigFor(CLOptions options)
         {
             var solutionPath = options.SolutionPath.Replace("\"", string.Empty);
-            var testAssemblyPath = GetTestAssemblyPath(options);
+            var testAssemblies = GetTestAssemblies(options);
 
             solutionPath = Path.GetFullPath(solutionPath);
-            testAssemblyPath = Path.GetFullPath(testAssemblyPath);
+            for (var i = 0; i < testAssemblies.Count() - 1; i++)
+            {
+                testAssemblies[i] = Path.GetFullPath(testAssemblies[i]);
+            }
 
-            return SetupGilesConfig(solutionPath, new List<string> { testAssemblyPath });
+            return SetupGilesConfig(solutionPath, testAssemblies);
         }
 
         static string GetGilesFunnyLine()
@@ -80,29 +83,29 @@ namespace Giles
             return watcher;
         }
 
-        private static string GetTestAssemblyPath(CLOptions options)
+        static List<string> GetTestAssemblies(CLOptions options)
         {
-            var path = options.TestAssemblyPath != null
-                ? options.TestAssemblyPath.Replace("\"", string.Empty)
+            var testAssemblies = options.GetTestAssemblies().Count > 0
+                ? options.GetTestAssemblies()
                 : FindTestAssembly(options.SolutionPath);
 
-            if (path == null)
+            if (testAssemblies == null)
             {
                 Console.Error.Write(options.GetUsage());
                 Console.Error.WriteLine("No test assemblies detected. Please specify"
-                    + " the TestAssemblyPath command line option.");
+                    + " the TestAssemblyPaths command line option.");
                 Console.Error.WriteLine();
                 Environment.Exit(1);
             }
-            return path;
+            return testAssemblies;
         }
 
-        private static string FindTestAssembly(string solutionPath)
+        private static List<string> FindTestAssembly(string solutionPath)
         {
             var finder = new TestAssemblyFinder();
             var assemblies = finder.FindTestAssembliesIn(solutionPath);
 
-            return assemblies.Count() == 0 ? null : assemblies.First();
+            return assemblies;
         }
 
         static GilesConfig SetupGilesConfig(string solutionPath, List<string> testAssemblies)

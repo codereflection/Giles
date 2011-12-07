@@ -27,7 +27,7 @@ namespace Giles.Core.Configuration
                           "xunit.dll"
                   };
 
-        public IEnumerable<string> FindTestAssembliesIn(string solutionFilePath)
+        public List<string> FindTestAssembliesIn(string solutionFilePath)
         {
             var projectFiles = GetProjectFilePaths(solutionFilePath);
             var testAssemblies = new List<Tuple<int, string>>();
@@ -51,7 +51,7 @@ namespace Giles.Core.Configuration
             return (from tuple in testAssemblies
                     orderby tuple.Item1 descending,
                             tuple.Item2 ascending // keep things deterministic for testing
-                    select tuple.Item2).ToArray();
+                    select tuple.Item2).ToList();
         }
 
         private IEnumerable<String> GetProjectFilePaths(string solutionFilePath)
