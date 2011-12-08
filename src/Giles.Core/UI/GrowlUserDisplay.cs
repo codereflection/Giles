@@ -36,7 +36,7 @@ namespace Giles.Core.UI
         public void DisplayMessage(string message, params object[] parameters)
         {
             const string title = "Giles says...";
-            var text = string.Format(message, parameters);
+            var text = string.Format(message.ScrubDisplayStringForFormatting(), parameters);
             var notification = new Notification(application.Name, notificationType.Name, DateTime.Now.Ticks.ToString(), title, text);
             growl.Notify(notification);
         }

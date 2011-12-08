@@ -26,7 +26,9 @@ namespace Giles.Options
 
         public List<string> GetTestAssemblies()
         {
-            return new List<string>(TestAssemblyPaths.Split(','));
+            return string.IsNullOrEmpty(TestAssemblyPaths) ? 
+                new List<string>() :
+                new List<string>(TestAssemblyPaths.Replace("\'", string.Empty).Replace("\"", string.Empty).Split(','));
         }
     }
 }

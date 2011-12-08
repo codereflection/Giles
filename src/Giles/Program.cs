@@ -85,9 +85,11 @@ namespace Giles
 
         static List<string> GetTestAssemblies(CLOptions options)
         {
-            var testAssemblies = options.GetTestAssemblies().Count > 0
-                ? options.GetTestAssemblies()
-                : FindTestAssembly(options.SolutionPath);
+            var testAssemblies = options.GetTestAssemblies();
+
+            testAssemblies = testAssemblies.Count > 0 ?
+                testAssemblies :
+                FindTestAssembly(options.SolutionPath);
 
             if (testAssemblies == null)
             {

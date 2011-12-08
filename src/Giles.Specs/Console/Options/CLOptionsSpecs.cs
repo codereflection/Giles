@@ -60,6 +60,7 @@ namespace Giles.Specs.Console.Options
         Establish context = () =>
             {
                 commandLineArgs = new[] { "-s", "mySolution.sln", "-t", "\"myTestAssembly.dll\"" };
+                SetupOptions();
             };
 
         Because of = () =>
@@ -72,9 +73,10 @@ namespace Giles.Specs.Console.Options
     public class when_the_test_assembly_path_is_surrounded_by_single_quotes : with_command_line_options
     {
         Establish context = () =>
-        {
-            commandLineArgs = new[] { "-s", "mySolution.sln", "-t", "'myTestAssembly.dll'" };
-        };
+            {
+                commandLineArgs = new[] { "-s", "mySolution.sln", "-t", "'myTestAssembly.dll'" };
+                SetupOptions();
+            };
 
         Because of = () =>
             result = options.GetTestAssemblies();
@@ -83,5 +85,18 @@ namespace Giles.Specs.Console.Options
             result.First().ShouldEqual("myTestAssembly.dll");
     }
 
-    
+    public class when_no_test_assemblies_are_passed : with_command_line_options
+    {
+        Establish context = () =>
+            {
+                commandLineArgs = new[] { "-s", "mySolution.sln" };
+                SetupOptions();
+            };
+
+        Because of = () =>
+            result = options.GetTestAssemblies();
+
+        It should_return_an_empty_list_of_test_assemblies = () =>
+            result.Count.ShouldEqual(0);
+    }
 }

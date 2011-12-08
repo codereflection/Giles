@@ -13,8 +13,7 @@ namespace Giles.Core.UI
         }
         public void DisplayMessage(string message, params object[] parameters)
         {
-            message = message.Replace("{", "{{");
-            Console.WriteLine(message, parameters);
+            Console.WriteLine(message.ScrubDisplayStringForFormatting(), parameters);
         }
 
         public void DisplayResult(ExecutionResult result)
