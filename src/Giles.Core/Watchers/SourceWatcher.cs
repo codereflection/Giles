@@ -14,7 +14,7 @@ namespace Giles.Core.Watchers
     public class SourceWatcher : IDisposable
     {
         readonly IBuildRunner buildRunner;
-        readonly Timer buildTimer;
+        readonly Timer buildDelayTimer;
         readonly IFileSystem fileSystem;
         readonly IFileWatcherFactory fileWatcherFactory;
         readonly GilesConfig config;
@@ -29,9 +29,9 @@ namespace Giles.Core.Watchers
             this.buildRunner = buildRunner;
             this.fileWatcherFactory = fileWatcherFactory;
             this.config = config;
-            buildTimer = new Timer { AutoReset = false, Enabled = false, Interval = config.BuildDelay };
+            buildDelayTimer = new Timer { AutoReset = false, Enabled = false, Interval = config.BuildDelay };
             config.PropertyChanged += config_PropertyChanged;
-            buildTimer.Elapsed += (sender, e) => RunNow();
+            buildDelayTimer.Elapsed += (sender, e) => RunNow();
         }
 
         void config_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -40,7 +40,7 @@ namespace Giles.Core.Watchers
             
             var buildDelay = ((GilesConfig) sender).BuildDelay;
 
-            buildTimer.Interval = buildDelay;
+            buildDelayTimer.Interval = buildDelay;
         }
 
         public void Dispose()
@@ -67,16 +67,16 @@ namespace Giles.Core.Watchers
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
         {
-            if (buildTimer.Enabled)
+            if (buildDelayTimer.Enabled)
                 ResetBuildTimer();
             else
-                buildTimer.Enabled = true;
+                buildDelayTimer.Enabled = true;
         }
 
         void ResetBuildTimer()
         {
-            buildTimer.Enabled = false;
-            buildTimer.Enabled = true;
+            buildDelayTimer.Enabled = false;
+            buildDelayTimer.Enabled = true;
         }
 
         public Func<GilesConfig, GilesTestListener> GetListener = config => new GilesTestListener(config);
