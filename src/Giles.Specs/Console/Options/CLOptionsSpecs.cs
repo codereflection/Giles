@@ -33,7 +33,7 @@ namespace Giles.Specs.Console.Options
         Because of = () =>
             result = options.GetTestAssemblies();
 
-        It should_locate_the_test_assembly_passed_ = () =>
+        It should_locate_the_test_assembly_passed = () =>
             result.ShouldContain("myTestAssembly.dll");
     }
 
@@ -48,10 +48,10 @@ namespace Giles.Specs.Console.Options
         Because of = () =>
             result = options.GetTestAssemblies();
 
-        It should_locate_the_first_test_assembly_passed_ = () =>
+        It should_locate_the_first_test_assembly_passed = () =>
             result.ShouldContain("myTestAssembly.dll");
 
-        It should_locate_the_second_test_assembly_passed_ = () =>
+        It should_locate_the_second_test_assembly_passed = () =>
             result.ShouldContain("myOtherTestAssembly.dll");
     }
 
@@ -98,5 +98,23 @@ namespace Giles.Specs.Console.Options
 
         It should_return_an_empty_list_of_test_assemblies = () =>
             result.Count.ShouldEqual(0);
+    }
+
+    public class when_multple_test_assembies_are_separated_by_a_command_and_a_space : with_command_line_options
+    {
+        Establish context = () =>
+            {
+                commandLineArgs = new[] { "-s", "mySolution.sln", "-t", "myTestAssembly.dll, myOtherTestAssembly.dll" };
+                SetupOptions();
+            };
+
+        Because of = () =>
+            result = options.GetTestAssemblies();
+
+        It should_locate_the_first_test_assembly_passed_and_not_contain_an_ending_space = () =>
+            result.ShouldContain("myTestAssembly.dll");
+
+        It should_locate_the_second_test_assembly_passed_and_not_contain_a_beginning_space = () =>
+            result.ShouldContain("myOtherTestAssembly.dll");
     }
 }
