@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Timers;
@@ -92,7 +93,12 @@ namespace Giles.Core.Watchers
 
             var runResults = new List<SessionResults>();
 
+            var watch = new Stopwatch();
+            watch.Start();
             config.TestAssemblies.Each(assm => runResults.AddRange(manager.Run(assm)));
+            watch.Stop();
+
+            Console.WriteLine("Test run completed in {0} seconds", watch.Elapsed.TotalSeconds);
 
             runResults.Each(result =>
                                {
