@@ -194,11 +194,16 @@ namespace Giles
         static void DisplayConfig()
         {
             Console.WriteLine("\nCurrent Configuration");
-            Console.WriteLine("  Build Delay: " + config.BuildDelay);
-            Console.WriteLine("  Solution: " + config.SolutionPath);
-            Console.WriteLine("  Test Assembly: " + config.TestAssemblies);
-            config.TestRunners.Each(r => Console.WriteLine("  " + r.Key + " Has been enabled"));
+            Console.WriteLine("  Build Delay: {0}", config.BuildDelay);
+            Console.WriteLine("  Solution: {0}", config.SolutionPath);
+            Console.WriteLine("  Test Assemblies: \n\t{0}", GetTestAssemblyListAsString());
+            config.TestRunners.Each(r => Console.WriteLine("  {0} Has been enabled", r.Key));
             Console.WriteLine();
+        }
+
+        static string GetTestAssemblyListAsString()
+        {
+            return config.TestAssemblies.Aggregate((next, working) => working = working + Environment.NewLine + "\t" + next);
         }
 
         static void DisplayInteractiveMenuOptions()
