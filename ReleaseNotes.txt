@@ -1,3 +1,6 @@
+v0.1.2.0 - Dec 10, 2011
+ - Added multiple test assembly support (auto detected, or passed by a comma separated list to the -t option)
+
 v0.1.1.4 - Nov 6, 2011
  - Fixed XUnit test project detection (Thanks Ian Davis!)
  - No longer blocking Ctrl-C (GH-4)
