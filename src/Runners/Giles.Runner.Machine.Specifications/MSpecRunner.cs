@@ -30,11 +30,14 @@ namespace Giles.Runner.Machine.Specifications
         {
             dynamic dynamicRunListener = GetMSpecRunListener(sessionResults);
 
-            var runOptionsType = MSpecTypes.Types.First(x => x.Name == "RunOptions");
-            var runOptions = Activator.CreateInstance(runOptionsType, new string[] { }, new string[] { }, new string[] { });
-
             var appDomainRunnerType = MSpecTypes.Types.First(x => x.Name == "AppDomainRunner");
-            return Activator.CreateInstance(appDomainRunnerType, dynamicRunListener, runOptions);
+            return Activator.CreateInstance(appDomainRunnerType, dynamicRunListener, GetRunOptions());
+        }
+
+        static dynamic GetRunOptions()
+        {
+            var runOptionsType = MSpecTypes.Types.First(x => x.Name == "RunOptions");
+            return Activator.CreateInstance(runOptionsType, new string[] { }, new string[] { }, new string[] { });
         }
 
         private static object GetMSpecRunListener(SessionResults sessionResults)
