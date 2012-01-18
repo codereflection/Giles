@@ -17,7 +17,7 @@ namespace Giles.Core.AppDomains
         public Func<IFileSystem> GetFileSystem = () => FileSystem;
 
 
-        public IEnumerable<SessionResults> Run(string testAssemblyPath)
+        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<string> filters)
         {
             IEnumerable<SessionResults> results = new List<SessionResults>();
             GilesAppDomainRunner runner;
@@ -25,7 +25,7 @@ namespace Giles.Core.AppDomains
             try
             {
                 runner = SetupRunner(testAssemblyPath);
-                results = runner.Run(testAssemblyPath);
+                results = runner.Run(testAssemblyPath, filters);
             }
             catch (InvalidOperationException e)
             {

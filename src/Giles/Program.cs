@@ -136,7 +136,9 @@ namespace Giles
                       new InteractiveMenuOption { HandlesKey = key => key == "b", Task = SetBuildDelay },
                       new InteractiveMenuOption { HandlesKey = key => key == "q", Task = RequestQuit },
                       new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults },
-                      new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors }
+                      new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors },
+                      new InteractiveMenuOption { HandlesKey = key => key == "f", Task = SetTestFilters },
+                      new InteractiveMenuOption { HandlesKey = key => key == "h", Task = ClearTestFilters },
                   };
         }
 
@@ -159,9 +161,22 @@ namespace Giles
             quitRequested = true;
         }
 
+        static void SetTestFilters()
+        {
+            config.Filters = GetUserValues("Filters", config.Filters);
+            Console.WriteLine("Filters set to:");
+            config.Filters.Each(x => Console.WriteLine("\t{0}", x));
+        }
+
+        static void ClearTestFilters()
+        {
+            config.Filters = new List<string>();
+            Console.WriteLine("Test filters cleared");
+        }
+
         static void SetBuildDelay()
         {
-            config.BuildDelay = GetUserValue(config.BuildDelay);
+            config.BuildDelay = GetUserValue("Build Delay", config.BuildDelay);
         }
 
         static void DisplayErrors()
@@ -180,9 +195,25 @@ namespace Giles
                 Console.WriteLine("Please run some tests first...");
         }
 
-        static T GetUserValue<T>(T defaultValue)
+        static List<T> GetUserValues<T>(string description, List<T> defaultValues)
         {
-            Console.Write("Enter new value ({0}): ", defaultValue);
+            Console.WriteLine("Enter new values, one on each line. Blank line save.");
+            var newValues = new List<T>();
+
+            string newLine;
+            do
+            {
+                newLine = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(newLine))
+                    newValues.Add((T)Convert.ChangeType(newLine, typeof(T)));
+            }
+            while (!string.IsNullOrWhiteSpace(newLine));
+            return newValues;
+        }
+
+        static T GetUserValue<T>(string description, T defaultValue)
+        {
+            Console.Write("Enter new value for {0} ({1}): ", description, defaultValue);
             var newValue = Console.ReadLine();
 
             if (string.IsNullOrWhiteSpace(newValue))
@@ -198,12 +229,20 @@ namespace Giles
             Console.WriteLine("  Solution: {0}", config.SolutionPath);
             Console.WriteLine("  Test Assemblies: \n\t{0}", GetTestAssemblyListAsString());
             config.TestRunners.Each(r => Console.WriteLine("  {0} Has been enabled", r.Key));
+            Console.WriteLine("  Test Filters: \n\t{0}", GetTestFilterListAsString());
             Console.WriteLine();
         }
 
         static string GetTestAssemblyListAsString()
         {
             return config.TestAssemblies.Aggregate((next, working) => working = working + Environment.NewLine + "\t" + next);
+        }
+
+        static string GetTestFilterListAsString()
+        {
+            return config.Filters.Count == 0 
+                ? "<All Classes>" 
+                : config.Filters.Aggregate((next, working) => working = working + Environment.NewLine + "\t" + next);
         }
 
         static void DisplayInteractiveMenuOptions()
@@ -216,6 +255,8 @@ namespace Giles
             Console.WriteLine("   V = Display all messages from last test run");
             Console.WriteLine("   E = Display errors from last test run");
             Console.WriteLine("   B = Set Build Delay");
+            Console.WriteLine("   F = Set Test Filters");
+            Console.WriteLine("   H = Clear Test Filters");
             Console.WriteLine("   Q = Quit");
             Console.WriteLine();
         }
