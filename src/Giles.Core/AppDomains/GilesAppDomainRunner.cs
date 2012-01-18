@@ -19,7 +19,7 @@ namespace Giles.Core.AppDomains
             var testFrameworkRunner = new TestFrameworkResolver().Resolve(testAssembly).ToList();
 
             var result = new List<SessionResults>();
-            testFrameworkRunner.ForEach(x => result.Add(x.RunAssembly(testAssembly, new[] { "Teh.Tests.TestTheClassThatDoesReturnsSomething" })));
+            testFrameworkRunner.ForEach(x => result.Add(x.RunAssembly(testAssembly, new[] { "Teh.Tests.TestTheClassThatDoesReturnsSomething", "Teh.Tests.NUnitTests" })));
             return result;
         }
     }
