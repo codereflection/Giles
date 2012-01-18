@@ -9,13 +9,16 @@ namespace Giles.Runner.Machine.Specifications
 {
     public class MSpecRunner : IFrameworkRunner
     {
+        IEnumerable<string> filters;
+
         public IEnumerable<string> RequiredAssemblies()
         {
             return new[] { Assembly.GetAssembly(typeof(MSpecRunner)).Location, "ImpromptuInterface.dll" };
         }
 
-        public SessionResults RunAssembly(Assembly assembly)
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
         {
+            this.filters = filters;
             var mspecAssembly = LoadMSpec(assembly);
             MSpecTypes.Types = mspecAssembly.GetExportedTypes();
             
@@ -26,7 +29,7 @@ namespace Giles.Runner.Machine.Specifications
             return sessionResults;
         }
 
-        private static dynamic GetRunner(SessionResults sessionResults)
+        private dynamic GetRunner(SessionResults sessionResults)
         {
             dynamic dynamicRunListener = GetMSpecRunListener(sessionResults);
 
@@ -34,10 +37,12 @@ namespace Giles.Runner.Machine.Specifications
             return Activator.CreateInstance(appDomainRunnerType, dynamicRunListener, GetRunOptions());
         }
 
-        static dynamic GetRunOptions()
+        dynamic GetRunOptions()
         {
             var runOptionsType = MSpecTypes.Types.First(x => x.Name == "RunOptions");
-            return Activator.CreateInstance(runOptionsType, new string[] { }, new string[] { }, new string[] { });
+            var includeTags = new string[] { };
+            var excludeTags = new string[] { };
+            return Activator.CreateInstance(runOptionsType, includeTags, excludeTags, filters);
         }
 
         private static object GetMSpecRunListener(SessionResults sessionResults)

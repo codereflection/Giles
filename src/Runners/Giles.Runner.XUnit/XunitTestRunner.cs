@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Giles.Runner.Xunit {
     public class XunitTestRunner : IFrameworkRunner {
-        public SessionResults RunAssembly(Assembly assembly) {
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters) {
             var sessionResults = new SessionResults();
             var logger = new GilesXunitLogger();
             using (var exWrapper = new XunitFx.ExecutorWrapper(new Uri(assembly.CodeBase).LocalPath, null, false)) {
