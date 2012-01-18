@@ -5,7 +5,7 @@ namespace Giles.Core.Runners
 {
     public interface IFrameworkRunner
     {
-        SessionResults RunAssembly(Assembly assembly);
+        SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters);
 
         /// <summary>
         /// Returns a list of assemblies which the test runner implementation requires to run

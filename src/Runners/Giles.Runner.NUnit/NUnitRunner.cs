@@ -7,7 +7,7 @@ namespace Giles.Runner.NUnit
 {
     public class NUnitRunner : IFrameworkRunner
     {
-        public SessionResults RunAssembly(Assembly assembly)
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
         {
             var remoteTestRunner = new RemoteTestRunner(0);
             var package = SetupTestPackager(assembly);
