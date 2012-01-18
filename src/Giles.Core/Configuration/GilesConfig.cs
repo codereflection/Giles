@@ -9,6 +9,7 @@ namespace Giles.Core.Configuration
         public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
         public List<IUserDisplay> UserDisplay = new List<IUserDisplay>();
         private long buildDelay = 500;
+        public List<string> Filters { get; set; }
         public List<string> TestAssemblies { get; set; }
         public string SolutionPath { get; set; }
 
