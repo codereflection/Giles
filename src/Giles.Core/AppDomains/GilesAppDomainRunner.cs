@@ -12,14 +12,16 @@ namespace Giles.Core.AppDomains
     /// </summary>
     public class GilesAppDomainRunner : MarshalByRefObject
     {
-        public IEnumerable<SessionResults> Run(string testAssemblyPath)
+        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<string> filters)
         {
             var testAssembly = Assembly.LoadFrom(testAssemblyPath);
 
             var testFrameworkRunner = new TestFrameworkResolver().Resolve(testAssembly).ToList();
 
             var result = new List<SessionResults>();
-            testFrameworkRunner.ForEach(x => result.Add(x.RunAssembly(testAssembly, new[] { "Teh.Tests.TestTheClassThatDoesReturnsSomething", "Teh.Tests.NUnitTests" })));
+            testFrameworkRunner.ForEach(x => 
+                result.Add(
+                    x.RunAssembly(testAssembly, filters)));
             return result;
         }
     }
