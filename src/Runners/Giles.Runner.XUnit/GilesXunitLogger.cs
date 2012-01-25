@@ -22,6 +22,9 @@ namespace Giles.Runner.Xunit {
             return false;
         }
         public void ExceptionThrown(string assemblyFilename, Exception exception) {
+            if (exception is ArgumentException)
+                return;
+
             var testResult = new Core.Runners.TestResult {
                 Name = assemblyFilename,
                 TestRunner = _runnerName,
