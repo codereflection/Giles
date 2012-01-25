@@ -67,7 +67,13 @@ namespace Giles.Core.Runners
         {
             if (testRunnerResults.Count == 0)
             {
-                config.UserDisplay.ToList().ForEach(display => display.DisplayResult(new ExecutionResult{ExitCode = 1, Output = "Something went wrong, check the Giles console window for more details", Runner = ""}));
+                config.UserDisplay.ToList().ForEach(display => 
+                    display.DisplayResult(new ExecutionResult
+                                              {
+                                                  ExitCode = 1, 
+                                                  Output = "No tests were run. Check your filter names and test assembly options",
+                                                  Runner = ""
+                                              }));
                 return;
             }
 
