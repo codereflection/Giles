@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Giles.Core.Runners;
-using Giles.Core.Utility;
 using NUnit.Core;
 using NUnit.Core.Filters;
 
@@ -20,7 +18,10 @@ namespace Giles.Runner.NUnit
             var package = SetupTestPackager(assembly);
             remoteTestRunner.Load(package);
             var listener = new GilesNUnitEventListener();
-            remoteTestRunner.Run(listener, GetFilters());
+            if (filters.Count() == 0)
+                remoteTestRunner.Run(listener);
+            else
+                remoteTestRunner.Run(listener, GetFilters());
             return listener.SessionResults;
         }
 
