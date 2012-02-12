@@ -198,6 +198,7 @@ namespace Giles
         static List<T> GetUserValues<T>(string description, List<T> defaultValues)
         {
             Console.WriteLine("Filters: Enter a namespace and type (MyNamespace.FooTests), one on each line. Use a blank line save.");
+            Console.WriteLine("  Current settings: {0}", defaultValues);
             var newValues = new List<T>();
 
             string newLine;
