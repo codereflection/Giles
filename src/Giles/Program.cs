@@ -163,7 +163,7 @@ namespace Giles
 
         static void SetTestFilters()
         {
-            config.Filters = UserInputHandler.GetUserValuesFor(config.Filters, "Filters: Enter a namespace and type (MyNamespace.FooTests), one on each line. Use a blank line save.");
+            config.Filters = UserInputHandler.GetUserValuesFor(config.Filters, "Filters: Enter a namespace and type (MyNamespace.FooTests).");
             Console.WriteLine("Filters set to:");
             config.Filters.Each(x => Console.WriteLine("\t{0}", x));
         }
