@@ -10,16 +10,16 @@ namespace Giles.Specs.Console
     {
         static List<string> result;
         static List<string> userValues;
-        static Queue<string> stack;
+        static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
         static readonly List<string> DefaultValues = new List<string> { "value1" };
 
         Establish context = () =>
             {
                 userValues = new List<string> { "newValue", Environment.NewLine };
-                stack = new Queue<string>(userValues);
+                queue = new Queue<string>(userValues);
                 UserInputHandler.Output = value => Messages.Add(value);
-                UserInputHandler.Input = () => stack.Dequeue();
+                UserInputHandler.Input = () => queue.Dequeue();
             };
 
         Because of = () =>
@@ -47,5 +47,122 @@ namespace Giles.Specs.Console
 
         It should_save_the_default_values = () =>
             result.ShouldContainOnly(DefaultValues);
+    }
+
+    [Subject(typeof(UserInputHandler))]
+    public class when_getting_a_list_of_user_values_and_the_user_adds_to_the_default_values
+    {
+        static List<string> result;
+        static List<string> userValues;
+        static Queue<string> queue;
+        static readonly List<string> Messages = new List<string>();
+        static readonly List<string> DefaultValues = new List<string> { "value1" };
+
+        Establish context = () =>
+            {
+                userValues = new List<string> { "+newValue", Environment.NewLine };
+                queue = new Queue<string>(userValues);
+                UserInputHandler.Output = value => Messages.Add(value);
+                UserInputHandler.Input = () => queue.Dequeue();
+            };
+
+        Because of = () =>
+            result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
+
+        It should_have_both_the_default_values = () => 
+            result.ShouldContain(DefaultValues.ToArray());
+
+        It should_add_the_new_items_and_remove_the_add_item_operator = () =>
+            result.FirstOrDefault(x => x.EndsWith("newValue")).StartsWith("+").ShouldBeFalse();
+    }
+
+    [Subject(typeof(UserInputHandler))]
+    public class when_getting_a_list_of_user_values_and_the_user_adds_to_the_default_values_with_only_one_value_having_a_modifier
+    {
+        static List<string> result;
+        static List<string> userValues;
+        static Queue<string> queue;
+        static readonly List<string> Messages = new List<string>();
+        static readonly List<string> DefaultValues = new List<string> { "value1" };
+
+        Establish context = () =>
+            {
+                userValues = new List<string> { "+newValue1", "newValue2", Environment.NewLine };
+                queue = new Queue<string>(userValues);
+                UserInputHandler.Output = value => Messages.Add(value);
+                UserInputHandler.Input = () => queue.Dequeue();
+            };
+
+        Because of = () =>
+            result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
+
+        It should_have_both_the_default_values = () => 
+            result.ShouldContain(DefaultValues.ToArray());
+
+        It should_add_the_new_items_with_and_without_a_modifier = () =>
+            {
+                result.ShouldContain("newValue1");
+                result.ShouldContain("newValue2");
+            };
+    }
+
+    [Subject(typeof(UserInputHandler))]
+    public class when_getting_a_list_of_user_values_and_the_user_removes_from_the_default_values
+    {
+        static List<string> result;
+        static List<string> userValues;
+        static Queue<string> queue;
+        static readonly List<string> Messages = new List<string>();
+        static readonly List<string> DefaultValues = new List<string> { "value1", "valueToRemove" };
+
+        Establish context = () =>
+            {
+                userValues = new List<string> { "-valueToRemove", Environment.NewLine };
+                queue = new Queue<string>(userValues);
+                UserInputHandler.Output = value => Messages.Add(value);
+                UserInputHandler.Input = () => queue.Dequeue();
+            };
+
+        Because of = () =>
+            result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
+
+        It should_remove_the_correct_value = () =>
+            result.ShouldNotContain("valueToRemove");
+
+        It should_maintain_the_other_values = () =>
+            result.ShouldContain("value1");       
+    }
+
+    [Subject(typeof(UserInputHandler))]
+    public class when_getting_a_list_of_user_values_and_the_user_adds_and_removes_values_from_the_default_values
+    {
+        static List<string> result;
+        static List<string> userValues;
+        static Queue<string> queue;
+        static readonly List<string> Messages = new List<string>();
+        static readonly List<string> DefaultValues = new List<string> { "value1", "value2", "value3" };
+
+        Establish context = () =>
+        {
+            userValues = new List<string> { "-value2", "+value4", Environment.NewLine };
+            queue = new Queue<string>(userValues);
+            UserInputHandler.Output = value => Messages.Add(value);
+            UserInputHandler.Input = () => queue.Dequeue();
+        };
+
+        Because of = () =>
+            result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
+
+        It should_remove_the_correct_value = () =>
+            result.ShouldNotContain("value2");
+
+        It should_maintain_the_values_not_added_or_removed = () =>
+            {
+                result.ShouldContain("value1");
+                result.ShouldContain("value3");
+            };
+
+        It should_add_the_new_value = () =>
+            result.ShouldContain("value4");
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Giles.Core.Utility;
 
 namespace Giles
 {
@@ -7,28 +9,71 @@ namespace Giles
     {
         public static Action<string> Output = value => Console.WriteLine(value);
         public static Func<string> Input = Console.ReadLine;
+        const string instructions = @"Enter one value on each line. Use a blank line save.
+Modifiers:
+    +[newValue] to add a value to the current settings
+    -[newValue] to remove a value from the current settings";
 
-        public static List<T> GetUserValuesFor<T>(List<T> defaultValues, string description)
+        public static List<string> GetUserValuesFor(List<string> defaultValues, string description)
         {
             Output(description);
-            Output(string.Format(@"  Current settings: {0}", GetLineSeparatedValueListFor(defaultValues)));
-            var newValues = new List<T>();
+            Output("");
+            Output(instructions);
+            Output(string.Format("  Current settings: {0}{1}", GetLineSeparatedValueListFor(defaultValues), Environment.NewLine));
+            var newValues = new List<string>();
 
+            var modifyingDefaultValues = false;
             string newLine;
             do
             {
                 newLine = Input();
-                if (!string.IsNullOrWhiteSpace(newLine))
-                    newValues.Add((T)Convert.ChangeType(newLine, typeof(T)));
+                if (string.IsNullOrWhiteSpace(newLine)) continue;
+
+                if (modifyingDefaultValues == false)
+                    modifyingDefaultValues = ContainsAModifier(newLine);
+                newValues.Add(newLine);
             }
             while (!string.IsNullOrWhiteSpace(newLine));
-            return newValues.Count == 0 ? defaultValues : newValues;
+
+            if (newValues.Count == 0) return defaultValues;
+
+            if (modifyingDefaultValues)
+                return GetModifiedList(defaultValues, newValues).ToList();
+
+            return newValues;
         }
 
-        static string GetLineSeparatedValueListFor<T>(List<T> defaultValues)
+        static IEnumerable<string> GetModifiedList(IEnumerable<string> defaultValues, IEnumerable<string> newValues)
+        {
+            var modifiedList = new List<string>(defaultValues);
+
+            modifiedList.AddRange(RemoveModifiersFrom(AddedValues(newValues)));
+
+            RemoveModifiersFrom(newValues.Where(x => x.StartsWith("-")))
+                .Each(x => modifiedList.Remove(x));
+
+            return modifiedList;
+        }
+
+        static IEnumerable<string> AddedValues(IEnumerable<string> newValues)
+        {
+            return newValues.Where(x => x.StartsWith("-") == false);
+        }
+
+        static IEnumerable<string> RemoveModifiersFrom(IEnumerable<string> newValues)
+        {
+            return newValues.Select(x => x.Replace("+", string.Empty).Replace("-", string.Empty));
+        }
+
+        static bool ContainsAModifier(string newLine)
+        {
+            return newLine.StartsWith("+") || newLine.StartsWith("-");
+        }
+
+        static string GetLineSeparatedValueListFor(List<string> defaultValues)
         {
             var result = "";
-            defaultValues.ForEach(x => result += Environment.NewLine + x.ToString());
+            defaultValues.ForEach(x => result += Environment.NewLine + "\t" + x);
             return result;
         }
     }
