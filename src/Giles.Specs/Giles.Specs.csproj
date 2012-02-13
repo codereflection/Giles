@@ -56,6 +56,7 @@
       <Link>Properties\ProjectVersion.cs</Link>
     </Compile>
     <Compile Include="Console\Options\CLOptionsSpecs.cs" />
+    <Compile Include="Console\UserInputHandlerSpecs.cs" />
     <Compile Include="Core\Configuration\TestAssemblyFinderSpecs.cs" />
     <Compile Include="Core\Runners\GilesTestListenerSpecs.cs" />
     <Compile Include="Core\Utility\FakeFileSystemWatcher.cs">

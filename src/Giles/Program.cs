@@ -163,7 +163,7 @@ namespace Giles
 
         static void SetTestFilters()
         {
-            config.Filters = GetUserValues("Filters", config.Filters);
+            config.Filters = UserInputHandler.GetUserValuesFor(config.Filters, "Filters: Enter a namespace and type (MyNamespace.FooTests), one on each line. Use a blank line save.");
             Console.WriteLine("Filters set to:");
             config.Filters.Each(x => Console.WriteLine("\t{0}", x));
         }
@@ -195,22 +195,6 @@ namespace Giles
                 Console.WriteLine("Please run some tests first...");
         }
 
-        static List<T> GetUserValues<T>(string description, List<T> defaultValues)
-        {
-            Console.WriteLine("Filters: Enter a namespace and type (MyNamespace.FooTests), one on each line. Use a blank line save.");
-            Console.WriteLine("  Current settings: {0}", defaultValues);
-            var newValues = new List<T>();
-
-            string newLine;
-            do
-            {
-                newLine = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(newLine))
-                    newValues.Add((T)Convert.ChangeType(newLine, typeof(T)));
-            }
-            while (!string.IsNullOrWhiteSpace(newLine));
-            return newValues;
-        }
 
         static T GetUserValue<T>(string description, T defaultValue)
         {

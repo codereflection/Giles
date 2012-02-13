@@ -87,6 +87,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlayerModule.cs" />
+    <Compile Include="UserInputHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CommandLine">
