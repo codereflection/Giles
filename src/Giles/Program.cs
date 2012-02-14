@@ -48,6 +48,8 @@ namespace Giles
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
+
+            GilesConfigBuilder.Save(config);
         }
 
         static GilesConfig GetGilesConfigFor(CLOptions options)
@@ -213,7 +215,6 @@ namespace Giles
             Console.WriteLine("  Build Delay: {0}", config.BuildDelay);
             Console.WriteLine("  Solution: {0}", config.SolutionPath);
             Console.WriteLine("  Test Assemblies: \n\t{0}", GetTestAssemblyListAsString());
-            config.TestRunners.Each(r => Console.WriteLine("  {0} Has been enabled", r.Key));
             Console.WriteLine("  Test Filters: \n\t{0}", GetTestFilterListAsString());
             Console.WriteLine();
         }

@@ -42,9 +42,6 @@ namespace Giles.Specs.Core.Configuration
         Because of = () =>
             config = builder.Build();
 
-        It built_the_correct_config_test_runners = () =>
-            config.TestRunners.All(x => x.Value.Path == testRunnerExe).ShouldBeTrue();
-
         It assigned_the_test_assembly_path = () =>
             config.TestAssemblies.ShouldContain(testAssemblyPath);
 

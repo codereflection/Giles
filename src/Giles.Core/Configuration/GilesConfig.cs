@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Web.Script.Serialization;
 using Giles.Core.UI;
 
 namespace Giles.Core.Configuration
 {
     public class GilesConfig : INotifyPropertyChanged
     {
-        public IDictionary<string, RunnerAssembly> TestRunners = new Dictionary<string, RunnerAssembly>();
+        [ScriptIgnore]
         public List<IUserDisplay> UserDisplay = new List<IUserDisplay>();
         private long buildDelay = 500;
         public List<string> Filters { get; set; }
