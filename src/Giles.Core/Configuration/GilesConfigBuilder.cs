@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Web.Script.Serialization;
 using Giles.Core.UI;
+using Newtonsoft.Json;
 
 namespace Giles.Core.Configuration
 {
@@ -21,7 +21,7 @@ namespace Giles.Core.Configuration
         {
             var path = GilesConfigPath(solutionPath);
             if (File.Exists(path))
-                config = new JavaScriptSerializer().Deserialize<GilesConfig>(File.ReadAllText(path));
+                config = JsonConvert.DeserializeObject<GilesConfig>(File.ReadAllText(path));
             else
             {
                 config.TestAssemblies = testAssemblies;
@@ -35,8 +35,7 @@ namespace Giles.Core.Configuration
 
         public static string Save(GilesConfig config)
         {
-            var serializer = new JavaScriptSerializer();
-            var data = serializer.Serialize(config);
+            var data = JsonConvert.SerializeObject(config, Formatting.Indented);
 
             var path = GilesConfigPath(config.SolutionPath);
             File.WriteAllText(path, data);

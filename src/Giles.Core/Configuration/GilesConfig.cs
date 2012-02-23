@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Web.Script.Serialization;
 using Giles.Core.UI;
+using Newtonsoft.Json;
 
 namespace Giles.Core.Configuration
 {
     public class GilesConfig : INotifyPropertyChanged
     {
-        [ScriptIgnore]
+        [JsonIgnore]
         public List<IUserDisplay> UserDisplay = new List<IUserDisplay>();
         private long buildDelay = 500;
         public List<string> Filters { get; set; }
