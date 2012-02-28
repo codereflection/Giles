@@ -3,7 +3,17 @@ a continuous test runner for .NET applications. True to form, Giles will watch y
 
 # Useage:
 
+```
 giles.exe -s [path_to_solution]
+```
+
+or
+
+```
+giles.ps1 (from root of solution, this will usually find your solution and test assemblies for you)
+```
+
+(```giles-x86.exe``` and ```giles-x86.ps1``` are also available for strictly 32-bit applications)
 
 
 # Command Line Help:
@@ -22,6 +32,7 @@ Giles Options
 
 While in the interactive console, press ? for a list of options:
 
+```
 Interactive Console Options:
   ? = Display options 
   
@@ -38,5 +49,6 @@ Interactive Console Options:
   B = Set Build Delay
   
   Q = Quit  
+```
 
 For more information and requirement to run Giles, please visit the [wiki](https://github.com/codereflection/Giles/wiki)
