@@ -6,31 +6,24 @@ using Machine.Specifications;
 namespace Giles.Specs.Core.Configuration
 {
     [Subject(typeof(MsBuildProject))]
-    public class an_msbuild_project
+    public class when_loading
     {
         protected static string projectPath;
         protected static MsBuildProject project;
 
-        private Establish context = () => {
+        Establish context = () => 
             projectPath = "Giles.Specs.Core.Configuration.Resources.Giles.Specs.csproj";
-        };
-    }
 
-    [Subject(typeof(MsBuildProject))]
-    public class when_an_msbuild_project_is_loaded : an_msbuild_project
-    {
-        Because of = () => {
+        Because of = () =>
             project = MsBuildProject.Load(TestResources.Read(projectPath));
-        };
 
-        It returns_referenced_assemblies_with_local_paths = () => {
+        It returns_referenced_assemblies_with_relative_paths = () => {
             project.GetLocalAssemblyRefs()
-                .Any(x => x == @"..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll")
-                .ShouldEqual(true);
+                .Count(x => x == @"..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll")
+                .ShouldEqual(1);
             project.GetLocalAssemblyRefs()
-                .Any(x => x == @"..\..\tools\mspec\Machine.Specifications.dll")
-                .ShouldEqual(true);
-            project.GetLocalAssemblyRefs().Count().ShouldEqual(2);
+                .Count(x => x == @"..\..\tools\mspec\Machine.Specifications.dll")
+                .ShouldEqual(1);
         };
 
         It returns_the_default_platform_configuration = () =>
@@ -53,7 +46,27 @@ namespace Giles.Specs.Core.Configuration
             project.GetAssemblyFilePath(@"C:\projects\Giles\src\Giles.Specs\Giles.Specs.csproj")
                 .ShouldEqual(@"C:\projects\Giles\src\Giles.Specs\bin\Debug\Giles.Specs.dll");
 
-        private It returns_the_assembly_name = () =>
+        It returns_the_assembly_name = () =>
             project.GetAssemblyName().ShouldEqual(@"Giles.Specs");
+    }
+
+    [Subject(typeof(MsBuildProject))]
+    public class when_loading_a_project_with_an_invalid_default_platform
+    {
+        protected static string projectPath;
+        protected static MsBuildProject project;
+        static string defaultPlatformConfig;
+
+        Establish context = () =>
+            {
+                projectPath = "Giles.Specs.Core.Configuration.Resources.Giles.Specs.WithInvalidPlatform.csproj";
+                project = MsBuildProject.Load(TestResources.Read(projectPath));
+            };
+
+        Because of = () =>
+            defaultPlatformConfig = project.GetDefaultPlatformConfig();
+
+        It should_default_to_the_next_available_platform_in_the_project_file = () =>
+            defaultPlatformConfig.ShouldEqual("Debug|x86");
     }
 }

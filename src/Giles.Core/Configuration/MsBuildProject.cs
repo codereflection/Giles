@@ -71,50 +71,56 @@ namespace Giles.Core.Configuration
             return Path.Combine (projectPath, Path.Combine(dir, assemblyName));
         }
 
-        public string GetPropertyValue(string platformConfig, string property)
+        public string GetPropertyValue(string platformName, string property)
         {
-            var condition = "'" + platformConfig + "'";
-            var specific = (
-                from XmlNode propertyGroup in ProjectNode.ChildNodes
-                where propertyGroup.Name == "PropertyGroup" &&
-                      propertyGroup.Attributes != null &&
-                      propertyGroup.Attributes["Condition"] != null &&
-                      propertyGroup.Attributes["Condition"].InnerText.Contains(condition)
+            var configAndPlatform = "'" + platformName + "'";
+            var specific = GetConfigAndPlatformPropertyValues(configAndPlatform, property);
 
-                from XmlNode outputNode in propertyGroup.ChildNodes
-                where outputNode.Name == property
-                select outputNode.InnerText).ToArray();
+            var defaultConfig = GetDefaultPropertyValues(property);
 
-            var defaultConfig = (
-                from XmlNode propertyGroup in ProjectNode.ChildNodes
-                where propertyGroup.Name == "PropertyGroup" && (
-                      propertyGroup.Attributes == null ||
-                      propertyGroup.Attributes["Condition"] == null)
+            if (specific.Length >= 1)
+                return specific[0];
 
-                from XmlNode outputNode in propertyGroup.ChildNodes
-                where outputNode.Name == property
-                select outputNode.InnerText).ToArray();
-
-            switch (specific.Length)
+            if (specific.Length == 0)
             {
-                case 1:
-                    return specific[0];
-                case 0:
-                    switch (defaultConfig.Length)
-                    {
-                        case 1:
-                            return defaultConfig[0];
-                        case 0:
-                            throw new InvalidOperationException(
-                                string.Format("No value found for property '{0}' using "
-                                    + "platform configuration '{1}'", property, platformConfig));
-                    }
-                    break;
+                switch (defaultConfig.Length)
+                {
+                    case 1:
+                        return defaultConfig[0];
+                    case 0:
+                        throw new InvalidOperationException(
+                            string.Format("No value found for property '{0}' using "
+                                          + "platform configuration '{1}'", property, platformName));
+                }
             }
-            throw new InvalidOperationException(
-                string.Format("The property '{0}' had multiple values "
-                    + "applicable for the same platform configuration '{1}'",
-                    property, platformConfig));
+            return string.Empty;
+        }
+
+        string[] GetConfigAndPlatformPropertyValues(string configAndPlatform, string propertyName)
+        {
+            return (
+                       from XmlNode propertyGroup in ProjectNode.ChildNodes
+                       where propertyGroup.Name == "PropertyGroup" &&
+                             propertyGroup.Attributes != null &&
+                             propertyGroup.Attributes["Condition"] != null &&
+                             propertyGroup.Attributes["Condition"].InnerText.Contains(configAndPlatform)
+
+                       from XmlNode outputNode in propertyGroup.ChildNodes
+                       where outputNode.Name == propertyName
+                       select outputNode.InnerText).ToArray();
+        }
+
+        string[] GetDefaultPropertyValues(string propertyName)
+        {
+            return (
+                       from XmlNode propertyGroup in ProjectNode.ChildNodes
+                       where propertyGroup.Name == "PropertyGroup" && (
+                                                                          propertyGroup.Attributes == null ||
+                                                                          propertyGroup.Attributes["Condition"] == null)
+
+                       from XmlNode outputNode in propertyGroup.ChildNodes
+                       where outputNode.Name == propertyName
+                       select outputNode.InnerText).ToArray();
         }
 
         public string GetDefaultPlatformConfig()
