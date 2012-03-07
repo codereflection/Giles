@@ -1,7 +1,7 @@
 # Giles - Watcher extraordinaire..  
 a continuous test runner for .NET applications. True to form, Giles will watch you kick ass, and let you know right away when you have made a mistake (intentionally or not).
 
-# Useage:
+# Usage:
 
 ```
 giles.exe -s [path_to_solution]
