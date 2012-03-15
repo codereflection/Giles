@@ -73,12 +73,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="ClassLibraryWithNSpec">
+      <HintPath>..\Specs\Support\ClassLibraryWithNSpec\bin\Debug\ClassLibraryWithNSpec.dll</HintPath>
+    </Reference>
     <Reference Include="CommandLine">
       <HintPath>..\..\lib\CommandLineParser\CommandLine.dll</HintPath>
+    </Reference>
+    <Reference Include="Giles.Runner.NSpec">
+      <HintPath>..\Runners\Giles.Runner.NSpec\bin\Debug\Giles.Runner.NSpec.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\manual\mspec\Machine.Specifications.dll</HintPath>
+    </Reference>
+    <Reference Include="NSpec">
+      <HintPath>..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>

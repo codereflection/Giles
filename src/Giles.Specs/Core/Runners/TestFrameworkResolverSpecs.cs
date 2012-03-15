@@ -53,6 +53,26 @@ namespace Giles.Specs.Core.Runners
     }
 
     [Subject(typeof(TestFrameworkResolver))]
+    public class when_resolving_for_the_nspec_runner_in_an_assembly_that_references_nspec
+        : with_a_test_framework_resolver
+    {
+        static Assembly assembly;
+        static IEnumerable<IFrameworkRunner> result;
+
+        Establish context = () =>
+            assembly = typeof(ClassLibraryWithNSpec.describe_Batman).Assembly;
+
+        Because of = () =>
+            result = subject.Resolve(assembly);
+
+        It should_return_a_result = () =>
+            result.ShouldNotBeEmpty();
+
+        It should_return_the_nspec_framework_runner = () =>
+            result.First().ShouldBeOfType<Giles.Runner.NSpec.NSpecRunner>();
+    }
+
+    [Subject(typeof(TestFrameworkResolver))]
     public class when_resolving_for_a_test_runner_and_an_assembly_is_not_passed
         : with_a_test_framework_resolver
     {
