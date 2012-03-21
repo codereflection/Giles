@@ -73,14 +73,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ClassLibraryWithNSpec">
-      <HintPath>..\Specs\Support\ClassLibraryWithNSpec\bin\Debug\ClassLibraryWithNSpec.dll</HintPath>
-    </Reference>
     <Reference Include="CommandLine">
       <HintPath>..\..\lib\CommandLineParser\CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="Giles.Runner.NSpec">
-      <HintPath>..\Runners\Giles.Runner.NSpec\bin\Debug\Giles.Runner.NSpec.dll</HintPath>
     </Reference>
     <Reference Include="Machine.Specifications, Version=0.4.10.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -108,6 +102,14 @@
     <ProjectReference Include="..\Runners\Giles.Runner.Machine.Specifications\Giles.Runner.Machine.Specifications.csproj">
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.NSpec\Giles.Runner.NSpec.csproj">
+      <Project>{84944DF0-E92B-4FF5-9230-2706A28E9F9C}</Project>
+      <Name>Giles.Runner.NSpec</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specs\Support\ClassLibraryWithNSpec\ClassLibraryWithNSpec.csproj">
+      <Project>{7ABB6BBC-3E40-40FC-8F8A-5A42CE64E1CE}</Project>
+      <Name>ClassLibraryWithNSpec</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
