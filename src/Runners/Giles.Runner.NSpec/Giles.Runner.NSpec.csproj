@@ -34,6 +34,9 @@
     <Reference Include="Giles.Core">
       <HintPath>..\..\Giles.Core\bin\Debug\Giles.Core.dll</HintPath>
     </Reference>
+    <Reference Include="NSpec">
+      <HintPath>..\..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GilesSessionResultsFormatter.cs" />
     <Compile Include="NSpecRunner.cs" />
     <Compile Include="NSpecTestFrameworkInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
