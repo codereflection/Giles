@@ -10,10 +10,10 @@ namespace ClassLibraryWithNSpec
     {
         Batman bruce;
 
-        public void specify_his_utility_belt_should_have_gadgets()
+        void as_the_caped_crusader()
         {
             before = () => bruce = new Batman();
-            bruce.UtilityBelt.should_not_be_empty();
+            it["his utility belt should have gadgets"] = () => bruce.UtilityBelt.should_not_be_empty();
         }
     }
 }
