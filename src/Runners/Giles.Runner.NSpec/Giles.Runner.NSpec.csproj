@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Giles.Core">
-      <HintPath>..\..\Giles.Core\bin\Debug\Giles.Core.dll</HintPath>
-    </Reference>
     <Reference Include="NSpec">
       <HintPath>..\..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
     </Reference>
@@ -50,6 +47,12 @@
     <Compile Include="NSpecRunner.cs" />
     <Compile Include="NSpecTestFrameworkInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Giles.Core\Giles.Core.csproj">
+      <Project>{9039E7FA-989E-46ED-B031-FB67571E8385}</Project>
+      <Name>Giles.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
