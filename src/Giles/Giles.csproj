@@ -111,6 +111,10 @@
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.NSpec\Giles.Runner.NSpec.csproj">
+      <Project>{84944DF0-E92B-4FF5-9230-2706A28E9F9C}</Project>
+      <Name>Giles.Runner.NSpec</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Runners\Giles.Runner.NUnit\Giles.Runner.NUnit.csproj">
       <Project>{C2A0F1C6-AA13-468F-844C-0D93A5C299D4}</Project>
       <Name>Giles.Runner.NUnit</Name>

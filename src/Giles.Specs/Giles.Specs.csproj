@@ -81,6 +81,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\manual\mspec\Machine.Specifications.dll</HintPath>
     </Reference>
+    <Reference Include="NSpec">
+      <HintPath>..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>
     </Reference>
@@ -100,6 +103,14 @@
     <ProjectReference Include="..\Runners\Giles.Runner.Machine.Specifications\Giles.Runner.Machine.Specifications.csproj">
       <Project>{88C6CC22-B9F2-41B8-8E4F-9500902AF874}</Project>
       <Name>Giles.Runner.Machine.Specifications</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runners\Giles.Runner.NSpec\Giles.Runner.NSpec.csproj">
+      <Project>{84944DF0-E92B-4FF5-9230-2706A28E9F9C}</Project>
+      <Name>Giles.Runner.NSpec</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specs\Support\ClassLibraryWithNSpec\ClassLibraryWithNSpec.csproj">
+      <Project>{7ABB6BBC-3E40-40FC-8F8A-5A42CE64E1CE}</Project>
+      <Name>ClassLibraryWithNSpec</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
