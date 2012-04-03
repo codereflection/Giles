@@ -26,6 +26,8 @@ namespace Giles
 
             Console.WriteLine(GetGilesFunnyLine());
 
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             var parser = new CommandLineParser(
                 new CommandLineParserSettings(false, Console.Error));
 
@@ -48,6 +50,11 @@ namespace Giles
             DisplayInteractiveMenuOptions();
 
             MainFeedbackLoop();
+        }
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine("Critical Error: {0}\nTerminating: {1}", e.ExceptionObject, e.IsTerminating);
         }
 
         static GilesConfig GetGilesConfigFor(CLOptions options)
@@ -147,11 +154,18 @@ namespace Giles
         {
             while (!quitRequested)
             {
-                var keyValue = Console.ReadKey(true).KeyChar.ToString().ToLower();
+                try
+                {
+                    var keyValue = Console.ReadKey(true).KeyChar.ToString().ToLower();
 
-                menuOptions
-                    .Where(option => option.HandlesKey(keyValue))
-                    .Each(option => option.Task());
+                    menuOptions
+                        .Where(option => option.HandlesKey(keyValue))
+                        .Each(option => option.Task());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: {0}", e);
+                }
             }
             Console.WriteLine("Until next time...");
         }
