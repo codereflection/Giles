@@ -46,7 +46,7 @@ assemblyinfo :assemblyInfo do |asm|
 	asm.product_name = "Giles - auto test runner"
 	asm.version = @GilesVersion
 	asm.file_version = @GilesVersion
-	asm.copyright = "Copyright (c)2011 Jeff Schumacher (@codereflection). Rupert Giles and all other Buffy The Vampire Slayer references are copyrights of their respective owners."
+	asm.copyright = "Copyright (c)2012 Jeff Schumacher (@codereflection). Rupert Giles and all other Buffy The Vampire Slayer references are copyrights of their respective owners."
 end
 
 desc "Prep the package folder"
@@ -70,9 +70,9 @@ nuspec :createSpec => :prepPackage do |nuspec|
 	nuspec.authors = "Jeff Schumacher (@codereflection)"
 	nuspec.owners = "Jeff Schumacher (@codereflection)"
 	nuspec.description = "Giles - continuous test runner for .NET applications."
-	nuspec.summary = "Currently supports Machine.Specifications (mspec) and NUnit, and xUnit.net"
+	nuspec.summary = "Currently supports Machine.Specifications (mspec), NUnit, xUnit.net, and NSpec"
 	nuspec.language = "en-US"
-	nuspec.projectUrl = "http://codereflection.github.com/Giles/"
+	nuspec.projectUrl = "http://testergiles.herokuapp.com/"
 	nuspec.title = "Giles, Rupert Giles, at your service!"
 	nuspec.tags = "testrunner test unittest giles"
 	nuspec.output_file = "Giles.nuspec"
