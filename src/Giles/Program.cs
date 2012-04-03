@@ -234,14 +234,16 @@ namespace Giles
 
         static string GetTestAssemblyListAsString()
         {
-            return config.TestAssemblies.Aggregate((next, working) => working = working + Environment.NewLine + "\t" + next);
+            return !config.TestAssemblies.Any() ? 
+                "No test assemblies detected." : 
+                config.TestAssemblies.Aggregate((next, working) => working + Environment.NewLine + "\t" + next);
         }
 
         static string GetTestFilterListAsString()
         {
-            return config.Filters.Count == 0 
+            return !config.Filters.Any()
                 ? "<All Classes>" 
-                : config.Filters.Aggregate((next, working) => working = working + Environment.NewLine + "\t" + next);
+                : config.Filters.Aggregate((next, working) => working + Environment.NewLine + "\t" + next);
         }
 
         static void DisplayInteractiveMenuOptions()

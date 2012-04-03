@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Giles.Core.Runners;
 using System.Reflection;
@@ -18,10 +17,10 @@ namespace Giles.Runner.NSpec
         {
             var sessionResults = new SessionResults();
             var tags = string.Empty;
-            if (filters.Count() > 0)
+            if (!filters.Any())
                 tags = filters.Aggregate((working, next) => working + "," + next);
             var runner = new RunnerInvocation(assembly.Location, tags, new GilesSessionResultsFormatter(sessionResults), false);
-            var runResults = runner.Run();
+            runner.Run();
             return sessionResults;
         }
     }
