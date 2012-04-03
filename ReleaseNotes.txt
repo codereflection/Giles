@@ -1,5 +1,8 @@
-v0.1.3.0 - Feb 10, 2012
+v0.1.3.0 - Apr 2, 2012
  - Added test filter support
+ - Added NSpec support (Thanks Eric Bock!)
+ - Resolved issue with Display Information when no test assemblies were detected
+ - Added support for loading .NET 2 assemblies
 
 v0.1.2.0 - Dec 10, 2011
  - Added multiple test assembly support (auto detected, or passed by a comma separated list to the -t option)
