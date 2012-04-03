@@ -17,7 +17,7 @@ namespace Giles.Runner.NSpec
         {
             var sessionResults = new SessionResults();
             var tags = string.Empty;
-            if (!filters.Any())
+            if (filters.Any())
                 tags = filters.Aggregate((working, next) => working + "," + next);
             var runner = new RunnerInvocation(assembly.Location, tags, new GilesSessionResultsFormatter(sessionResults), false);
             runner.Run();
