@@ -70,13 +70,13 @@ namespace Giles.Specs.Core.Runners
             fakeUserDisplay.DisplayResultsReceived.ShouldNotBeEmpty();
 
         It should_display_the_number_of_successful_tests = () =>
-            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Output.Contains("Passed: 0")).ShouldEqual(1);
+            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Runner.ToString().Contains("Passed: 0")).ShouldEqual(1);
 
         It should_display_the_number_of_failed_tests = () =>
-            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Output.Contains("Failed: 1")).ShouldEqual(1);
+            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Runner.ToString().Contains("Failed: 1")).ShouldEqual(1);
 
         It should_display_the_number_of_ignored_tests = () =>
-            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Output.Contains("Ignored: 0")).ShouldEqual(1);
+            fakeUserDisplay.DisplayResultsReceived.Count(x => x.Runner.ToString().Contains("Ignored: 0")).ShouldEqual(1);
 
     }
 
