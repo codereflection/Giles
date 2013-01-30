@@ -134,7 +134,7 @@ namespace Giles
 
         static InteractiveMenuOption[] GetInteractiveMenuOptions()
         {
-            return new[]
+			return new[]
                   {
                       new InteractiveMenuOption { HandlesKey = key => key == "?", Task = DisplayInteractiveMenuOptions },
                       new InteractiveMenuOption { HandlesKey = key => key == "i", Task = DisplayConfig },
@@ -146,6 +146,7 @@ namespace Giles
                       new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors },
                       new InteractiveMenuOption { HandlesKey = key => key == "f", Task = SetTestFilters },
                       new InteractiveMenuOption { HandlesKey = key => key == "h", Task = ClearTestFilters },
+					  new InteractiveMenuOption {HandlesKey = key => key == "p", Task = TogglePause},
                   };
         }
 
@@ -209,8 +210,14 @@ namespace Giles
                 Console.WriteLine("Please run some tests first...");
         }
 
+        static void TogglePause()
+        {
+            sourceWatcher.Pause = sourceWatcher.Pause != true;
+            Console.WriteLine(sourceWatcher.Pause ? "Pausing Giles" : "Resuming Giles");
+        }
 
-        static T GetUserValue<T>(string description, T defaultValue)
+
+	    static T GetUserValue<T>(string description, T defaultValue)
         {
             Console.Write("Enter new value for {0} ({1}): ", description, defaultValue);
             var newValue = Console.ReadLine();
@@ -259,6 +266,7 @@ namespace Giles
             Console.WriteLine("   F = Set Test Filters");
             Console.WriteLine("   H = Clear Test Filters");
             Console.WriteLine("   Q = Quit");
+            Console.WriteLine("   P = Toggle Pause Giles");
             Console.WriteLine();
         }
     }
