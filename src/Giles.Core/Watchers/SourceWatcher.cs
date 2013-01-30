@@ -21,6 +21,7 @@ namespace Giles.Core.Watchers
         readonly GilesConfig config;
 
         public List<FileSystemWatcher> FileWatchers { get; set; }
+        public bool Pause { get; set; }
 
         public SourceWatcher(IBuildRunner buildRunner, IFileSystem fileSystem,
                              IFileWatcherFactory fileWatcherFactory, GilesConfig config)
@@ -84,7 +85,7 @@ namespace Giles.Core.Watchers
 
         public void RunNow()
         {
-            if (!buildRunner.Run())
+            if (Pause || !buildRunner.Run())
                 return;
 
             var listener = GetListener.Invoke(config);
