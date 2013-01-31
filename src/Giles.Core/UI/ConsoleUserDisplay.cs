@@ -11,6 +11,7 @@ namespace Giles.Core.UI
         {
             defaultConsoleColor = Console.ForegroundColor;
         }
+
         public void DisplayMessage(string message, params object[] parameters)
         {
             Console.WriteLine(message.ScrubDisplayStringForFormatting(), parameters);
@@ -18,13 +19,66 @@ namespace Giles.Core.UI
 
         public void DisplayResult(ExecutionResult result)
         {
-            Console.WriteLine("\n\n======= {0} TEST RUNNER RESULTS =======", result.Runner);
-            Console.ForegroundColor = result.ExitCode != 0 ?
-                                      ConsoleColor.Red : defaultConsoleColor;
+            try
+            {
+                Console.WriteLine("\n\n======= {0} TEST RUNNER RESULTS =======", result.Runner.RunnerName);
 
-            Console.WriteLine(result.Output);
+                using(new ChangedColorContext(GetPassedColor(result)))
+                {
+                    Console.Write(string.Format("Passed: {0}", result.Runner.Stats.Passed));
+                }
 
-            Console.ForegroundColor = defaultConsoleColor;
+                Console.Write(", ");
+
+                using (new ChangedColorContext(GetFailedColor(result)))
+                {
+                    Console.Write(string.Format("Failed: {0}", result.Runner.Stats.Failed));
+                }
+
+                Console.Write(", ");
+
+                using (new ChangedColorContext(GetIgnoredColor(result)))
+                {
+                    Console.Write(string.Format("Ignored: {0}", result.Runner.Stats.Ignored));
+                }
+
+                Console.Write(Environment.NewLine);
+            }
+            finally
+            {
+                Console.ForegroundColor = defaultConsoleColor;
+            }
+        }
+
+        public ConsoleColor GetPassedColor(ExecutionResult result)
+        {
+            return result.Runner.Stats.Passed > 0 ? ConsoleColor.Green : defaultConsoleColor;
+        }
+
+        public ConsoleColor GetFailedColor(ExecutionResult result)
+        {
+            return result.Runner.Stats.Failed > 0 ? ConsoleColor.Red : defaultConsoleColor;
+        }
+
+        public ConsoleColor GetIgnoredColor(ExecutionResult result)
+        {
+            return result.Runner.Stats.Ignored > 0 ? ConsoleColor.Yellow : defaultConsoleColor;
+        }
+
+        private class ChangedColorContext : IDisposable
+        {
+            private readonly ConsoleColor defaultConsoleColor;
+
+            public ChangedColorContext(ConsoleColor color)
+            {
+                defaultConsoleColor = Console.ForegroundColor;
+                Console.ForegroundColor = color;
+            }
+
+            public void Dispose()
+            {
+                Console.ForegroundColor = defaultConsoleColor;
+            }
         }
     }
 }

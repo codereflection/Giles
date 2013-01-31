@@ -67,47 +67,42 @@ namespace Giles.Core.Runners
         {
             if (testRunnerResults.Count == 0)
             {
-                config.UserDisplay.ToList().ForEach(display => 
-                    display.DisplayResult(new ExecutionResult
-                                              {
-                                                  ExitCode = 1, 
-                                                  Output = "No tests were run. Check your filter names and test assembly options",
-                                                  Runner = ""
-                                              }));
+                config.UserDisplay.ToList().ForEach(display => display.DisplayResult(new ExecutionResult
+                {
+                    ExitCode = 1,
+                    ErrorMessage = "No tests were run. Check your filter names and test assembly options",
+                }));
                 return;
             }
 
-            var messages = AggregateTestRunnerResults();
-
-            var result = new ExecutionResult
-                {
-                    ExitCode = totalResults[TestState.Failed] > 0 ? 1 : 0,
-                    Output = messages.ToString(),
-                    Runner = string.Empty
-                };
-
-            if (config.UserDisplay.Count() == 0)
+            var results = CreateResults();
+            
+            if (config.UserDisplay.IsNullOrEmpty())
                 config.UserDisplay = new List<IUserDisplay> { new ConsoleUserDisplay() };
 
-            config.UserDisplay.ToList().ForEach(display => display.DisplayResult(result));
+            config.UserDisplay.ToList().ForEach(display => results.ForEach(display.DisplayResult));
         }
 
-        StringBuilder AggregateTestRunnerResults()
+        private List<ExecutionResult> CreateResults()
         {
-            var messages = new StringBuilder();
-            testRunnerResults.ToList().ForEach(x => messages.Append(
-                string.Format(
-                    "{0} Results: Passed: {1}, Failed: {2}, Ignored: {3}\n",
-                    x.Key,
-                    x.Value[TestState.Passed],
-                    x.Value[TestState.Failed],
-                    x.Value[TestState.Ignored])));
+            var result = new List<ExecutionResult>();
 
-            messages.Append(string.Format("Total Passed: {0}, Failed: {1}, Ignored: {2}",
-                                          totalResults[TestState.Passed],
-                                          totalResults[TestState.Failed],
-                                          totalResults[TestState.Ignored]));
-            return messages;
+            testRunnerResults.ToList().ForEach(x => result.Add(new ExecutionResult
+            {
+                Runner = new TestRunnerResult
+                {
+                    RunnerName = x.Key,
+                    Stats = new TestStatistics
+                    {
+                        Failed = x.Value[TestState.Failed],
+                        Passed = x.Value[TestState.Passed],
+                        Ignored = x.Value[TestState.Ignored]
+                    }
+                },
+                ExitCode = x.Value[TestState.Failed] > 0 ? 1 : 0,
+            }));
+
+            return result;
         }
 
         public void DisplayVerboseResults()
@@ -118,7 +113,7 @@ namespace Giles.Core.Runners
 
         public void DisplayErrors()
         {
-            var messages = new StringBuilder(string.Format("\n\nTest Run Errors ({0})\n", testRunnerFailures.ToList().Count));
+            var messages = new StringBuilder(string.Format("\n\nTest Run Errors ({0})\n", testRunnerFailures.Count()));
             testRunnerFailures.Each(x =>
                                         {
                                             messages.AppendLine("-------------------");
