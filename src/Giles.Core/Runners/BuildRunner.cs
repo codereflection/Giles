@@ -42,7 +42,7 @@ namespace Giles.Core.Runners
                                         result.ExitCode == 0 ? "Success" : "Failure");
 
             if (result.ExitCode != 0)
-                message += string.Format("\n{0}", result.Output);
+                message += string.Format("\n{0}", result.ErrorMessage);
             return message;
         }
     }

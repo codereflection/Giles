@@ -45,7 +45,7 @@ namespace Giles.Core.UI
         {
             var title = result.ExitCode == 0 ? "Success!" : "Failures!";
             Resource icon = result.ExitCode == 0 ? LoadImage(successImage) : LoadImage(failureImage);
-            var notification = new Notification(application.Name, notificationType.Name, DateTime.Now.Ticks.ToString(), title, result.Output) { Icon = icon };
+            var notification = new Notification(application.Name, notificationType.Name, DateTime.Now.Ticks.ToString(), title, result.Runner.ToString()) { Icon = icon };
             growl.Notify(notification);
         }
 
