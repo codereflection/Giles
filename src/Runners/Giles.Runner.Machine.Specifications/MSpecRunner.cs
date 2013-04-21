@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using ImpromptuInterface;
 
@@ -9,16 +10,16 @@ namespace Giles.Runner.Machine.Specifications
 {
     public class MSpecRunner : IFrameworkRunner
     {
-        IEnumerable<string> filters;
+        IEnumerable<Filter> filters;
 
         public IEnumerable<string> RequiredAssemblies()
         {
             return new[] { Assembly.GetAssembly(typeof(MSpecRunner)).Location, "ImpromptuInterface.dll" };
         }
 
-        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> inputFilters)
         {
-            this.filters = filters;
+            this.filters = inputFilters;
             var mspecAssembly = LoadMSpec(assembly);
             MSpecTypes.Types = mspecAssembly.GetExportedTypes();
             

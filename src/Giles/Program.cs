@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using CommandLine;
 using Giles.Core.Configuration;
 using Giles.Core.Utility;
@@ -180,12 +181,12 @@ namespace Giles
         {
             config.Filters = UserInputHandler.GetUserValuesFor(config.Filters, "Filters: Enter a namespace and type (MyNamespace.FooTests).");
             Console.WriteLine("Filters set to:");
-            config.Filters.Each(x => Console.WriteLine("\t{0}", x));
+            config.Filters.Each(x => Console.WriteLine("\t{0}", x.Name));
         }
 
         static void ClearTestFilters()
         {
-            config.Filters = new List<string>();
+            config.Filters = new List<Filter>();
             Console.WriteLine("Test filters cleared");
         }
 
@@ -248,9 +249,14 @@ namespace Giles
 
         static string GetTestFilterListAsString()
         {
-            return !config.Filters.Any()
-                ? "<All Classes>" 
-                : config.Filters.Aggregate((next, working) => working + Environment.NewLine + "\t" + next);
+            var sb = new StringBuilder();
+
+            if (config.Filters.Any())
+                config.Filters.ForEach(f => sb.Append(String.Format("{0}{1}\t", f.Name, Environment.NewLine)));
+            else
+                sb.Append("<All Classes>");
+
+            return sb.ToString();
         }
 
         static void DisplayInteractiveMenuOptions()

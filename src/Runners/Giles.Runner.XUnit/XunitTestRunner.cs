@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using System;
 using Giles.Core.Utility;
@@ -8,7 +9,7 @@ using System.Reflection;
 
 namespace Giles.Runner.Xunit {
     public class XunitTestRunner : IFrameworkRunner {
-        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters) {
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> filters) {
 
             var logger = new GilesXunitLogger();
             

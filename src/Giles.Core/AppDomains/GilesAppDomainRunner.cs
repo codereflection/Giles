@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Giles.Core.Configuration;
 using Giles.Core.Runners;
 
 namespace Giles.Core.AppDomains
@@ -12,7 +13,7 @@ namespace Giles.Core.AppDomains
     /// </summary>
     public class GilesAppDomainRunner : MarshalByRefObject
     {
-        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<string> filters)
+        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<Filter> filters)
         {
             var testAssembly = Assembly.LoadFrom(testAssemblyPath);
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using NUnit.Core;
 using NUnit.Core.Filters;
@@ -9,11 +10,11 @@ namespace Giles.Runner.NUnit
 {
     public class NUnitRunner : IFrameworkRunner
     {
-        IEnumerable<string> filters;
+        IEnumerable<Filter> filters;
 
-        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> inputFilters)
         {
-            this.filters = filters;
+            this.filters = inputFilters;
             var remoteTestRunner = new RemoteTestRunner(0);
             var package = SetupTestPackager(assembly);
             remoteTestRunner.Load(package);

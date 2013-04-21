@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Giles.Core.Configuration;
 using Giles.Core.IO;
 using Giles.Core.Runners;
 using Giles.Core.Utility;
@@ -17,7 +18,7 @@ namespace Giles.Core.AppDomains
         public Func<IFileSystem> GetFileSystem = () => FileSystem;
 
 
-        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<string> filters)
+        public IEnumerable<SessionResults> Run(string testAssemblyPath, List<Filter> filters)
         {
             IEnumerable<SessionResults> results = new List<SessionResults>();
             GilesAppDomainRunner runner;
