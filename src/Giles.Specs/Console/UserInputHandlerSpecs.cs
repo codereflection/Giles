@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Giles.Core.Configuration;
 using Machine.Specifications;
 
 namespace Giles.Specs.Console
@@ -8,11 +9,11 @@ namespace Giles.Specs.Console
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_a_new_value_is_entered
     {
-        static List<string> result;
+        static List<Filter> result;
         static List<string> userValues;
         static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1" };
+        private static readonly List<Filter> DefaultValues = new List<Filter> {new Filter {Name = "value1"}};
 
         Establish context = () =>
             {
@@ -26,15 +27,15 @@ namespace Giles.Specs.Console
             result = UserInputHandler.GetUserValuesFor(DefaultValues, "The prompt");
 
         It should_get_the_user_entered_values = () =>
-            result.ShouldContainOnly(userValues.First());
+            result[0].ShouldEqual(DefaultValues[0]);
     }
 
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_the_default_setting_is_accepted
     {
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1" };
-        static List<string> result;
+        private static readonly List<Filter> DefaultValues = new List<Filter> {new Filter {Name = "value1"}};
+        static List<Filter> result;
 
         Establish context = () =>
             {
@@ -52,11 +53,11 @@ namespace Giles.Specs.Console
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_the_user_adds_to_the_default_values
     {
-        static List<string> result;
+        static List<Filter> result;
         static List<string> userValues;
         static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1" };
+        private static readonly List<Filter> DefaultValues = new List<Filter> {new Filter {Name = "value1"}};
 
         Establish context = () =>
             {
@@ -73,17 +74,17 @@ namespace Giles.Specs.Console
             result.ShouldContain(DefaultValues.ToArray());
 
         It should_add_the_new_items_and_remove_the_add_item_operator = () =>
-            result.FirstOrDefault(x => x.EndsWith("newValue")).StartsWith("+").ShouldBeFalse();
+            result.FirstOrDefault(x => x.Name.EndsWith("newValue")).Name.StartsWith("+").ShouldBeFalse();
     }
 
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_the_user_adds_to_the_default_values_with_only_one_value_having_a_modifier
     {
-        static List<string> result;
+        static List<Filter> result;
         static List<string> userValues;
         static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1" };
+        private static readonly List<Filter> DefaultValues = new List<Filter> {new Filter {Name = "value1"}};
 
         Establish context = () =>
             {
@@ -109,11 +110,16 @@ namespace Giles.Specs.Console
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_the_user_removes_from_the_default_values
     {
-        static List<string> result;
+        static List<Filter> result;
         static List<string> userValues;
         static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1", "valueToRemove" };
+
+        private static readonly List<Filter> DefaultValues = new List<Filter>
+                                                                 {
+                                                                     new Filter {Name = "value1"},
+                                                                     new Filter {Name = "valueToRemove"}
+                                                                 };
 
         Establish context = () =>
             {
@@ -136,11 +142,17 @@ namespace Giles.Specs.Console
     [Subject(typeof(UserInputHandler))]
     public class when_getting_a_list_of_user_values_and_the_user_adds_and_removes_values_from_the_default_values
     {
-        static List<string> result;
+        static List<Filter> result;
         static List<string> userValues;
         static Queue<string> queue;
         static readonly List<string> Messages = new List<string>();
-        static readonly List<string> DefaultValues = new List<string> { "value1", "value2", "value3" };
+
+        private static readonly List<Filter> DefaultValues = new List<Filter>
+                                                                 {
+                                                                     new Filter {Name = "value1"},
+                                                                     new Filter {Name = "value2"},
+                                                                     new Filter {Name = "value3"}
+                                                                 };
 
         Establish context = () =>
         {
