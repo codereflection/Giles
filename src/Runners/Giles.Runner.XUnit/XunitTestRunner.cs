@@ -18,7 +18,7 @@ namespace Giles.Runner.Xunit {
                 if (filters.Count() == 0)
                     runner.RunAssembly();
                 else
-                    filters.Each(x => runner.RunClass(x));
+                    filters.Each(x => runner.RunClass(x.Name));
             }
 
             return logger.SessionResults;

@@ -5,6 +5,8 @@ namespace Giles.Core.Configuration
 {
     public class Filter
     {
+        public Filter() { }
+
         public Filter(string convertToFilter)
         {
             foreach (var entry in FilterLookUp.Where(entry => convertToFilter.Contains(entry.Key)))

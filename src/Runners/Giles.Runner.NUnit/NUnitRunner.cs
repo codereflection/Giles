@@ -28,7 +28,7 @@ namespace Giles.Runner.NUnit
 
         ITestFilter GetFilters()
         {
-            var simpleNameFilter = new SimpleNameFilter(filters.ToArray());
+            var simpleNameFilter = new SimpleNameFilter(filters.Select(x => x.Name).ToArray());
             return simpleNameFilter;
         }
 
