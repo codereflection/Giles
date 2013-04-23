@@ -16,6 +16,11 @@ namespace Giles.Core.Configuration
 
                 break;
             }
+
+            if (!string.IsNullOrWhiteSpace(Name)) return;
+
+            Name = convertToFilter;
+            Type = FilterType.Inclusive;
         }
 
         public string Name { get; set; }
