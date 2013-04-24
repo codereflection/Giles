@@ -85,6 +85,10 @@ Modifiers:
         static string GetLineSeparatedValueListForFilters(List<Filter> defaultValues)
         {
             var sb = new StringBuilder();
+
+            if (defaultValues.Any())
+                sb.Append(String.Format("{0}\t", Environment.NewLine));
+            
             defaultValues.ForEach(x => sb.Append(String.Format("{0} ({1}) {2} \t", x.Name, x.Type.ToString(), Environment.NewLine)));
             return sb.ToString();
         }
