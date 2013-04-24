@@ -51,7 +51,7 @@ Modifiers:
 
             modifiedList.AddRange(ConvertToFilters(RemoveModifiersFrom(FilterValues(valuesList, false))));
 
-            RemoveModifiersFrom(FilterValues(valuesList, true)).Each(x => modifiedList.Remove(new Filter(x)));
+            RemoveModifiersFrom(FilterValues(valuesList, true)).Each(x => modifiedList.RemoveAll(y => y.Name == x));
 
             return modifiedList;
         }
