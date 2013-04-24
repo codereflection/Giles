@@ -66,9 +66,9 @@ Modifiers:
             foreach (var value in newValues.Select(x => x.Replace("+", string.Empty)).AsParallel())
             {
                 if (value.Trim().StartsWith("-", StringComparison.OrdinalIgnoreCase))
-                    yield return value.Substring(1, value.Length).Trim();
-
-                yield return value;
+                    yield return value.Substring(1, value.Length - 1).Trim();
+                else
+                    yield return value;
             }
         }
 
