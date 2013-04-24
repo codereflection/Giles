@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Giles.Core.Configuration
 {
+    [Serializable]
     public class Filter
     {
         public Filter() { }
@@ -38,6 +40,4 @@ namespace Giles.Core.Configuration
         Inclusive,
         Exclusive
     }
-
-    
 }
