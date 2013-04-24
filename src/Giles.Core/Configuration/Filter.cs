@@ -12,14 +12,14 @@ namespace Giles.Core.Configuration
             foreach (var entry in FilterLookUp.Where(entry => convertToFilter.Contains(entry.Key)))
             {
                 Type = entry.Value;
-                Name = convertToFilter.Replace(entry.Key, string.Empty);
+                Name = convertToFilter.Replace(entry.Key, string.Empty).Trim();
 
                 break;
             }
 
             if (!string.IsNullOrWhiteSpace(Name)) return;
 
-            Name = convertToFilter;
+            Name = convertToFilter.Trim();
             Type = FilterType.Inclusive;
         }
 
