@@ -43,7 +43,7 @@ namespace Giles.Runner.Machine.Specifications
             var runOptionsType = MSpecTypes.Types.First(x => x.Name == "RunOptions");
             var includeTags = new string[] { };
             var excludeTags = new string[] { };
-            return Activator.CreateInstance(runOptionsType, includeTags, excludeTags, filters);
+            return Activator.CreateInstance(runOptionsType, includeTags, excludeTags, filters.Select(x => x.Name));
         }
 
         private static object GetMSpecRunListener(SessionResults sessionResults)
