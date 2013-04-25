@@ -97,6 +97,7 @@ namespace Giles.Core.Watchers
             var watch = new Stopwatch();
             watch.Start();
             config.TestAssemblies.Each(assm => runResults.AddRange(manager.Run(assm, config.Filters)));
+            //config.TestAssemblies.Where()
             watch.Stop();
 
             Console.WriteLine("Test run completed in {0} seconds", watch.Elapsed.TotalSeconds);

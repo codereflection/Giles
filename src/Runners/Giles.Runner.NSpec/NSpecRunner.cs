@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using System.Reflection;
 using NSpec.Domain;
@@ -15,27 +13,12 @@ namespace Giles.Runner.NSpec
             return new[] { Assembly.GetAssembly(typeof(NSpecRunner)).Location, "NSpec.dll" };
         }
 
-        public SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> filters)
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
         {
             var sessionResults = new SessionResults();
             var tags = string.Empty;
-            var filtersList = filters as IList<Filter> ?? filters.ToList();
-
-            if (filtersList.Any())
-            {
-                var sb = new StringBuilder();
-
-                foreach (var filter in filtersList)
-                {
-                    sb.Append(filter);
-                    sb.Append(",");
-                }
-
-                sb.Remove(sb.Length, 1);
-
-                tags = sb.ToString();
-            }
-
+            if (filters.Any())
+                tags = filters.Aggregate((working, next) => working + "," + next);
             var runner = new RunnerInvocation(assembly.Location, tags, new GilesSessionResultsFormatter(sessionResults), false);
             runner.Run();
             return sessionResults;

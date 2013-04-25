@@ -1,24 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Giles.Core.Configuration;
 using Giles.Core.Runners;
 using System;
 using Giles.Core.Utility;
 using XunitFx = Xunit;
 using System.Reflection;
 
-namespace Giles.Runner.Xunit {
-    public class XunitTestRunner : IFrameworkRunner {
-        public SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> filters) {
+namespace Giles.Runner.Xunit
+{
+    public class XunitTestRunner : IFrameworkRunner
+    {
+        public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
+        {
 
             var logger = new GilesXunitLogger();
-            
-            using (var exWrapper = new XunitFx.ExecutorWrapper(new Uri(assembly.CodeBase).LocalPath, null, false)) {
+
+            using (var exWrapper = new XunitFx.ExecutorWrapper(new Uri(assembly.CodeBase).LocalPath, null, false))
+            {
                 var runner = new XunitFx.TestRunner(exWrapper, logger);
                 if (filters.Count() == 0)
                     runner.RunAssembly();
                 else
-                    filters.Each(x => runner.RunClass(x.Name));
+                    filters.Each(x => runner.RunClass(x));
             }
 
             return logger.SessionResults;

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Giles.Core.Configuration;
 
 namespace Giles.Core.Runners
 {
     public interface IFrameworkRunner
     {
-        SessionResults RunAssembly(Assembly assembly, IEnumerable<Filter> filters);
+        SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters);
 
         /// <summary>
         /// Returns a list of assemblies which the test runner implementation requires to run
