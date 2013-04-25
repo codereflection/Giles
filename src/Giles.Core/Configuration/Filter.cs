@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace Giles.Core.Configuration
 {
-    [Serializable]
     public class Filter
     {
         public Filter() { }
@@ -27,6 +26,14 @@ namespace Giles.Core.Configuration
 
         public string Name { get; set; }
         public FilterType Type { get; set; }
+
+        public string NameDll
+        {
+            get
+            {
+                return Name.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) ? Name : String.Format("{0}.dll", Name);
+            }
+        }
 
         public static readonly IDictionary<string, FilterType> FilterLookUp = new Dictionary<string, FilterType>
                                                                            {
