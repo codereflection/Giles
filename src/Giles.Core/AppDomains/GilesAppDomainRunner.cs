@@ -22,7 +22,7 @@ namespace Giles.Core.AppDomains
             var result = new List<SessionResults>();
             testFrameworkRunner.ForEach(x => 
                 result.Add(
-                    x.RunAssembly(testAssembly, filters.Select(y => y.Name))));
+                    x.RunAssembly(testAssembly, filters.Select(y => y.Name).ToList())));
             return result;
         }
     }
