@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Giles.Core.Configuration
 {
+    [Serializable]
     public class Filter
     {
         public Filter() { }
