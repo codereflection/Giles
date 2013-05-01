@@ -94,13 +94,18 @@ namespace Giles.Core.Watchers
 
             var runResults = new List<SessionResults>();
 
+            var testAssembliesToRun = config.TestAssemblies.ToList();
+
+            foreach (var filter in config.Filters.Where(f => f.Type == FilterType.Exclusive))
+            {
+                testAssembliesToRun.RemoveAll(a => a.Contains(filter.NameDll));
+            }
+
             var watch = new Stopwatch();
             watch.Start();
-            config.TestAssemblies.Each(assm => runResults.AddRange(manager.Run(assm, config.Filters.Select(f => f.Name).ToList())));
-            
 
-            
-            //config.TestAssemblies.Where()
+            testAssembliesToRun.Each(assm => runResults.AddRange(manager.Run(assm, config.Filters.Where(f => f.Type != FilterType.Exclusive).Select(f => f.Name).ToList())));
+
             watch.Stop();
 
             Console.WriteLine("Test run completed in {0} seconds", watch.Elapsed.TotalSeconds);
