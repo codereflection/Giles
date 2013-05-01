@@ -21,7 +21,7 @@ namespace Giles.Runner.Machine.Specifications
             this.filters = filters;
             var mspecAssembly = LoadMSpec(assembly);
             MSpecTypes.Types = mspecAssembly.GetExportedTypes();
-            
+
             var sessionResults = new SessionResults();
             var runner = GetRunner(sessionResults);
 

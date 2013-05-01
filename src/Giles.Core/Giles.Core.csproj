@@ -57,6 +57,7 @@
     <Compile Include="AppDomains\FileOperationType.cs" />
     <Compile Include="AppDomains\GilesAppDomainManager.cs" />
     <Compile Include="AppDomains\GilesAppDomainRunner.cs" />
+    <Compile Include="Configuration\Filter.cs" />
     <Compile Include="Configuration\GilesConfig.cs" />
     <Compile Include="Configuration\GilesConfigBuilder.cs" />
     <Compile Include="Configuration\MsBuildProject.cs" />

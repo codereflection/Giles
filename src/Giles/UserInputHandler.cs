@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Giles.Core.Configuration;
 using Giles.Core.Utility;
 
 namespace Giles
@@ -10,16 +12,20 @@ namespace Giles
         public static Action<string> Output = value => Console.WriteLine(value);
         public static Func<string> Input = Console.ReadLine;
         const string instructions = @"Enter one value on each line. Use a blank line save.
-Modifiers:
+Filters:
     +[newValue] to add a value to the current settings
-    -[newValue] to remove a value from the current settings";
+    -[newValue] to remove a value from the current settings
 
-        public static List<string> GetUserValuesFor(List<string> defaultValues, string description)
+Modifiers:
+    +[newValue] -e at the end to exclude the namespace
+";
+
+        public static List<Filter> GetUserValuesFor(List<Filter> defaultValues, string description)
         {
             Output(description);
             Output("");
             Output(instructions);
-            Output(string.Format("  Current settings: {0}{1}", GetLineSeparatedValueListFor(defaultValues), Environment.NewLine));
+            Output(string.Format("  Current settings: {0}{1}", GetLineSeparatedValueListForFilters(defaultValues), Environment.NewLine));
             var newValues = new List<string>();
 
             var modifyingDefaultValues = false;
@@ -37,32 +43,42 @@ Modifiers:
 
             if (newValues.Count == 0) return defaultValues;
 
-            if (modifyingDefaultValues)
-                return GetModifiedList(defaultValues, newValues).ToList();
-
-            return newValues;
+            return modifyingDefaultValues 
+                ? GetModifiedList(defaultValues, newValues).ToList() 
+                : newValues.Select(x => new Filter(x)).ToList();
         }
 
-        static IEnumerable<string> GetModifiedList(IEnumerable<string> defaultValues, IEnumerable<string> newValues)
+        static IEnumerable<Filter> GetModifiedList(IEnumerable<Filter> defaultValues, IEnumerable<string> newValues)
         {
-            var modifiedList = new List<string>(defaultValues);
+            var valuesList = newValues as IList<string> ?? newValues.ToList();
+            var modifiedList = new List<Filter>(defaultValues);
 
-            modifiedList.AddRange(RemoveModifiersFrom(AddedValues(newValues)));
+            modifiedList.AddRange(ConvertToFilters(RemoveModifiersFrom(FilterValues(valuesList, false))));
 
-            RemoveModifiersFrom(newValues.Where(x => x.StartsWith("-")))
-                .Each(x => modifiedList.Remove(x));
+            RemoveModifiersFrom(FilterValues(valuesList, true)).Each(x => modifiedList.RemoveAll(y => y.Name == x));
 
             return modifiedList;
         }
 
-        static IEnumerable<string> AddedValues(IEnumerable<string> newValues)
+        static IEnumerable<string> FilterValues(IEnumerable<string> newValues, bool isStartsWithRemove)
         {
-            return newValues.Where(x => x.StartsWith("-") == false);
+            return newValues.Where(x => x.Trim().StartsWith("-") == isStartsWithRemove).AsParallel();
         }
 
         static IEnumerable<string> RemoveModifiersFrom(IEnumerable<string> newValues)
         {
-            return newValues.Select(x => x.Replace("+", string.Empty).Replace("-", string.Empty));
+            foreach (var value in newValues.Select(x => x.Replace("+", string.Empty)).AsParallel())
+            {
+                if (value.Trim().StartsWith("-", StringComparison.OrdinalIgnoreCase))
+                    yield return value.Substring(1, value.Length - 1).Trim();
+                else
+                    yield return value;
+            }
+        }
+
+        static IEnumerable<Filter> ConvertToFilters(IEnumerable<string> newValues)
+        {
+            return newValues.Select(value => new Filter(value));
         }
 
         static bool ContainsAModifier(string newLine)
@@ -70,11 +86,15 @@ Modifiers:
             return newLine.StartsWith("+") || newLine.StartsWith("-");
         }
 
-        static string GetLineSeparatedValueListFor(List<string> defaultValues)
+        static string GetLineSeparatedValueListForFilters(List<Filter> defaultValues)
         {
-            var result = "";
-            defaultValues.ForEach(x => result += Environment.NewLine + "\t" + x);
-            return result;
+            var sb = new StringBuilder();
+
+            if (defaultValues.Any())
+                sb.Append(String.Format("{0}\t", Environment.NewLine));
+            
+            defaultValues.ForEach(x => sb.Append(String.Format("{0} ({1}) {2} \t", x.Name, x.Type.ToString(), Environment.NewLine)));
+            return sb.ToString();
         }
     }
 }

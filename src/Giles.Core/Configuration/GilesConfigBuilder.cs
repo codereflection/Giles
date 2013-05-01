@@ -22,7 +22,7 @@ namespace Giles.Core.Configuration
 
             config.UserDisplay.Add(new ConsoleUserDisplay());
             config.UserDisplay.Add(new GrowlUserDisplay());
-            config.Filters = new List<string>();
+            config.Filters = new List<Filter>();
             return config;
         }
     }

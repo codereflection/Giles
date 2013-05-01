@@ -68,7 +68,7 @@ namespace Giles.Core.AppDomains
 
         private GilesAppDomainRunner GetRunner()
         {
-            var runType = typeof (GilesAppDomainRunner);
+            var runType = typeof(GilesAppDomainRunner);
 
             return appDomain.CreateInstanceAndUnwrap(runType.Assembly.FullName, runType.FullName) as GilesAppDomainRunner;
         }
@@ -76,11 +76,11 @@ namespace Giles.Core.AppDomains
         private void SetupAppDomain(string testAssemblyPath)
         {
             var domainInfo = new AppDomainSetup
-                                 {
-                                     ApplicationBase = testAssemblyFolder,
-                                     PrivateBinPath = "Giles",
-                                     ConfigurationFile = GetConfigFile(testAssemblyPath)
-                                 };
+            {
+                ApplicationBase = testAssemblyFolder,
+                PrivateBinPath = "Giles",
+                ConfigurationFile = GetConfigFile(testAssemblyPath)
+            };
 
             appDomain = AppDomain.CreateDomain("GilesAppDomainRunner", AppDomain.CurrentDomain.Evidence, domainInfo);
         }
@@ -88,7 +88,7 @@ namespace Giles.Core.AppDomains
         string GetConfigFile(string testAssemblyPath)
         {
             var configFile = testAssemblyPath + ".config";
-            
+
             return GetFileSystem().FileExists(configFile) ? configFile : string.Empty;
         }
 
@@ -106,25 +106,25 @@ namespace Giles.Core.AppDomains
         {
             var fileSystem = new FileSystem();
             var filesToCopy = GetGilesAssembliesToUse();
-            
+
             var gilesTargetAssemblyFolder = Path.Combine(testAssemblyFolder, @"Giles");
             if (!Directory.Exists(gilesTargetAssemblyFolder))
                 Directory.CreateDirectory(gilesTargetAssemblyFolder);
 
             filesToCopy.Each(f =>
-                                 {
-                                     var sourcePath = f.Contains("\\") ? f : GetFileSourceLocation(f);
-                                     var targetPath = Path.Combine(gilesTargetAssemblyFolder, fileSystem.GetFileName(f));
-                                     
-                                     if (fileOperationType == FileOperationType.Copy || fileOperationType == FileOperationType.Delete)
-                                         if (fileSystem.FileExists(targetPath))
-                                             fileSystem.DeleteFile(targetPath);
+            {
+                var sourcePath = f.Contains("\\") ? f : GetFileSourceLocation(f);
+                var targetPath = Path.Combine(gilesTargetAssemblyFolder, fileSystem.GetFileName(f));
 
-                                     if (fileOperationType == FileOperationType.Copy)
-                                     {
-                                         fileSystem.CopyFile(sourcePath, targetPath);
-                                     }
-                                 });
+                if (fileOperationType == FileOperationType.Copy || fileOperationType == FileOperationType.Delete)
+                    if (fileSystem.FileExists(targetPath))
+                        fileSystem.DeleteFile(targetPath);
+
+                if (fileOperationType == FileOperationType.Copy)
+                {
+                    fileSystem.CopyFile(sourcePath, targetPath);
+                }
+            });
         }
 
         static string GetFileSourceLocation(string f)
