@@ -12,9 +12,13 @@ namespace Giles
         public static Action<string> Output = value => Console.WriteLine(value);
         public static Func<string> Input = Console.ReadLine;
         const string instructions = @"Enter one value on each line. Use a blank line save.
-Modifiers:
+Filters:
     +[newValue] to add a value to the current settings
-    -[newValue] to remove a value from the current settings";
+    -[newValue] to remove a value from the current settings
+
+Modifiers:
+    +[newValue] -e at the end to exclude the namespace
+";
 
         public static List<Filter> GetUserValuesFor(List<Filter> defaultValues, string description)
         {
