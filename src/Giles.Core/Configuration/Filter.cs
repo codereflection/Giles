@@ -11,10 +11,10 @@ namespace Giles.Core.Configuration
 
         public Filter(string convertToFilter)
         {
-            foreach (var entry in FilterLookUp.Where(entry => convertToFilter.Contains(entry.Key)))
+            foreach (var entry in FilterLookUp.Where(entry => convertToFilter.Contains(string.Format(" {0}" ,entry.Key))))
             {
                 Type = entry.Value;
-                Name = convertToFilter.Replace(entry.Key, string.Empty).Trim();
+                Name = convertToFilter.Replace(string.Format(" {0}", entry.Key), string.Empty).Trim();
 
                 break;
             }
