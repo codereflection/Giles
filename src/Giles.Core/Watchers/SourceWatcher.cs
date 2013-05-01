@@ -96,7 +96,10 @@ namespace Giles.Core.Watchers
 
             var watch = new Stopwatch();
             watch.Start();
-            config.TestAssemblies.Each(assm => runResults.AddRange(manager.Run(assm, config.Filters)));
+            config.TestAssemblies.Each(assm => runResults.AddRange(manager.Run(assm, config.Filters.Select(f => f.Name).ToList())));
+            
+
+            
             //config.TestAssemblies.Where()
             watch.Stop();
 
