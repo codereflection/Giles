@@ -52,14 +52,23 @@ namespace Giles.Core.Watchers
 
         public void Watch(string solutionPath, string filter)
         {
-            var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
-            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
-                                                                           ErrorAction);
+            string solutionFolder = GetSolutionFolder(solutionPath);
+            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder,
+                filter, ChangeAction, null, ErrorAction);
             fileSystemWatcher.EnableRaisingEvents = true;
             fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
             fileSystemWatcher.IncludeSubdirectories = true;
 
             FileWatchers.Add(fileSystemWatcher);
+        }
+
+        private string GetSolutionFolder(string solutionPath)
+        {
+            var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
+            // handle relative solution path that was only a filename
+            if (solutionFolder == string.Empty)
+                solutionFolder = "." + Path.DirectorySeparatorChar;
+            return solutionFolder;
         }
 
         public void ErrorAction(object sender, ErrorEventArgs e)
