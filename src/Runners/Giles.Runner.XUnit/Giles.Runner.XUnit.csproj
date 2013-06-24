@@ -37,6 +37,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="xunit">
+      <HintPath>..\..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.runner.utility">
       <HintPath>..\..\..\lib\xunit-1.8\xunit.runner.utility.dll</HintPath>
     </Reference>
