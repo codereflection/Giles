@@ -41,6 +41,26 @@ namespace Giles.Core.Configuration
                                                                                {"-i", FilterType.Inclusive},
                                                                                {"-e", FilterType.Exclusive}
                                                                            };
+
+        public override bool Equals(object obj)
+        {
+            var compareTo = (Filter)obj;
+            return Name == compareTo.Name && Type == compareTo.Type;
+        }
+
+        public override int GetHashCode()
+        {
+            var name = Enum.GetName(typeof (FilterType), Type);
+            if (name != null)
+                return Name.GetHashCode() ^ name.GetHashCode();
+
+            return Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Name: {0}, Type: {1}", Name, Enum.GetName(typeof(FilterType), Type));
+        }
     }
 
     public enum FilterType
