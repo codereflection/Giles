@@ -7,7 +7,7 @@ using Machine.Specifications;
 namespace Giles.Specs.Console
 {
     [Subject(typeof(UserInputHandler))]
-    public class when_getting_a_list_of_user_values_and_a_new_value_is_entered
+    public class when_getting_a_list_of_user_values_and_a_new_value_is_entered_without_a_modifier
     {
         static List<Filter> result;
         static List<string> userValues;
@@ -26,8 +26,11 @@ namespace Giles.Specs.Console
         Because of = () =>
             result = UserInputHandler.GetUserValuesFor(DefaultValues, "The prompt");
 
-        It should_get_the_user_entered_values = () =>
-            result[0].ShouldEqual(DefaultValues[0]);
+        It should_not_have_the_original_value = () =>
+            result.ShouldNotContain(new Filter {Name = "value1"});
+
+        It should_have_the_new_value = () =>
+            result.ShouldContain(new Filter {Name = "newValue"});
     }
 
     [Subject(typeof(UserInputHandler))]
@@ -102,8 +105,8 @@ namespace Giles.Specs.Console
 
         It should_add_the_new_items_with_and_without_a_modifier = () =>
             {
-                result.ShouldContain("newValue1");
-                result.ShouldContain("newValue2");
+                result.ShouldContain(new Filter { Name = "newValue1" });
+                result.ShouldContain(new Filter { Name = "newValue2" });
             };
     }
 
@@ -133,10 +136,13 @@ namespace Giles.Specs.Console
             result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
 
         It should_remove_the_correct_value = () =>
-            result.ShouldNotContain("valueToRemove");
+            result.ShouldNotContain(new Filter { Name = "valueToRemove" });
 
         It should_maintain_the_other_values = () =>
-            result.ShouldContain("value1");       
+            result.ShouldContain(new Filter { Name = "value1" });
+
+        It should_have_the_correct_number_of_filters = () =>
+            result.Count.ShouldEqual(1);
     }
 
     [Subject(typeof(UserInputHandler))]
@@ -166,15 +172,18 @@ namespace Giles.Specs.Console
             result = UserInputHandler.GetUserValuesFor(DefaultValues, "The Prompt");
 
         It should_remove_the_correct_value = () =>
-            result.ShouldNotContain("value2");
+            result.ShouldNotContain(new Filter {Name = "value2"});
 
         It should_maintain_the_values_not_added_or_removed = () =>
             {
-                result.ShouldContain("value1");
-                result.ShouldContain("value3");
+                result.ShouldContain(new Filter { Name = "value1" });
+                result.ShouldContain(new Filter { Name = "value3" });
             };
 
         It should_add_the_new_value = () =>
-            result.ShouldContain("value4");
+            result.ShouldContain(new Filter { Name = "value4" });
+
+        It should_have_the_correct_number_of_filters = () =>
+            result.Count.ShouldEqual(3);
     }
 }
