@@ -57,6 +57,7 @@ namespace Giles.Runner.NUnit
                     break;
                 default:
                     testResult.State = TestState.Failed;
+                    testResult.Message = result.Message;
                     testResult.StackTrace = result.StackTrace;
                     sessionResults.Messages.Add(string.Format("\n{0}\n{1}", result.Message, result.StackTrace));
                     break;
