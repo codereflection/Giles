@@ -11,7 +11,8 @@ class NuGetPack
   attr_accessor  :nuspec,
                  :output,
                  :base_folder,
-                 :command
+                 :command,
+                 :no_package_analysis
 
   def initialize(command = "NuGet.exe") # users might have put the NuGet.exe in path
     super()
@@ -28,6 +29,7 @@ class NuGetPack
     params << "#{nuspec}"
     params << "-BasePath #{base_folder}" unless @base_folder.nil?
     params << "-OutputDirectory #{output}" unless @output.nil?
+    params << "-NoPackageAnalysis" unless @no_package_analysis.nil? | @no_package_analysis = false
     
     merged_params = params.join(' ')
     

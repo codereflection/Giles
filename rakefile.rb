@@ -82,7 +82,9 @@ end
 
 desc "Create the nuspec package"
 nugetpack :createPackage do |nugetpack|
+    nugetpack.command = "tools/nuget/NuGet.CommandLine.2.6.1/tools/NuGet.exe"
 	nugetpack.nuspec = "deploy/package/Giles.nuspec"
 	nugetpack.base_folder = "deploy/package"
 	nugetpack.output = "deploy"
+    nugetpack.no_package_analysis = true
 end
