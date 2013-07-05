@@ -34,21 +34,17 @@ While in the interactive console, press ? for a list of options:
 
 ```
 Interactive Console Options:
-  ? = Display options 
-  
-  C = Clear the window
-  
-  I = Show current configuration
-  
-  R = Run build & tests now
-  
-  V = Display last test run messages
-  
-  E = Display last test run errors
-  
-  B = Set Build Delay
-  
-  Q = Quit  
+   ? = Display options
+   C = Clear the window
+   I = Show current configuration
+   R = Run build & tests now
+   V = Display all messages from last test run
+   E = Display errors from last test run
+   B = Set Build Delay
+   F = Set Test Filters
+   H = Clear Test Filters
+   Q = Quit
+   P = Toggle Pause Giles
 ```
 
 For more information and requirement to run Giles, please visit the [wiki](https://github.com/codereflection/Giles/wiki)
