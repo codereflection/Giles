@@ -2,7 +2,7 @@
 
 require 'rake'
 require 'albacore'
-require 'lib/FileSystem/filesystem'
+require './lib/FileSystem/filesystem'
 
 task :default => [:full]
 
