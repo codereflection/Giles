@@ -1,3 +1,10 @@
+v0.1.5.0 - July 5, 2013
+ - Added Pause support, cli option P (Thanks Kelly Elton!)
+ - Added console colors for Pass/Fail/Ignore for better readability (Thanks Hadi Eskandari!)
+ - Added excludes to test filters (Thanks Chad Wilkin!)
+ - Updated xunit runner to 1.9.1 (Thanks Reid Evans!)
+ - Updated to support .NET 4.5 (Thanks Reid Evans!)
+
 v0.1.4.0 - Apr 3, 2012
  - Added test filter support
  - Added NSpec support (Thanks Eric Bock!)
