@@ -16,9 +16,9 @@ deploy/
 [Rr]eport/*
 *.Publish.xml
 publish/*
-nuget/
 *.swp
 *~
+Gemfile.lock
 
 #Make sure report dir is created
 ![Rr]eport/Specs/.gitignore
@@ -27,3 +27,4 @@ nuget/
 # don't exclude the Ruby bin!
 ![Tt]ools/Rake/lib/ruby/gems/1.8/gems/rake-0.8.7/bin/
 ![Tt]ools/Rake/bin
+![Tt]ools/nuget/*/tools/NuGet.exe
