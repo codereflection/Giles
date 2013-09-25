@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Giles.Core.IO
 {
@@ -20,6 +21,26 @@ namespace Giles.Core.IO
 			};
 		}
 	}
+
+	public class RegexSolutionParser : ISolutionParser
+	{
+		private static readonly Regex crackProjectLine = new Regex("^Project\\(\"(?<PROJECTTYPEGUID>.*)\"\\)\\s*=\\s*\"(?<PROJECTNAME>.*)\"\\s*,\\s*\"(?<RELATIVEPATH>.*)\"\\s*,\\s*\"(?<PROJECTGUID>.*)\"$");
+		public IEnumerable<string> GetProjectPaths(string solutionPath)
+		{
+			List<string> result = new List<string>();
+
+			var solution = File.ReadAllLines(solutionPath);
+
+			foreach (var line in solution)
+			{
+				var match = crackProjectLine.Match(line);
+				if (match.Success) result.Add(match.Groups["RELATIVEPATH"].Value.Trim());
+			}
+
+			return result;
+		}
+	}
+
 
 	public class ReflectionSolutionParser : ISolutionParser
 	{
