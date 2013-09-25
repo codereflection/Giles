@@ -113,15 +113,49 @@ namespace Giles.Core.Runners
 
         public void DisplayErrors()
         {
-            var messages = new StringBuilder(string.Format("\n\nTest Run Errors ({0})\n", testRunnerFailures.Count()));
-            testRunnerFailures.Each(x =>
-                                        {
-                                            messages.AppendLine("-------------------");
-                                            messages.AppendLine(x.Name);
-                                            messages.AppendLine(x.Message);
-                                            messages.AppendLine(x.StackTrace);
-                                        });
+			var messages = GetErrorMessage();
             Console.WriteLine(messages);
         }
+
+		public void WriteVerboseResultsToFile(string filePath)
+		{
+			var fullFilePath = GetOrCreateFullFilePath(filePath);
+
+			System.IO.File.WriteAllLines(fullFilePath, output.Select(x => x.Value.ToString()));
+			Console.WriteLine("File has been saved " + fullFilePath);
+		}
+
+		private static string GetOrCreateFullFilePath(string filePath)
+		{
+			var fullFilePath = System.IO.Path.GetFullPath(filePath);
+			var directoryPath = System.IO.Path.GetDirectoryName(fullFilePath);
+			if (!System.IO.Directory.Exists(directoryPath))
+			{
+				System.IO.Directory.CreateDirectory(directoryPath);
+			}
+			return fullFilePath;
+		}
+
+		public void WriteErrorsToFile(string filePath)
+		{
+			var fullFilePath = GetOrCreateFullFilePath(filePath);
+			var messages = GetErrorMessage();
+
+			System.IO.File.WriteAllText(fullFilePath, messages);
+			Console.WriteLine("File has been saved " + fullFilePath);
+		}
+
+		private string GetErrorMessage()
+		{
+			var messages = new StringBuilder(string.Format("\n\nTest Run Errors ({0})\n", testRunnerFailures.Count()));
+			testRunnerFailures.Each(x =>
+			{
+				messages.AppendLine("-------------------");
+				messages.AppendLine(x.Name);
+				messages.AppendLine(x.Message);
+				messages.AppendLine(x.StackTrace);
+			});
+			return messages.ToString();
+		}
     }
 }
