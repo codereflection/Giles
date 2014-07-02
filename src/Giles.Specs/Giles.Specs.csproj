@@ -86,8 +86,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\manual\mspec\Machine.Specifications.dll</HintPath>
     </Reference>
-    <Reference Include="NSpec">
-      <HintPath>..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
+    <Reference Include="NSpec, Version=0.9.59.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nspec.0.9.67\lib\NSpec.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\..\lib\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>

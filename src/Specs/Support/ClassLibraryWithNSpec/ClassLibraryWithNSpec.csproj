@@ -36,7 +36,7 @@
   <ItemGroup>
     <Reference Include="NSpec, Version=0.9.59.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\nspec.0.9.59\lib\NSpec.dll</HintPath>
+      <HintPath>..\..\..\..\lib\nspec.0.9.67\lib\NSpec.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
