@@ -80,7 +80,7 @@ namespace Giles.Runner.NSpec
 
         static string GetStackTrace(Example example)
         {
-            if (GetState(example) == TestState.Failed) return String.Empty;
+            if (example == null || example.Exception == null) return String.Empty;
 
             var stackTrace =
                 example.Exception
