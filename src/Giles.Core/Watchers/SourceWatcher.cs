@@ -56,7 +56,7 @@ namespace Giles.Core.Watchers
             var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
                                                                            ErrorAction);
             fileSystemWatcher.EnableRaisingEvents = true;
-            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime;
             fileSystemWatcher.IncludeSubdirectories = true;
 
             FileWatchers.Add(fileSystemWatcher);
