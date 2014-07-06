@@ -22,7 +22,7 @@ Giles Options
 
   s, SolutionPath        Required. Path to the sln file
 
-  t, TestAssemblyPath    Required. Path to the test assembly dll ( Optional, Giles will try to find the test assembly )
+  t, TestAssemblyPath    Optional, Giles will try to find the test assembly
 
   help                   Display this help screen.
 
@@ -46,5 +46,9 @@ Interactive Console Options:
    Q = Quit
    P = Toggle Pause Giles
 ```
+
+# FAQ
+Giles shows build error while VS compiles without problem. Why?
+   - change MSBuild.exe path in Giles config file. Giles uses .NET default MSBuild while some VS (like 2013) uses standalone version (for example: C:\Program Files (x86)\MSBuild\12.0\Bin\msbuild.exe)
 
 For more information and requirement to run Giles, please visit the [wiki](https://github.com/codereflection/Giles/wiki)
