@@ -6,7 +6,7 @@ require './lib/FileSystem/filesystem'
 
 task :default => [:full]
 
-@GilesVersion = "0.1.5.0"
+@GilesVersion = "0.1.6.0"
 
 task :full => [:clean,:assemblyInfo,:build,:buildx86,:copyx86,:specifications,:createSpec,:createPackage]
 
@@ -46,7 +46,7 @@ assemblyinfo :assemblyInfo do |asm|
 	asm.product_name = "Giles - auto test runner"
 	asm.version = @GilesVersion
 	asm.file_version = @GilesVersion
-	asm.copyright = "Copyright (c)2013 Jeff Schumacher (@codereflection). Rupert Giles and all other Buffy The Vampire Slayer references are copyrights of their respective owners."
+	asm.copyright = "Copyright (c)2014 Jeff Schumacher (@codereflection). Rupert Giles and all other Buffy The Vampire Slayer references are copyrights of their respective owners."
 end
 
 desc "Prep the package folder"
