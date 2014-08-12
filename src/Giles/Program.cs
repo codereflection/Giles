@@ -145,6 +145,8 @@ namespace Giles
                       new InteractiveMenuOption { HandlesKey = key => key == "q", Task = RequestQuit },
                       new InteractiveMenuOption { HandlesKey = key => key == "v", Task = DisplayVerboseResults },
                       new InteractiveMenuOption { HandlesKey = key => key == "e", Task = DisplayErrors },
+                      new InteractiveMenuOption { HandlesKey = key => key == "o", Task = OutputErrorsToFile },
+                      new InteractiveMenuOption { HandlesKey = key => key == "d", Task = OutputVerboseToFile },
                       new InteractiveMenuOption { HandlesKey = key => key == "f", Task = SetTestFilters },
                       new InteractiveMenuOption { HandlesKey = key => key == "h", Task = ClearTestFilters },
 					  new InteractiveMenuOption {HandlesKey = key => key == "p", Task = TogglePause},
@@ -187,7 +189,9 @@ namespace Giles
         static void ClearTestFilters()
         {
             config.Filters = new List<Filter>();
-            Console.WriteLine("Test filters cleared");
+			config.OutputFilePath = string.Empty;
+			config.VerboseResultsFilePath = string.Empty;
+            Console.WriteLine("Test filters and outpuf files cleared");
         }
 
         static void SetBuildDelay()
@@ -202,6 +206,38 @@ namespace Giles
             else
                 Console.WriteLine("Please run some tests first...");
         }
+
+		static void OutputErrorsToFile()
+		{
+			if (LastRunResults.GilesTestListener != null)
+			{
+				if (string.IsNullOrEmpty(config.OutputFilePath))
+				{
+					Console.WriteLine("File name: Enter the file name with path where the errors will be written.");
+					config.OutputFilePath = Console.ReadLine();
+				}
+				LastRunResults.GilesTestListener.WriteErrorsToFile(config.OutputFilePath); 
+			}
+				
+			else
+				Console.WriteLine("Please run some tests first...");
+		}
+
+		static void OutputVerboseToFile()
+		{
+			if (LastRunResults.GilesTestListener != null)
+			{
+				if (string.IsNullOrEmpty(config.VerboseResultsFilePath))
+				{
+					Console.WriteLine("File name: Enter the file name with path where the results will be written.");
+					config.VerboseResultsFilePath = Console.ReadLine();
+				}
+				LastRunResults.GilesTestListener.WriteVerboseResultsToFile(config.VerboseResultsFilePath);
+			}
+
+			else
+				Console.WriteLine("Please run some tests first...");
+		}
 
         static void DisplayVerboseResults()
         {
@@ -234,9 +270,12 @@ namespace Giles
             Console.WriteLine("\nCurrent Configuration");
             Console.WriteLine("  Build Delay: {0}", config.BuildDelay);
             Console.WriteLine("  Solution: {0}", config.SolutionPath);
+			Console.WriteLine("  Output Errors File: {0}", (string.IsNullOrEmpty(config.OutputFilePath) ? "Not Set" : Path.GetFullPath(config.OutputFilePath)));
+			Console.WriteLine("  Output Verbose File: {0}", (string.IsNullOrEmpty(config.VerboseResultsFilePath) ? "Not Set" : Path.GetFullPath(config.VerboseResultsFilePath)));
             Console.WriteLine("  Test Assemblies: \n\t{0}", GetTestAssemblyListAsString());
             config.TestRunners.Each(r => Console.WriteLine("  {0} Has been enabled", r.Key));
-            Console.WriteLine("  Test Filters: \n\t{0}", GetTestFilterListAsString());
+			Console.WriteLine("  Test Filters: \n\t{0}", GetTestFilterListAsString());
+			
             Console.WriteLine();
         }
 
@@ -267,10 +306,12 @@ namespace Giles
             Console.WriteLine("   I = Show current configuration");
             Console.WriteLine("   R = Run build & tests now");
             Console.WriteLine("   V = Display all messages from last test run");
-            Console.WriteLine("   E = Display errors from last test run");
+			Console.WriteLine("   E = Display errors from last test run");
+			Console.WriteLine("   O = Output errors from last test run to file...");
+			Console.WriteLine("   D = Output all messages from last test run to file...");
             Console.WriteLine("   B = Set Build Delay");
             Console.WriteLine("   F = Set Test Filters");
-            Console.WriteLine("   H = Clear Test Filters");
+            Console.WriteLine("   H = Clear Test Filters && Output Files");
             Console.WriteLine("   Q = Quit");
             Console.WriteLine("   P = Toggle Pause Giles");
             Console.WriteLine();
