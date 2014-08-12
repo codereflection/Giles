@@ -12,6 +12,8 @@ namespace Giles.Core.Configuration
         public List<Filter> Filters { get; set; }
         public List<string> TestAssemblies { get; set; }
         public string SolutionPath { get; set; }
+		public string OutputFilePath { get; set; }
+		public string VerboseResultsFilePath { get; set; }
 
         public long BuildDelay
         {
