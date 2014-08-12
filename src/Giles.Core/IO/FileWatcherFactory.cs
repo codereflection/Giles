@@ -11,10 +11,15 @@ namespace Giles.Core.IO
             this.fileSystem = fileSystem;
         }
 
-        public FileSystemWatcher Build(string path, string filter, FileSystemEventHandler changedAction,
-                                       FileSystemEventHandler createdAction, ErrorEventHandler errorAction)
+        public FileSystemWatcher Build(FileSystemWatcherOptions fileSystemWatcherOptions)
         {
-            return fileSystem.SetupFileWatcher(path, filter, changedAction, createdAction, null, null, errorAction);
+            return fileSystem.SetupFileWatcher(fileSystemWatcherOptions.Path, 
+                                               fileSystemWatcherOptions.Filter, 
+                                               fileSystemWatcherOptions.ChangedAction, 
+                                               fileSystemWatcherOptions.CreatedAction, 
+                                               fileSystemWatcherOptions.DeletedAction, 
+                                               fileSystemWatcherOptions.RenamedAction, 
+                                               fileSystemWatcherOptions.ErrorAction);
         }
     }
 }

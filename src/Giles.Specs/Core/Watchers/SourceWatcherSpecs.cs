@@ -1,4 +1,3 @@
-using System.IO;
 using System.Threading;
 using Giles.Core.Configuration;
 using Giles.Core.IO;
@@ -40,7 +39,7 @@ namespace Giles.Specs.Core.Watchers
                 fileSystem.FileExists(path).Returns(false);
                 fileSystemWatcher = new FakeFileSystemWatcher(".");
 
-                fileWatcherFactory.Build(path, filter, null, null, null).ReturnsForAnyArgs(fileSystemWatcher);
+                fileWatcherFactory.Build(new FileSystemWatcherOptions(path, filter, null, null, null, null, null)).ReturnsForAnyArgs(fileSystemWatcher);
                 solutionfolder = @"c:\solutionFolder";
                 fileSystem.GetDirectoryName(path)
                             .Returns(solutionfolder);
@@ -57,7 +56,7 @@ namespace Giles.Specs.Core.Watchers
             watcher.Watch(path, filter);
 
         It setups_a_file_watcher = () =>
-            fileWatcherFactory.Received().Build(solutionfolder, filter, Arg.Any<FileSystemEventHandler>(), Arg.Any<FileSystemEventHandler>(), Arg.Any<ErrorEventHandler>());
+            fileWatcherFactory.Received().Build(Arg.Any<FileSystemWatcherOptions>());
 
         It stores_a_reference_to_the_watcher = () =>
             watcher.FileWatchers.ShouldNotBeEmpty();

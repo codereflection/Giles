@@ -75,6 +75,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GilesResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="IO\FileSystemWatcherOptions.cs" />
     <Compile Include="IO\IFileSystem.cs" />
     <Compile Include="IO\FileWatcherFactory.cs" />
     <Compile Include="IO\IFileWatcherFactory.cs" />

@@ -415,7 +415,7 @@ namespace Giles.Core.IO
             fileWatcher.Renamed += renamedAction;
             fileWatcher.Error += errorAction;
 
-            fileWatcher.Error += delegate(object sender, ErrorEventArgs e)
+            fileWatcher.Error += (sender, args) =>
             {
                 fileWatcher.EnableRaisingEvents = false;
 
