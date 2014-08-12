@@ -74,13 +74,13 @@ namespace Giles.Runner.NSpec
         static TestState GetState(Example example)
         {
             if (example.Pending) return TestState.Ignored;
-            if (example.Passed) return TestState.Passed;
+            if (example.HasRun && example.Exception == null) return TestState.Passed;
             return TestState.Failed;
         }
 
         static string GetStackTrace(Example example)
         {
-            if (example.Passed || example.Pending) return String.Empty;
+            if (example == null || example.Exception == null) return String.Empty;
 
             var stackTrace =
                 example.Exception

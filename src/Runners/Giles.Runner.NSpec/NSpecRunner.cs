@@ -10,7 +10,7 @@ namespace Giles.Runner.NSpec
     {
         public IEnumerable<string> RequiredAssemblies()
         {
-            return new[] { Assembly.GetAssembly(typeof(NSpecRunner)).Location, "NSpec.dll" };
+            return new[] { Assembly.GetAssembly(typeof(NSpecRunner)).Location, "NSpec.dll", "nunit.framework.dll" };
         }
 
         public SessionResults RunAssembly(Assembly assembly, IEnumerable<string> filters)
