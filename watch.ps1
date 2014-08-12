@@ -1,1 +1,1 @@
-& .\build\Giles.exe -s .\src\Giles.sln -t .\src\Giles.Specs\bin\Debug\Giles.Specs.dll
+& .\build\Giles.exe -s .\src\Giles.sln

@@ -53,13 +53,22 @@ namespace Giles.Core.Watchers
         public void Watch(string solutionPath, string filter)
         {
             var solutionFolder = fileSystem.GetDirectoryName(solutionPath);
-            var fileSystemWatcher = fileWatcherFactory.Build(solutionFolder, filter, ChangeAction, null,
-                                                                           ErrorAction);
+            var fileSystemWatcher = fileWatcherFactory.Build(new FileSystemWatcherOptions(solutionFolder, filter, ChangeAction, null, ErrorAction, DeletedAction, RenamedAction));
             fileSystemWatcher.EnableRaisingEvents = true;
-            fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.CreationTime;
+            fileSystemWatcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.CreationTime | NotifyFilters.FileName | NotifyFilters.DirectoryName;
             fileSystemWatcher.IncludeSubdirectories = true;
 
             FileWatchers.Add(fileSystemWatcher);
+        }
+
+        private void RenamedAction(object sender, RenamedEventArgs e)
+        {
+            TriggerBuildTimer();
+        }
+
+        private void DeletedAction(object sender, FileSystemEventArgs e)
+        {
+            // noop
         }
 
         public void ErrorAction(object sender, ErrorEventArgs e)
@@ -68,6 +77,11 @@ namespace Giles.Core.Watchers
         }
 
         public void ChangeAction(object sender, FileSystemEventArgs e)
+        {
+            TriggerBuildTimer();
+        }
+
+        private void TriggerBuildTimer()
         {
             if (buildDelayTimer.Enabled)
                 ResetBuildTimer();

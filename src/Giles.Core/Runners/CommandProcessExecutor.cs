@@ -8,7 +8,7 @@ namespace Giles.Core.Runners
     {
         static CommandProcessExecutor()
         {
-            Execute = (fileName, arguements) => RunExecutable(fileName, arguements);
+            Execute = RunExecutable;
         }
 
         /// <summary>
@@ -46,6 +46,7 @@ namespace Giles.Core.Runners
             process.Dispose();
             return new ExecutionResult
                        {
+                           CommandOutput = output,
                            ExitCode = exitCode, 
                            Runner = new TestRunnerResult
                            {
@@ -64,6 +65,7 @@ namespace Giles.Core.Runners
         public TestRunnerResult Runner { get; set; }
         public string ErrorMessage { get; set; }
         public int ExitCode { get; set; }
+        public string CommandOutput { get; set; }
     }
 
     public class TestRunnerResult
