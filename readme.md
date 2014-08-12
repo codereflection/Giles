@@ -40,9 +40,11 @@ Interactive Console Options:
    R = Run build & tests now
    V = Display all messages from last test run
    E = Display errors from last test run
+   O = Output errors from last test run to file...
+   D = Output all messages from last test run to file...
    B = Set Build Delay
    F = Set Test Filters
-   H = Clear Test Filters
+   H = Clear Test Filters && Output Files
    Q = Quit
    P = Toggle Pause Giles
 ```
