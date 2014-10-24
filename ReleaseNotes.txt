@@ -1,3 +1,6 @@
+v0.1.6.1 - October 24, 2014
+ - Added Growl notification types: Info, Success, Failure (Thanks pcrockett!3   )
+
 v0.1.6.0 - August 12, 2014
  - Fixes to VS 2013 support
  - Added output to file option for all message and for all errors (Thanks jjchiw!)
