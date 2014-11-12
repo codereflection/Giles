@@ -6,10 +6,12 @@ using System.Reflection;
 using System.Text;
 using CommandLine;
 using Giles.Core.Configuration;
+using Giles.Core.IO;
 using Giles.Core.Utility;
 using Giles.Core.Watchers;
 using Giles.Options;
 using Ninject;
+
 
 namespace Giles
 {
@@ -85,9 +87,15 @@ namespace Giles
         static SourceWatcher StartSourceWatcher()
         {
             var watcher = kernel.Get<SourceWatcher>();
+			var solutionParser = kernel.Get<ISolutionParser>();
+			var paths = solutionParser.GetProjectPaths(config.SolutionPath);
 
-            // HACK: Only *.cs files? Really? 
-            watcher.Watch(config.SolutionPath, @"*.cs");
+			foreach (var path in paths)
+			{
+				// HACK: Only *.cs files? Really? 
+				watcher.Watch(path, @"*.cs");
+			}
+
             return watcher;
         }
 

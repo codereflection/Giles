@@ -21,6 +21,7 @@ namespace Giles
             Bind<IBuildRunner>().To<BuildRunner>().WithConstructorArgument("config", config);
             Bind<IFileWatcherFactory>().To<FileWatcherFactory>();
             Bind<SourceWatcher>().ToSelf().InSingletonScope().WithConstructorArgument("config", config);
+			Bind<ISolutionParser>().To<RegexSolutionParser>().InSingletonScope();
         }
     }
 }
